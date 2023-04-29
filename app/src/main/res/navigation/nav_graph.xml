@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/homeFragment">
 
     <fragment
         android:id="@+id/FirstFragment"
         android:name="com.red_velvet.marvel.FirstFragment"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first" >
+        tools:layout="@layout/fragment_first">
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
@@ -19,10 +19,14 @@
         android:id="@+id/SecondFragment"
         android:name="com.red_velvet.marvel.SecondFragment"
         android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second" >
+        tools:layout="@layout/fragment_second">
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.red_velvet.marvel.ui.home.HomeFragment"
+        android:label="HomeFragment" />
 </navigation>
