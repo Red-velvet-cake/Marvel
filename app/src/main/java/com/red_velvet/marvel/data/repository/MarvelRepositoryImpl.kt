@@ -62,7 +62,7 @@ class MarvelRepositoryImpl(
 
 
     override fun getComicsByStoryId(storyId: Int): Single<BaseResponse<StoryComicsResponse>> {
-        return RetrofitClient.apiService.getComicsByStoryId(storyId)
+        return marvelServiceImpl.getComicsByStoryId(storyId)
     }
 
 
