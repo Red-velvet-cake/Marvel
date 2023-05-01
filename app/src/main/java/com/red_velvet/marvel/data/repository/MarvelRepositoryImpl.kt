@@ -3,7 +3,7 @@ package com.red_velvet.marvel.data.repository
 import com.red_velvet.marvel.data.model.BaseResponse
 import com.red_velvet.marvel.data.model.CharactersByEventIdResponse
 import com.red_velvet.marvel.data.model.ComicsResponse
-import com.red_velvet.marvel.data.model.SeriesDetailsResponse
+import com.red_velvet.marvel.data.model.SeriesResponse
 import com.red_velvet.marvel.data.remote.MarvelService
 import com.red_velvet.marvel.data.remote.RetrofitClient
 import io.reactivex.rxjava3.core.Single
@@ -34,7 +34,7 @@ class MarvelRepositoryImpl(
     //TODO Series(use **search starts with** and **contains** QP)
 
 
-    override fun getSeriesDetails(seriesId: Int): Single<BaseResponse<SeriesDetailsResponse>> {
+    override fun getSeriesDetails(seriesId: Int): Single<BaseResponse<SeriesResponse>> {
         return marvelServiceImpl.getSeriesDetails(seriesId)
     }
 
