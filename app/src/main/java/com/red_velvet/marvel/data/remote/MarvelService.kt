@@ -3,6 +3,7 @@ package com.red_velvet.marvel.data.remote
 import com.red_velvet.marvel.data.model.ComicsResponse
 import com.red_velvet.marvel.data.model.BaseResponse
 import com.red_velvet.marvel.data.model.CharactersByEventIdResponse
+import com.red_velvet.marvel.data.model.StoryCreatorsResponse
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -60,6 +61,12 @@ interface MarvelService {
 
 
     //TODO Story creators by story id
+
+    @GET("stories/{storyId}/creators")
+    fun getStoryCreatorsByStoryId(
+        @Path("storyId") storyId:Int
+    )
+    :Single<BaseResponse<StoryCreatorsResponse>>
 
 
     //TODO Story comics by story id
