@@ -3,6 +3,7 @@ package com.red_velvet.marvel.data.model.seriesDetails
 
 import com.google.gson.annotations.SerializedName
 import com.red_velvet.marvel.data.model.Content
+import com.red_velvet.marvel.data.model.Item
 import com.red_velvet.marvel.data.model.Thumbnail
 import com.red_velvet.marvel.data.model.Url
 
@@ -24,9 +25,9 @@ data class SeriesDetailsResponse(
     @SerializedName("modified")
     val modified: String?,
     @SerializedName("next")
-    val next: Next?,
+    val next: Item?,
     @SerializedName("previous")
-    val previous: Any?,
+    val previous: Item?,
     @SerializedName("rating")
     val rating: String?,
     @SerializedName("resourceURI")
