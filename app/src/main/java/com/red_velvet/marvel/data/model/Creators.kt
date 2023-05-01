@@ -9,7 +9,7 @@ data class Creators(
     @SerializedName("collectionURI")
     val collectionURI: String? = "",
     @SerializedName("items")
-    val items: List<ItemX>? = listOf(),
+    val items: List<CreatorItem>? = listOf(),
     @SerializedName("returned")
     val returned: Int? = 0
 )

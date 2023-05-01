@@ -3,7 +3,7 @@ package com.red_velvet.marvel.data.model
 
 import com.google.gson.annotations.SerializedName
 
-data class ItemXX(
+data class StoryItem(
     @SerializedName("name")
     val name: String? = null,
     @SerializedName("resourceURI")

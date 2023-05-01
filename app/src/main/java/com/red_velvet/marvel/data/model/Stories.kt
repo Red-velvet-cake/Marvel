@@ -9,7 +9,7 @@ data class Stories(
     @SerializedName("collectionURI")
     val collectionURI: String? = "",
     @SerializedName("items")
-    val items: List<ItemXX>? = listOf(),
+    val items: List<StoryItem>? = listOf(),
     @SerializedName("returned")
     val returned: Int? = 0
 )

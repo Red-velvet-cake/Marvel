@@ -9,7 +9,7 @@ data class Characters(
     @SerializedName("collectionURI")
     val collectionURI: String? = null,
     @SerializedName("items")
-    val items: List<Item?>? = null,
+    val items: List<CharacterItem?>? = null,
     @SerializedName("returned")
     val returned: Int? = null
 )
