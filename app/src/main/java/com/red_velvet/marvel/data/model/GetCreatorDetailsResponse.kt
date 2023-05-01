@@ -13,7 +13,7 @@ data class GetCreatorDetailsResponse(
     @SerializedName("copyright")
     val copyright: String?,
     @SerializedName("data")
-    val `data`: BaseResponseBody<Result>?,
+    val `data`: BaseResponseBody<ComicCreatorResponse>?,
     @SerializedName("etag")
     val etag: String?,
     @SerializedName("status")

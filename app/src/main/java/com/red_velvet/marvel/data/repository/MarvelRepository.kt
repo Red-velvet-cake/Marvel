@@ -3,7 +3,7 @@ package com.red_velvet.marvel.data.repository
 import com.red_velvet.marvel.data.model.ComicsResponse
 import com.red_velvet.marvel.data.model.BaseResponse
 import com.red_velvet.marvel.data.model.CharactersByEventIdResponse
-import com.red_velvet.marvel.data.model.GetCreatorDetailsResponse
+import com.red_velvet.marvel.data.model.ComicCreatorResponse
 import io.reactivex.rxjava3.core.Single
 
 interface MarvelRepository {
@@ -23,7 +23,7 @@ interface MarvelRepository {
 
 
     //TODO Comic creator by comic id
-    fun getComicCreatorByComicId( comicId:Int): Single<BaseResponse<GetCreatorDetailsResponse>>
+    fun getComicCreatorByComicId( comicId:Int): Single<BaseResponse<ComicCreatorResponse>>
 
 
     //TODO Series(use **search starts with** and **contains** QP)
