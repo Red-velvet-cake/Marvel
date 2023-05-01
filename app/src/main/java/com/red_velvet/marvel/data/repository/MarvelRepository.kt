@@ -3,6 +3,7 @@ package com.red_velvet.marvel.data.repository
 import com.red_velvet.marvel.data.model.ComicsResponse
 import com.red_velvet.marvel.data.model.BaseResponse
 import com.red_velvet.marvel.data.model.CharactersByEventIdResponse
+import com.red_velvet.marvel.data.model.EventsResponse
 import io.reactivex.rxjava3.core.Single
 
 interface MarvelRepository {
@@ -33,7 +34,7 @@ interface MarvelRepository {
     //TODO Serie details(Creators by serie id)
 
 
-    //TODO Events
+    fun getEvents(): Single<BaseResponse<EventsResponse>>
 
 
     //TODO Events(Characters by event id)
