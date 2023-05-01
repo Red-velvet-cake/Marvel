@@ -3,42 +3,41 @@ package com.red_velvet.marvel.data.model
 
 import com.google.gson.annotations.SerializedName
 
-
 data class SeriesResponse(
     @SerializedName("characters")
-    val characters: Content? = null,
+    val characters: Content?,
     @SerializedName("comics")
-    val comics: Content? = null,
+    val comics: Content?,
     @SerializedName("creators")
-    val creators: Content? = null,
+    val creators: Content?,
     @SerializedName("description")
-    val description: String? = null,
+    val description: String?,
     @SerializedName("endYear")
-    val endYear: Int? = null,
+    val endYear: Int?,
     @SerializedName("events")
-    val events: Content? = null,
+    val events: Content?,
     @SerializedName("id")
-    val id: Int? = null,
+    val id: Int?,
     @SerializedName("modified")
-    val modified: String? = null,
+    val modified: String?,
     @SerializedName("next")
-    val next: Item? = null,
+    val next: Item?,
     @SerializedName("previous")
-    val previous: Item? = null,
+    val previous: Item?,
     @SerializedName("rating")
-    val rating: String? = null,
+    val rating: String?,
     @SerializedName("resourceURI")
-    val resourceURI: String? = null,
+    val resourceURI: String?,
     @SerializedName("startYear")
-    val startYear: Int? = null,
+    val startYear: Int?,
     @SerializedName("stories")
-    val stories: Content? = null,
+    val stories: Content?,
     @SerializedName("thumbnail")
-    val thumbnail: Thumbnail? = null,
+    val thumbnail: Thumbnail?,
     @SerializedName("title")
-    val title: String? = null,
+    val title: String?,
     @SerializedName("type")
-    val type: String? = null,
+    val type: String?,
     @SerializedName("urls")
-    val urls: List<Url>? = null
+    val urls: List<Url>?
 )
