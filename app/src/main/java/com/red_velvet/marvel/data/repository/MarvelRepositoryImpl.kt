@@ -79,7 +79,9 @@ class MarvelRepositoryImpl(
     //TODO Story creators by story id
 
 
-    //TODO Story comics by story id
+    override fun getComicsByStoryId(storyId: Int): Single<BaseResponse<ComicsResponse>> {
+        return marvelServiceImpl.getComicsByStoryId(storyId)
+    }
 
 
     //TODO Characters
