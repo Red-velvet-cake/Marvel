@@ -1,6 +1,7 @@
 package com.red_velvet.marvel.data.repository
 
 import com.red_velvet.marvel.data.model.GetComicsResponse
+import com.red_velvet.marvel.data.model.Stories
 import com.red_velvet.marvel.data.remote.MarvelService
 import com.red_velvet.marvel.data.remote.RetrofitClient
 import io.reactivex.rxjava3.core.Single
@@ -46,7 +47,9 @@ class MarvelRepositoryImpl(
     //TODO Events(Creators by event id)
 
 
-    //TODO Stories
+    override fun getStories(): Single<Stories> {
+        return RetrofitClient.apiService.getStories()
+    }
 
 
     //TODO Story by id
