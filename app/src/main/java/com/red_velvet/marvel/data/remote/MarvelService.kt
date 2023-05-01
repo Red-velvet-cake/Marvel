@@ -1,6 +1,7 @@
 package com.red_velvet.marvel.data.remote
 
 import com.red_velvet.marvel.data.model.GetComicsResponse
+import com.red_velvet.marvel.data.model.Stories
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -45,8 +46,14 @@ interface MarvelService {
 
     //TODO Events(Creators by event id)
 
-
-    //TODO Stories
+    @Get("stories")
+    fun getStories(
+        @Query("events") events: Int? = null,
+        @Query("comics") comics: Int? = null,
+        @Query("characters") characters: Int? = null,
+        @Query("creators") creators: Int? = null,
+        @Query("series") series: Int? = null
+    ): Single<Stories>
 
 
     //TODO Story by id
