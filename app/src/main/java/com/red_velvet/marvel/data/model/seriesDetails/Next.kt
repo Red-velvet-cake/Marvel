@@ -1,4 +1,4 @@
-package com.red_velvet.marvel.data.model.series_details
+package com.red_velvet.marvel.data.model.seriesDetails
 
 
 import com.google.gson.annotations.SerializedName

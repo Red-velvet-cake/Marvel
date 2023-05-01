@@ -1,23 +1,24 @@
-package com.red_velvet.marvel.data.model.series_details
+package com.red_velvet.marvel.data.model.seriesDetails
 
 
 import com.google.gson.annotations.SerializedName
+import com.red_velvet.marvel.data.model.Content
 import com.red_velvet.marvel.data.model.Thumbnail
 import com.red_velvet.marvel.data.model.Url
 
 data class SeriesDetailsResponse(
     @SerializedName("characters")
-    val characters: Characters?,
+    val characters: Content?,
     @SerializedName("comics")
-    val comics: Comics?,
+    val comics: Content?,
     @SerializedName("creators")
-    val creators: Creators?,
+    val creators: Content?,
     @SerializedName("description")
     val description: String?,
     @SerializedName("endYear")
     val endYear: Int?,
     @SerializedName("events")
-    val events: Events?,
+    val events: Content?,
     @SerializedName("id")
     val id: Int?,
     @SerializedName("modified")
@@ -33,7 +34,7 @@ data class SeriesDetailsResponse(
     @SerializedName("startYear")
     val startYear: Int?,
     @SerializedName("stories")
-    val stories: Stories?,
+    val stories: Content?,
     @SerializedName("thumbnail")
     val thumbnail: Thumbnail?,
     @SerializedName("title")
