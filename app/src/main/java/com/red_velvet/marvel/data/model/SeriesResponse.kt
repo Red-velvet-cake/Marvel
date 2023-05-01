@@ -6,39 +6,39 @@ import com.google.gson.annotations.SerializedName
 
 data class SeriesResponse(
     @SerializedName("characters")
-    val characters: Content?,
+    val characters: Content? = null,
     @SerializedName("comics")
-    val comics: Content?,
+    val comics: Content? = null,
     @SerializedName("creators")
-    val creators: Content?,
+    val creators: Content? = null,
     @SerializedName("description")
-    val description: String?,
+    val description: String? = null,
     @SerializedName("endYear")
-    val endYear: Int?,
+    val endYear: Int? = null,
     @SerializedName("events")
-    val events: Content?,
+    val events: Content? = null,
     @SerializedName("id")
-    val id: Int?,
+    val id: Int? = null,
     @SerializedName("modified")
-    val modified: String?,
+    val modified: String? = null,
     @SerializedName("next")
-    val next: Item?,
+    val next: Item? = null,
     @SerializedName("previous")
-    val previous: Item?,
+    val previous: Item? = null,
     @SerializedName("rating")
-    val rating: String?,
+    val rating: String? = null,
     @SerializedName("resourceURI")
-    val resourceURI: String?,
+    val resourceURI: String? = null,
     @SerializedName("startYear")
-    val startYear: Int?,
+    val startYear: Int? = null,
     @SerializedName("stories")
-    val stories: Content?,
+    val stories: Content? = null,
     @SerializedName("thumbnail")
-    val thumbnail: Thumbnail?,
+    val thumbnail: Thumbnail? = null,
     @SerializedName("title")
-    val title: String?,
+    val title: String? = null,
     @SerializedName("type")
-    val type: String?,
+    val type: String? = null,
     @SerializedName("urls")
-    val urls: List<Url>?
+    val urls: List<Url>? = null
 )
