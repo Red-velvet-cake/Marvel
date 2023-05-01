@@ -1,11 +1,11 @@
 package com.red_velvet.marvel.data.repository
 
 import com.red_velvet.marvel.data.model.BaseResponse
-import com.red_velvet.marvel.data.model.CharactersResponse
 import com.red_velvet.marvel.data.model.ComicsResponse
+import com.red_velvet.marvel.data.model.SeriesResponse
+import com.red_velvet.marvel.data.model.CharactersResponse
 import com.red_velvet.marvel.data.model.CreatorsResponse
 import com.red_velvet.marvel.data.model.EventsResponse
-import com.red_velvet.marvel.data.model.SeriesResponse
 import com.red_velvet.marvel.data.model.StoryResponse
 import com.red_velvet.marvel.data.remote.MarvelService
 import com.red_velvet.marvel.data.remote.RetrofitClient
@@ -94,5 +94,10 @@ class MarvelRepositoryImpl(
 
 
     //TODO Character(char series by char id)
+    override fun getSeriesByCharacterId(
+        characterId: Int
+    ): Single<BaseResponse<BaseResponse<SeriesResponse>>> {
+        return marvelServiceImpl.getSeriesByCharacterId(characterId)
+    }
 
 }
