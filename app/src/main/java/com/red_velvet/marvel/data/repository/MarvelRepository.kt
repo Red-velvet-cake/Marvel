@@ -17,7 +17,7 @@ interface MarvelRepository {
 
 
     //TODO Comics by Char id
-
+    fun getComicsByCharacterId(characterId: Int): Single<GetComicsResponse>
 
     //TODO Comic creator by comic id
 
