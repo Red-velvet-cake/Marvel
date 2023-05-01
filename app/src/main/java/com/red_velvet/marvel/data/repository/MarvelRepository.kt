@@ -2,6 +2,7 @@ package com.red_velvet.marvel.data.repository
 
 import com.red_velvet.marvel.data.model.ComicsResponse
 import com.red_velvet.marvel.data.model.BaseResponse
+import com.red_velvet.marvel.data.model.Characters
 import com.red_velvet.marvel.data.model.CharactersByEventIdResponse
 import io.reactivex.rxjava3.core.Single
 
@@ -56,7 +57,7 @@ interface MarvelRepository {
 
 
     //TODO Characters
-
+    fun getCharacters():Single<BaseResponse<Characters>>
 
     //TODO Character(character comics by char id)
 
