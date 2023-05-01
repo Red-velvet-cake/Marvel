@@ -16,13 +16,15 @@ interface MarvelRepository {
 
 
     //TODO Comic details(Comic by id)
+    fun getComicDetail(comicId: Int): Single<BaseResponse<ComicsResponse>>
+
 
 
     //TODO Comic details(Comic chars by comic id)
 
 
     //TODO Comics by Char id
-
+    fun getComicsByCharacterId(characterId: Int): Single<BaseResponse<ComicsResponse>>
 
     //TODO Comic creator by comic id
 

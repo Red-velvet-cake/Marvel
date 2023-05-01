@@ -20,13 +20,18 @@ class MarvelRepositoryImpl(
 
 
     //TODO Comic details(Comic by id)
+    override fun getComicDetail(comicId: Int): Single<BaseResponse<ComicsResponse>> {
+        return marvelServiceImpl.getComicDetail(comicId)
+    }
 
 
     //TODO Comic details(Comic chars by comic id)
 
 
     //TODO Comics by Char id
-
+    override fun getComicsByCharacterId(characterId: Int): Single<BaseResponse<ComicsResponse>> {
+        return marvelServiceImpl.getComicsByCharacterId(characterId)
+    }
 
     //TODO Comic creator by comic id
 
@@ -44,7 +49,7 @@ class MarvelRepositoryImpl(
 
 
     //TODO Events(Characters by event id)
-    override fun getCharactersByEventId(eventId: Int): Single<BaseResponse<CharactersByEventIdResponse>> {
+    override fun getCharactersByEventId(eventId:Int): Single<BaseResponse<CharactersByEventIdResponse>> {
         return marvelServiceImpl.getCharactersByEventId(eventId)
     }
 
