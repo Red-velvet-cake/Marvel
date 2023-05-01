@@ -74,17 +74,17 @@ interface MarvelService {
     ): Single<BaseResponse<CharactersResponse>>
 
 
-    //TODO Events(Creators by event id)
+    @GET("events/{eventId}/creators")
+    fun getCreatorsByEventId(
+        @Path("eventId") eventId: Int
+    ): Single<BaseResponse<CreatorsResponse>>
 
 
     //TODO Stories
 
 
     //TODO Story by id
-    @GET("stories/{storyId}")
-    fun getStory(
-        @Path("storyId") storyId: Int
-    ): Single<BaseResponse<StoryResponse>>
+    fun getStory(storyId: Int): Single<BaseResponse<StoryResponse>>
 
 
     //TODO Story creators by story id
@@ -98,7 +98,7 @@ interface MarvelService {
 
     @GET("stories/{storyId}/comics")
     fun getComicsByStoryId(
-        @Path("storyId") storyId:Int
+        @Path("storyId") storyId: Int
     ): Single<BaseResponse<ComicsResponse>>
 
 
@@ -111,5 +111,9 @@ interface MarvelService {
 
 
     //TODO Character(char series by char id)
+    @GET("characters/{characterId}/series")
+    fun getSeriesByCharacterId(
+        @Path("characterId") characterId: Int
+    ): Single<BaseResponse<BaseResponse<SeriesResponse>>>
 
 }
