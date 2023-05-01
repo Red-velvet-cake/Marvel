@@ -3,7 +3,9 @@ package com.red_velvet.marvel.data.remote
 import com.red_velvet.marvel.data.model.BaseResponse
 import com.red_velvet.marvel.data.model.CharactersResponse
 import com.red_velvet.marvel.data.model.ComicsResponse
+import com.red_velvet.marvel.data.model.CreatorsResponse
 import com.red_velvet.marvel.data.model.EventsResponse
+import com.red_velvet.marvel.data.model.GetAllSeries
 import com.red_velvet.marvel.data.model.SeriesResponse
 import com.red_velvet.marvel.data.model.StoryResponse
 import io.reactivex.rxjava3.core.Single
@@ -41,6 +43,11 @@ interface MarvelService {
 
 
     //TODO Series(use **search starts with** and **contains** QP)
+    @GET("series")
+    fun getAllSeries(
+        @Query("startYear") startYear: Int? = null,
+        @Query("contains") contains: String? = null
+    ): Single<BaseResponse<GetAllSeries>>
 
 
     @GET("series/{seriesId}")
@@ -80,8 +87,17 @@ interface MarvelService {
 
     //TODO Story creators by story id
 
+    @GET("stories/{storyId}/creators")
+    fun getStoryCreatorsByStoryId(
+        @Path("storyId") storyId: Int
+    )
+            : Single<BaseResponse<CreatorsResponse>>
 
-    //TODO Story comics by story id
+
+    @GET("stories/{storyId}/comics")
+    fun getComicsByStoryId(
+        @Path("storyId") storyId:Int
+    ): Single<BaseResponse<ComicsResponse>>
 
 
     //TODO Characters
