@@ -6,6 +6,7 @@ import com.red_velvet.marvel.data.model.ComicsResponse
 import com.red_velvet.marvel.data.model.CreatorsResponse
 import com.red_velvet.marvel.data.model.EventsResponse
 import com.red_velvet.marvel.data.model.SeriesResponse
+import com.red_velvet.marvel.data.model.StoryResponse
 import com.red_velvet.marvel.data.remote.MarvelService
 import com.red_velvet.marvel.data.remote.RetrofitClient
 import io.reactivex.rxjava3.core.Single
@@ -39,7 +40,9 @@ class MarvelRepositoryImpl(
 
 
     //TODO Series(use **search starts with** and **contains** QP)
-    override fun getAllSeries() = marvelServiceImpl.getAllSeries()
+    override fun getAllSeries(): Single<BaseResponse<SeriesResponse>> {
+        return marvelServiceImpl.getAllSeries()
+    }
 
     override fun getSeriesDetails(seriesId: Int): Single<BaseResponse<SeriesResponse>> {
         return marvelServiceImpl.getSeriesDetails(seriesId)
@@ -69,6 +72,9 @@ class MarvelRepositoryImpl(
 
 
     //TODO Story by id
+    override fun getStory(storyId: Int): Single<BaseResponse<StoryResponse>> {
+        return marvelServiceImpl.getStory(storyId)
+    }
 
 
     //TODO Story creators by story id
