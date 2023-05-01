@@ -1,30 +1,32 @@
 package com.red_velvet.marvel.data.model
-
 import com.google.gson.annotations.SerializedName
-
 data class CreatorsResponse(
     @SerializedName("id")
-    val id: Int? = 0,
+    var id: Int? = null,
     @SerializedName("firstName")
-    val firstName: String? = "",
+    var firstName: String? = null,
+    @SerializedName("middleName")
+    var middleName: String? = null,
     @SerializedName("lastName")
-    val lastName: String? = "",
-    @SerializedName("fullName")
-    val fullName: String? = "",
+    var lastName: String? = null,
+    @SerializedName("suffix")
+    var suffix: String? = null,
+    @SerializedName("fullName"    )
+    var fullName : String? = null,
     @SerializedName("modified")
-    val modified: String? = "",
-    @SerializedName("thumbnail")
-    val thumbnail: Thumbnail? = Thumbnail(),
-    @SerializedName("resourceURI")
-    val resourceURI: String? = "",
+    var modified : String?= null,
+    @SerializedName("thumbnail"   )
+    var thumbnail  : Thumbnail? = Thumbnail(),
+    @SerializedName("resourceURI" )
+    var resourceURI : String? = null,
     @SerializedName("comics")
-    val comics: Content? = Content(),
+    var comics: Content?= Content(),
     @SerializedName("series")
-    val series: Content? = Content(),
+    var series : Content?= Content(),
     @SerializedName("stories")
-    val stories: Content? = Content(),
+    var stories: Content?= Content(),
     @SerializedName("events")
-    val events: Content? = Content(),
+    var events: Content? = Content(),
     @SerializedName("urls")
-    val urls: List<Url>? = listOf(),
+    var urls: List<Url> = listOf()
 )
