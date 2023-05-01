@@ -1,19 +1,13 @@
 package com.red_velvet.marvel.data.repository
 
 
-
-import com.red_velvet.marvel.data.model.SerieCreatorsResponse
-
 import com.red_velvet.marvel.data.model.BaseResponse
-
-
 import com.red_velvet.marvel.data.model.Characters
-import com.red_velvet.marvel.data.model.CharactersByEventIdResponse
 import com.red_velvet.marvel.data.model.CharactersResponse
 import com.red_velvet.marvel.data.model.ComicsResponse
-import com.red_velvet.marvel.data.model.SeriesResponse
 import com.red_velvet.marvel.data.model.CreatorsResponse
 import com.red_velvet.marvel.data.model.EventsResponse
+import com.red_velvet.marvel.data.model.SeriesResponse
 import com.red_velvet.marvel.data.model.StoryResponse
 import com.red_velvet.marvel.data.remote.MarvelService
 import com.red_velvet.marvel.data.remote.RetrofitClient
@@ -24,10 +18,8 @@ class MarvelRepositoryImpl(
 ) : MarvelRepository {
 
     override fun getComics(): Single<BaseResponse<ComicsResponse>> {
-        return RetrofitClient.apiService.getComics()
+        return RetrofitClient.apiService.getAllComics()
     }
-
-
 
 
     //TODO Add all required filtration query parameters QPs(for search, filter, etc...)
@@ -58,7 +50,7 @@ class MarvelRepositoryImpl(
     }
 
     override fun getSeriesDetails(seriesId: Int): Single<BaseResponse<SeriesResponse>> {
-        return marvelServiceImpl.getSeriesDetails(seriesId)
+        return marvelServiceImpl.getSerieDetails(seriesId)
     }
 
 
@@ -67,7 +59,7 @@ class MarvelRepositoryImpl(
     //TODO Events
 
     override fun getEvents(): Single<BaseResponse<EventsResponse>> {
-        return marvelServiceImpl.getEvents()
+        return marvelServiceImpl.getAllEvents()
     }
 
 
@@ -81,8 +73,6 @@ class MarvelRepositoryImpl(
     }
 
 
-
-
     override fun getCreatorsByEventId(eventId: Int): Single<BaseResponse<CreatorsResponse>> {
         return marvelServiceImpl.getCreatorsByEventId(eventId)
     }
@@ -90,7 +80,7 @@ class MarvelRepositoryImpl(
 
     //TODO Stories
     override fun getStories(): Single<BaseResponse<StoryResponse>> {
-        return marvelServiceImpl.getStories()
+        return marvelServiceImpl.getAllStories()
     }
 
 
@@ -123,8 +113,8 @@ class MarvelRepositoryImpl(
         return marvelServiceImpl.getSeriesByCharacterId(characterId)
     }
 
-    override fun getSerieCreatorsBySeriesId(seriesId:Int): Single<BaseResponse<CreatorsResponse>> {
-        return  RetrofitClient.apiService.getSerieCreatorsBySeriesId(seriesId)
+    override fun getSerieCreatorsBySeriesId(seriesId: Int): Single<BaseResponse<CreatorsResponse>> {
+        return RetrofitClient.apiService.getSerieCreatorsBySeriesId(seriesId)
     }
 
 }
