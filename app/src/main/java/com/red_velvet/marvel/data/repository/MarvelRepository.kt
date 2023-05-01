@@ -1,5 +1,6 @@
 package com.red_velvet.marvel.data.repository
 
+import com.red_velvet.marvel.data.model.GetAllSeries
 import com.red_velvet.marvel.data.model.GetComicsResponse
 import io.reactivex.rxjava3.core.Single
 
@@ -23,7 +24,7 @@ interface MarvelRepository {
 
 
     //TODO Series(use **search starts with** and **contains** QP)
-
+    fun getAllSeries(): Single<GetAllSeries>
 
     //TODO Serie details
 
