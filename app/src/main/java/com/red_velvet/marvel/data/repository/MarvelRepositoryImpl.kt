@@ -50,7 +50,7 @@ class MarvelRepositoryImpl(
 
 
     override fun getCreatorsByEventId(eventId: Int): Single<BaseResponse<EventCreatorsResponse>> {
-        return RetrofitClient.apiService.getCreatorsByEventId(eventId)
+        return marvelServiceImpl.getCreatorsByEventId(eventId)
     }
 
 
