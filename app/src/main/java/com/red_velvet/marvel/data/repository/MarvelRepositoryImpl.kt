@@ -1,6 +1,5 @@
 package com.red_velvet.marvel.data.repository
 
-import com.red_velvet.marvel.data.model.GetComicsResponse
 import com.red_velvet.marvel.data.model.GetCreatorDetailsResponse
 import com.red_velvet.marvel.data.model.ComicsResponse
 import com.red_velvet.marvel.data.model.BaseResponse
@@ -30,7 +29,7 @@ class MarvelRepositoryImpl(
 
 
     //TODO Comic creator by comic id
-    override fun getComicCreatorByComicId(comicId: Int): Single<GetCreatorDetailsResponse> {
+    override fun getComicCreatorByComicId(comicId: Int): Single<BaseResponse<GetCreatorDetailsResponse>> {
         return RetrofitClient.apiService.getComicCreatorByComicId(comicId)
     }
 

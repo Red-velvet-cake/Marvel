@@ -1,6 +1,5 @@
 package com.red_velvet.marvel.data.remote
 
-import com.red_velvet.marvel.data.model.GetComicsResponse
 import com.red_velvet.marvel.data.model.GetCreatorDetailsResponse
 import com.red_velvet.marvel.data.model.ComicsResponse
 import com.red_velvet.marvel.data.model.BaseResponse
@@ -34,7 +33,7 @@ interface MarvelService {
     @GET("comics/{comicId}")
     fun getComicCreatorByComicId(
         @Path("comicId") comicId:Int?=null
-    ): Single<GetCreatorDetailsResponse>
+    ): Single<BaseResponse<GetCreatorDetailsResponse>>
 
     //TODO Series(use **search starts with** and **contains** QP)
 
