@@ -1,6 +1,7 @@
 package com.red_velvet.marvel.data.repository
 
-import com.red_velvet.marvel.data.model.GetComicsResponse
+import com.red_velvet.marvel.data.model.ComicsResponse
+import com.red_velvet.marvel.data.model.GetMarvelGeneralResponse
 import com.red_velvet.marvel.data.remote.MarvelService
 import com.red_velvet.marvel.data.remote.RetrofitClient
 import io.reactivex.rxjava3.core.Single
@@ -9,7 +10,7 @@ class MarvelRepositoryImpl(
     private val marvelServiceImpl: MarvelService
 ) : MarvelRepository {
 
-    override fun getComics(): Single<GetComicsResponse> {
+    override fun getComics(): Single<GetMarvelGeneralResponse<ComicsResponse>> {
         return RetrofitClient.apiService.getComics()
     }
 

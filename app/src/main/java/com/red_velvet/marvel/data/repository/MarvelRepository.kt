@@ -1,11 +1,12 @@
 package com.red_velvet.marvel.data.repository
 
-import com.red_velvet.marvel.data.model.GetComicsResponse
+import com.red_velvet.marvel.data.model.ComicsResponse
+import com.red_velvet.marvel.data.model.GetMarvelGeneralResponse
 import io.reactivex.rxjava3.core.Single
 
 interface MarvelRepository {
 
-    fun getComics(): Single<GetComicsResponse>
+    fun getComics(): Single<GetMarvelGeneralResponse<ComicsResponse>>
 
     //TODO Add all required filtration query parameters QPs(for search, filter, etc...)
 

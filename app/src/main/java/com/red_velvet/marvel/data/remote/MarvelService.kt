@@ -1,6 +1,7 @@
 package com.red_velvet.marvel.data.remote
 
-import com.red_velvet.marvel.data.model.GetComicsResponse
+import com.red_velvet.marvel.data.model.ComicsResponse
+import com.red_velvet.marvel.data.model.GetMarvelGeneralResponse
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -11,7 +12,7 @@ interface MarvelService {
     fun getComics(
         @Query("titleStartsWith") titleStartsWith: String? = null,
         @Query("dateDescriptor") dateDescriptor: String? = null
-    ): Single<GetComicsResponse>
+    ): Single<GetMarvelGeneralResponse<ComicsResponse>>
 
     //TODO Add all required filtration query parameters QPs(for search, filter, etc...)
 
