@@ -1,14 +1,12 @@
-package com.red_velvet.marvel.data.model.seriesResponse
+package com.red_velvet.marvel.data.model
 
 
 import com.google.gson.annotations.SerializedName
-import com.red_velvet.marvel.data.model.Content
-import com.red_velvet.marvel.data.model.Thumbnail
-import com.red_velvet.marvel.data.model.Url
 
-data class SeriesByCharIdResponse(
+
+data class SeriesResponse(
     @SerializedName("characters")
-    val characters: Characters?,
+    val characters: Content?,
     @SerializedName("comics")
     val comics: Content?,
     @SerializedName("creators")
@@ -24,9 +22,9 @@ data class SeriesByCharIdResponse(
     @SerializedName("modified")
     val modified: String?,
     @SerializedName("next")
-    val next: Next?,
+    val next: Item?,
     @SerializedName("previous")
-    val previous: Previous?,
+    val previous: Item?,
     @SerializedName("rating")
     val rating: String?,
     @SerializedName("resourceURI")
