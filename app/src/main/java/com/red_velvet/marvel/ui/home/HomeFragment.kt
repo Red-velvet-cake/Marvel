@@ -22,7 +22,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         super.onViewCreated(view, savedInstanceState)
         binding.root.setOnClickListener {
 
-            marvelRepositoryImpl.getSingleStory(116).subscribe({
+            marvelRepositoryImpl.getStory(116).subscribe({
                 println("TAG: success: $it")
                 Log.i("TAG", "success: $it")
             }, {

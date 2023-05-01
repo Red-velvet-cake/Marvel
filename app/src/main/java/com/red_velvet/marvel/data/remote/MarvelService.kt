@@ -1,11 +1,11 @@
 package com.red_velvet.marvel.data.remote
 
-import com.red_velvet.marvel.data.model.ComicsResponse
 import com.red_velvet.marvel.data.model.BaseResponse
-import com.red_velvet.marvel.data.model.StoryResponse
 import com.red_velvet.marvel.data.model.CharactersResponse
+import com.red_velvet.marvel.data.model.ComicsResponse
 import com.red_velvet.marvel.data.model.EventsResponse
 import com.red_velvet.marvel.data.model.SeriesResponse
+import com.red_velvet.marvel.data.model.StoryResponse
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -73,7 +73,7 @@ interface MarvelService {
 
     //TODO Story by id
     @GET("stories/{storyId}")
-    fun getSingleStory(
+    fun getStory(
         @Path("storyId") storyId: Int
     ): Single<BaseResponse<StoryResponse>>
 
