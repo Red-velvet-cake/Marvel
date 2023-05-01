@@ -6,8 +6,8 @@ import com.red_velvet.marvel.data.model.SerieCreatorsResponse
 
 import com.red_velvet.marvel.data.model.BaseResponse
 
-
-
+import com.red_velvet.marvel.data.model.Characters
+import com.red_velvet.marvel.data.model.CharactersByEventIdResponse
 import com.red_velvet.marvel.data.model.CharactersResponse
 import com.red_velvet.marvel.data.model.ComicsResponse
 import com.red_velvet.marvel.data.model.CreatorsResponse
@@ -111,6 +111,8 @@ interface MarvelService {
 
 
     //TODO Characters
+    @GET("characters")
+    fun getCharacters():Single<BaseResponse<Characters>>
 
 
     //TODO Character(character comics by char id)

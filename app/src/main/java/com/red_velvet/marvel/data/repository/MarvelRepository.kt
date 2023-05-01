@@ -3,6 +3,8 @@ package com.red_velvet.marvel.data.repository
 
 import com.red_velvet.marvel.data.model.SerieCreatorsResponse
 import com.red_velvet.marvel.data.model.BaseResponse
+import com.red_velvet.marvel.data.model.Characters
+import com.red_velvet.marvel.data.model.CharactersByEventIdResponse
 import com.red_velvet.marvel.data.model.StoryResponse
 import com.red_velvet.marvel.data.model.ComicsResponse
 import com.red_velvet.marvel.data.model.SeriesResponse
@@ -68,7 +70,7 @@ interface MarvelRepository {
 
 
     //TODO Characters
-
+    fun getCharacters():Single<BaseResponse<Characters>>
 
     //TODO Character(character comics by char id)
 
