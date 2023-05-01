@@ -47,7 +47,7 @@ interface MarvelRepository {
     fun getCharactersByEventId(eventId: Int): Single<BaseResponse<CharactersResponse>>
 
 
-    //TODO Events(Creators by event id)
+    fun getCreatorsByEventId(eventId: Int): Single<BaseResponse<CreatorsResponse>>
 
 
     //TODO Stories

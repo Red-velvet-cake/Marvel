@@ -65,7 +65,9 @@ class MarvelRepositoryImpl(
 
 
 
-    //TODO Events(Creators by event id)
+    override fun getCreatorsByEventId(eventId: Int): Single<BaseResponse<CreatorsResponse>> {
+        return marvelServiceImpl.getCreatorsByEventId(eventId)
+    }
 
 
     //TODO Stories

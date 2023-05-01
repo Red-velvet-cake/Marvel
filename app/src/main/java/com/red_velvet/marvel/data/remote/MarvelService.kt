@@ -1,11 +1,11 @@
 package com.red_velvet.marvel.data.remote
 
 import com.red_velvet.marvel.data.model.BaseResponse
-import com.red_velvet.marvel.data.model.ComicsResponse
-import com.red_velvet.marvel.data.model.SeriesResponse
 import com.red_velvet.marvel.data.model.CharactersResponse
+import com.red_velvet.marvel.data.model.ComicsResponse
 import com.red_velvet.marvel.data.model.CreatorsResponse
 import com.red_velvet.marvel.data.model.EventsResponse
+import com.red_velvet.marvel.data.model.SeriesResponse
 import com.red_velvet.marvel.data.model.StoryResponse
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
@@ -71,17 +71,17 @@ interface MarvelService {
     ): Single<BaseResponse<CharactersResponse>>
 
 
-    //TODO Events(Creators by event id)
+    @GET("events/{eventId}/creators")
+    fun getCreatorsByEventId(
+        @Path("eventId") eventId: Int
+    ): Single<BaseResponse<CreatorsResponse>>
 
 
     //TODO Stories
 
 
     //TODO Story by id
-    @GET("stories/{storyId}")
-    fun getStory(
-        @Path("storyId") storyId: Int
-    ): Single<BaseResponse<StoryResponse>>
+    fun getStory(storyId: Int): Single<BaseResponse<StoryResponse>>
 
 
     //TODO Story creators by story id
@@ -95,7 +95,7 @@ interface MarvelService {
 
     @GET("stories/{storyId}/comics")
     fun getComicsByStoryId(
-        @Path("storyId") storyId:Int
+        @Path("storyId") storyId: Int
     ): Single<BaseResponse<ComicsResponse>>
 
 
