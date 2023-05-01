@@ -1,8 +1,10 @@
 package com.red_velvet.marvel.data.remote
 
 import com.red_velvet.marvel.data.model.GetComicsResponse
+import com.red_velvet.marvel.data.model.GetCreatorDetailsResponse
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface MarvelService {
@@ -26,7 +28,10 @@ interface MarvelService {
 
 
     //TODO Comic creator by comic id
-
+    @GET("comics/{comicId}")
+    fun getComicCreatorByComicId(
+        @Path("comicId") comicId:Int?=null
+    ): Single<GetCreatorDetailsResponse>
 
     //TODO Series(use **search starts with** and **contains** QP)
 
