@@ -40,7 +40,7 @@ class MarvelRepositoryImpl(
 
 
     //TODO Series(use **search starts with** and **contains** QP)
-
+    override fun getAllSeries() = marvelServiceImpl.getAllSeries()
 
     override fun getSeriesDetails(seriesId: Int): Single<BaseResponse<SeriesResponse>> {
         return marvelServiceImpl.getSeriesDetails(seriesId)
