@@ -30,5 +30,5 @@ data class StoryCreatorsResponse(
     @SerializedName("events")
     var events: Content? = Content(),
     @SerializedName("urls")
-    var urls        : List<Url> = listOf()
+    var urls: List<Url> = listOf()
 )
