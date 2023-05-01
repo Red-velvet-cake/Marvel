@@ -1,5 +1,9 @@
 package com.red_velvet.marvel.data.repository
 
+
+
+import com.red_velvet.marvel.data.model.SerieCreatorsResponse
+
 import com.red_velvet.marvel.data.model.BaseResponse
 import com.red_velvet.marvel.data.model.ComicsResponse
 import com.red_velvet.marvel.data.model.SeriesResponse
@@ -18,6 +22,9 @@ class MarvelRepositoryImpl(
     override fun getComics(): Single<BaseResponse<ComicsResponse>> {
         return RetrofitClient.apiService.getComics()
     }
+
+
+
 
     //TODO Add all required filtration query parameters QPs(for search, filter, etc...)
 
@@ -53,6 +60,7 @@ class MarvelRepositoryImpl(
 
     //TODO Serie details(Creators by serie id)
 
+    //TODO Events
 
     override fun getEvents(): Single<BaseResponse<EventsResponse>> {
         return marvelServiceImpl.getEvents()
@@ -105,6 +113,10 @@ class MarvelRepositoryImpl(
         characterId: Int
     ): Single<BaseResponse<BaseResponse<SeriesResponse>>> {
         return marvelServiceImpl.getSeriesByCharacterId(characterId)
+    }
+
+    override fun getSerieCreatorsBySeriesId(seriesId:Int): Single<BaseResponse<CreatorsResponse>> {
+        return  RetrofitClient.apiService.getSerieCreatorsBySeriesId(seriesId)
     }
 
 }
