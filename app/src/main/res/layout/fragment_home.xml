@@ -7,23 +7,28 @@
 
         <variable
             name="viewModel"
-            type="com.red_velvet.marvel.ui.home.HomeViewModel" />
+            type="com.red_velvet.marvel.ui.home.ComicsViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.home.HomeFragment">
+        tools:context=".ui.home.ComicsFragment">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@{viewModel.message}"
+            android:text="@{viewModel.comics.toData().get(0).title}"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Hello World!" />
+
+        <ProgressBar
+            android:id="@+id/pBar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
