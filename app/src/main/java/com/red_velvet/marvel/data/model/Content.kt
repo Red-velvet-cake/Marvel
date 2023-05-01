@@ -16,10 +16,3 @@ data class Content(
     @SerializedName("resourceURI")
     val resourceURI: String? = null
 )
-
-
-/*
-* character
-* comic
-*
-* */
