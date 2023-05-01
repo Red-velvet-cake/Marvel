@@ -9,6 +9,7 @@ import com.red_velvet.marvel.data.remote.RetrofitClient
 import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
 import com.red_velvet.marvel.databinding.FragmentHomeBinding
 import com.red_velvet.marvel.ui.base.BaseFragment
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
@@ -28,6 +29,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 Log.i("TAG", "error: $it")
             })
         }
+
+        val dis = RetrofitClient.apiService.getSeriesByCharacterId(1011334)
+            .subscribeOn(AndroidSchedulers.mainThread()).subscribe({
+                Log.d("TAG", "onViewCreated: ${it.attributionText} ")
+            }, {
+
+            })
 
 
     }
