@@ -1,11 +1,7 @@
-package com.red_velvet.marvel.data.model.seriesDetails
+package com.red_velvet.marvel.data.model
 
 
 import com.google.gson.annotations.SerializedName
-import com.red_velvet.marvel.data.model.Content
-import com.red_velvet.marvel.data.model.Item
-import com.red_velvet.marvel.data.model.Thumbnail
-import com.red_velvet.marvel.data.model.Url
 
 data class SeriesDetailsResponse(
     @SerializedName("characters")
