@@ -1,16 +1,16 @@
 package com.red_velvet.marvel.data.model
 import com.google.gson.annotations.SerializedName
-data class StoryCreatorsResponse(
+data class CreatorsResponse(
     @SerializedName("id")
-    var id : Int?= null,
+    var id: Int? = null,
     @SerializedName("firstName")
-    var firstName : String?= null,
+    var firstName: String? = null,
     @SerializedName("middleName")
-    var middleName : String?= null,
-    @SerializedName("lastName" )
-    var lastName : String? = null,
+    var middleName: String? = null,
+    @SerializedName("lastName")
+    var lastName: String? = null,
     @SerializedName("suffix")
-    var suffix: String?= null,
+    var suffix: String? = null,
     @SerializedName("fullName"    )
     var fullName : String? = null,
     @SerializedName("modified")
