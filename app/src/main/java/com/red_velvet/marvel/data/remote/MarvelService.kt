@@ -3,6 +3,7 @@ package com.red_velvet.marvel.data.remote
 import com.red_velvet.marvel.data.model.BaseResponse
 import com.red_velvet.marvel.data.model.CharactersResponse
 import com.red_velvet.marvel.data.model.ComicsResponse
+import com.red_velvet.marvel.data.model.EventsResponse
 import com.red_velvet.marvel.data.model.SeriesResponse
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
@@ -50,7 +51,10 @@ interface MarvelService {
     //TODO Serie details(Creators by serie id)
 
 
-    //TODO Events
+    @GET("events")
+    fun getEvents(
+        @Query("nameStartsWith") nameStartsWith: String? = null
+    ): Single<BaseResponse<EventsResponse>>
 
 
     //TODO Events(Characters by event id)

@@ -1,6 +1,7 @@
 package com.red_velvet.marvel.data.repository
 
 import com.red_velvet.marvel.data.model.BaseResponse
+import com.red_velvet.marvel.data.model.EventsResponse
 import com.red_velvet.marvel.data.model.CharactersResponse
 import com.red_velvet.marvel.data.model.ComicsResponse
 import com.red_velvet.marvel.data.model.SeriesResponse
@@ -36,7 +37,7 @@ interface MarvelRepository {
     //TODO Serie details(Creators by serie id)
 
 
-    //TODO Events
+    fun getEvents(): Single<BaseResponse<EventsResponse>>
 
 
     //TODO Events(Characters by event id)
