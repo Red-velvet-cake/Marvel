@@ -20,6 +20,7 @@ interface MarvelRepository {
 
 
     //TODO Comic creator by comic id
+    fun getComicCreatorByComicId( comicId:Int): Single<GetCreatorDetailsResponse>
 
 
     //TODO Series(use **search starts with** and **contains** QP)
