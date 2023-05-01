@@ -1,7 +1,7 @@
 package com.red_velvet.marvel.data.remote
 
 
-import com.red_velvet.marvel.data.model.SeriesDetailsResponse
+import com.red_velvet.marvel.data.model.SerieCreatorsResponse
 import com.red_velvet.marvel.data.model.ComicsResponse
 import com.red_velvet.marvel.data.model.BaseResponse
 import com.red_velvet.marvel.data.model.CharactersByEventIdResponse
@@ -41,10 +41,7 @@ interface MarvelService {
 
 
     //TODO Series details(Creators by series id)
-    @GET("series/{seriesId}")
-    fun getSeriesDetailsBySeriesId(
-        @Path("seriesId") seriesId: Int
-    ):Single<BaseResponse<SeriesDetailsResponse>>
+
 
 
     //TODO Events
@@ -79,5 +76,11 @@ interface MarvelService {
 
 
     //TODO Character(char series by char id)
+
+
+    @GET("series/{seriesId}/creators")
+    fun getSerieCreatorsBySeriesId(
+        @Path("seriesId") seriesId: Int
+    ):Single<BaseResponse<SerieCreatorsResponse>>
 
 }
