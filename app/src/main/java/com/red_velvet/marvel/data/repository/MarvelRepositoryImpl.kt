@@ -19,7 +19,6 @@ class MarvelRepositoryImpl(
     override fun getComics(): Single<BaseResponse<ComicsResponse>> {
         return marvelServiceImpl.getAllComics()
     }
-
     override fun getComicDetail(comicId: Int): Single<BaseResponse<ComicsResponse>> {
         return marvelServiceImpl.getComicDetail(comicId)
     }
