@@ -1,7 +1,5 @@
 package com.red_velvet.marvel.data.model
-
 import com.google.gson.annotations.SerializedName
-
 data class StoryCreatorsResponse(
     @SerializedName("id")
     var id : Int?= null,
