@@ -3,6 +3,7 @@ package com.red_velvet.marvel.data.remote
 import com.red_velvet.marvel.data.model.ComicsResponse
 import com.red_velvet.marvel.data.model.BaseResponse
 import com.red_velvet.marvel.data.model.CharactersByEventIdResponse
+import com.red_velvet.marvel.data.model.GetAllSeries
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -32,6 +33,11 @@ interface MarvelService {
 
 
     //TODO Series(use **search starts with** and **contains** QP)
+    @GET("series")
+    fun getAllSeries(
+        @Query("startYear") startYear: Int? = null,
+        @Query("contains") contains: String? = null
+    ): Single<BaseResponse<GetAllSeries>>
 
 
     //TODO Serie details
