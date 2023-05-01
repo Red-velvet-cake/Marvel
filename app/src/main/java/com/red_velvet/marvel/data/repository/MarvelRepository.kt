@@ -4,6 +4,7 @@ import com.red_velvet.marvel.data.model.ComicsResponse
 import com.red_velvet.marvel.data.model.BaseResponse
 import com.red_velvet.marvel.data.model.CharactersByEventIdResponse
 import com.red_velvet.marvel.data.model.Content
+import com.red_velvet.marvel.data.model.StoryResponse
 import io.reactivex.rxjava3.core.Single
 
 interface MarvelRepository {
@@ -45,7 +46,7 @@ interface MarvelRepository {
 
 
     //TODO Stories
-    fun getStories(): Single<BaseResponse<Content>>
+    fun getStories(): Single<BaseResponse<StoryResponse>>
 
 
     //TODO Story by id

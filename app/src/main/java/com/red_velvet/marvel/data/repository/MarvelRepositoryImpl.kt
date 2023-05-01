@@ -4,6 +4,7 @@ import com.red_velvet.marvel.data.model.ComicsResponse
 import com.red_velvet.marvel.data.model.BaseResponse
 import com.red_velvet.marvel.data.model.CharactersByEventIdResponse
 import com.red_velvet.marvel.data.model.Content
+import com.red_velvet.marvel.data.model.StoryResponse
 import com.red_velvet.marvel.data.remote.MarvelService
 import com.red_velvet.marvel.data.remote.RetrofitClient
 import io.reactivex.rxjava3.core.Single
@@ -53,7 +54,7 @@ class MarvelRepositoryImpl(
 
 
     //TODO Stories
-    override fun getStories(): Single<BaseResponse<Content>> {
+    override fun getStories(): Single<BaseResponse<StoryResponse>> {
         return marvelServiceImpl.getStories()
     }
 
