@@ -69,6 +69,7 @@ dependencies {
     // Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.retrofit2:adapter-rxjava3:2.9.0")
 
     // Gson
     implementation("com.google.code.gson:gson:2.10.1")
@@ -80,6 +81,7 @@ dependencies {
     // RxJava
     implementation("io.reactivex.rxjava3:rxjava:3.1.6")
     implementation("io.reactivex.rxjava3:rxandroid:3.0.2")
+    implementation("io.reactivex.rxjava3:rxkotlin:3.0.1")
 
     // Splash Screen
     implementation("androidx.core:core-splashscreen:1.0.1")
