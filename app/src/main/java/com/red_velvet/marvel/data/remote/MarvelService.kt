@@ -1,5 +1,9 @@
 package com.red_velvet.marvel.data.remote
 
+
+
+import com.red_velvet.marvel.data.model.SerieCreatorsResponse
+
 import com.red_velvet.marvel.data.model.BaseResponse
 
 import com.red_velvet.marvel.data.model.Characters
@@ -20,7 +24,7 @@ interface MarvelService {
     @GET("comics")
     fun getComics(
         @Query("titleStartsWith") titleStartsWith: String? = null,
-        @Query("dateDescriptor") dateDescriptor: String? = null
+        @Query("dateDescriptor") dateDescriptor: String? = null,
     ): Single<BaseResponse<ComicsResponse>>
 
     //TODO Add all required filtration query parameters QPs(for search, filter, etc...)
@@ -42,7 +46,10 @@ interface MarvelService {
     ): Single<BaseResponse<ComicsResponse>>
 
     //TODO Comic creator by comic id
-
+    @GET("comics/{comicId}/creators")
+    fun getComicCreatorByComicId(
+        @Path("comicId") comicId: Int? = null,
+    ): Single<BaseResponse<CreatorsResponse>>
 
     //TODO Series(use **search starts with** and **contains** QP)
     @GET("series")
@@ -58,7 +65,8 @@ interface MarvelService {
     ): Single<BaseResponse<SeriesResponse>>
 
 
-    //TODO Serie details(Creators by serie id)
+    //TODO Series details(Creators by series id)
+
 
 
     @GET("events")
@@ -70,7 +78,7 @@ interface MarvelService {
     //TODO Events(Characters by event id)
     @GET("events/{eventId}/characters")
     fun getCharactersByEventId(
-        @Path("eventId") eventId: Int
+        @Path("eventId") eventId: Int,
     ): Single<BaseResponse<CharactersResponse>>
 
 
@@ -81,7 +89,8 @@ interface MarvelService {
 
 
     //TODO Stories
-
+    @GET("stories")
+    fun getStories(): Single<BaseResponse<StoryResponse>>
 
     //TODO Story by id
     fun getStory(storyId: Int): Single<BaseResponse<StoryResponse>>
@@ -92,8 +101,7 @@ interface MarvelService {
     @GET("stories/{storyId}/creators")
     fun getStoryCreatorsByStoryId(
         @Path("storyId") storyId: Int
-    )
-            : Single<BaseResponse<CreatorsResponse>>
+    ) : Single<BaseResponse<CreatorsResponse>>
 
 
     @GET("stories/{storyId}/comics")
@@ -115,5 +123,11 @@ interface MarvelService {
     fun getSeriesByCharacterId(
         @Path("characterId") characterId: Int
     ): Single<BaseResponse<BaseResponse<SeriesResponse>>>
+
+
+    @GET("series/{seriesId}/creators")
+    fun getSerieCreatorsBySeriesId(
+        @Path("seriesId") seriesId: Int
+    ):Single<BaseResponse<CreatorsResponse>>
 
 }

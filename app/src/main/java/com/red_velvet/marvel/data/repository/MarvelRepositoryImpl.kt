@@ -1,5 +1,9 @@
 package com.red_velvet.marvel.data.repository
 
+
+
+import com.red_velvet.marvel.data.model.SerieCreatorsResponse
+
 import com.red_velvet.marvel.data.model.BaseResponse
 
 
@@ -23,6 +27,9 @@ class MarvelRepositoryImpl(
         return RetrofitClient.apiService.getComics()
     }
 
+
+
+
     //TODO Add all required filtration query parameters QPs(for search, filter, etc...)
 
 
@@ -41,7 +48,9 @@ class MarvelRepositoryImpl(
     }
 
     //TODO Comic creator by comic id
-
+    override fun getComicCreatorByComicId(comicId: Int): Single<BaseResponse<CreatorsResponse>> {
+        return marvelServiceImpl.getComicCreatorByComicId(comicId)
+    }
 
     //TODO Series(use **search starts with** and **contains** QP)
     override fun getAllSeries(): Single<BaseResponse<SeriesResponse>> {
@@ -55,6 +64,7 @@ class MarvelRepositoryImpl(
 
     //TODO Serie details(Creators by serie id)
 
+    //TODO Events
 
     override fun getEvents(): Single<BaseResponse<EventsResponse>> {
         return marvelServiceImpl.getEvents()
@@ -79,6 +89,9 @@ class MarvelRepositoryImpl(
 
 
     //TODO Stories
+    override fun getStories(): Single<BaseResponse<StoryResponse>> {
+        return marvelServiceImpl.getStories()
+    }
 
 
     //TODO Story by id
@@ -108,6 +121,10 @@ class MarvelRepositoryImpl(
         characterId: Int
     ): Single<BaseResponse<BaseResponse<SeriesResponse>>> {
         return marvelServiceImpl.getSeriesByCharacterId(characterId)
+    }
+
+    override fun getSerieCreatorsBySeriesId(seriesId:Int): Single<BaseResponse<CreatorsResponse>> {
+        return  RetrofitClient.apiService.getSerieCreatorsBySeriesId(seriesId)
     }
 
 }
