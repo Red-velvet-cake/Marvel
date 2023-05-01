@@ -2,14 +2,12 @@ package com.red_velvet.marvel.data.repository
 
 import com.red_velvet.marvel.data.model.BaseResponse
 import com.red_velvet.marvel.data.model.CharactersResponse
+import com.red_velvet.marvel.data.model.ComicCreatorResponse
 import com.red_velvet.marvel.data.model.ComicsResponse
 import com.red_velvet.marvel.data.model.CreatorsResponse
 import com.red_velvet.marvel.data.model.EventsResponse
 import com.red_velvet.marvel.data.model.GetAllSeries
 import com.red_velvet.marvel.data.model.SeriesResponse
-import com.red_velvet.marvel.data.model.CharactersByEventIdResponse
-import com.red_velvet.marvel.data.model.ComicCreatorResponse
-import com.red_velvet.marvel.data.model.ComicsResponse
 import io.reactivex.rxjava3.core.Single
 
 interface MarvelRepository {

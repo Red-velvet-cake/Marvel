@@ -1,10 +1,8 @@
 package com.red_velvet.marvel.data.repository
 
 import com.red_velvet.marvel.data.model.BaseResponse
-import com.red_velvet.marvel.data.model.CharactersByEventIdResponse
-import com.red_velvet.marvel.data.model.ComicCreatorResponse
-import com.red_velvet.marvel.data.model.ComicsResponse
 import com.red_velvet.marvel.data.model.CharactersResponse
+import com.red_velvet.marvel.data.model.ComicCreatorResponse
 import com.red_velvet.marvel.data.model.ComicsResponse
 import com.red_velvet.marvel.data.model.CreatorsResponse
 import com.red_velvet.marvel.data.model.EventsResponse
@@ -60,7 +58,7 @@ class MarvelRepositoryImpl(
 
 
     //TODO Events(Characters by event id)
-    override fun getCharactersByEventId(eventId: Int): Single<BaseResponse<CharactersByEventIdResponse>> {
+
     override fun getCharactersByEventId(eventId: Int): Single<BaseResponse<CharactersResponse>> {
         return marvelServiceImpl.getCharactersByEventId(eventId)
     }
