@@ -30,7 +30,7 @@ class MarvelRepositoryImpl(
 
     //TODO Comic creator by comic id
     override fun getComicCreatorByComicId(comicId: Int): Single<BaseResponse<ComicCreatorResponse>> {
-        return RetrofitClient.apiService.getComicCreatorByComicId(comicId)
+        return marvelServiceImpl.getComicCreatorByComicId(comicId)
     }
 
     //TODO Series(use **search starts with** and **contains** QP)
