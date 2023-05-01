@@ -5,13 +5,13 @@ import com.google.gson.annotations.SerializedName
 
 data class ComicsResponse(
     @SerializedName("characters")
-    val characters: Characters? = Characters(),
+    val characters: Content? = Content(),
     @SerializedName("collectedIssues")
     val collectedIssues: List<CollectedIssue>? = listOf(),
     @SerializedName("collections")
     val collections: List<Any>? = listOf(),
     @SerializedName("creators")
-    val creators: Creators? = Creators(),
+    val creators: Content? = Content(),
     @SerializedName("dates")
     val dates: List<Date>? = listOf(),
     @SerializedName("description")
@@ -23,7 +23,7 @@ data class ComicsResponse(
     @SerializedName("ean")
     val ean: String? = "",
     @SerializedName("events")
-    val events: Events? = Events(),
+    val events: Content? = Content(),
     @SerializedName("format")
     val format: String? = "",
     @SerializedName("id")
@@ -45,9 +45,9 @@ data class ComicsResponse(
     @SerializedName("resourceURI")
     val resourceURI: String? = "",
     @SerializedName("series")
-    val series: Series? = Series(),
+    val series: Content? = Content(),
     @SerializedName("stories")
-    val stories: Stories? = Stories(),
+    val stories: Content? = Content(),
     @SerializedName("textObjects")
     val textObjects: List<TextObject>? = listOf(),
     @SerializedName("thumbnail")
