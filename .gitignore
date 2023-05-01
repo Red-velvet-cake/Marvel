@@ -6,6 +6,7 @@
 /captures
 .externalNativeBuild
 .cxx
+build.gradle.kts
 
 # Gradle files
 .gradle/
