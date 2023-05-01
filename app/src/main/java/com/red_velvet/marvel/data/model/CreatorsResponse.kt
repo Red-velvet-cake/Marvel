@@ -2,7 +2,7 @@ package com.red_velvet.marvel.data.model
 
 import com.google.gson.annotations.SerializedName
 
-data class EventCreatorsResponse(
+data class CreatorsResponse(
     @SerializedName("id")
     val id: Int? = 0,
     @SerializedName("firstName")
@@ -27,6 +27,4 @@ data class EventCreatorsResponse(
     val events: Content? = Content(),
     @SerializedName("urls")
     val urls: List<Url>? = listOf(),
-
-
 )
