@@ -21,13 +21,19 @@ interface MarvelService {
 
 
     //TODO Comic details(Comic by id)
-
+    @GET("comics/{comicId}")
+    fun getComicDetail(@Path("comicId") comicId: Int): Single<BaseResponse<ComicsResponse>>
 
     //TODO Comic details(Comic chars by comic id)
 
 
     //TODO Comics by Char id
-
+    @GET("characters/{characterId}/comics")
+    fun getComicsByCharacterId(
+        @Path("characterId") characterId: Int,
+        @Query("titleStartsWith") titleStartsWith: String? = null,
+        @Query("dateDescriptor") dateDescriptor: String? = null
+    ): Single<BaseResponse<ComicsResponse>>
 
     //TODO Comic creator by comic id
 
