@@ -47,13 +47,7 @@ interface MarvelService {
     //TODO Events(Creators by event id)
 
     @GET("stories")
-    fun getStories(
-        @Query("events") events: Int? = null,
-        @Query("comics") comics: Int? = null,
-        @Query("characters") characters: Int? = null,
-        @Query("creators") creators: Int? = null,
-        @Query("series") series: Int? = null
-    ): Single<Stories>
+    fun getStories(): Single<Stories>
 
 
     //TODO Story by id
