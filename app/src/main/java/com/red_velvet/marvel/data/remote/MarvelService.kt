@@ -2,8 +2,10 @@ package com.red_velvet.marvel.data.remote
 
 import com.red_velvet.marvel.data.model.ComicsResponse
 import com.red_velvet.marvel.data.model.BaseResponse
-import com.red_velvet.marvel.data.model.CharactersByEventIdResponse
 import com.red_velvet.marvel.data.model.StoryResponse
+import com.red_velvet.marvel.data.model.CharactersResponse
+import com.red_velvet.marvel.data.model.EventsResponse
+import com.red_velvet.marvel.data.model.SeriesResponse
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -41,20 +43,26 @@ interface MarvelService {
     //TODO Series(use **search starts with** and **contains** QP)
 
 
-    //TODO Serie details
+    @GET("series/{seriesId}")
+    fun getSeriesDetails(
+        @Path("seriesId") seriesId: Int
+    ): Single<BaseResponse<SeriesResponse>>
 
 
     //TODO Serie details(Creators by serie id)
 
 
-    //TODO Events
+    @GET("events")
+    fun getEvents(
+        @Query("nameStartsWith") nameStartsWith: String? = null
+    ): Single<BaseResponse<EventsResponse>>
 
 
     //TODO Events(Characters by event id)
     @GET("events/{eventId}/characters")
     fun getCharactersByEventId(
         @Path("eventId") eventId: Int
-    ): Single<BaseResponse<CharactersByEventIdResponse>>
+    ): Single<BaseResponse<CharactersResponse>>
 
 
     //TODO Events(Creators by event id)
