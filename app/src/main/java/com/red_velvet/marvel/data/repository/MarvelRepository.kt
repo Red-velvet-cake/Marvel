@@ -1,9 +1,9 @@
 package com.red_velvet.marvel.data.repository
 
 import com.red_velvet.marvel.data.model.BaseResponse
-import com.red_velvet.marvel.data.model.CharactersByEventIdResponse
+import com.red_velvet.marvel.data.model.CharactersResponse
 import com.red_velvet.marvel.data.model.ComicsResponse
-import com.red_velvet.marvel.data.model.GetComicByComicIdResponse
+import com.red_velvet.marvel.data.model.SeriesResponse
 import io.reactivex.rxjava3.core.Single
 
 interface MarvelRepository {
@@ -14,7 +14,7 @@ interface MarvelRepository {
 
 
     //TODO Comic details(Comic by id)
-    fun getComicDetail(comicId: Int): Single<BaseResponse<GetComicByComicIdResponse>>
+    fun getComicDetail(comicId: Int): Single<BaseResponse<ComicsResponse>>
 
 
 
@@ -30,7 +30,7 @@ interface MarvelRepository {
     //TODO Series(use **search starts with** and **contains** QP)
 
 
-    //TODO Serie details
+    fun getSeriesDetails(seriesId: Int): Single<BaseResponse<SeriesResponse>>
 
 
     //TODO Serie details(Creators by serie id)
@@ -40,7 +40,7 @@ interface MarvelRepository {
 
 
     //TODO Events(Characters by event id)
-    fun getCharactersByEventId(eventId: Int): Single<BaseResponse<CharactersByEventIdResponse>>
+    fun getCharactersByEventId(eventId: Int): Single<BaseResponse<CharactersResponse>>
 
 
     //TODO Events(Creators by event id)
