@@ -1,29 +1,34 @@
 package com.red_velvet.marvel.data.model
 
 import com.google.gson.annotations.SerializedName
-import com.red_velvet.marvel.data.model.*
 
-data class CharactersByEventIdResponse(
+data class ComicCreatorResponse(
     @SerializedName("comics")
     val comics: Content? = Content(),
-    @SerializedName("description")
-    val description: String?,
     @SerializedName("events")
     val events: Content? = Content(),
+    @SerializedName("firstName")
+    val firstName: String = "",
+    @SerializedName("fullName")
+    val fullName: String = "",
     @SerializedName("id")
-    val id: Int?,
+    val id: Int = 0,
+    @SerializedName("lastName")
+    val lastName: String = "",
+    @SerializedName("middleName")
+    val middleName: String = "",
     @SerializedName("modified")
-    val modified: String?,
-    @SerializedName("name")
-    val name: String?,
+    val modified: String = "",
     @SerializedName("resourceURI")
-    val resourceURI: String?,
+    val resourceURI: String = "",
     @SerializedName("series")
     val series: Content? = Content(),
     @SerializedName("stories")
     val stories: Content? = Content(),
+    @SerializedName("suffix")
+    val suffix: String = "",
     @SerializedName("thumbnail")
-    val thumbnail: Thumbnail?,
+    val thumbnail: Thumbnail? = Thumbnail(),
     @SerializedName("urls")
-    val urls: List<Url?>
+    val urls: List<Url>?,
 )

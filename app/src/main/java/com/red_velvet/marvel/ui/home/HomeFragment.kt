@@ -19,16 +19,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     val marvelRepositoryImpl = MarvelRepositoryImpl(RetrofitClient.apiService)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.root.setOnClickListener {
-
-            marvelRepositoryImpl.getCharactersByEventId(116).subscribe({
-                println("TAG: success: $it")
-                Log.i("TAG", "success: $it")
-            }, {
-                Log.i("TAG", "error: $it")
-            })
-        }
-
 
     }
 }
