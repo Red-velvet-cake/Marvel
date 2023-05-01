@@ -1,6 +1,12 @@
 package com.red_velvet.marvel.data.repository
 
 import com.red_velvet.marvel.data.model.BaseResponse
+import com.red_velvet.marvel.data.model.CharactersResponse
+import com.red_velvet.marvel.data.model.ComicsResponse
+import com.red_velvet.marvel.data.model.CreatorsResponse
+import com.red_velvet.marvel.data.model.EventsResponse
+import com.red_velvet.marvel.data.model.GetAllSeries
+import com.red_velvet.marvel.data.model.SeriesResponse
 import com.red_velvet.marvel.data.model.CharactersByEventIdResponse
 import com.red_velvet.marvel.data.model.ComicCreatorResponse
 import com.red_velvet.marvel.data.model.ComicsResponse
@@ -14,32 +20,34 @@ interface MarvelRepository {
 
 
     //TODO Comic details(Comic by id)
+    fun getComicDetail(comicId: Int): Single<BaseResponse<ComicsResponse>>
+
 
 
     //TODO Comic details(Comic chars by comic id)
 
 
     //TODO Comics by Char id
-
+    fun getComicsByCharacterId(characterId: Int): Single<BaseResponse<ComicsResponse>>
 
     //TODO Comic creator by comic id
     fun getComicCreatorByComicId(comicId: Int): Single<BaseResponse<ComicCreatorResponse>>
 
 
     //TODO Series(use **search starts with** and **contains** QP)
+    fun getAllSeries(): Single<BaseResponse<GetAllSeries>>
 
-
-    //TODO Serie details
+    fun getSeriesDetails(seriesId: Int): Single<BaseResponse<SeriesResponse>>
 
 
     //TODO Serie details(Creators by serie id)
 
 
-    //TODO Events
+    fun getEvents(): Single<BaseResponse<EventsResponse>>
 
 
     //TODO Events(Characters by event id)
-    fun getCharactersByEventId(eventId: Int): Single<BaseResponse<CharactersByEventIdResponse>>
+    fun getCharactersByEventId(eventId: Int): Single<BaseResponse<CharactersResponse>>
 
 
     //TODO Events(Creators by event id)
@@ -52,9 +60,9 @@ interface MarvelRepository {
 
 
     //TODO Story creators by story id
+    fun getStoryCreatorsByStoryId(storyId: Int): Single<BaseResponse<CreatorsResponse>>
 
-
-    //TODO Story comics by story id
+    fun getComicsByStoryId(storyId:Int): Single<BaseResponse<ComicsResponse>>
 
 
     //TODO Characters

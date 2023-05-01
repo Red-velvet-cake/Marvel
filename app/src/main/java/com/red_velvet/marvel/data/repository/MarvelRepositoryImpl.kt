@@ -4,6 +4,11 @@ import com.red_velvet.marvel.data.model.BaseResponse
 import com.red_velvet.marvel.data.model.CharactersByEventIdResponse
 import com.red_velvet.marvel.data.model.ComicCreatorResponse
 import com.red_velvet.marvel.data.model.ComicsResponse
+import com.red_velvet.marvel.data.model.CharactersResponse
+import com.red_velvet.marvel.data.model.ComicsResponse
+import com.red_velvet.marvel.data.model.CreatorsResponse
+import com.red_velvet.marvel.data.model.EventsResponse
+import com.red_velvet.marvel.data.model.SeriesResponse
 import com.red_velvet.marvel.data.remote.MarvelService
 import com.red_velvet.marvel.data.remote.RetrofitClient
 import io.reactivex.rxjava3.core.Single
@@ -20,13 +25,18 @@ class MarvelRepositoryImpl(
 
 
     //TODO Comic details(Comic by id)
+    override fun getComicDetail(comicId: Int): Single<BaseResponse<ComicsResponse>> {
+        return marvelServiceImpl.getComicDetail(comicId)
+    }
 
 
     //TODO Comic details(Comic chars by comic id)
 
 
     //TODO Comics by Char id
-
+    override fun getComicsByCharacterId(characterId: Int): Single<BaseResponse<ComicsResponse>> {
+        return marvelServiceImpl.getComicsByCharacterId(characterId)
+    }
 
     //TODO Comic creator by comic id
     override fun getComicCreatorByComicId(comicId: Int): Single<BaseResponse<ComicCreatorResponse>> {
@@ -34,21 +44,28 @@ class MarvelRepositoryImpl(
     }
 
     //TODO Series(use **search starts with** and **contains** QP)
+    override fun getAllSeries() = marvelServiceImpl.getAllSeries()
 
-
-    //TODO Serie details
+    override fun getSeriesDetails(seriesId: Int): Single<BaseResponse<SeriesResponse>> {
+        return marvelServiceImpl.getSeriesDetails(seriesId)
+    }
 
 
     //TODO Serie details(Creators by serie id)
 
 
-    //TODO Events
+    override fun getEvents(): Single<BaseResponse<EventsResponse>> {
+        return marvelServiceImpl.getEvents()
+    }
 
 
     //TODO Events(Characters by event id)
     override fun getCharactersByEventId(eventId: Int): Single<BaseResponse<CharactersByEventIdResponse>> {
+    override fun getCharactersByEventId(eventId: Int): Single<BaseResponse<CharactersResponse>> {
         return marvelServiceImpl.getCharactersByEventId(eventId)
     }
+
+
 
 
     //TODO Events(Creators by event id)
@@ -61,9 +78,13 @@ class MarvelRepositoryImpl(
 
 
     //TODO Story creators by story id
+    override fun getStoryCreatorsByStoryId(storyId: Int): Single<BaseResponse<CreatorsResponse>> {
+        return marvelServiceImpl.getStoryCreatorsByStoryId(storyId)
+    }
 
-
-    //TODO Story comics by story id
+    override fun getComicsByStoryId(storyId: Int): Single<BaseResponse<ComicsResponse>> {
+        return marvelServiceImpl.getComicsByStoryId(storyId)
+    }
 
 
     //TODO Characters
