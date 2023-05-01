@@ -21,7 +21,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         super.onViewCreated(view, savedInstanceState)
         binding.root.setOnClickListener {
 
-            marvelRepositoryImpl.getCharactersByEventId(116).subscribe({
+            marvelRepositoryImpl.getSingleStory(116).subscribe({
                 println("TAG: success: $it")
                 Log.i("TAG", "success: $it")
             }, {
