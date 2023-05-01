@@ -20,8 +20,8 @@ class ComicDetailsViewModel : BaseViewModel() {
     private val _creators: MutableLiveData<State<List<CreatorsResponse>>> = MutableLiveData()
     val creators: MutableLiveData<State<List<CreatorsResponse>>> get() = _creators
 
-    private val _characters: MutableLiveData<State<List<CharactersResponse>>> = MutableLiveData()
-    val characters: MutableLiveData<State<List<CharactersResponse>>> get() = _characters
+    private val _characters: MutableLiveData<State<List<Characters>>> = MutableLiveData()
+    val characters: MutableLiveData<State<List<Characters>>> get() = _characters
 
 
     private val repository: MarvelRepository = MarvelRepositoryImpl(RetrofitClient.apiService)
@@ -72,19 +72,19 @@ class ComicDetailsViewModel : BaseViewModel() {
     private fun getCharacters() {
         _creators.postValue(State.Loading)
 
-        val disposable = repository.getCh(comicId)
+        // TODO: get characters by comic id not all characters
+        val disposable = repository.getCharacters()
             .doOnError {
-                onGetCreatorsError(it)
+                onGetCharactersError(it)
             }
             .doOnSuccess {
-                onGetCreatorsSuccess(it)
+                onGetCharactersSuccess(it)
             }
             .subscribeBy(
-                onError = ::onGetCreatorsError, onSuccess = ::onGetCreatorsSuccess
+                onError = ::onGetCharactersError, onSuccess = ::onGetCharactersSuccess
             )
 
         disposable.addTo(compositeDisposable)
-
 
 
     }
@@ -110,7 +110,7 @@ class ComicDetailsViewModel : BaseViewModel() {
         _creators.postValue(State.Success(response.data?.results!!))
     }
 
-    private fun onGetCharactersSuccess(response: BaseResponse<CharactersResponse>) {
+    private fun onGetCharactersSuccess(response: BaseResponse<Characters>) {
         _characters.postValue(State.Success(response.data?.results!!))
     }
 
