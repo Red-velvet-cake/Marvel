@@ -3,7 +3,7 @@ package com.red_velvet.marvel.data.model
 
 import com.google.gson.annotations.SerializedName
 
-data class GetMarvelGeneralResponse<T>(
+data class BaseResponse<T>(
     @SerializedName("attributionHTML")
     val attributionHTML: String? = "",
     @SerializedName("attributionText")
@@ -13,7 +13,7 @@ data class GetMarvelGeneralResponse<T>(
     @SerializedName("copyright")
     val copyright: String? = "",
     @SerializedName("data")
-    val `data`: GeneralDataResponse<T>? = GeneralDataResponse(),
+    val `data`: BaseResponseBody<T>? = BaseResponseBody(),
     @SerializedName("etag")
     val etag: String? = "",
     @SerializedName("status")

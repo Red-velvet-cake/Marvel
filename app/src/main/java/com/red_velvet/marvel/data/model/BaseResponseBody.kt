@@ -3,7 +3,7 @@ package com.red_velvet.marvel.data.model
 
 import com.google.gson.annotations.SerializedName
 
-data class GeneralDataResponse<T>(
+data class BaseResponseBody<T>(
     @SerializedName("count")
     val count: Int? = 0,
     @SerializedName("limit")
