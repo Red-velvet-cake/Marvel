@@ -4,31 +4,31 @@ import com.google.gson.annotations.SerializedName
 
 data class ComicCreatorResponse(
     @SerializedName("comics")
-    val comics:Content? = Content(),
+    val comics: Content? = Content(),
     @SerializedName("events")
     val events: Content? = Content(),
     @SerializedName("firstName")
-    val firstName: String="",
+    val firstName: String = "",
     @SerializedName("fullName")
-    val fullName: String="",
+    val fullName: String = "",
     @SerializedName("id")
-    val id: Int=0,
+    val id: Int = 0,
     @SerializedName("lastName")
-    val lastName: String="",
+    val lastName: String = "",
     @SerializedName("middleName")
-    val middleName: String="",
+    val middleName: String = "",
     @SerializedName("modified")
-    val modified: String="",
+    val modified: String = "",
     @SerializedName("resourceURI")
-    val resourceURI: String="",
+    val resourceURI: String = "",
     @SerializedName("series")
     val series: Content? = Content(),
     @SerializedName("stories")
     val stories: Content? = Content(),
     @SerializedName("suffix")
-    val suffix: String="",
+    val suffix: String = "",
     @SerializedName("thumbnail")
-    val thumbnail: Thumbnail?=Thumbnail(),
+    val thumbnail: Thumbnail? = Thumbnail(),
     @SerializedName("urls")
-    val urls: List<Url>?
+    val urls: List<Url>?,
 )
