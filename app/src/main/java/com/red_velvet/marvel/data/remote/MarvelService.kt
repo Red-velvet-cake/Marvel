@@ -84,7 +84,10 @@ interface MarvelService {
     :Single<BaseResponse<StoryCreatorsResponse>>
 
 
-    //TODO Story comics by story id
+    @GET("stories/{storyId}/comics")
+    fun getComicsByStoryId(
+        @Path("storyId") storyId:Int
+    ): Single<BaseResponse<ComicsResponse>>
 
 
     //TODO Characters
