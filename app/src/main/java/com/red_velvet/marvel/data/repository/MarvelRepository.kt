@@ -1,6 +1,7 @@
 package com.red_velvet.marvel.data.repository
 
 import com.red_velvet.marvel.data.model.GetComicsResponse
+import com.red_velvet.marvel.data.model.Stories
 import io.reactivex.rxjava3.core.Single
 
 interface MarvelRepository {
@@ -40,7 +41,7 @@ interface MarvelRepository {
     //TODO Events(Creators by event id)
 
 
-    //TODO Stories
+    fun getStories(): Single<Stories>
 
 
     //TODO Story by id
