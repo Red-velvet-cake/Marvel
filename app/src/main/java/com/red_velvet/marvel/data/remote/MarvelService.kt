@@ -1,9 +1,12 @@
 package com.red_velvet.marvel.data.remote
 
+import com.red_velvet.marvel.data.model.GetComicDetailResponse
 import com.red_velvet.marvel.data.model.GetComicsResponse
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
+
 
 interface MarvelService {
 
@@ -17,6 +20,9 @@ interface MarvelService {
 
 
     //TODO Comic details(Comic by id)
+
+    @GET("comics/{comicId}")
+    fun getComicDetail(@Path("comicId") comicId: Int): Single<GetComicDetailResponse>
 
 
     //TODO Comic details(Comic chars by comic id)

@@ -1,5 +1,6 @@
 package com.red_velvet.marvel.data.repository
 
+import com.red_velvet.marvel.data.model.GetComicDetailResponse
 import com.red_velvet.marvel.data.model.GetComicsResponse
 import io.reactivex.rxjava3.core.Single
 
@@ -11,6 +12,7 @@ interface MarvelRepository {
 
 
     //TODO Comic details(Comic by id)
+    fun getComicDetail(comicId: Int): Single<GetComicDetailResponse>
 
 
     //TODO Comic details(Comic chars by comic id)
