@@ -37,7 +37,9 @@ class MarvelRepositoryImpl(
     }
 
     //TODO Comic creator by comic id
-
+    override fun getComicCreatorByComicId(comicId: Int): Single<BaseResponse<CreatorsResponse>> {
+        return marvelServiceImpl.getComicCreatorByComicId(comicId)
+    }
 
     //TODO Series(use **search starts with** and **contains** QP)
     override fun getAllSeries(): Single<BaseResponse<SeriesResponse>> {

@@ -28,6 +28,7 @@ interface MarvelRepository {
     fun getComicsByCharacterId(characterId: Int): Single<BaseResponse<ComicsResponse>>
 
     //TODO Comic creator by comic id
+    fun getComicCreatorByComicId(comicId: Int): Single<BaseResponse<CreatorsResponse>>
 
 
     //TODO Series(use **search starts with** and **contains** QP)

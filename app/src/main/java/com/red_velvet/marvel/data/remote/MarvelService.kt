@@ -17,7 +17,7 @@ interface MarvelService {
     @GET("comics")
     fun getComics(
         @Query("titleStartsWith") titleStartsWith: String? = null,
-        @Query("dateDescriptor") dateDescriptor: String? = null
+        @Query("dateDescriptor") dateDescriptor: String? = null,
     ): Single<BaseResponse<ComicsResponse>>
 
     //TODO Add all required filtration query parameters QPs(for search, filter, etc...)
@@ -39,7 +39,10 @@ interface MarvelService {
     ): Single<BaseResponse<ComicsResponse>>
 
     //TODO Comic creator by comic id
-
+    @GET("comics/{comicId}/creators")
+    fun getComicCreatorByComicId(
+        @Path("comicId") comicId: Int? = null,
+    ): Single<BaseResponse<CreatorsResponse>>
 
     //TODO Series(use **search starts with** and **contains** QP)
     @GET("series")
@@ -67,7 +70,7 @@ interface MarvelService {
     //TODO Events(Characters by event id)
     @GET("events/{eventId}/characters")
     fun getCharactersByEventId(
-        @Path("eventId") eventId: Int
+        @Path("eventId") eventId: Int,
     ): Single<BaseResponse<CharactersResponse>>
 
 
