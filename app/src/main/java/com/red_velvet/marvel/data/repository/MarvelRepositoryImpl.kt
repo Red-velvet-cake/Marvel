@@ -73,6 +73,9 @@ class MarvelRepositoryImpl(
 
 
     //TODO Stories
+    override fun getStories(): Single<BaseResponse<StoryResponse>> {
+        return marvelServiceImpl.getStories()
+    }
 
 
     //TODO Story by id

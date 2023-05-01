@@ -81,7 +81,8 @@ interface MarvelService {
 
 
     //TODO Stories
-
+    @GET("stories")
+    fun getStories(): Single<BaseResponse<StoryResponse>>
 
     //TODO Story by id
     fun getStory(storyId: Int): Single<BaseResponse<StoryResponse>>
