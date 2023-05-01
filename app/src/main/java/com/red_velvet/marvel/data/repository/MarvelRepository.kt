@@ -1,6 +1,7 @@
 package com.red_velvet.marvel.data.repository
 
 import com.red_velvet.marvel.data.model.GetComicsResponse
+import com.red_velvet.marvel.data.model.GetSeriesDetails
 import io.reactivex.rxjava3.core.Single
 
 interface MarvelRepository {
@@ -29,7 +30,7 @@ interface MarvelRepository {
 
 
     //TODO Serie details(Creators by serie id)
-
+    fun getSeriesDetailsBySeriesId(seriesId:Int): Single<GetSeriesDetails>
 
     //TODO Events
 

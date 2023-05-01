@@ -1,6 +1,7 @@
 package com.red_velvet.marvel.data.repository
 
 import com.red_velvet.marvel.data.model.GetComicsResponse
+import com.red_velvet.marvel.data.model.GetSeriesDetails
 import com.red_velvet.marvel.data.remote.MarvelService
 import com.red_velvet.marvel.data.remote.RetrofitClient
 import io.reactivex.rxjava3.core.Single
@@ -12,6 +13,9 @@ class MarvelRepositoryImpl(
     override fun getComics(): Single<GetComicsResponse> {
         return RetrofitClient.apiService.getComics()
     }
+
+
+
 
     //TODO Add all required filtration query parameters QPs(for search, filter, etc...)
 
@@ -36,6 +40,9 @@ class MarvelRepositoryImpl(
 
     //TODO Serie details(Creators by serie id)
 
+    override fun getSeriesDetailsBySeriesId(seriesId:Int): Single<GetSeriesDetails> {
+        return  RetrofitClient.apiService.getSeriesDetailsBySeriesId(seriesId)
+    }
 
     //TODO Events
 
