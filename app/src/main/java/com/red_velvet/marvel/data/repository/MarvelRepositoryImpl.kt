@@ -31,7 +31,7 @@ class MarvelRepositoryImpl(
 
 
     //TODO Series(use **search starts with** and **contains** QP)
-    override fun getAllSeries() = RetrofitClient.apiService.getAllSeries()
+    override fun getAllSeries() = marvelServiceImpl.getAllSeries()
 
     //TODO Serie details
 
