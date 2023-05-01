@@ -1,7 +1,10 @@
 package com.red_velvet.marvel.data.repository
 
-import com.red_velvet.marvel.data.model.GetComicsResponse
-import com.red_velvet.marvel.data.model.GetSeriesDetails
+
+import com.red_velvet.marvel.data.model.SeriesDetailsResponse
+import com.red_velvet.marvel.data.model.ComicsResponse
+import com.red_velvet.marvel.data.model.BaseResponse
+import com.red_velvet.marvel.data.model.CharactersByEventIdResponse
 import com.red_velvet.marvel.data.remote.MarvelService
 import com.red_velvet.marvel.data.remote.RetrofitClient
 import io.reactivex.rxjava3.core.Single
@@ -10,7 +13,7 @@ class MarvelRepositoryImpl(
     private val marvelServiceImpl: MarvelService
 ) : MarvelRepository {
 
-    override fun getComics(): Single<GetComicsResponse> {
+    override fun getComics(): Single<BaseResponse<ComicsResponse>> {
         return RetrofitClient.apiService.getComics()
     }
 
@@ -40,7 +43,7 @@ class MarvelRepositoryImpl(
 
     //TODO Serie details(Creators by serie id)
 
-    override fun getSeriesDetailsBySeriesId(seriesId:Int): Single<GetSeriesDetails> {
+    override fun getSeriesDetailsBySeriesId(seriesId:Int): Single<BaseResponse<SeriesDetailsResponse>> {
         return  RetrofitClient.apiService.getSeriesDetailsBySeriesId(seriesId)
     }
 
@@ -48,6 +51,9 @@ class MarvelRepositoryImpl(
 
 
     //TODO Events(Characters by event id)
+    override fun getCharactersByEventId(eventId:Int): Single<BaseResponse<CharactersByEventIdResponse>> {
+        return marvelServiceImpl.getCharactersByEventId(eventId)
+    }
 
 
     //TODO Events(Creators by event id)

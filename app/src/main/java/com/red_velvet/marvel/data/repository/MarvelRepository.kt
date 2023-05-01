@@ -1,12 +1,14 @@
 package com.red_velvet.marvel.data.repository
 
-import com.red_velvet.marvel.data.model.GetComicsResponse
-import com.red_velvet.marvel.data.model.GetSeriesDetails
+import com.red_velvet.marvel.data.model.SeriesDetailsResponse
+import com.red_velvet.marvel.data.model.ComicsResponse
+import com.red_velvet.marvel.data.model.BaseResponse
+import com.red_velvet.marvel.data.model.CharactersByEventIdResponse
 import io.reactivex.rxjava3.core.Single
 
 interface MarvelRepository {
 
-    fun getComics(): Single<GetComicsResponse>
+    fun getComics(): Single<BaseResponse<ComicsResponse>>
 
     //TODO Add all required filtration query parameters QPs(for search, filter, etc...)
 
@@ -30,12 +32,14 @@ interface MarvelRepository {
 
 
     //TODO Serie details(Creators by serie id)
-    fun getSeriesDetailsBySeriesId(seriesId:Int): Single<GetSeriesDetails>
+    fun getSeriesDetailsBySeriesId(seriesId:Int):
+            Single<BaseResponse<SeriesDetailsResponse>>
 
     //TODO Events
 
 
     //TODO Events(Characters by event id)
+    fun getCharactersByEventId(eventId: Int): Single<BaseResponse<CharactersByEventIdResponse>>
 
 
     //TODO Events(Creators by event id)
