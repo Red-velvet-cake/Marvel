@@ -3,6 +3,7 @@ package com.red_velvet.marvel.data.repository
 import com.red_velvet.marvel.data.model.ComicsResponse
 import com.red_velvet.marvel.data.model.BaseResponse
 import com.red_velvet.marvel.data.model.CharactersByEventIdResponse
+import com.red_velvet.marvel.data.model.StoryComicsResponse
 import com.red_velvet.marvel.data.remote.MarvelService
 import com.red_velvet.marvel.data.remote.RetrofitClient
 import io.reactivex.rxjava3.core.Single
@@ -60,7 +61,9 @@ class MarvelRepositoryImpl(
     //TODO Story creators by story id
 
 
-    //TODO Story comics by story id
+    override fun getComicsByStoryId(storyId: Int): Single<BaseResponse<StoryComicsResponse>> {
+        return RetrofitClient.apiService.getComicsByStoryId(storyId)
+    }
 
 
     //TODO Characters
