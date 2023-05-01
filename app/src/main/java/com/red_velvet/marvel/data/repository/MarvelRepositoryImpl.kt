@@ -41,7 +41,7 @@ class MarvelRepositoryImpl(
 
 
     override fun getEvents(): Single<BaseResponse<EventsResponse>> {
-        return RetrofitClient.apiService.getEvents()
+        return marvelServiceImpl.getEvents()
     }
 
 
