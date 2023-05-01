@@ -31,6 +31,7 @@ interface MarvelRepository {
 
 
     //TODO Series(use **search starts with** and **contains** QP)
+    fun getAllSeries(): Single<BaseResponse<SeriesResponse>>
 
 
     fun getSeriesDetails(seriesId: Int): Single<BaseResponse<SeriesResponse>>
