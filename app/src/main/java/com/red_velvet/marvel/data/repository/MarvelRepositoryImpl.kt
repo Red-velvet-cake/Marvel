@@ -25,7 +25,7 @@ class MarvelRepositoryImpl(
 
 
     //TODO Comics by Char id
-    override fun getComicsByCharacterId(characterId: Int): Single<GetComicsResponse> {
+    override fun getComicsByCharacterId(characterId: Int): Single<BaseResponse<ComicsResponse>> {
         return marvelServiceImpl.getComicsByCharacterId(characterId)
     }
 

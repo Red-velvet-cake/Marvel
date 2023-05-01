@@ -31,7 +31,7 @@ interface MarvelService {
         @Path("characterId") characterId: Int,
         @Query("titleStartsWith") titleStartsWith: String? = null,
         @Query("dateDescriptor") dateDescriptor: String? = null
-    ): Single<GetComicsResponse>
+    ): Single<BaseResponse<ComicsResponse>>
 
     //TODO Comic creator by comic id
 
