@@ -1,5 +1,6 @@
 package com.red_velvet.marvel.ui.comicDetails
 
+import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -15,25 +16,76 @@ class ComicDetailsFragment : BaseFragment<FragmentComicDetailsBinding>() {
 
     override val viewModel: ComicDetailsViewModel by viewModels()
 
-    override fun setUp() {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.root.setOnClickListener {
+            setUp()
+            binding.lifecycleOwner = viewLifecycleOwner
 
-        viewModel.comics.observe(this) {
+        }
+    }
+    override fun setUp() {
+        observeComicsDetails()
+        observeCharacters()
+        observeCreators()
+    }
+
+    private fun observeComicsDetails() {
+        viewModel.comicsDetails.observe(viewLifecycleOwner) {
             when (it) {
                 is State.Failed -> {
                     binding.pBar.visibility = View.VISIBLE
+                    Log.d("Tag", "Failed:observeComicsDetails:  ")
+
                 }
 
                 State.Loading -> {
                 }
 
                 is State.Success -> {
-                    Log.d("Mako", "setUp:  ")
                     binding.pBar.visibility = View.GONE
+                    Log.d("Tag", "Success:observeComicsDetails:  ")
                 }
             }
         }
-
-
     }
+
+    private fun observeCharacters() {
+        viewModel.characters.observe(viewLifecycleOwner) {
+            when (it) {
+                is State.Failed -> {
+                    Log.d("Tag", "Failed:observeCharacters:  ")
+
+                }
+
+                State.Loading -> {
+                }
+
+                is State.Success -> {
+                    Log.d("Tag", "Success:observeCharacters:  ")
+                }
+            }
+        }
+    }
+
+    private fun observeCreators() {
+        viewModel.creators.observe(viewLifecycleOwner) {
+            when (it) {
+                is State.Failed -> {
+                    Log.d("Tag", "Failed:observeCreators:  ")
+
+                }
+
+                State.Loading -> {
+                }
+
+                is State.Success -> {
+                    Log.d("Tag", "Success:observeCreators:  ")
+                }
+            }
+        }
+    }
+
+
 }
 
