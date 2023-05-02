@@ -1,5 +1,6 @@
 package com.red_velvet.marvel.ui.home
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.red_velvet.marvel.data.model.ComicsResponse
 import com.red_velvet.marvel.data.remote.RetrofitClient
@@ -17,19 +18,19 @@ class ComicsViewModel : BaseViewModel() {
     private val repository: MarvelRepository = MarvelRepositoryImpl(RetrofitClient.apiService)
 
     init {
-        getComics()
+        getAllComics()
     }
 
-    private fun getComics() {
+    fun getAllComics() {
         //Upstream/Downstream
-        _comics.postValue(State.Loading)
+//        _comics.postValue(State.Loading)
         try {
             repository.getComics()
                 .doOnError(::onGetComicsError)
-                .doOnSuccess(::onGetComicsSuccess)
+                .doOnNext(::onGetComicsNextState)
                 .subscribeBy(
                     onError = ::onGetComicsError,
-                    onSuccess = ::onGetComicsSuccess
+                    onNext = ::onGetComicsNextState,
                 )
                 .addTo(compositeDisposable)
         } catch (e: Exception) {
@@ -39,11 +40,16 @@ class ComicsViewModel : BaseViewModel() {
     }
 
     private fun onGetComicsError(error: Throwable) {
+        Log.d("SADEQMHANA", "onGetComicsError: ${error.message}")
         _comics.postValue(State.Failed(error.message.toString()))
     }
 
-    private fun onGetComicsSuccess(state: State<List<ComicsResponse>?>) {
-        _comics.postValue(State.Success(state.toData()!!))
+    private fun onGetComicsNextState(state: State<List<ComicsResponse>?>) {
+        when (state) {
+            is State.Success -> _comics.postValue(State.Success(state.data!!))
+            is State.Failed -> _comics.postValue(State.Failed(state.error))
+            is State.Loading -> _comics.postValue(State.Loading)
+        }
     }
 
 }
