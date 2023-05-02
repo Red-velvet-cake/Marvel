@@ -10,6 +10,7 @@ import com.red_velvet.marvel.data.model.EventsResponse
 import com.red_velvet.marvel.data.model.SeriesResponse
 import com.red_velvet.marvel.data.model.StoryResponse
 import io.reactivex.rxjava3.core.Single
+import retrofit2.http.Path
 
 interface MarvelRepository {
 
@@ -48,5 +49,5 @@ interface MarvelRepository {
     fun getSeriesByCharacterId(
         characterId: Int
     ): Single<BaseResponse<BaseResponse<SeriesResponse>>>
-
+    fun getEventDetails(eventId:Int):Single<BaseResponse<EventsResponse>>
 }

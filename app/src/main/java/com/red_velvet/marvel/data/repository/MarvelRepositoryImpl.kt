@@ -99,6 +99,10 @@ class MarvelRepositoryImpl(
             .applySchedulers()
     }
 
+    override fun getEventDetails(eventId: Int): Single<BaseResponse<EventsResponse>> {
+       return  marvelServiceImpl.getEventDetails(eventId).applySchedulers()
+    }
+
     override fun getSerieCreatorsBySeriesId(seriesId: Int): Single<BaseResponse<CreatorsResponse>> {
         return marvelServiceImpl.getSerieCreatorsBySeriesId(seriesId)
             .applySchedulers()

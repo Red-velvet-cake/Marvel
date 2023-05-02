@@ -90,4 +90,9 @@ interface MarvelService {
     fun getSerieCreatorsBySeriesId(
         @Path("seriesId") seriesId: Int
     ): Single<BaseResponse<CreatorsResponse>>
+
+    @GET("events/{eventId}")
+    fun getEventDetails(
+        @Path("eventId") eventId:Int
+    ):Single<BaseResponse<EventsResponse>>
 }
