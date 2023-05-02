@@ -2,6 +2,8 @@ package com.red_velvet.marvel.data.repository
 
 
 import com.red_velvet.marvel.data.model.BaseResponse
+
+import com.red_velvet.marvel.data.model.charsbycomicid.CharsByComicIdResponse
 import com.red_velvet.marvel.data.model.Characters
 import com.red_velvet.marvel.data.model.CharactersResponse
 import com.red_velvet.marvel.data.model.ComicsResponse
@@ -43,6 +45,9 @@ class MarvelRepositoryImpl(
             .applySchedulers()
     }
 
+    override fun getCharsByComicId(comicId: Int): Single<BaseResponse<Characters>> {
+        return marvelServiceImpl.getCharsByComicId(comicId)
+    }
     override fun getSeriesDetails(seriesId: Int): Single<BaseResponse<SeriesResponse>> {
         return marvelServiceImpl.getSerieDetails(seriesId)
             .applySchedulers()
@@ -51,6 +56,7 @@ class MarvelRepositoryImpl(
     override fun getEvents(): Single<BaseResponse<EventsResponse>> {
         return marvelServiceImpl.getAllEvents()
             .applySchedulers()
+
     }
 
     override fun getCharactersByEventId(eventId: Int): Single<BaseResponse<CharactersResponse>> {
@@ -99,5 +105,4 @@ class MarvelRepositoryImpl(
         return marvelServiceImpl.getSerieCreatorsBySeriesId(seriesId)
             .applySchedulers()
     }
-
 }
