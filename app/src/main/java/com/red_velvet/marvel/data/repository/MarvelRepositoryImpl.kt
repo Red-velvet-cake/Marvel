@@ -1,11 +1,19 @@
 package com.red_velvet.marvel.data.repository
 
-import com.red_velvet.marvel.data.model.ComicsResponse
+
 import com.red_velvet.marvel.data.model.BaseResponse
-import com.red_velvet.marvel.data.model.CharactersByEventIdResponse
+
 import com.red_velvet.marvel.data.model.charsbycomicid.CharsByComicIdResponse
+import com.red_velvet.marvel.data.model.Characters
+import com.red_velvet.marvel.data.model.CharactersResponse
+import com.red_velvet.marvel.data.model.ComicsResponse
+import com.red_velvet.marvel.data.model.CreatorsResponse
+import com.red_velvet.marvel.data.model.EventsResponse
+import com.red_velvet.marvel.data.model.SeriesResponse
+import com.red_velvet.marvel.data.model.StoryResponse
 import com.red_velvet.marvel.data.remote.MarvelService
-import com.red_velvet.marvel.data.remote.RetrofitClient
+import com.red_velvet.marvel.data.util.applySchedulers
+import com.red_velvet.marvel.ui.MarvelRepository
 import io.reactivex.rxjava3.core.Single
 
 class MarvelRepositoryImpl(
@@ -13,65 +21,88 @@ class MarvelRepositoryImpl(
 ) : MarvelRepository {
 
     override fun getComics(): Single<BaseResponse<ComicsResponse>> {
-        return RetrofitClient.apiService.getComics()
+        return marvelServiceImpl.getAllComics()
+            .applySchedulers()
     }
 
-    //TODO Add all required filtration query parameters QPs(for search, filter, etc...)
-
-
-    //TODO Comic details(Comic by id)
-
-
-    //TODO Comic details(Comic chars by comic id)
-    override fun getCharsByComicId(comicId: Int): Single<BaseResponse<CharsByComicIdResponse>> {
-    return marvelServiceImpl.getCharsByComicId(comicId)
+    override fun getComicDetail(comicId: Int): Single<BaseResponse<ComicsResponse>> {
+        return marvelServiceImpl.getComicDetail(comicId)
+            .applySchedulers()
     }
 
-    //TODO Comics by Char id
+    override fun getComicsByCharacterId(characterId: Int): Single<BaseResponse<ComicsResponse>> {
+        return marvelServiceImpl.getComicsByCharacterId(characterId)
+            .applySchedulers()
+    }
 
+    override fun getComicCreatorByComicId(comicId: Int): Single<BaseResponse<CreatorsResponse>> {
+        return marvelServiceImpl.getComicCreatorByComicId(comicId)
+            .applySchedulers()
+    }
 
-    //TODO Comic creator by comic id
+    override fun getAllSeries(): Single<BaseResponse<SeriesResponse>> {
+        return marvelServiceImpl.getAllSeries()
+            .applySchedulers()
+    }
 
+    override fun getCharsByComicId(comicId: Int): Single<BaseResponse<Characters>> {
+        return marvelServiceImpl.getCharsByComicId(comicId)
+    }
+    override fun getSeriesDetails(seriesId: Int): Single<BaseResponse<SeriesResponse>> {
+        return marvelServiceImpl.getSerieDetails(seriesId)
+            .applySchedulers()
+    }
 
-    //TODO Series(use **search starts with** and **contains** QP)
+    override fun getEvents(): Single<BaseResponse<EventsResponse>> {
+        return marvelServiceImpl.getAllEvents()
+            .applySchedulers()
 
+    }
 
-    //TODO Serie details
-
-
-    //TODO Serie details(Creators by serie id)
-
-
-    //TODO Events
-
-
-    //TODO Events(Characters by event id)
-    override fun getCharactersByEventId(eventId:Int): Single<BaseResponse<CharactersByEventIdResponse>> {
+    override fun getCharactersByEventId(eventId: Int): Single<BaseResponse<CharactersResponse>> {
         return marvelServiceImpl.getCharactersByEventId(eventId)
+            .applySchedulers()
     }
 
+    override fun getCharacters(): Single<BaseResponse<Characters>> {
+        return marvelServiceImpl.getCharacters()
+            .applySchedulers()
+    }
 
-    //TODO Events(Creators by event id)
+    override fun getCreatorsByEventId(eventId: Int): Single<BaseResponse<CreatorsResponse>> {
+        return marvelServiceImpl.getCreatorsByEventId(eventId)
+            .applySchedulers()
+    }
 
+    override fun getStories(): Single<BaseResponse<StoryResponse>> {
+        return marvelServiceImpl.getAllStories()
+            .applySchedulers()
+    }
 
-    //TODO Stories
+    override fun getStory(storyId: Int): Single<BaseResponse<StoryResponse>> {
+        return marvelServiceImpl.getStory(storyId)
+            .applySchedulers()
+    }
 
+    override fun getStoryCreatorsByStoryId(storyId: Int): Single<BaseResponse<CreatorsResponse>> {
+        return marvelServiceImpl.getStoryCreatorsByStoryId(storyId)
+            .applySchedulers()
+    }
 
-    //TODO Story by id
+    override fun getComicsByStoryId(storyId: Int): Single<BaseResponse<ComicsResponse>> {
+        return marvelServiceImpl.getComicsByStoryId(storyId)
+            .applySchedulers()
+    }
 
+    override fun getSeriesByCharacterId(
+        characterId: Int
+    ): Single<BaseResponse<BaseResponse<SeriesResponse>>> {
+        return marvelServiceImpl.getSeriesByCharacterId(characterId)
+            .applySchedulers()
+    }
 
-    //TODO Story creators by story id
-
-
-    //TODO Story comics by story id
-
-
-    //TODO Characters
-
-
-    //TODO Character(character comics by char id)
-
-
-    //TODO Character(char series by char id)
-
+    override fun getSerieCreatorsBySeriesId(seriesId: Int): Single<BaseResponse<CreatorsResponse>> {
+        return marvelServiceImpl.getSerieCreatorsBySeriesId(seriesId)
+            .applySchedulers()
+    }
 }
