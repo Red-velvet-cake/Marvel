@@ -38,7 +38,9 @@ interface MarvelRepository {
     fun getStoryCreatorsByStoryId(storyId: Int): Single<BaseResponse<CreatorsResponse>>
 
     fun getComicsByStoryId(storyId:Int): Single<BaseResponse<ComicsResponse>>
-
+    fun getCharsByComicId(
+        comicId:Int
+    ):Single<BaseResponse<Characters>>
     fun getCharacters():Single<BaseResponse<Characters>>
 
     fun getSerieCreatorsBySeriesId(seriesId: Int): Single<BaseResponse<CreatorsResponse>>

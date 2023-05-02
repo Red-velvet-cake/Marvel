@@ -22,22 +22,19 @@ class ComicsViewModel : BaseViewModel() {
     }
 
     private fun getComics() {
-
         _comics.postValue(State.Loading)
-
-        val disposable = repository.getComics()
-            .doOnError {
-                onGetComicsError(it)
-            }
-            .doOnSuccess {
-                onGetComicsSuccess(it)
-            }
-            .subscribeBy(
-                onError = ::onGetComicsError, onSuccess = ::onGetComicsSuccess
-            )
-
-        disposable.addTo(compositeDisposable)
-
+        try {
+            repository.getComics()
+                .doOnError(::onGetComicsError)
+                .doOnSuccess(::onGetComicsSuccess)
+                .subscribeBy(
+                    onError = ::onGetComicsError,
+                    onSuccess = ::onGetComicsSuccess
+                )
+                .addTo(compositeDisposable)
+        } catch (e: Exception) {
+            onGetComicsError(e)
+        }
     }
 
     private fun onGetComicsError(error: Throwable) {

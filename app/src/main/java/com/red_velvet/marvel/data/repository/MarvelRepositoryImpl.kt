@@ -43,6 +43,9 @@ class MarvelRepositoryImpl(
             .applySchedulers()
     }
 
+    override fun getCharsByComicId(comicId: Int): Single<BaseResponse<Characters>> {
+        return marvelServiceImpl.getCharsByComicId(comicId)
+    }
     override fun getSeriesDetails(seriesId: Int): Single<BaseResponse<SeriesResponse>> {
         return marvelServiceImpl.getSerieDetails(seriesId)
             .applySchedulers()
@@ -51,6 +54,7 @@ class MarvelRepositoryImpl(
     override fun getEvents(): Single<BaseResponse<EventsResponse>> {
         return marvelServiceImpl.getAllEvents()
             .applySchedulers()
+
     }
 
     override fun getCharactersByEventId(eventId: Int): Single<BaseResponse<CharactersResponse>> {
@@ -99,5 +103,4 @@ class MarvelRepositoryImpl(
         return marvelServiceImpl.getSerieCreatorsBySeriesId(seriesId)
             .applySchedulers()
     }
-
 }
