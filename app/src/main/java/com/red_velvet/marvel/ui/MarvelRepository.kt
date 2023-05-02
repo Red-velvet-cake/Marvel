@@ -47,6 +47,6 @@ interface MarvelRepository {
 
     fun getSeriesByCharacterId(
         characterId: Int
-    ): Single<BaseResponse<BaseResponse<SeriesResponse>>>
+    ): Single<BaseResponse<SeriesResponse>>
 
 }

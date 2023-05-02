@@ -94,7 +94,7 @@ class MarvelRepositoryImpl(
 
     override fun getSeriesByCharacterId(
         characterId: Int
-    ): Single<BaseResponse<BaseResponse<SeriesResponse>>> {
+    ): Single<BaseResponse<SeriesResponse>> {
         return marvelServiceImpl.getSeriesByCharacterId(characterId)
             .applySchedulers()
     }
