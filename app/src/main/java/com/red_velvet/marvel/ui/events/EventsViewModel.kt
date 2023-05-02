@@ -18,6 +18,10 @@ class EventsViewModel : BaseViewModel() {
     val event: LiveData<State<List<EventsResponse>>>
         get() = _event
 
+    init {
+        getEvents()
+    }
+
     private fun getEvents() {
 
         _event.postValue(State.Loading)
