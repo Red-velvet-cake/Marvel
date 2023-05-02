@@ -1,7 +1,6 @@
 package com.red_velvet.marvel.ui.home
 
 import androidx.lifecycle.MutableLiveData
-import com.red_velvet.marvel.data.model.BaseResponse
 import com.red_velvet.marvel.data.model.ComicsResponse
 import com.red_velvet.marvel.data.remote.RetrofitClient
 import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
@@ -22,6 +21,7 @@ class ComicsViewModel : BaseViewModel() {
     }
 
     private fun getComics() {
+        //Upstream/Downstream
         _comics.postValue(State.Loading)
         try {
             repository.getComics()
@@ -35,14 +35,15 @@ class ComicsViewModel : BaseViewModel() {
         } catch (e: Exception) {
             onGetComicsError(e)
         }
+        //DRY
     }
 
     private fun onGetComicsError(error: Throwable) {
         _comics.postValue(State.Failed(error.message.toString()))
     }
 
-    private fun onGetComicsSuccess(response: BaseResponse<ComicsResponse>) {
-        _comics.postValue(State.Success(response.data?.results!!))
+    private fun onGetComicsSuccess(state: State<List<ComicsResponse>?>) {
+        _comics.postValue(State.Success(state.toData()!!))
     }
 
 }

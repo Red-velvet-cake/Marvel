@@ -2,6 +2,7 @@ package com.red_velvet.marvel.data.repository
 
 
 import com.red_velvet.marvel.data.model.BaseResponse
+import com.red_velvet.marvel.data.model.BaseResponseBody
 import com.red_velvet.marvel.data.model.Characters
 import com.red_velvet.marvel.data.model.CharactersResponse
 import com.red_velvet.marvel.data.model.ComicsResponse
@@ -10,18 +11,62 @@ import com.red_velvet.marvel.data.model.EventsResponse
 import com.red_velvet.marvel.data.model.SeriesResponse
 import com.red_velvet.marvel.data.model.StoryResponse
 import com.red_velvet.marvel.data.remote.MarvelService
+import com.red_velvet.marvel.data.util.State
 import com.red_velvet.marvel.data.util.applySchedulers
 import com.red_velvet.marvel.ui.MarvelRepository
 import io.reactivex.rxjava3.core.Single
+import retrofit2.Response
 
 class MarvelRepositoryImpl(
     private val marvelServiceImpl: MarvelService
 ) : MarvelRepository {
 
-    override fun getComics(): Single<BaseResponse<ComicsResponse>> {
-        return marvelServiceImpl.getAllComics()
+    override fun getComics(): Single<State<List<ComicsResponse>?>> {
+        return wrap(marvelServiceImpl.getAllComics())
             .applySchedulers()
     }
+
+    fun <T> wrap(response: Single<Response<BaseResponse<BaseResponseBody<T>>>>): Single<State<T?>> {
+        return response.map {
+            if (it.isSuccessful) {
+                State.Success(it.body()?.data?.results?.results)
+            } else {
+                State.Failed(it.message())
+            }
+        }
+    }
+
+//    fun <T> wrap(response: Single<Response<BaseResponse<T>>>): Single<State<T>> {
+//        return response
+//            .map {
+//                if (it.isSuccessful) {
+//                    State.Success(it.body()!!.data as T)
+//                } else {
+//                    State.Failed(it.message())
+//                }
+//            }
+//    }
+
+//    fun <T> wrap(response: Single<Response<State<BaseResponse<T>>>>): Observable<State<T>> {
+//        return response
+//            .toObservable()
+//            .map { apiResponse ->
+//                if (apiResponse.isSuccessful) {
+//                    val body = apiResponse.body()
+//                    if (body is State.Success) {
+//                        State.Success(body.data.data)
+//                    } else {
+//                        State.Error("API response successful, but state is not 'Success'")
+//                    }
+//                } else {
+//                    State.Error("API response failed with code: ${apiResponse.code()}")
+//                }
+//            }
+//            .onErrorReturn { throwable ->
+//                State.Error(throwable.message ?: "Unknown error")
+//            }
+//            .startWithItem(State.Loading)
+//    }
 
     override fun getComicDetail(comicId: Int): Single<BaseResponse<ComicsResponse>> {
         return marvelServiceImpl.getComicDetail(comicId)
@@ -46,6 +91,7 @@ class MarvelRepositoryImpl(
     override fun getCharsByComicId(comicId: Int): Single<BaseResponse<Characters>> {
         return marvelServiceImpl.getCharsByComicId(comicId)
     }
+
     override fun getSeriesDetails(seriesId: Int): Single<BaseResponse<SeriesResponse>> {
         return marvelServiceImpl.getSerieDetails(seriesId)
             .applySchedulers()

@@ -9,11 +9,12 @@ import com.red_velvet.marvel.data.model.CreatorsResponse
 import com.red_velvet.marvel.data.model.EventsResponse
 import com.red_velvet.marvel.data.model.SeriesResponse
 import com.red_velvet.marvel.data.model.StoryResponse
+import com.red_velvet.marvel.data.util.State
 import io.reactivex.rxjava3.core.Single
 
 interface MarvelRepository {
 
-    fun getComics(): Single<BaseResponse<ComicsResponse>>
+    fun getComics(): Single<State<List<ComicsResponse>?>>
 
     fun getComicDetail(comicId: Int): Single<BaseResponse<ComicsResponse>>
 

@@ -11,7 +11,7 @@ data class BaseResponseBody<T>(
     @SerializedName("offset")
     val offset: Int? = 0,
     @SerializedName("results")
-    val results: List<T>? = listOf(),
+    val results: T? = null,
     @SerializedName("total")
     val total: Int? = 0
 )
