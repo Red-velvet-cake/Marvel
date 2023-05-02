@@ -1,19 +1,17 @@
 package com.red_velvet.marvel.data.repository
 
 
-import com.red_velvet.marvel.data.model.BaseResponse
-import com.red_velvet.marvel.data.model.BaseResponseBody
-import com.red_velvet.marvel.data.model.Characters
 import com.red_velvet.marvel.data.model.CharactersResponse
 import com.red_velvet.marvel.data.model.ComicsResponse
 import com.red_velvet.marvel.data.model.CreatorsResponse
 import com.red_velvet.marvel.data.model.EventsResponse
+import com.red_velvet.marvel.data.model.MarvelResponse
 import com.red_velvet.marvel.data.model.SeriesResponse
 import com.red_velvet.marvel.data.model.StoryResponse
 import com.red_velvet.marvel.data.remote.MarvelService
 import com.red_velvet.marvel.data.util.State
-import com.red_velvet.marvel.data.util.applySchedulers
 import com.red_velvet.marvel.ui.MarvelRepository
+import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import retrofit2.Response
 
@@ -21,132 +19,106 @@ class MarvelRepositoryImpl(
     private val marvelServiceImpl: MarvelService
 ) : MarvelRepository {
 
-    override fun getComics(): Single<State<List<ComicsResponse>?>> {
-        return wrap(marvelServiceImpl.getAllComics())
-            .applySchedulers()
+    override fun getComics(): Observable<State<List<ComicsResponse>?>> {
+        return wrapWithState { marvelServiceImpl.getAllComics() }
     }
 
-    fun <T> wrap(response: Single<Response<BaseResponse<BaseResponseBody<T>>>>): Single<State<T?>> {
-        return response.map {
-            if (it.isSuccessful) {
-                State.Success(it.body()?.data?.results?.results)
-            } else {
-                State.Failed(it.message())
-            }
-        }
+    //    Response<MarvelResponse<List<ComicsResponse>>>
+    private fun wrap(): Observable<State<List<ComicsResponse>?>> {
+
+        val stateObservable = marvelServiceImpl.getAllComics()
+            .map { responseWrapper ->
+                if (responseWrapper.isSuccessful) {
+                    State.Success(responseWrapper.body()?.body?.results)
+                } else {
+                    State.Failed(responseWrapper.message())
+                }
+            }.startWith(Observable.just(State.Loading))
+
+        return stateObservable
     }
 
-//    fun <T> wrap(response: Single<Response<BaseResponse<T>>>): Single<State<T>> {
-//        return response
-//            .map {
-//                if (it.isSuccessful) {
-//                    State.Success(it.body()!!.data as T)
-//                } else {
-//                    State.Failed(it.message())
-//                }
-//            }
-//    }
-
-//    fun <T> wrap(response: Single<Response<State<BaseResponse<T>>>>): Observable<State<T>> {
-//        return response
-//            .toObservable()
-//            .map { apiResponse ->
-//                if (apiResponse.isSuccessful) {
-//                    val body = apiResponse.body()
-//                    if (body is State.Success) {
-//                        State.Success(body.data.data)
-//                    } else {
-//                        State.Error("API response successful, but state is not 'Success'")
-//                    }
-//                } else {
-//                    State.Error("API response failed with code: ${apiResponse.code()}")
-//                }
-//            }
-//            .onErrorReturn { throwable ->
-//                State.Error(throwable.message ?: "Unknown error")
-//            }
-//            .startWithItem(State.Loading)
-//    }
-
-    override fun getComicDetail(comicId: Int): Single<BaseResponse<ComicsResponse>> {
-        return marvelServiceImpl.getComicDetail(comicId)
-            .applySchedulers()
+    private fun <T> wrapWithState(function: () -> Single<Response<MarvelResponse<T>>>): Observable<State<T?>> {
+        return function()
+            .map {
+                if (it.isSuccessful) {
+                    State.Success(it.body()?.body?.results)
+                } else {
+                    State.Failed(it.message())
+                }
+            }.startWith(Observable.just(State.Loading))
     }
 
-    override fun getComicsByCharacterId(characterId: Int): Single<BaseResponse<ComicsResponse>> {
-        return marvelServiceImpl.getComicsByCharacterId(characterId)
-            .applySchedulers()
+    override fun getComicDetail(comicId: Int): Observable<State<List<ComicsResponse>?>> {
+        return wrapWithState { marvelServiceImpl.getComicDetail(comicId) }
     }
 
-    override fun getComicCreatorByComicId(comicId: Int): Single<BaseResponse<CreatorsResponse>> {
-        return marvelServiceImpl.getComicCreatorByComicId(comicId)
-            .applySchedulers()
+    override fun getComicsByCharacterId(characterId: Int): Observable<State<List<ComicsResponse>?>> {
+        return wrapWithState { marvelServiceImpl.getComicsByCharacterId(characterId) }
     }
 
-    override fun getAllSeries(): Single<BaseResponse<SeriesResponse>> {
-        return marvelServiceImpl.getAllSeries()
-            .applySchedulers()
+
+    override fun getAllSeries(): Observable<State<List<SeriesResponse>?>> {
+        return wrapWithState { marvelServiceImpl.getAllSeries() }
     }
 
-    override fun getCharsByComicId(comicId: Int): Single<BaseResponse<Characters>> {
-        return marvelServiceImpl.getCharsByComicId(comicId)
+    override fun getCharsByComicId(comicId: Int): Observable<State<List<CharactersResponse>?>> {
+        return wrapWithState { marvelServiceImpl.getCharsByComicId(comicId) }
     }
 
-    override fun getSeriesDetails(seriesId: Int): Single<BaseResponse<SeriesResponse>> {
-        return marvelServiceImpl.getSerieDetails(seriesId)
-            .applySchedulers()
+    override fun getSeriesDetails(seriesId: Int): Observable<State<List<SeriesResponse>?>> {
+        return wrapWithState { marvelServiceImpl.getSerieDetails(seriesId) }
     }
 
-    override fun getEvents(): Single<BaseResponse<EventsResponse>> {
-        return marvelServiceImpl.getAllEvents()
-            .applySchedulers()
+    override fun getEvents(): Observable<State<List<EventsResponse>?>> {
+        return wrapWithState { marvelServiceImpl.getAllEvents() }
 
     }
 
-    override fun getCharactersByEventId(eventId: Int): Single<BaseResponse<CharactersResponse>> {
-        return marvelServiceImpl.getCharactersByEventId(eventId)
-            .applySchedulers()
+    override fun getComicCreatorByComicId(comicId: Int): Observable<State<List<CreatorsResponse>?>> {
+        return wrapWithState { marvelServiceImpl.getComicCreatorByComicId(comicId) }
     }
 
-    override fun getCharacters(): Single<BaseResponse<Characters>> {
-        return marvelServiceImpl.getCharacters()
-            .applySchedulers()
+    override fun getCharactersByEventId(eventId: Int): Observable<State<List<CharactersResponse>?>> {
+        return wrapWithState { marvelServiceImpl.getCharactersByEventId(eventId) }
     }
 
-    override fun getCreatorsByEventId(eventId: Int): Single<BaseResponse<CreatorsResponse>> {
-        return marvelServiceImpl.getCreatorsByEventId(eventId)
-            .applySchedulers()
+    override fun getCharacters(): Observable<State<List<CharactersResponse>?>> {
+        return wrapWithState { marvelServiceImpl.getCharacters() }
     }
 
-    override fun getStories(): Single<BaseResponse<StoryResponse>> {
-        return marvelServiceImpl.getAllStories()
-            .applySchedulers()
+    override fun getCharacterByCharacterId(characterId: Int): Observable<State<List<CharactersResponse>?>> {
+        return wrapWithState { marvelServiceImpl.getCharacterByCharacterId(characterId) }
     }
 
-    override fun getStory(storyId: Int): Single<BaseResponse<StoryResponse>> {
-        return marvelServiceImpl.getStory(storyId)
-            .applySchedulers()
+
+    override fun getCreatorsByEventId(eventId: Int): Observable<State<List<CreatorsResponse>?>> {
+        return wrapWithState { marvelServiceImpl.getCreatorsByEventId(eventId) }
     }
 
-    override fun getStoryCreatorsByStoryId(storyId: Int): Single<BaseResponse<CreatorsResponse>> {
-        return marvelServiceImpl.getStoryCreatorsByStoryId(storyId)
-            .applySchedulers()
+    override fun getStories(): Observable<State<List<StoryResponse>?>> {
+        return wrapWithState { marvelServiceImpl.getAllStories() }
     }
 
-    override fun getComicsByStoryId(storyId: Int): Single<BaseResponse<ComicsResponse>> {
-        return marvelServiceImpl.getComicsByStoryId(storyId)
-            .applySchedulers()
+    override fun getStory(storyId: Int): Observable<State<List<StoryResponse>?>> {
+        return wrapWithState { marvelServiceImpl.getStory(storyId) }
+    }
+
+    override fun getStoryCreatorsByStoryId(storyId: Int): Observable<State<List<CreatorsResponse>?>> {
+        return wrapWithState { marvelServiceImpl.getStoryCreatorsByStoryId(storyId) }
+    }
+
+    override fun getComicsByStoryId(storyId: Int): Observable<State<List<ComicsResponse>?>> {
+        return wrapWithState { marvelServiceImpl.getComicsByStoryId(storyId) }
     }
 
     override fun getSeriesByCharacterId(
         characterId: Int
-    ): Single<BaseResponse<SeriesResponse>> {
-        return marvelServiceImpl.getSeriesByCharacterId(characterId)
-            .applySchedulers()
+    ): Observable<State<List<SeriesResponse>?>> {
+        return wrapWithState { marvelServiceImpl.getSeriesByCharacterId(characterId) }
     }
 
-    override fun getSerieCreatorsBySeriesId(seriesId: Int): Single<BaseResponse<CreatorsResponse>> {
-        return marvelServiceImpl.getSerieCreatorsBySeriesId(seriesId)
-            .applySchedulers()
+    override fun getSerieCreatorsBySeriesId(seriesId: Int): Observable<State<List<CreatorsResponse>?>> {
+        return wrapWithState { marvelServiceImpl.getSerieCreatorsBySeriesId(seriesId) }
     }
 }
