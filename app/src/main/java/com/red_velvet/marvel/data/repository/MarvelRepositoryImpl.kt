@@ -2,8 +2,6 @@ package com.red_velvet.marvel.data.repository
 
 
 import com.red_velvet.marvel.data.model.BaseResponse
-
-import com.red_velvet.marvel.data.model.charsbycomicid.CharsByComicIdResponse
 import com.red_velvet.marvel.data.model.Characters
 import com.red_velvet.marvel.data.model.CharactersResponse
 import com.red_velvet.marvel.data.model.ComicsResponse
