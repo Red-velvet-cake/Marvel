@@ -1,48 +1,43 @@
 package com.red_velvet.marvel.ui.home
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.red_velvet.marvel.data.model.BaseResponse
+import com.red_velvet.marvel.data.model.CharactersResponse
 import com.red_velvet.marvel.data.model.ComicsResponse
 import com.red_velvet.marvel.data.remote.RetrofitClient
 import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
 import com.red_velvet.marvel.data.util.State
 import com.red_velvet.marvel.ui.MarvelRepository
 import com.red_velvet.marvel.ui.base.BaseViewModel
-import io.reactivex.rxjava3.kotlin.addTo
-import io.reactivex.rxjava3.kotlin.subscribeBy
 
 class ComicsViewModel : BaseViewModel() {
+
+    private val _chars: MutableLiveData<State<List<CharactersResponse>>> = MutableLiveData()
+    val chars: LiveData<State<List<CharactersResponse>>> = _chars
+
     private val _comics: MutableLiveData<State<List<ComicsResponse>>> = MutableLiveData()
-    val comics: MutableLiveData<State<List<ComicsResponse>>> get() = _comics
+    val comics: LiveData<State<List<ComicsResponse>>> get() = _comics
+
+    private val _char: MutableLiveData<State<List<CharactersResponse>>> = MutableLiveData()
+    val character: LiveData<State<List<CharactersResponse>>> get() = _char
+
 
     private val repository: MarvelRepository = MarvelRepositoryImpl(RetrofitClient.apiService)
 
     init {
-        getComics()
+        getAllChars()
+        getCharById()
     }
 
-    private fun getComics() {
-        _comics.postValue(State.Loading)
-        try {
-            repository.getComics()
-                .doOnError(::onGetComicsError)
-                .doOnSuccess(::onGetComicsSuccess)
-                .subscribeBy(
-                    onError = ::onGetComicsError,
-                    onSuccess = ::onGetComicsSuccess
-                )
-                .addTo(compositeDisposable)
-        } catch (e: Exception) {
-            onGetComicsError(e)
-        }
+    fun getAllComics() {
+        getData(_comics, repository.getComics())
     }
 
-    private fun onGetComicsError(error: Throwable) {
-        _comics.postValue(State.Failed(error.message.toString()))
+    fun getAllChars() {
+        getData(_chars, repository.getCharacters())
     }
 
-    private fun onGetComicsSuccess(response: BaseResponse<ComicsResponse>) {
-        _comics.postValue(State.Success(response.data?.results!!))
+    fun getCharById() {
+        getData(_char, repository.getCharsByComicId(1749))
     }
-
 }
