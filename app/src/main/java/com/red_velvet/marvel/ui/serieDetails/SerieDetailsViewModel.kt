@@ -9,10 +9,11 @@ import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
 import com.red_velvet.marvel.ui.MarvelRepository
 import com.red_velvet.marvel.data.util.State
 import com.red_velvet.marvel.ui.base.BaseViewModel
+import com.red_velvet.marvel.ui.serieDetails.adapter.SerieDetailsAdapter
 import io.reactivex.rxjava3.kotlin.addTo
 import io.reactivex.rxjava3.kotlin.subscribeBy
 
-class SerieDetailsViewModel : BaseViewModel() {
+class SerieDetailsViewModel : BaseViewModel(),SerieDetailsAdapter.CreatorListenerInteraction {
 
     private val repository: MarvelRepository = MarvelRepositoryImpl(RetrofitClient.apiService)
 
@@ -21,6 +22,7 @@ class SerieDetailsViewModel : BaseViewModel() {
 
     private val _creators:MutableLiveData<State<List<CreatorsResponse>>> = MutableLiveData()
     val creators:MutableLiveData<State<List<CreatorsResponse>>> get() = _creators
+
 
     private fun getSerie(id:Int){
         _serie.postValue(State.Loading)
@@ -68,5 +70,9 @@ class SerieDetailsViewModel : BaseViewModel() {
     override fun onCleared() {
         compositeDisposable.dispose()
         super.onCleared()
+    }
+
+    override fun onClickCreator() {
+        TODO("Not yet implemented")
     }
 }

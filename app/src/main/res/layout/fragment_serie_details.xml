@@ -14,29 +14,10 @@
         android:layout_height="match_parent"
         tools:context=".ui.serieDetails.SerieDetails">
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/series_image"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:scaleType="fitXY"
-            app:image="@{viewModel.serie.toData().get(0).thumbnail}"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@{viewModel.serie.toData().get(0).title}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
-        <TextView
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/parent_recycle_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@{viewModel.creators.toData().get(0).firstName}" />
-
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
