@@ -19,7 +19,6 @@ class ComicsViewModel : BaseViewModel() {
     val comics: LiveData<State<List<ComicsResponse>>> get() = _comics
 
     private val _char: MutableLiveData<State<List<CharactersResponse>>> = MutableLiveData()
-
     val character: LiveData<State<List<CharactersResponse>>> get() = _char
 
 

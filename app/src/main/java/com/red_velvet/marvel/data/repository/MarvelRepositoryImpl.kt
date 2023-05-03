@@ -23,28 +23,13 @@ class MarvelRepositoryImpl(
         return wrapWithState { marvelServiceImpl.getAllComics() }
     }
 
-    //    Response<MarvelResponse<List<ComicsResponse>>>
-    private fun wrap(): Observable<State<List<ComicsResponse>?>> {
-
-        val stateObservable = marvelServiceImpl.getAllComics()
-            .map { responseWrapper ->
+    private fun <T> wrapWithState(function: () -> Single<Response<MarvelResponse<T>>>): Observable<State<T?>> {
+        return function()
+            .map { responseWrapper: Response<MarvelResponse<T>> ->
                 if (responseWrapper.isSuccessful) {
                     State.Success(responseWrapper.body()?.body?.results)
                 } else {
                     State.Failed(responseWrapper.message())
-                }
-            }.startWith(Observable.just(State.Loading))
-
-        return stateObservable
-    }
-
-    private fun <T> wrapWithState(function: () -> Single<Response<MarvelResponse<T>>>): Observable<State<T?>> {
-        return function()
-            .map {
-                if (it.isSuccessful) {
-                    State.Success(it.body()?.body?.results)
-                } else {
-                    State.Failed(it.message())
                 }
             }.startWith(Observable.just(State.Loading))
     }
