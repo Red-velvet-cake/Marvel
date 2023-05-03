@@ -3,7 +3,7 @@ package com.red_velvet.marvel.data.model
 
 import com.google.gson.annotations.SerializedName
 
-data class BaseResponseBody<T>(
+abstract class MarvelResponseBody<T>(
     @SerializedName("count")
     val count: Int? = 0,
     @SerializedName("limit")
@@ -11,7 +11,7 @@ data class BaseResponseBody<T>(
     @SerializedName("offset")
     val offset: Int? = 0,
     @SerializedName("results")
-    val results: List<T>? = listOf(),
+    val results: T? = null,
     @SerializedName("total")
     val total: Int? = 0
 )
