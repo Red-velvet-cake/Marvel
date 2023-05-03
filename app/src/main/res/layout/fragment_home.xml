@@ -16,10 +16,11 @@
         tools:context=".ui.home.ComicsFragment">
 
         <TextView
+            android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@{viewModel.comics.toData().get(0).title}"
+            android:text="@{viewModel.character.toData().get(0).modified}"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -28,6 +29,7 @@
         <ProgressBar
             android:id="@+id/pBar"
             android:layout_width="match_parent"
+            android:visibility="gone"
             android:layout_height="match_parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
