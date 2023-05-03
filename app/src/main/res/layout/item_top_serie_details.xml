@@ -6,10 +6,7 @@
     <data>
         <variable
             name="item"
-            type="com.red_velvet.marvel.ui.serieDetails.SerieDetailsViewModel" />
-        <variable
-            name="listener"
-            type="com.red_velvet.marvel.ui.serieDetails.SerieDetailsViewModel" />
+            type="com.red_velvet.marvel.data.model.SeriesResponse" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -23,7 +20,7 @@
             android:layout_height="@dimen/zero"
             style="@style/CardImageStyle"
             app:layout_constraintDimensionRatio="16:9"
-            app:image="@{item.serie.toData().get(0).thumbnail}"
+            app:imageUrL="@{item.thumbnail}"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
@@ -32,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/spacing_medium"
-            android:text="@{item.serie.toData().get(0).title}"
+            android:text="@{item.title}"
             app:layout_constraintTop_toBottomOf="@id/image_view_details"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -46,7 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/spacing_medium"
-            android:text="@{item.serie.toData().get(0).description}"
+            android:text="@{item.description}"
             app:layout_constraintTop_toBottomOf="@id/text_view_serie_title"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -54,6 +51,12 @@
             android:textSize="@dimen/font_size_title_medium"
             android:textColor="@color/tertiary_87"
             tools:text="sakafklsanfskafnsakfnasksakfnksasfsafsaffssafsaasfsasafssasfsafsafsfsasfasfsaffsafffasassafsafssfasffs"/>
+
+        <include
+            layout="@layout/item_creators_serie_list"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

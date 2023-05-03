@@ -6,10 +6,10 @@
     <data>
         <variable
             name="item"
-            type="com.red_velvet.marvel.ui.serieDetails.SerieDetailsViewModel" />
+            type="com.red_velvet.marvel.data.model.CreatorsResponse" />
         <variable
             name="listener"
-            type="com.red_velvet.marvel.ui.serieDetails.SerieDetailsViewModel" />
+            type="com.red_velvet.marvel.ui.serieDetails.adapter.CreatorListenerInteraction" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,14 +22,15 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             app:layout_constraintEnd_toEndOf="parent"
+            android:onClick="@{() -> listener.onClickCreator(item)}"
             app:layout_constraintStart_toStartOf="parent"
-            app:image="@{item.creators.toData().get(0).thumbnail}"
+            app:imageUrL="@{item.thumbnail}"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{item.creators.toData().get(0).firstName}"
+            android:text="@{item.firstName}"
             app:layout_constraintTop_toBottomOf="@id/image_view_creator"
             app:layout_constraintStart_toStartOf="@id/image_view_creator"
             app:layout_constraintEnd_toEndOf="@id/image_view_creator"
