@@ -10,8 +10,7 @@ import com.red_velvet.marvel.ui.MarvelRepository
 import com.red_velvet.marvel.ui.base.BaseViewModel
 import com.red_velvet.marvel.ui.base.LiveDataObservablePair
 
-class ComicDetailsViewModel : BaseViewModel() {
-    private val comicId = 1308
+class ComicDetailsViewModel : BaseViewModel(), ComicDetailsCreatorListenerInteraction,ComicDetailsCharacterListenerInteraction {
 
     private val _comicsDetails: MutableLiveData<State<List<ComicsResponse>>> = MutableLiveData()
     val comicsDetails: LiveData<State<List<ComicsResponse>>> get() = _comicsDetails
@@ -24,16 +23,21 @@ class ComicDetailsViewModel : BaseViewModel() {
 
     private val repository: MarvelRepository = MarvelRepositoryImpl(RetrofitClient.apiService)
 
-    init {
-        fetchData(comicId)
-    }
 
-    private fun fetchData(comicId: Int) {
+    fun fetchData(comicId: Int) {
         return getDataForMultipleRequests(
             LiveDataObservablePair(_comicsDetails, repository.getComicDetail(comicId)),
             LiveDataObservablePair(_creators, repository.getComicCreatorByComicId(comicId)),
             LiveDataObservablePair(_characters, repository.getCharsByComicId(comicId))
         )
+    }
+
+    override fun onClickCharacter(creator: CreatorsResponse) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onClickCreator(creator: CreatorsResponse) {
+        TODO("Not yet implemented")
     }
 
 }
