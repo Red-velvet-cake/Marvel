@@ -41,4 +41,9 @@
     </style>
 
     <style name="Theme.Marvel" parent="Base.Theme.Marvel" />
+
+    <style name="RoundedShapeableImageView" parent="Widget.MaterialComponents.ShapeableImageView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
 </resources>
