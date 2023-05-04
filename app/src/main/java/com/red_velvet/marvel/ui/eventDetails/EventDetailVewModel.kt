@@ -10,6 +10,7 @@ import com.red_velvet.marvel.data.util.State
 import com.red_velvet.marvel.ui.base.BaseViewModel
 
 class EventDetailVewModel: BaseViewModel() {
+    
     private  val eventId=116
     private val repository=MarvelRepositoryImpl(RetrofitClient.apiService)
     private var _event:MutableLiveData<State<List<EventsResponse>>> = MutableLiveData()
