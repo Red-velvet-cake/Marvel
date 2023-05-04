@@ -9,20 +9,21 @@ import com.red_velvet.marvel.data.util.State
 import com.red_velvet.marvel.ui.base.BaseInteractionListener
 import com.red_velvet.marvel.ui.base.BaseViewModel
 
-class EventsViewModel:BaseViewModel(),BaseInteractionListener{
+class EventsViewModel : BaseViewModel(), BaseInteractionListener {
 
-    private val repository=MarvelRepositoryImpl(RetrofitClient.apiService)
+    private val repository = MarvelRepositoryImpl(RetrofitClient.apiService)
 
-    private val _events=MutableLiveData<State<List<EventsResponse>>>()
-    val events:LiveData<State<List<EventsResponse>>>
-        get() =_events
+    private val _events = MutableLiveData<State<List<EventsResponse>>>()
+    val events: LiveData<State<List<EventsResponse>>>
+        get() = _events
 
     init {
         getAllEvents()
     }
 
-    fun getAllEvents(){
-        getData(_events, repository.getEvents())
+    fun getAllEvents(query: String? = null) {
+        getData(_events, repository.getEvents(query))
     }
+
 
 }
