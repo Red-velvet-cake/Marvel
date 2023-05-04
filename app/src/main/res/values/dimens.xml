@@ -24,5 +24,6 @@
 
     <dimen name="padding_normal">12dp</dimen>
     <dimen name="app_bar_height">56dp</dimen>
+    <dimen name="card_creator_size">100dp</dimen>
 
 </resources>
