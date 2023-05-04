@@ -91,7 +91,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/spacing_medium"
             android:orientation="horizontal"
-            app:creatorItems="@{viewModel.creators.toData()}"
+            app:setItems="@{viewModel.creators.toData()}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"

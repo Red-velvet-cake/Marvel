@@ -36,8 +36,8 @@ fun <T> showWhenSuccess(view: View, state: State<T>?){
 }
 
 @BindingAdapter(value = ["app:imageUrl"])
-fun loadImage(view:ImageView,thumbnail: Thumbnail){
-    Glide.with(view).load(thumbnail.toUrl()).into(view)
+fun loadImage(view:ImageView,thumbnail: Thumbnail?){
+    Glide.with(view).load(thumbnail?.toUrl()).into(view)
 }
 
 @BindingAdapter(value = ["app:setItems"])
