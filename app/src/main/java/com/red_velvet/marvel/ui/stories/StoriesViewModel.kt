@@ -10,7 +10,7 @@ import com.red_velvet.marvel.ui.base.BaseViewModel
 
 
 class StoriesViewModel : BaseViewModel() {
-    val repository = MarvelRepositoryImpl(RetrofitClient.apiService)
+    private val repository = MarvelRepositoryImpl(RetrofitClient.apiService)
     private val _stories: MutableLiveData<State<List<StoryResponse>>> = MutableLiveData()
     val stories: LiveData<State<List<StoryResponse>>> get() = _stories
 
