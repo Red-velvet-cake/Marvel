@@ -26,6 +26,10 @@
             app:destination="@id/FirstFragment" />
     </fragment>
     <fragment
+        android:id="@+id/storyFragment"
+        android:name="com.red_velvet.marvel.ui.story.StoryFragment"
+        android:label="HomeFragment" />
+    <fragment
         android:id="@+id/homeFragment"
         android:name="com.red_velvet.marvel.ui.home.ComicsFragment"
         android:label="HomeFragment" />
