@@ -5,10 +5,8 @@ import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.red_velvet.marvel.R
-import com.red_velvet.marvel.data.model.CreatorsResponse
 import com.red_velvet.marvel.data.model.Thumbnail
-import com.red_velvet.marvel.ui.serieDetails.adapter.CreatorsAdapter
+import com.red_velvet.marvel.ui.base.BaseAdapter
 
 @BindingAdapter(value = ["app:showWhenLoading"])
 fun <T> showWhenLoading(view: View, state: State<T>?){
@@ -38,16 +36,15 @@ fun <T> showWhenSuccess(view: View, state: State<T>?){
 }
 
 @BindingAdapter(value = ["app:imageUrl"])
-fun loadImage(view:ImageView,thumbnail: Thumbnail?){
-    Glide.with(view).load(thumbnail?.toUrl())
-        .thumbnail(Glide.with(view).load(R.raw.loading)).into(view)
+fun loadImage(view:ImageView,thumbnail: Thumbnail){
+    Glide.with(view).load(thumbnail.toUrl()).into(view)
 }
 
-@BindingAdapter(value = ["app:creatorItems"])
-fun setItems(view:RecyclerView,items:List<CreatorsResponse>?){
-    if(items != null) {
-        (view.adapter as CreatorsAdapter).setItems(items)
+@BindingAdapter(value = ["app:setItems"])
+fun <T> setRecyclerItems(view: RecyclerView, items:List<T>?){
+    if (items !=null){
+        (view.adapter as BaseAdapter<T>).setItems(items)
     }else{
-        (view.adapter as CreatorsAdapter).setItems(emptyList())
+        (view.adapter as BaseAdapter<T>).setItems(emptyList())
     }
 }
