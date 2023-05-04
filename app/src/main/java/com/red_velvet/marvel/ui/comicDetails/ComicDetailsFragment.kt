@@ -12,7 +12,7 @@ class ComicDetailsFragment : BaseFragment<FragmentComicDetailsBinding>() {
     override val viewModel: ComicDetailsViewModel by viewModels()
 
     override fun setUp() {
-        viewModel.fetchData(1308)
+        viewModel.fetchData(1749)
         val creatorsAdapter = ComicDetailsCreatorsAdapter(mutableListOf(), viewModel)
         val charactersAdapter = ComicDetailsCharactersAdapter(mutableListOf(), viewModel)
 
