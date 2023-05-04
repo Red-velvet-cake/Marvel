@@ -7,13 +7,13 @@
 
         <variable
             name="viewModel"
-            type="com.red_velvet.marvel.ui.home.ComicsViewModel" />
+            type="com.red_velvet.marvel.ui.comics.ComicsViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.home.ComicsFragment">
+        tools:context=".ui.comics.ComicsFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
