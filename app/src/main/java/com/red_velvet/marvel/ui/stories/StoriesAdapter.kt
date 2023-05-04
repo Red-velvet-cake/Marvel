@@ -1,23 +1,13 @@
 package com.red_velvet.marvel.ui.stories
 
-import android.view.View
-import android.view.ViewGroup
-import android.widget.BaseAdapter
 
-class StoriesAdapter : BaseAdapter() {
-    override fun getCount(): Int {
-        TODO("Not yet implemented")
-    }
+import com.red_velvet.marvel.data.model.StoryResponse
+import com.red_velvet.marvel.ui.base.BaseAdapter
+import com.red_velvet.marvel.ui.base.BaseInteractionListener
 
-    override fun getItem(p0: Int): Any {
-        TODO("Not yet implemented")
-    }
+class StoriesAdapter(stories: List<StoryResponse>, listener: BaseInteractionListener) :
+    BaseAdapter<StoryResponse>(stories, listener) {
+    override val layoutId: Int
+        get() = TODO("Not yet implemented")
 
-    override fun getItemId(p0: Int): Long {
-        TODO("Not yet implemented")
-    }
-
-    override fun getView(p0: Int, p1: View?, p2: ViewGroup?): View {
-        TODO("Not yet implemented")
-    }
 }
