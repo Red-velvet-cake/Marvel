@@ -30,5 +30,20 @@
         <item name="shapeAppearance">@style/ShapeAppearance.Material3.NavigationBarView.ActiveIndicator</item>
     </style>
 
+    <style name="CardImageStyle" parent="">
+        <item name="android:layout_marginStart">@dimen/spacing_medium</item>
+        <item name="android:layout_marginEnd">@dimen/spacing_medium</item>
+        <item name="android:layout_marginTop">@dimen/spacing_medium</item>
+        <item name="android:scaleType">centerCrop</item>
+        <item name="android:backgroundTint">@color/card</item>
+        <item name="android:background">@color/card</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.Material3.Corner.Large</item>
+    </style>
+
     <style name="Theme.Marvel" parent="Base.Theme.Marvel" />
+
+    <style name="RoundedShapeableImageView" parent="Widget.MaterialComponents.ShapeableImageView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
 </resources>
