@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="item"
+            type="com.red_velvet.marvel.data.model.EventsResponse" />
+        <variable
+            name="listener"
+            type="com.red_velvet.marvel.ui.base.BaseInteractionListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/image_item"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            app:imageUrl="@{item.thumbnail}"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:src="@color/black"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
