@@ -19,11 +19,10 @@
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/image_view_creator"
             style="@style/CardImageStyle"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="@dimen/card_creator_size"
+            android:layout_height="@dimen/card_creator_size"
             android:layout_margin="@dimen/spacing_normal"
             app:layout_constraintEnd_toEndOf="parent"
-            android:onClick="@{() -> listener.onClickCreator(item)}"
             app:layout_constraintStart_toStartOf="parent"
             app:imageUrl="@{item.thumbnail}"
             app:layout_constraintTop_toTopOf="parent"
