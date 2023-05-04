@@ -10,7 +10,8 @@ import com.red_velvet.marvel.ui.MarvelRepository
 import com.red_velvet.marvel.ui.base.BaseViewModel
 import com.red_velvet.marvel.ui.base.LiveDataObservablePair
 
-class ComicDetailsViewModel : BaseViewModel(), ComicDetailsCreatorListenerInteraction,ComicDetailsCharacterListenerInteraction {
+class ComicDetailsViewModel : BaseViewModel(), ComicDetailsCreatorListenerInteraction,
+    ComicDetailsCharacterListenerInteraction {
 
     private val _comicsDetails: MutableLiveData<State<List<ComicsResponse>>> = MutableLiveData()
     val comicsDetails: LiveData<State<List<ComicsResponse>>> get() = _comicsDetails
@@ -22,7 +23,6 @@ class ComicDetailsViewModel : BaseViewModel(), ComicDetailsCreatorListenerIntera
     val characters: LiveData<State<List<CharactersResponse>>> get() = _characters
 
     private val repository: MarvelRepository = MarvelRepositoryImpl(RetrofitClient.apiService)
-
 
     fun fetchData(comicId: Int) {
         return getDataForMultipleRequests(
