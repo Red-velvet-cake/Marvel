@@ -9,7 +9,7 @@
             type="com.red_velvet.marvel.data.model.CharactersResponse" />
         <variable
             name="listener"
-            type="com.red_velvet.marvel.ui.comicDetails.ComicDetailsCharacterListenerInteraction" />
+            type="com.red_velvet.marvel.ui.comicDetails.adapter.ComicDetailsCharacterListenerInteraction" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
