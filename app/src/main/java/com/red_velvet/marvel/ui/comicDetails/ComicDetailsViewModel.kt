@@ -9,8 +9,6 @@ import com.red_velvet.marvel.data.util.State
 import com.red_velvet.marvel.ui.MarvelRepository
 import com.red_velvet.marvel.ui.base.BaseViewModel
 import com.red_velvet.marvel.ui.base.LiveDataObservablePair
-import io.reactivex.rxjava3.kotlin.addTo
-import io.reactivex.rxjava3.kotlin.subscribeBy
 
 class ComicDetailsViewModel : BaseViewModel() {
     private val comicId = 1308
