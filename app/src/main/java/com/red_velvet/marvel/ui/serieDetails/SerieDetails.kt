@@ -5,7 +5,7 @@ import androidx.fragment.app.viewModels
 import com.red_velvet.marvel.R
 import com.red_velvet.marvel.databinding.FragmentSerieDetailsBinding
 import com.red_velvet.marvel.ui.base.BaseFragment
-import com.red_velvet.marvel.ui.serieDetails.adapter.SerieDetailsAdapter
+import com.red_velvet.marvel.ui.serieDetails.adapter.CreatorsAdapter
 
 
 class SerieDetails : BaseFragment<FragmentSerieDetailsBinding>() {
@@ -14,10 +14,9 @@ class SerieDetails : BaseFragment<FragmentSerieDetailsBinding>() {
 
     override val viewModel: SerieDetailsViewModel by viewModels()
     override fun setUp() {
-        viewModel.serie
-        val adapter = SerieDetailsAdapter(mutableListOf(),viewModel)
-        binding.parentRecycleView.adapter = adapter
-        viewModel.getSerie(5)
-        viewModel.getCreators(5)
+        viewModel.getSerie(9)
+        viewModel.getCreators(9)
+        val creatorsAdapter =CreatorsAdapter(mutableListOf(),viewModel)
+        binding.recyclerViewSerieCreators.adapter = creatorsAdapter
     }
 }

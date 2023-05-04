@@ -21,21 +21,24 @@
             style="@style/CardImageStyle"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:layout_margin="@dimen/spacing_normal"
             app:layout_constraintEnd_toEndOf="parent"
             android:onClick="@{() -> listener.onClickCreator(item)}"
             app:layout_constraintStart_toStartOf="parent"
-            app:imageUrL="@{item.thumbnail}"
+            app:imageUrl="@{item.thumbnail}"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{item.firstName}"
+            android:text="@{item.fullName}"
+            android:fontFamily="@font/roboto"
+            android:textSize="@dimen/font_size_title"
             app:layout_constraintTop_toBottomOf="@id/image_view_creator"
             app:layout_constraintStart_toStartOf="@id/image_view_creator"
             app:layout_constraintEnd_toEndOf="@id/image_view_creator"
             android:layout_margin="@dimen/spacing_small"
-            tools:text="afhjfafka"/>
+            tools:text="frank"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
