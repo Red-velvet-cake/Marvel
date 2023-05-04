@@ -22,7 +22,7 @@ class EventsViewModel : BaseViewModel(), BaseInteractionListener {
     }
 
     fun getAllEvents(query: String? = null) {
-        getData(_events, repository.getEvents(query))
+//        bindStateUpdates(_events, repository.getEvents(query))
     }
 
 
