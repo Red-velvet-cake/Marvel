@@ -24,7 +24,7 @@ interface MarvelRepository {
 
     fun getSeriesDetails(seriesId: Int): Observable<State<List<SeriesResponse>?>>
 
-    fun getEvents(): Observable<State<List<EventsResponse>?>>
+    fun getEvents(query: String? =null): Observable<State<List<EventsResponse>?>>
 
     fun getCharactersByEventId(eventId: Int): Observable<State<List<CharactersResponse>?>>
 

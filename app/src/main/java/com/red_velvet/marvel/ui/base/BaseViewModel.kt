@@ -47,4 +47,34 @@ abstract class BaseViewModel : ViewModel() {
             is State.Loading -> liveData.postValue(State.Loading)
         }
     }
+
+
+    fun getDataForMultipleRequests(vararg pairs: LiveDataObservablePair<*>) {
+        val observables = pairs.map {
+            it.stateObservable.subscribeOn(Schedulers.io())
+        }
+
+        val combinedFunction: (Array<Any>) -> List<Pair<MutableLiveData<State<Any?>>, State<Any?>>> = { states ->
+            states.mapIndexed { index, state ->
+                (pairs[index].liveData as MutableLiveData<State<Any?>>) to (state as State<Any?>)
+            }
+        }
+
+        Observable.combineLatest(observables, combinedFunction)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(
+                onError = { error ->
+                    val message = error.message.toString()
+                    pairs.forEach { pair -> onGetDataError(pair.liveData as MutableLiveData<State<Any>>, message) }
+                },
+                onNext = { combinedStates: List<Pair<MutableLiveData<State<Any?>>, State<Any?>>> ->
+                    combinedStates.forEach { (liveData, state) ->
+                        handleUIState(liveData, state)
+                    }
+                }
+            )
+            .addTo(compositeDisposable)
+    }
+
 }
+

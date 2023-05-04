@@ -55,8 +55,8 @@ class MarvelRepositoryImpl(
         return wrapWithState { marvelServiceImpl.getSerieDetails(seriesId) }
     }
 
-    override fun getEvents(): Observable<State<List<EventsResponse>?>> {
-        return wrapWithState { marvelServiceImpl.getAllEvents() }
+    override fun getEvents(query: String?): Observable<State<List<EventsResponse>?>> {
+        return wrapWithState { marvelServiceImpl.getAllEvents(query) }
 
     }
 
