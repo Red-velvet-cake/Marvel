@@ -1,3 +1,7 @@
+import java.util.Properties
+import java.io.*
+
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -16,6 +20,19 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        val properties = Properties()
+        val localPropertiesFile = File("local.properties")
+        properties.load(project.rootProject.file("local.properties").inputStream())
+
+        if (localPropertiesFile.exists()) {
+            val fileInputStream = FileInputStream(localPropertiesFile)
+            properties.load(fileInputStream)
+            fileInputStream.close()
+        }
+        buildConfigField("String" , "PUBLIC_KEY" , "\"${properties.getProperty("PUBLIC_KEY")}\"")
+        buildConfigField("String" , "PRIVATE_KEY" , "\"${properties.getProperty("PRIVATE_KEY")}\"")
+        buildConfigField("String" , "TIME_STAMP" , "\"${properties.getProperty("TIME_STAMP")}\"")
     }
 
     buildTypes {
@@ -42,6 +59,9 @@ android {
     }
     dataBinding {
         enable = true
+    }
+    buildFeatures {
+        buildConfig = true
     }
 }
 
