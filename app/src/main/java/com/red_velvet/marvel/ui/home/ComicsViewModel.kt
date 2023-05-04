@@ -33,7 +33,7 @@ class ComicsViewModel : BaseViewModel() {
         getData(_comics, repository.getComics())
     }
 
-    fun getAllChars() {
+    private fun getAllChars() {
         getData(_chars, repository.getCharacters())
     }
 

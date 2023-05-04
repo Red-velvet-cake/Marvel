@@ -1,6 +1,5 @@
 package com.red_velvet.marvel.ui.base
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.red_velvet.marvel.data.util.State
@@ -36,7 +35,6 @@ abstract class BaseViewModel : ViewModel() {
     }
 
     private fun <T> onGetDataError(liveData: MutableLiveData<State<T>>, message: String) {
-        Log.d("SADEQMHANA", "onGetComicsError: ${message}")
         liveData.postValue(State.Failed(message))
     }
 
