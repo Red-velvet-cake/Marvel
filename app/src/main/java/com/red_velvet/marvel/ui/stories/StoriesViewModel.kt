@@ -18,7 +18,7 @@ class StoriesViewModel : BaseViewModel() {
         getStories()
     }
 
-     fun getStories() {
-         getData(_stories, repository.getStories())
-     }
+    fun getStories() {
+        getData(_stories, repository.getStories())
+    }
 }
