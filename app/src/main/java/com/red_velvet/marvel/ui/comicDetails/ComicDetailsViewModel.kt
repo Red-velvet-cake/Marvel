@@ -2,13 +2,14 @@ package com.red_velvet.marvel.ui.comicDetails
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.red_velvet.marvel.data.model.*
+import com.red_velvet.marvel.data.model.CharactersResponse
+import com.red_velvet.marvel.data.model.ComicsResponse
+import com.red_velvet.marvel.data.model.CreatorsResponse
 import com.red_velvet.marvel.data.remote.RetrofitClient
+import com.red_velvet.marvel.data.repository.MarvelRepository
 import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
 import com.red_velvet.marvel.data.util.State
-import com.red_velvet.marvel.ui.MarvelRepository
 import com.red_velvet.marvel.ui.base.BaseViewModel
-import com.red_velvet.marvel.ui.base.LiveDataObservablePair
 import com.red_velvet.marvel.ui.comicDetails.adapter.ComicDetailsCharacterListenerInteraction
 import com.red_velvet.marvel.ui.comicDetails.adapter.ComicDetailsCreatorListenerInteraction
 
@@ -27,11 +28,11 @@ class ComicDetailsViewModel : BaseViewModel(), ComicDetailsCreatorListenerIntera
     private val repository: MarvelRepository = MarvelRepositoryImpl(RetrofitClient.apiService)
 
     fun fetchData(comicId: Int) {
-        return getDataForMultipleRequests(
-            LiveDataObservablePair(_comicsDetails, repository.getComicDetail(comicId)),
-            LiveDataObservablePair(_creators, repository.getComicCreatorByComicId(comicId)),
-            LiveDataObservablePair(_characters, repository.getCharsByComicId(comicId))
-        )
+//        return getDataForMultipleRequests(
+//            LiveDataObservablePair(_comicsDetails, repository.getComicDetail(comicId)),
+//            LiveDataObservablePair(_creators, repository.getComicCreatorByComicId(comicId)),
+//            LiveDataObservablePair(_characters, repository.getCharsByComicId(comicId))
+//        )
     }
 
     override fun onClickCharacter(creator: CreatorsResponse) {

@@ -19,6 +19,6 @@ class StoriesViewModel : BaseViewModel() {
     }
 
     fun getStories() {
-        getData(_stories, repository.getStories())
+//        bindStateUpdates(_stories, repository.getStories())
     }
 }

@@ -1,4 +1,4 @@
-package com.red_velvet.marvel.ui
+package com.red_velvet.marvel.data.repository
 
 
 import com.red_velvet.marvel.data.model.CharactersResponse

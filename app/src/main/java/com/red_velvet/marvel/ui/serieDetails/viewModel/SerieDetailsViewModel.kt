@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import com.red_velvet.marvel.data.model.CreatorsResponse
 import com.red_velvet.marvel.data.model.SeriesResponse
 import com.red_velvet.marvel.data.remote.RetrofitClient
+import com.red_velvet.marvel.data.repository.MarvelRepository
 import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
-import com.red_velvet.marvel.ui.MarvelRepository
 import com.red_velvet.marvel.data.util.State
 import com.red_velvet.marvel.ui.base.BaseViewModel
 import com.red_velvet.marvel.ui.serieDetails.adapter.CreatorListenerInteraction
@@ -23,11 +23,11 @@ class SerieDetailsViewModel : BaseViewModel(), CreatorListenerInteraction {
 
 
     fun getSerie(id: Int) {
-        getData(_serie, repository.getSeriesDetails(id))
+//        bindStateUpdates(_serie, repository.getSeriesDetails(id))
     }
 
     fun getCreators(id: Int) {
-        getData(_creators, repository.getSerieCreatorsBySeriesId(id))
+//        bindStateUpdates(_creators, repository.getSerieCreatorsBySeriesId(id))
     }
 
     override fun onClickCreator(creator: CreatorsResponse) {
