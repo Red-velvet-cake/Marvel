@@ -47,4 +47,45 @@ abstract class BaseViewModel : ViewModel() {
             is State.Loading -> liveData.postValue(State.Loading)
         }
     }
+
+
+
+    fun <T1, T2, T3> getDataForMultipleRequests(
+        liveData1: MutableLiveData<State<T1>>,
+        stateObservable1: Observable<State<T1?>>,
+        liveData2: MutableLiveData<State<T2>>,
+        stateObservable2: Observable<State<T2?>>,
+        liveData3: MutableLiveData<State<T3>>,
+        stateObservable3: Observable<State<T3?>>
+    ) {
+        Observable.combineLatest(
+            stateObservable1.subscribeOn(Schedulers.io()),
+            stateObservable2.subscribeOn(Schedulers.io()),
+            stateObservable3.subscribeOn(Schedulers.io()),
+            object : Function3<State<T1?>, State<T2?>, State<T3?>, Triple<State<T1>, State<T2>, State<T3>>> {
+                override fun invoke(
+                    p1: State<T1?>,
+                    p2: State<T2?>,
+                    p3: State<T3?>
+                ): Triple<State<T1>, State<T2>, State<T3>> {
+                    return Triple(p1 as State<T1>, p2 as State<T2>, p3 as State<T3>)
+                }
+            }
+        ).observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(
+                onError = { error ->
+                    val message = error.message.toString()
+                    onGetDataError(liveData1, message)
+                    onGetDataError(liveData2, message)
+                    onGetDataError(liveData3, message)
+                },
+                onNext = { (state1, state2, state3) ->
+                    handleUIState(liveData1, state1)
+                    handleUIState(liveData2, state2)
+                    handleUIState(liveData3, state3)
+                }
+            )
+            .addTo(compositeDisposable)
+    }
+
 }
