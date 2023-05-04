@@ -13,10 +13,11 @@ class AuthorizationInterceptor : Interceptor {
         val ts = BuildConfig.TIME_STAMP
         val publicKey = BuildConfig.PUBLIC_KEY
         val privateKey = BuildConfig.PRIVATE_KEY
+        val hash = md5Hashing("$ts$privateKey$publicKey")
 
         val url = request.url.newBuilder()
             .addQueryParameter("apikey", "$publicKey")
-            .addQueryParameter("hash", "653d56017d0140a6a351d88dda97fc15")
+            .addQueryParameter("hash", "$hash")
             .addQueryParameter("ts", "$ts")
             .build()
 
@@ -24,6 +25,9 @@ class AuthorizationInterceptor : Interceptor {
 
         return chain.proceed(newRequest)
     }
-
+    private fun md5Hashing(input:String): String {
+        val md = MessageDigest.getInstance("MD5")
+        return BigInteger(1, md.digest(input.toByteArray())).toString(16).padStart(32, '0')
+    }
 
 }
