@@ -7,8 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.red_velvet.marvel.data.model.Thumbnail
 import com.red_velvet.marvel.ui.base.BaseAdapter
-import com.red_velvet.marvel.ui.comics.ComicsCollection
-import com.red_velvet.marvel.ui.comics.ComicsScreenAdapter
 
 @BindingAdapter(value = ["app:showWhenLoading"])
 fun <T> showWhenLoading(view: View, state: State<T>?) {
@@ -48,14 +46,5 @@ fun <T> setRecyclerItems(view: RecyclerView, items: List<T>?) {
         (view.adapter as BaseAdapter<T>).setItems(items)
     } else {
         (view.adapter as BaseAdapter<T>).setItems(emptyList())
-    }
-}
-
-@BindingAdapter(value = ["app:setComics"])
-fun setComics(view: RecyclerView, comics: List<ComicsCollection>?) {
-    if (comics != null) {
-        (view.adapter as ComicsScreenAdapter).setItems(comics)
-    } else {
-        (view.adapter as ComicsScreenAdapter).setItems(emptyList())
     }
 }
