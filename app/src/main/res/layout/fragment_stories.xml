@@ -44,6 +44,19 @@
             app:layout_constraintTop_toTopOf="parent"
             app:showWhenLoading="@{viewModel.stories1}" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_error"
+            android:drawablePadding="4dp"
+            android:onClick="@{()->viewModel.getStories()}"
+            android:text="try again"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:showWhenError="@{viewModel.stories1}" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
