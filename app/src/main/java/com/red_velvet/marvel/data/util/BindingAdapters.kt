@@ -7,44 +7,55 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.red_velvet.marvel.data.model.Thumbnail
 import com.red_velvet.marvel.ui.base.BaseAdapter
+import com.red_velvet.marvel.ui.comics.ComicsCollection
+import com.red_velvet.marvel.ui.comics.ComicsScreenAdapter
 
 @BindingAdapter(value = ["app:showWhenLoading"])
-fun <T> showWhenLoading(view: View, state: State<T>?){
-    if (state is State.Loading){
+fun <T> showWhenLoading(view: View, state: State<T>?) {
+    if (state is State.Loading) {
         view.visibility = View.VISIBLE
-    }else{
+    } else {
         view.visibility = View.GONE
     }
 }
 
 @BindingAdapter(value = ["app:showWhenError"])
-fun <T> showWhenError(view: View, state: State<T>?){
-    if (state is State.Failed){
+fun <T> showWhenError(view: View, state: State<T>?) {
+    if (state is State.Failed) {
         view.visibility = View.VISIBLE
-    }else{
+    } else {
         view.visibility = View.GONE
     }
 }
 
 @BindingAdapter(value = ["app:showWhenSuccess"])
-fun <T> showWhenSuccess(view: View, state: State<T>?){
-    if (state is State.Success){
+fun <T> showWhenSuccess(view: View, state: State<T>?) {
+    if (state is State.Success) {
         view.visibility = View.VISIBLE
-    }else{
+    } else {
         view.visibility = View.GONE
     }
 }
 
 @BindingAdapter(value = ["app:imageUrl"])
-fun loadImage(view:ImageView,thumbnail: Thumbnail?){
+fun loadImage(view: ImageView, thumbnail: Thumbnail?) {
     Glide.with(view).load(thumbnail?.toUrl()).into(view)
 }
 
 @BindingAdapter(value = ["app:setItems"])
-fun <T> setRecyclerItems(view: RecyclerView, items:List<T>?){
-    if (items !=null){
+fun <T> setRecyclerItems(view: RecyclerView, items: List<T>?) {
+    if (items != null) {
         (view.adapter as BaseAdapter<T>).setItems(items)
-    }else{
+    } else {
         (view.adapter as BaseAdapter<T>).setItems(emptyList())
+    }
+}
+
+@BindingAdapter(value = ["app:setComics"])
+fun setComics(view: RecyclerView, comics: List<ComicsCollection>?) {
+    if (comics != null) {
+        (view.adapter as ComicsScreenAdapter).setItems(comics)
+    } else {
+        (view.adapter as ComicsScreenAdapter).setItems(emptyList())
     }
 }
