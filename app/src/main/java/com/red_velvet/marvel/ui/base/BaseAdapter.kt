@@ -39,6 +39,7 @@ abstract class BaseAdapter<T>(
 
     fun setItems(newItems: List<T>) {
         items = newItems
+        notifyDataSetChanged()
     }
 
     fun getItems() = items
