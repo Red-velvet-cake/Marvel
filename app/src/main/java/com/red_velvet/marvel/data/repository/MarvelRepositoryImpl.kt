@@ -18,8 +18,11 @@ class MarvelRepositoryImpl(
     private val marvelServiceImpl: MarvelService
 ) : MarvelRepository {
 
-    override fun getComics(): Observable<State<List<ComicsResponse>?>> {
-        return wrapWithState { marvelServiceImpl.getAllComics() }
+    override fun getComics(
+        titleStartsWith: String?,
+        dateDescriptor: String?
+    ): Observable<State<List<ComicsResponse>?>> {
+        return wrapWithState { marvelServiceImpl.getAllComics(titleStartsWith, dateDescriptor) }
     }
 
     private fun <T> wrapWithState(function: () -> Single<Response<MarvelResponse<T>>>): Observable<State<T?>> {
