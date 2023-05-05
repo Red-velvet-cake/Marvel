@@ -22,7 +22,7 @@
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintTop_toTopOf="parent"
-            app:setComics="@{viewModel.screenItems}"
+            app:setItems="@{viewModel.screenItems}"
             app:showWhenSuccess="@{viewModel.comics}"
             tools:listitem="@layout/list_comics" />
 
