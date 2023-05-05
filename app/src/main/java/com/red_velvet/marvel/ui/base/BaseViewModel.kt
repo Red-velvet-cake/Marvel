@@ -1,7 +1,5 @@
 package com.red_velvet.marvel.ui.base
 
-import android.util.Log
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.red_velvet.marvel.data.util.State
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -19,32 +17,22 @@ abstract class BaseViewModel : ViewModel() {
         super.onCleared()
         compositeDisposable.dispose()
     }
-
-    fun <T> getData(liveData: MutableLiveData<State<T>>, stateObservable: Observable<State<T?>>) {
+    fun <T> bindStateUpdates(
+        stateObservable: Observable<State<T>>,
+        onError: (Throwable) -> Unit,
+        onNext: (State<T>) -> Unit
+    ) {
         try {
             stateObservable
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
-                    onError = { onGetDataError(liveData, it.message.toString()) },
-                    onNext = { handleUIState(liveData, it) },
+                    onError = onError,
+                    onNext = onNext,
                 )
                 .addTo(compositeDisposable)
         } catch (e: Exception) {
-            onGetDataError(liveData, e.message.toString())
-        }
-    }
-
-    private fun <T> onGetDataError(liveData: MutableLiveData<State<T>>, message: String) {
-        Log.d("SADEQMHANA", "onGetComicsError: ${message}")
-        liveData.postValue(State.Failed(message))
-    }
-
-    private fun <T> handleUIState(liveData: MutableLiveData<State<T>>, state: State<T?>) {
-        when (state) {
-            is State.Success -> liveData.postValue(State.Success(state.data!!))
-            is State.Failed -> onGetDataError(liveData, state.error)
-            is State.Loading -> liveData.postValue(State.Loading)
+            onError(e)
         }
     }
 }

@@ -25,19 +25,19 @@ class ComicsViewModel : BaseViewModel() {
     private val repository: MarvelRepository = MarvelRepositoryImpl(RetrofitClient.apiService)
 
     init {
-        getAllChars()
-        getCharById()
+//        getAllChars()
+//        getCharById()
     }
 
-    fun getAllComics() {
-        getData(_comics, repository.getComics())
-    }
-
-    fun getAllChars() {
-        getData(_chars, repository.getCharacters())
-    }
-
-    fun getCharById() {
-        getData(_char, repository.getCharsByComicId(1749))
-    }
+//    fun getAllComics() {
+//        getData(_comics, repository.getComics())
+//    }
+//
+//    fun getAllChars() {
+//        getData(_chars, repository.getCharacters())
+//    }
+//
+//    fun getCharById() {
+//        getData(_char, repository.getCharsByComicId(1749))
+//    }
 }

@@ -20,7 +20,7 @@ class ComicsFragment : BaseFragment<FragmentHomeBinding>() {
         binding.root.setOnClickListener {
 //            viewModel.getAllComics()
 //            viewModel.getAllChars()
-            viewModel.getCharById()
+//            viewModel.getCharById()
         }
 
         viewModel.chars.observe(this) {
