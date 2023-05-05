@@ -12,20 +12,22 @@ class SeriesFragment : BaseFragment<FragmentSeriesBinding>() {
     override val viewModel: SeriesViewModel by viewModels()
 
     override fun setUp() {
+        viewModel.getAllSeries()
         val adapter = SeriesAdapter(emptyList(), viewModel)
         binding.recyclerViewSeries.adapter = adapter
 
 
+
         binding.chips.chipAllSeries.setOnClickListener {
-            viewModel.getSeries()
+            viewModel.getAllSeries()
         }
         binding.chips.chipComic.setOnClickListener {
             viewModel.filterSeries(binding.chips.chipComic.text.toString())
         }
-        binding.chips.chipMagazine.setOnClickListener{
+        binding.chips.chipMagazine.setOnClickListener {
             viewModel.filterSeries(binding.chips.chipMagazine.text.toString())
         }
-        binding.chips.chipHardcover.setOnClickListener{
+        binding.chips.chipHardcover.setOnClickListener {
             viewModel.filterSeries(binding.chips.chipHardcover.text.toString())
         }
         binding.chips.chipTradePaperback.setOnClickListener {

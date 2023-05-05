@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.red_velvet.marvel.ui.series.SeriesViewModel" />
@@ -15,15 +16,15 @@
         android:layout_margin="16dp"
         android:orientation="vertical">
 
+
         <include
             android:id="@+id/search_bar"
-            layout="@layout/item_search"
-          />
+            layout="@layout/item_search" />
 
         <include
             android:id="@+id/chips"
-            layout="@layout/item_chips"
-           />
+            layout="@layout/item_chips" />
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewSeries"
@@ -34,17 +35,24 @@
             app:showWhenSuccess="@{viewModel.series}"
             tools:listitem="@layout/item_series" />
 
+
+
         <ProgressBar
             android:id="@+id/lading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:showWhenLoading="@{viewModel.series}" />
+            app:showWhenLoading="@{viewModel.series}"
+            android:indeterminate="true"
+            android:layout_gravity="center"
+            android:indeterminateTint="@color/primary"
+            android:indeterminateTintMode="src_atop"/>
 
         <ImageView
             android:id="@+id/main_iv_error"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_error"
+            android:layout_gravity="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
