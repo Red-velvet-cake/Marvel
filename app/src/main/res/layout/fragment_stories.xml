@@ -49,7 +49,7 @@
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/ic_error"
             android:drawablePadding="4dp"
-            android:onClick="@{()->viewModel.getStories()}"
+            android:onClick="@{()->viewModel.getAllStories()}"
             android:text="try again"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

@@ -1,6 +1,5 @@
 package com.red_velvet.marvel.ui.stories
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.red_velvet.marvel.data.model.StoryResponse
@@ -16,7 +15,7 @@ class StoriesViewModel : BaseViewModel(), BaseInteractionListener {
     private val _stories: MutableLiveData<State<List<StoryResponse>>> = MutableLiveData()
     val stories1: LiveData<State<List<StoryResponse>>> get() = _stories
 
-    fun getStories() {
+    fun getAllStories() {
         bindStateUpdates(
             repository.getStories(),
             onError = ::onGetStoriesError,
