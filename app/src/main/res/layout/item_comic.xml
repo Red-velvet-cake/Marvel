@@ -8,6 +8,10 @@
         <variable
             name="item"
             type="com.red_velvet.marvel.data.model.ComicsResponse" />
+
+        <variable
+            name="listener"
+            type="com.red_velvet.marvel.ui.comics.ComicsInteractionListener" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
