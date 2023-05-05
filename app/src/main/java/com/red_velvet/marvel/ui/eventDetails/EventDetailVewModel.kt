@@ -12,7 +12,7 @@ import com.red_velvet.marvel.ui.base.BaseViewModel
 
 class EventDetailVewModel: BaseViewModel() {
     
-    private  val eventId=116
+
     private val repository=MarvelRepositoryImpl(RetrofitClient.apiService)
     private var _event:MutableLiveData<State<List<EventsResponse>>> = MutableLiveData()
     val event:MutableLiveData<State<List<EventsResponse>>>
@@ -24,10 +24,8 @@ class EventDetailVewModel: BaseViewModel() {
     val creators:MutableLiveData<State<List<CreatorsResponse>>>
         get()=_creators
 
-    init {
-        getEvent()
-    }
-     fun getEvent() {
+
+     fun getEvent(eventId:Int) {
          bindStateUpdates(
              repository.getEventDetails(eventId),
              onNext=::onGetEventSuccess,
@@ -36,14 +34,14 @@ class EventDetailVewModel: BaseViewModel() {
     }
 
 
-    fun getCreatorsEventId() {
+    fun getCreatorsEventId(eventId:Int) {
         bindStateUpdates(
             repository.getCreatorsByEventId(eventId),
             onNext=::onGetEventCreatorsSuccess,
             onError = ::onGetEventCreatorsError
         )
     }
-    fun getCharactersEventId() {
+    fun getCharactersEventId(eventId:Int) {
         bindStateUpdates(
             repository.getCharactersByEventId(eventId),
             onNext=::onGetEventCharactersSuccess,

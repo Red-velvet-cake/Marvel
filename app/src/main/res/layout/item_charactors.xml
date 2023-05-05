@@ -5,9 +5,6 @@
         <variable
             name="item"
             type="com.red_velvet.marvel.data.model.CharactersResponse" />
-        <variable
-            name="listener"
-            type="com.red_velvet.marvel.ui.eventDetails.CharactersListenerInteraction" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"

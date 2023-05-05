@@ -13,11 +13,11 @@ class EventDetailsFragment:BaseFragment<FragmentEventDetailsBinding>() {
 
     override val layoutIdFragment=R.layout.fragment_event_details
     override val viewModel:EventDetailVewModel by viewModels()
-
+    private  val eventId=116
     override fun setUp() {
-        viewModel.getEvent()
-        viewModel.getCharactersEventId()
-        viewModel.getCreatorsEventId()
+        viewModel.getEvent(eventId)
+        viewModel.getCharactersEventId(eventId)
+        viewModel.getCreatorsEventId(eventId)
         val charactersAdapter = CharactersAdapter(mutableListOf())
         val creatorsAdapter = CreatorsAdapter(mutableListOf())
         binding.recyclerViewEventChars.adapter = charactersAdapter
