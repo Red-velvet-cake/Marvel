@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import com.red_velvet.marvel.data.model.CharactersResponse
 import com.red_velvet.marvel.data.model.CreatorsResponse
 import com.red_velvet.marvel.data.model.EventsResponse
+import com.red_velvet.marvel.data.model.MarvelResponse
 import com.red_velvet.marvel.data.remote.RetrofitClient
 import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
 import com.red_velvet.marvel.data.util.State
@@ -27,12 +28,19 @@ class EventDetailVewModel: BaseViewModel() {
         getEvent()
     }
      fun getEvent() {
-        getData(_event,repository.getEventDetails(eventId))
+//         bindStateUpdates(repository.getEventDetails(eventId),::onError,::onSuccess)
+//        getData(_event,repository.getEventDetails(eventId))
+    }
+//        private fun onSuccess(state: State) {
+//
+//    }
+   private fun onError(throwable: Throwable){
+
     }
      fun getCreatorsEventId() {
-        getData(_creators,repository.getCreatorsByEventId(eventId))
+//        getData(_creators,repository.getCreatorsByEventId(eventId))
     }
      fun getCharactersEventId() {
-        getData(_characters,repository.getCharactersByEventId(eventId))
+//        getData(_characters,repository.getCharactersByEventId(eventId))
     }
 }
