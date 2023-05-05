@@ -1,6 +1,5 @@
 package com.red_velvet.marvel.ui.series
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.red_velvet.marvel.data.model.SeriesResponse
@@ -10,7 +9,6 @@ import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
 import com.red_velvet.marvel.data.util.State
 import com.red_velvet.marvel.ui.base.BaseViewModel
 import com.red_velvet.marvel.ui.character.SeriesInteractionListener
-import kotlin.math.log
 
 
 class SeriesViewModel : BaseViewModel(), SeriesInteractionListener {

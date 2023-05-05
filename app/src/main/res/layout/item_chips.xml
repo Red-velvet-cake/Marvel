@@ -22,31 +22,31 @@
             android:id="@+id/chip_all_series"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="all series" />
+            android:text="@string/all_series" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip_comic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="comic" />
+            android:text="@string/comic" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip_magazine"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="magazine" />
+            android:text="@string/magazine" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip_trade_paperback"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="trade paperback" />
+            android:text="@string/trade_paperback" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip_hardcover"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="hardcover" />
+            android:text="@string/hardcover" />
 
     </com.google.android.material.chip.ChipGroup>
 

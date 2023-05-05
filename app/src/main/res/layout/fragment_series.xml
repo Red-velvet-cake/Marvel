@@ -13,7 +13,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/spacing_medium"
         android:orientation="vertical">
 
 
@@ -30,7 +30,8 @@
             android:id="@+id/recyclerViewSeries"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="16dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            android:layout_marginTop="@dimen/spacing_medium"
             app:setItems="@{viewModel.series.toData()}"
             app:showWhenSuccess="@{viewModel.series}"
             tools:listitem="@layout/item_series" />

@@ -12,7 +12,6 @@ class SeriesFragment : BaseFragment<FragmentSeriesBinding>() {
     override val viewModel: SeriesViewModel by viewModels()
 
     override fun setUp() {
-        viewModel.getAllSeries()
         val adapter = SeriesAdapter(emptyList(), viewModel)
         binding.recyclerViewSeries.adapter = adapter
 
