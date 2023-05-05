@@ -28,19 +28,55 @@ class EventDetailVewModel: BaseViewModel() {
         getEvent()
     }
      fun getEvent() {
-//         bindStateUpdates(repository.getEventDetails(eventId),::onError,::onSuccess)
-//        getData(_event,repository.getEventDetails(eventId))
+         bindStateUpdates(
+             repository.getEventDetails(eventId),
+             onNext=::onGetEventSuccess,
+             onError = ::onGetEventError
+           )
     }
-//        private fun onSuccess(state: State) {
-//
-//    }
-   private fun onError(throwable: Throwable){
 
+
+    fun getCreatorsEventId() {
+        bindStateUpdates(
+            repository.getCreatorsByEventId(eventId),
+            onNext=::onGetEventCreatorsSuccess,
+            onError = ::onGetEventCreatorsError
+        )
     }
-     fun getCreatorsEventId() {
-//        getData(_creators,repository.getCreatorsByEventId(eventId))
+    fun getCharactersEventId() {
+        bindStateUpdates(
+            repository.getCharactersByEventId(eventId),
+            onNext=::onGetEventCharactersSuccess,
+            onError = ::onGetEventCharactersError
+        )
     }
-     fun getCharactersEventId() {
-//        getData(_characters,repository.getCharactersByEventId(eventId))
+    private fun onGetEventSuccess(state: State<List<EventsResponse>?>) {
+        _event.postValue(State.Loading)
+        state.toData()?.let {
+            _event.postValue(State.Success(it))
+        }
     }
+   private fun onGetEventError(e: Throwable){
+       _event.postValue(State.Failed(e.message.toString()))
+    }
+    private fun onGetEventCreatorsSuccess(state: State<List<CreatorsResponse>?>) {
+        _creators.postValue(State.Loading)
+        state.toData()?.let {
+            _creators.postValue(State.Success(it))
+        }
+    }
+    private fun onGetEventCreatorsError(e: Throwable){
+        _creators.postValue(State.Failed(e.message.toString()))
+    }
+    private fun onGetEventCharactersSuccess(state: State<List<CharactersResponse>?>) {
+        _characters.postValue(State.Loading)
+        state.toData()?.let {
+            _characters.postValue(State.Success(it))
+        }
+    }
+    private fun onGetEventCharactersError(e: Throwable){
+        _characters.postValue(State.Failed(e.message.toString()))
+    }
+
+
 }
