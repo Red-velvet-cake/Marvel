@@ -11,7 +11,7 @@ import com.red_velvet.marvel.BR
 interface BaseInteractionListener
 abstract class BaseAdapter<T>(
     private var items: List<T>,
-    private var listener: BaseInteractionListener,
+    private var listener: BaseInteractionListener=  object : BaseInteractionListener {},
 ) : RecyclerView.Adapter<BaseAdapter.BaseViewHolder>() {
 
     abstract val layoutId: Int
