@@ -5,9 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import com.red_velvet.marvel.data.model.CharactersResponse
 import com.red_velvet.marvel.data.model.ComicsResponse
 import com.red_velvet.marvel.data.remote.RetrofitClient
+import com.red_velvet.marvel.data.repository.MarvelRepository
 import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
 import com.red_velvet.marvel.data.util.State
-import com.red_velvet.marvel.ui.MarvelRepository
 import com.red_velvet.marvel.ui.base.BaseViewModel
 
 class ComicsViewModel : BaseViewModel() {
@@ -30,14 +30,14 @@ class ComicsViewModel : BaseViewModel() {
     }
 
     fun getAllComics() {
-        getData(_comics, repository.getComics())
+//        bindStateUpdates(_comics, repository.getComics())
     }
 
     fun getAllChars() {
-        getData(_chars, repository.getCharacters())
+//        bindStateUpdates(_chars, repository.getCharacters())
     }
 
     fun getCharById() {
-        getData(_char, repository.getCharsByComicId(1749))
+//        bindStateUpdates(_char, repository.getCharsByComicId(1749))
     }
 }

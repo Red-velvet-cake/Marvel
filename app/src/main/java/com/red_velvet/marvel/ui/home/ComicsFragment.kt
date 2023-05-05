@@ -3,6 +3,7 @@ package com.red_velvet.marvel.ui.home
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.red_velvet.marvel.R
 import com.red_velvet.marvel.data.util.State
@@ -16,6 +17,9 @@ class ComicsFragment : BaseFragment<FragmentHomeBinding>() {
     override val viewModel: ComicsViewModel by viewModels()
 
     override fun setUp() {
+        binding.btn.setOnClickListener {
+            findNavController().navigate(R.id.characterFragment)
+        }
 
         binding.root.setOnClickListener {
 //            viewModel.getAllComics()
