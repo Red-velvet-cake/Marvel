@@ -20,7 +20,7 @@ class EventDetailsFragment:BaseFragment<FragmentEventDetailsBinding>() {
         viewModel.getCreatorsEventId(eventId)
         val charactersAdapter = CharactersAdapter(mutableListOf())
         val creatorsAdapter = CreatorsAdapter(mutableListOf())
-        binding.recyclerViewEventChars.adapter = charactersAdapter
-        binding.recyclerViewEventCreators.adapter = creatorsAdapter
+//        binding.recyclerViewEventChars.adapter = charactersAdapter
+//        binding.recyclerViewEventCreators.adapter = creatorsAdapter
     }
 }

@@ -18,7 +18,7 @@ class ComicsFragment : BaseFragment<FragmentHomeBinding>() {
 
     override fun setUp() {
         binding.btn.setOnClickListener {
-            findNavController().navigate(R.id.characterFragment)
+            findNavController().navigate(R.id.eventDetailsFragment)
         }
 
         binding.root.setOnClickListener {

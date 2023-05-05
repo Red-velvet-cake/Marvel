@@ -10,8 +10,8 @@ class StoriesFragment : BaseFragment<FragmentStoriesBinding>() {
     override val viewModel: StoriesViewModel by viewModels()
 
     override fun setUp() {
-        binding.root.setOnClickListener {
-            viewModel.getStories()
-        }
+//        binding.root.setOnClickListener {
+////            viewModel.getStories()
+//        }
     }
 }
