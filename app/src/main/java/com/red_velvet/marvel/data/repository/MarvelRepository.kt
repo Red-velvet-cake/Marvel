@@ -48,4 +48,6 @@ interface MarvelRepository {
 
     fun getSeriesByCharacterId(characterId: Int): Observable<State<List<SeriesResponse>?>>
 
+    fun searchCharacters(nameStartsWith: String?): Observable<State<List<CharactersResponse>?>>
+
 }
