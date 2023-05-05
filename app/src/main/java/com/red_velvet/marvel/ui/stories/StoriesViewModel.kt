@@ -14,11 +14,18 @@ class StoriesViewModel : BaseViewModel() {
     private val _stories: MutableLiveData<State<List<StoryResponse>>> = MutableLiveData()
     val stories: LiveData<State<List<StoryResponse>>> get() = _stories
 
-    init {
-        getStories()
-    }
-
     fun getStories() {
-//        bindStateUpdates(_stories, repository.getStories())
+        bindStateUpdates(repository.getStories(), onError = ::onGetStoriesError,::onGetStoriesSuccess)
+    }
+    private fun onGetStoriesSuccess(state:State<List<StoryResponse>?>)
+    {
+        _stories.postValue(State.Loading)
+        state.toData()?.let {
+            _stories.postValue(State.Success(it))
+        }
+    }
+    private fun onGetStoriesError(error:Throwable)
+    {
+        _stories.postValue(State.Failed(error.message.toString()))
     }
 }
