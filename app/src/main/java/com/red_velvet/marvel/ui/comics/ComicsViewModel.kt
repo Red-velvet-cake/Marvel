@@ -1,97 +1,120 @@
 package com.red_velvet.marvel.ui.comics
 
+import androidx.annotation.StringRes
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.red_velvet.marvel.R
 import com.red_velvet.marvel.data.model.ComicsResponse
 import com.red_velvet.marvel.data.remote.RetrofitClient
 import com.red_velvet.marvel.data.repository.MarvelRepository
 import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
 import com.red_velvet.marvel.data.util.State
 import com.red_velvet.marvel.ui.base.BaseViewModel
+import io.reactivex.rxjava3.core.Observable
 
 class ComicsViewModel : BaseViewModel(), ComicsInteractionListener {
     private val repository: MarvelRepository = MarvelRepositoryImpl(RetrofitClient.apiService)
 
-    private val _comics: MutableLiveData<State<List<ComicsResponse>>> = MutableLiveData()
-    val comics: LiveData<State<List<ComicsResponse>>> get() = _comics
+    @StringRes
+    private val thisWeekStringResource = R.string.this_week
 
-    private val _screenItems: MutableLiveData<List<ComicsCollection>> = MutableLiveData()
-    val screenItems: LiveData<List<ComicsCollection>> get() = _screenItems
+    @StringRes
+    private val nextWeekStringResource = R.string.next_week
 
+    @StringRes
+    private val lastWeekStringResource = R.string.last_week
+
+    @StringRes
+    private val thisMonthStringResource = R.string.this_month
+
+    private val comicsCollections: MutableLiveData<State<List<ComicsCollection>>> =
+        MutableLiveData(State.Loading)
+    val comicCollections: LiveData<State<List<ComicsCollection>>> get() = comicsCollections
 
     init {
-        getThisWeekComics()
-        getScreensItems()
+        getAllComicsCollections()
     }
 
-    private fun getThisWeekComics() {
+    private fun getAllComicsCollections() {
         bindStateUpdates(
-            repository.getComics(),
-            ::handleComicsError,
-            ::handleComicsSuccess
+            getAllComicsCollectionObservable(),
+            ::handleComicsCollectionsFailure,
+            ::handleComicsCollectionsSuccess,
         )
-
     }
 
-    private fun handleComicsError(throwable: Throwable) {
-        _comics.value = State.Failed(throwable.message ?: "Unknown error")
-    }
-
-    private fun handleComicsSuccess(state: State<List<ComicsResponse>?>) {
-        when (state) {
-            is State.Loading -> {
-                _comics.postValue(State.Loading)
-            }
-
-            is State.Success -> {
-                _comics.postValue(State.Success(state.data ?: emptyList()))
-            }
-
-            is State.Failed -> {
-                _comics.value = State.Failed(state.error)
-            }
+    private fun getAllComicsCollectionObservable(): Observable<State<List<ComicsCollection>>> {
+        return Observable.zip(
+            repository.getComics(dateDescriptor = THIS_WEEK),
+            repository.getComics(dateDescriptor = NEXT_WEEK),
+            repository.getComics(dateDescriptor = LAST_WEEK),
+            repository.getComics(dateDescriptor = THIS_MONTH)
+        ) { thisWeek, nextWeek, lastWeek, thisMonth ->
+            handleComicsCollectionsState(thisWeek, nextWeek, lastWeek, thisMonth)
         }
     }
 
-    private fun getScreensItems() {
-
-        val thisWeek = comics.value?.let {
-            ComicsCollection(
-                title = "This Week",
-                comics = it
+    private fun handleComicsCollectionsState(
+        thisWeek: State<List<ComicsResponse>?>,
+        nextWeek: State<List<ComicsResponse>?>,
+        lastWeek: State<List<ComicsResponse>?>,
+        thisMonth: State<List<ComicsResponse>?>
+    ): State<List<ComicsCollection>> {
+        return if (areAllComicsCollectionsSuccess(thisWeek, nextWeek, lastWeek, thisMonth)) {
+            State.Success(
+                listOf(
+                    ComicsCollection(thisWeekStringResource, thisWeek),
+                    ComicsCollection(nextWeekStringResource, nextWeek),
+                    ComicsCollection(lastWeekStringResource, lastWeek),
+                    ComicsCollection(thisMonthStringResource, thisMonth)
+                )
             )
+        } else if (isAnyComicsCollectionLoading(thisWeek, nextWeek, lastWeek, thisMonth)) {
+            State.Loading
+        } else {
+            State.Failed(UNKNOWN_ERROR)
         }
+    }
 
-        val nextWeek = comics.value?.let {
-            ComicsCollection(
-                title = "Next Week",
-                comics = it
-            )
-        }
+    private fun areAllComicsCollectionsSuccess(
+        thisWeek: State<List<ComicsResponse>?>,
+        nextWeek: State<List<ComicsResponse>?>,
+        lastWeek: State<List<ComicsResponse>?>,
+        thisMonth: State<List<ComicsResponse>?>
+    ): Boolean {
+        return thisWeek is State.Success
+                && nextWeek is State.Success
+                && lastWeek is State.Success
+                && thisMonth is State.Success
+    }
 
-        val lastWeek = comics.value?.let {
-            ComicsCollection(
-                title = "Last Week",
-                comics = it
-            )
-        }
+    private fun isAnyComicsCollectionLoading(
+        thisWeek: State<List<ComicsResponse>?>,
+        nextWeek: State<List<ComicsResponse>?>,
+        lastWeek: State<List<ComicsResponse>?>,
+        thisMonth: State<List<ComicsResponse>?>
+    ): Boolean {
+        return thisWeek is State.Loading
+                || nextWeek is State.Loading
+                || lastWeek is State.Loading
+                || thisMonth is State.Loading
+    }
 
-        val thisMonth = comics.value?.let {
-            ComicsCollection(
-                title = "This Month",
-                comics = it
-            )
-        }
+    private fun handleComicsCollectionsFailure(throwable: Throwable) {
+        comicsCollections.postValue(State.Failed(throwable.message ?: UNKNOWN_ERROR))
+    }
 
-        _screenItems.postValue(
-            listOfNotNull(
-                thisWeek,
-                nextWeek,
-                lastWeek,
-                thisMonth
-            )
-        )
+    private fun handleComicsCollectionsSuccess(state: State<List<ComicsCollection>>) {
+        comicsCollections.postValue(state)
     }
 
     override fun onComicClicked(comic: ComicsResponse) {}
+
+    companion object {
+        private const val THIS_WEEK = "thisWeek"
+        private const val NEXT_WEEK = "nextWeek"
+        private const val LAST_WEEK = "lastWeek"
+        private const val THIS_MONTH = "thisMonth"
+        private const val UNKNOWN_ERROR = "Unknown error"
+    }
 }

@@ -6,5 +6,5 @@ import com.red_velvet.marvel.data.util.State
 
 data class ComicsCollection(
     @StringRes val titleId: Int,
-    val comics: State<List<ComicsResponse>>
+    val comics: State<List<ComicsResponse>?>
 )

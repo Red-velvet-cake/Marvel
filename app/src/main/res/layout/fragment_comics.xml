@@ -22,8 +22,8 @@
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintTop_toTopOf="parent"
-            app:setItems="@{viewModel.screenItems}"
-            app:showWhenSuccess="@{viewModel.comics}"
+            app:setItems="@{viewModel.comicCollections.toData()}"
+            app:showWhenSuccess="@{viewModel.comicCollections}"
             tools:listitem="@layout/list_comics" />
 
         <ProgressBar
@@ -37,7 +37,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:showWhenLoading="@{viewModel.comics}" />
+            app:showWhenLoading="@{viewModel.comicCollections}" />
 
         <ImageView
             android:id="@+id/main_iv_error"
@@ -48,7 +48,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:showWhenError="@{viewModel.comics}" />
+            app:showWhenError="@{viewModel.comicCollections}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
