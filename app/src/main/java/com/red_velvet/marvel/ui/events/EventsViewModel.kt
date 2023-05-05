@@ -1,7 +1,10 @@
 package com.red_velvet.marvel.ui.events
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.distinctUntilChanged
+import androidx.lifecycle.switchMap
 import com.red_velvet.marvel.data.model.EventsResponse
 import com.red_velvet.marvel.data.remote.RetrofitClient
 import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
@@ -9,6 +12,7 @@ import com.red_velvet.marvel.data.util.State
 import com.red_velvet.marvel.ui.base.BaseInteractionListener
 import com.red_velvet.marvel.ui.base.BaseViewModel
 ;
+import io.reactivex.rxjava3.core.Observable
 import java.util.concurrent.TimeUnit
 
 class EventsViewModel : BaseViewModel(), BaseInteractionListener {
@@ -53,16 +57,54 @@ class EventsViewModel : BaseViewModel(), BaseInteractionListener {
         _events.postValue(State.Loading)
         _events.postValue(State.Failed(e.message.toString()))
     }
-    private fun searchResult(){
 
-        searchQuery.observeForever { query ->
-            if (query == null || query.isEmpty()) {
-                getAllEvents()
-            } else {
-                search(query)
+//    private fun searchResult(){
+//        val debouncedSearchQuery = MediatorLiveData<String>()
+//        debouncedSearchQuery.addSource(searchQuery) { query ->
+//            debouncedSearchQuery.value = query
+//        }
+//
+//        debouncedSearchQuery.distinctUntilChanged()
+//            .switchMap { query ->
+//                if (query.isNullOrEmpty()) {
+//                    getAllEvents()
+//                } else {
+//                    search(query)
+//                }
+//            }.observeForever { state ->
+//                _events.postValue(state)
+//            }
+//    }
+
+    private fun searchResult() {
+        Observable.create { emitter ->
+            searchQuery.observeForever { query ->
+                if (query != null) {
+                    emitter.onNext(query)
+                }
             }
         }
+            .debounce(300, TimeUnit.SECONDS)
+            .distinctUntilChanged()
+            .subscribe { query ->
+                if (query.isEmpty()) {
+                    getAllEvents()
+                } else {
+                    search(query)
+                }
+            }
     }
+
+//    private fun searchResult(){
+//
+//        searchQuery.observeForever { query ->
+//            if (query == null || query.isEmpty()) {
+//                getAllEvents()
+//            } else {
+//                search(query)
+//            }
+//        }
+//    }
 
 
 }
