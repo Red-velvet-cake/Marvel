@@ -71,7 +71,7 @@ interface MarvelService {
     fun getAllStories(): Single<Response<MarvelResponse<List<StoryResponse>>>>
 
     @GET("stories/{storyId}")
-    fun getStory(storyId: Int): Single<Response<MarvelResponse<List<StoryResponse>>>>
+    fun getStory(@Path("storyId")storyId: Int): Single<Response<MarvelResponse<List<StoryResponse>>>>
 
     @GET("stories/{storyId}/creators")
     fun getStoryCreatorsByStoryId(
