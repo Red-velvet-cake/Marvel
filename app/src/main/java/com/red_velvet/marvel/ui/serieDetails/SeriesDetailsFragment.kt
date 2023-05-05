@@ -12,7 +12,7 @@ class SeriesDetailsFragment : BaseFragment<FragmentSeriesDetailsBinding>() {
 
     override val viewModel: SerieDetailsViewModel by viewModels()
     override fun setUp() {
-        viewModel.getSerie(632)
+        viewModel.getSeries(632)
         viewModel.getCreators(632)
         val creatorsAdapter = CreatorsAdapter(mutableListOf(), viewModel)
         binding.recyclerViewSerieCreators.adapter = creatorsAdapter

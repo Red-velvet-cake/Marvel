@@ -88,18 +88,34 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:showWhenError="@{viewModel.creators}" />
+            
+            <TextView
+                android:id="@+id/text_view_title_creators"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/creators_title"
+                app:layout_constraintBottom_toTopOf="@id/recycler_view_serie_creators"
+                app:layout_constraintTop_toBottomOf="@id/text_view_serie_desc"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:layout_marginStart="@dimen/spacing_medium"
+                android:fontFamily="@font/roboto_medium"
+                android:textSize="@dimen/font_size_title"
+                android:textColor="@color/tertiary_87"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_serie_creators"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/spacing_medium"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="@dimen/spacing_medium"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:clipToPadding="false"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_view_serie_desc"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_title_creators"
                 app:setItems="@{viewModel.creators.toData()}"
                 app:showWhenSuccess="@{viewModel.creators}"
                 tools:listitem="@layout/item_creator" />

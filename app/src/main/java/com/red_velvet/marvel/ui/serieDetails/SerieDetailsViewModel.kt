@@ -22,17 +22,17 @@ class SerieDetailsViewModel : BaseViewModel(), CreatorListenerInteraction {
     val creators: LiveData<State<List<CreatorsResponse>>> get() = _creators
 
 
-    fun getSerie(id: Int) {
+    fun getSeries(seriesId: Int) {
         bindStateUpdates(
-            repository.getSeriesDetails(id),
+            repository.getSeriesDetails(seriesId),
             onNext = ::onGetSeriesDetailsSuccess,
             onError = ::onGetSeriesDetailsError
         )
     }
 
-    fun getCreators(id: Int) {
+    fun getCreators(seriesId: Int) {
         bindStateUpdates(
-            repository.getSerieCreatorsBySeriesId(id),
+            repository.getSerieCreatorsBySeriesId(seriesId),
             onNext = ::onGetCreatorsBySeriesIdSuccess,
             onError = ::onGetCreatorsBySeriesDetailsError
         )
