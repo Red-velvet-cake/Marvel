@@ -15,10 +15,10 @@
     </data>
 
     <com.google.android.material.card.MaterialCardView
-        android:layout_width="160dp"
-        android:layout_height="240dp"
-        android:layout_margin="8dp"
-        app:cardCornerRadius="12dp">
+        android:layout_width="@dimen/comic_width"
+        android:layout_height="@dimen/comic_height"
+        android:layout_margin="@dimen/spacing_normal"
+        app:cardCornerRadius="@dimen/radius_medium">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/card_recipe"
@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:padding="8dp"
+                android:padding="@dimen/spacing_normal"
                 android:text="@{item.title}"
                 android:textColor="@color/secondary"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -49,6 +49,5 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
-
 
 </layout>
