@@ -12,7 +12,7 @@ class ComicsFragment : BaseFragment<FragmentComicsBinding>() {
     override val viewModel: ComicsViewModel by viewModels()
 
     override fun setUp() {
-        val comicsAdapter = ComicsAdapter(mutableListOf(), viewModel)
+        val comicsAdapter = ComicsScreenAdapter(mutableListOf(), viewModel)
         binding.recyclerComics.adapter = comicsAdapter
     }
 }
