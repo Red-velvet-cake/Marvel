@@ -42,7 +42,8 @@ class MarvelRepositoryImpl(
     }
 
 
-    override fun getAllSeries(): Observable<State<List<SeriesResponse>?>> {
+    override fun getAllSeries(  startYear: Int?,
+                                contains: String? ): Observable<State<List<SeriesResponse>?>> {
         return wrapWithState { marvelServiceImpl.getAllSeries() }
     }
 
