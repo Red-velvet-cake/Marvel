@@ -1,25 +1,23 @@
 package com.red_velvet.marvel.ui.comics
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
-import com.red_velvet.marvel.BR
+import com.red_velvet.marvel.R
 import com.red_velvet.marvel.databinding.ListComicsBinding
 
-class ComicsAdapter(
+class ComicsScreenAdapter(
     private var items: List<ComicsCollection>,
     private val comicsListener: ComicsInteractionListener
-) : RecyclerView.Adapter<ComicsAdapter.ItemViewHolder>() {
+) : RecyclerView.Adapter<ComicsScreenAdapter.ItemViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): ItemViewHolder {
         return ItemViewHolder(
-            DataBindingUtil.inflate(
-                LayoutInflater.from(parent.context),
-                viewType,
+            LayoutInflater.from(parent.context).inflate(
+                R.layout.list_comics,
                 parent,
                 false
             )
@@ -28,9 +26,13 @@ class ComicsAdapter(
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val currentItem = items[position]
+
         holder.binding.apply {
-            setVariable(BR.item, currentItem)
-            setVariable(BR.listener, comicsListener)
+            textViewTitle.text = currentItem.title
+            recyclerComics.adapter = ComicAdapter(
+                currentItem.comics.toData() ?: emptyList(),
+                comicsListener
+            )
         }
     }
 
@@ -40,8 +42,8 @@ class ComicsAdapter(
         items = newItems
     }
 
-    class ItemViewHolder(binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root) {
-        val binding = ListComicsBinding.bind(binding.root)
+    class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val binding = ListComicsBinding.bind(itemView)
     }
 
 }
