@@ -1,13 +1,7 @@
 package com.red_velvet.marvel.ui.series
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.red_velvet.marvel.R
-import com.red_velvet.marvel.data.util.State
 import com.red_velvet.marvel.databinding.FragmentSeriesBinding
 import com.red_velvet.marvel.ui.base.BaseFragment
 
@@ -18,20 +12,30 @@ class SeriesFragment : BaseFragment<FragmentSeriesBinding>() {
     override val viewModel: SeriesViewModel by viewModels()
 
     override fun setUp() {
-        viewModel.series.observe(this) {
-            when (it) {
-                is State.Failed -> {
-                }
+        val adapter = SeriesAdapter(emptyList(), viewModel)
+        binding.recyclerViewSeries.adapter = adapter
 
-                State.Loading -> {
-                }
 
-                is State.Success -> {
-                }
-            }
+        binding.chips.chipAllSeries.setOnClickListener {
+            viewModel.getSeries()
         }
+        binding.chips.chipComic.setOnClickListener {
+            viewModel.filterSeries(binding.chips.chipComic.text.toString())
+        }
+        binding.chips.chipMagazine.setOnClickListener{
+            viewModel.filterSeries(binding.chips.chipMagazine.text.toString())
+        }
+        binding.chips.chipHardcover.setOnClickListener{
+            viewModel.filterSeries(binding.chips.chipHardcover.text.toString())
+        }
+        binding.chips.chipTradePaperback.setOnClickListener {
+            viewModel.filterSeries(binding.chips.chipTradePaperback.text.toString())
+        }
+
     }
-
-
-
 }
+
+
+
+
+
