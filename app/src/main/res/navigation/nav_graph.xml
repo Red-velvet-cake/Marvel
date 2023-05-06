@@ -41,4 +41,9 @@
         android:id="@+id/eventDetailsFragment"
         android:name="com.red_velvet.marvel.ui.eventDetails.EventDetailsFragment"
         android:label="EventDetailsFragment" />
+    <fragment
+            android:id="@+id/comicDetailsFragment"
+            android:name="com.red_velvet.marvel.ui.comicDetails.ComicDetailsFragment"
+            android:label="ComicDetailsFragment" />
+
 </navigation>
