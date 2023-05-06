@@ -31,7 +31,7 @@
         android:label="HomeFragment" />
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.red_velvet.marvel.ui.home.ComicsFragment"
+        android:name="com.red_velvet.marvel.ui.comics.ComicsFragment"
         android:label="HomeFragment" />
     <fragment
         android:id="@+id/characterFragment"
