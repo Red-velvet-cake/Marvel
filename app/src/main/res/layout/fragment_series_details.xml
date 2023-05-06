@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.red_velvet.marvel.ui.serieDetails.SerieDetailsViewModel" />
+            type="com.red_velvet.marvel.ui.serieDetails.SeriesDetailsViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

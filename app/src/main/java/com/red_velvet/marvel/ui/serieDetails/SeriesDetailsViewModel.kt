@@ -11,7 +11,7 @@ import com.red_velvet.marvel.data.util.State
 import com.red_velvet.marvel.ui.base.BaseViewModel
 import com.red_velvet.marvel.ui.serieDetails.adapter.CreatorListenerInteraction
 
-class SerieDetailsViewModel : BaseViewModel(), CreatorListenerInteraction {
+class SeriesDetailsViewModel : BaseViewModel(), CreatorListenerInteraction {
 
     private val repository: MarvelRepository = MarvelRepositoryImpl(RetrofitClient.apiService)
 

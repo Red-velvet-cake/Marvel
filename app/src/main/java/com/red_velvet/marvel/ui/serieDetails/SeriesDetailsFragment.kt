@@ -10,7 +10,7 @@ class SeriesDetailsFragment : BaseFragment<FragmentSeriesDetailsBinding>() {
 
     override val layoutIdFragment = R.layout.fragment_series_details
 
-    override val viewModel: SerieDetailsViewModel by viewModels()
+    override val viewModel: SeriesDetailsViewModel by viewModels()
     override fun setUp() {
         viewModel.getSeries(632)
         viewModel.getCreators(632)
