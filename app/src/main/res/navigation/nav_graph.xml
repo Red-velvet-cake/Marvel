@@ -37,4 +37,14 @@
         android:id="@+id/characterFragment"
         android:name="com.red_velvet.marvel.ui.character.CharacterFragment"
         android:label="CharacterFragment" />
+    <fragment
+
+        android:id="@+id/eventDetailsFragment"
+        android:name="com.red_velvet.marvel.ui.eventDetails.EventDetailsFragment"
+        android:label="EventDetailsFragment" />
+    <fragment
+        android:id="@+id/seriesDetailsFragment"
+        android:name="com.red_velvet.marvel.ui.serieDetails.SeriesDetailsFragment"
+        android:label="SeriesDetailsFragment" />
+
 </navigation>
