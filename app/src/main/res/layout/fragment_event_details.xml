@@ -70,6 +70,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:indeterminate="true"
+
                 android:indeterminateTintMode="src_atop"
                 android:indeterminateTint="@color/primary"
 
@@ -84,34 +85,60 @@
                 android:src="@drawable/baseline_error_24"
                 app:showWhenError="@{viewModel.creators}"
                 android:contentDescription="@string/error_image" />
-<!--            <androidx.recyclerview.widget.RecyclerView-->
-<!--                android:id="@+id/recycler_view_event_chars"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_margin="@dimen/spacing_medium"-->
-<!--                android:orientation="horizontal"-->
-<!--                app:setItems="@{viewModel.characters.toData()}"-->
-<!--                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintHorizontal_bias="0.0"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/text_view_event_desc"-->
-<!--                app:showWhenSuccess="@{viewModel.characters}"-->
-<!--                tools:listitem="@layout/item_charactors" />-->
-<!--&lt;!&ndash;            <androidx.recyclerview.widget.RecyclerView&ndash;&gt;-->
-<!--                android:id="@+id/recycler_view_event_creators"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_margin="@dimen/spacing_medium"-->
-<!--                android:orientation="horizontal"-->
-<!--                app:setItems="@{viewModel.creators.toData()}"-->
-<!--                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintHorizontal_bias="0.0"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/recycler_view_event_chars"-->
-<!--                app:showWhenSuccess="@{viewModel.creators}"-->
-<!--                tools:listitem="@layout/item_creators_event" />-->
+            <TextView
+                android:id="@+id/text_view_event_chars"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing_medium"
+                android:text="Characters"
+                app:layout_constraintTop_toBottomOf="@id/text_view_event_desc"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:fontFamily="@font/roboto_medium"
+                android:textSize="@dimen/font_size_title_medium"
+                android:textColor="@color/tertiary_87"
+    />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_event_chars"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing_medium"
+                android:orientation="horizontal"
+                app:setItems="@{viewModel.characters.toData()}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_event_chars"
+                app:showWhenSuccess="@{viewModel.characters}"
+                tools:listitem="@layout/item_charactors" />
+            <TextView
+                android:id="@+id/text_view_event_creators"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing_medium"
+                android:text="Creators"
+                app:layout_constraintTop_toBottomOf="@id/recycler_view_event_chars"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:fontFamily="@font/roboto_medium"
+                android:textSize="@dimen/font_size_title_medium"
+                android:textColor="@color/tertiary_87"
+                tools:text="Characters"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_event_creators"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing_medium"
+                android:orientation="horizontal"
+                app:setItems="@{viewModel.creators.toData()}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_event_creators"
+                app:showWhenSuccess="@{viewModel.creators}"
+                tools:listitem="@layout/item_creators_event" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
