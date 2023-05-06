@@ -1,7 +1,6 @@
 package com.red_velvet.marvel.ui.characters
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import com.red_velvet.marvel.data.model.CharactersResponse
 import com.red_velvet.marvel.data.remote.RetrofitClient
@@ -9,44 +8,43 @@ import com.red_velvet.marvel.data.repository.MarvelRepository
 import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
 import com.red_velvet.marvel.data.util.State
 import com.red_velvet.marvel.ui.base.BaseViewModel
+import io.reactivex.rxjava3.core.Observable
+import java.util.concurrent.TimeUnit
 
 class CharactersViewModel : BaseViewModel(), CharacterDetailsInteractionListener {
     private val _characters: MutableLiveData<State<List<CharactersResponse>>> = MutableLiveData()
-    val characters: LiveData<State<List<CharactersResponse>>> get() = _characters
+    val characters: LiveData<State<List<CharactersResponse>>>  = _characters
 
     private var _searchQuery = MutableLiveData<String>()
-    private val searchQuery: LiveData<String> get() = _searchQuery
-
-    private val _filteredCharacters = MediatorLiveData<State<List<CharactersResponse>>>()
-    val filteredCharacters: LiveData<State<List<CharactersResponse>>> get() = _filteredCharacters
-
+    val searchQuery: LiveData<String> get() = _searchQuery
 
     private val repository: MarvelRepository = MarvelRepositoryImpl(RetrofitClient.apiService)
 
     init {
-        _filteredCharacters.addSource(_characters) { updateFilteredCharacters() }
-        _filteredCharacters.addSource(searchQuery) { updateFilteredCharacters() }
         getCharacters()
+        searchResult()
     }
 
-    private fun updateFilteredCharacters() {
-        val query = searchQuery.value.orEmpty()
-        if (query.isNotEmpty()) {
-            bindStateUpdates(
-                repository.searchCharacters(query),
-                onNext = ::onGetFilteredCharactersSuccess,
-                onError = ::onGetCharactersError
-            )
-        } else {
-            _filteredCharacters.value = _characters.value
+    private fun searchResult() {
+        Observable.create<String> { emitter ->
+            searchQuery.observeForever { query ->
+                if (query != null) {
+                    emitter.onNext(query)
+                }
+            }
         }
+            .debounce(300, TimeUnit.MILLISECONDS)
+            .distinctUntilChanged()
+            .subscribe { query ->
+                if (query.isEmpty()) {
+                    getCharacters()
+                } else {
+                    searchCharacters(query)
+                }
+            }
     }
 
-    private fun onGetFilteredCharactersSuccess(state: State<List<CharactersResponse>?>) {
-        state.toData()?.let { _filteredCharacters.postValue(State.Success(it)) }
-    }
-
-    fun getCharacters() {
+    private fun getCharacters() {
         bindStateUpdates(
             repository.getCharacters(),
             onNext = ::onGetCharactersSuccess,
@@ -59,17 +57,20 @@ class CharactersViewModel : BaseViewModel(), CharacterDetailsInteractionListener
         state.toData()?.let { _characters.postValue(State.Success(it)) }
     }
 
-    fun searchCharacters(query: String) {
-        _searchQuery.value = query
-        bindStateUpdates(
-            repository.searchCharacters(query),
-            onNext = ::onGetCharactersSuccess,
-            onError = ::onGetCharactersError
-        )
-    }
-
     private fun onGetCharactersError(error: Throwable) {
         _characters.postValue(State.Failed(error.message.toString()))
+    }
+
+    fun searchCharacters(query: String) {
+        if (query.isEmpty()) {
+            getCharacters()
+        } else {
+            bindStateUpdates(
+                repository.searchCharacters(query),
+                onNext = ::onGetCharactersSuccess,
+                onError = ::onGetCharactersError
+            )
+        }
     }
 
     override fun onCharacterSelected(character: CharactersResponse) {
