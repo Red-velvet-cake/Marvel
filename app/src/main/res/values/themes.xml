@@ -44,6 +44,6 @@
 
     <style name="RoundedShapeableImageView" parent="Widget.MaterialComponents.ShapeableImageView">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">16dp</item>
+        <item name="cornerSize">@dimen/radius_medium</item>
     </style>
 </resources>

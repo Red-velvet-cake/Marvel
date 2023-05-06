@@ -1,5 +1,5 @@
 <resources>
-      <dimen name="fab_margin">16dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 
     <dimen name="zero">0dp</dimen>
 
@@ -26,5 +26,8 @@
     <dimen name="app_bar_height">56dp</dimen>
     <dimen name="card_creator_size">100dp</dimen>
     <dimen name="chars_image_size">140dp</dimen>
+
+    <dimen name="comic_width">160dp</dimen>
+    <dimen name="comic_height">240dp</dimen>
 
 </resources>

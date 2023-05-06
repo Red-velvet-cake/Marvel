@@ -5,15 +5,13 @@ import androidx.fragment.app.viewModels
 import com.red_velvet.marvel.R
 import com.red_velvet.marvel.databinding.FragmentEventDetailsBinding
 import com.red_velvet.marvel.ui.base.BaseFragment
-import com.red_velvet.marvel.ui.eventDetails.adapter.CharactersAdapter
-import com.red_velvet.marvel.ui.eventDetails.adapter.CreatorsAdapter
 
 
-class EventDetailsFragment:BaseFragment<FragmentEventDetailsBinding>() {
+class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>() {
 
-    override val layoutIdFragment=R.layout.fragment_event_details
-    override val viewModel:EventDetailVewModel by viewModels()
-    private  val eventId=116
+    override val layoutIdFragment = R.layout.fragment_event_details
+    override val viewModel: EventDetailVewModel by viewModels()
+    private val eventId = 116
     override fun setUp() {
         viewModel.getEvent(eventId)
         viewModel.getCharactersEventId(eventId)
