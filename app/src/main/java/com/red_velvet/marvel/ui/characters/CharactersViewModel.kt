@@ -10,19 +10,13 @@ import com.red_velvet.marvel.data.util.State
 import com.red_velvet.marvel.ui.base.BaseViewModel
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.kotlin.addTo
-import io.reactivex.rxjava3.subjects.PublishSubject
 import java.util.concurrent.TimeUnit
 
 class CharactersViewModel : BaseViewModel(), CharacterDetailsInteractionListener {
     private val _characters: MutableLiveData<State<List<CharactersResponse>>> = MutableLiveData()
     val characters: LiveData<State<List<CharactersResponse>>> get() = _characters
 
-    private val _searchQuery = MutableLiveData<String>()
-    var searchQuery: String
-        get() = _searchQuery.value ?: ""
-        set(value) {
-            _searchQuery.value = value
-        }
+    val searchQuery = MutableLiveData<String>()
 
     private val repository: MarvelRepository = MarvelRepositoryImpl(RetrofitClient.apiService)
 
@@ -33,8 +27,10 @@ class CharactersViewModel : BaseViewModel(), CharacterDetailsInteractionListener
 
     private fun searchResult() {
         Observable.create { emitter ->
-            _searchQuery.observeForever { query ->
-                emitter.onNext(query ?: "")
+            searchQuery.observeForever { query ->
+                if (query != null) {
+                    emitter.onNext(query)
+                }
             }
         }.debounce(300, TimeUnit.MILLISECONDS)
             .distinctUntilChanged()
