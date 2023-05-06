@@ -26,8 +26,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:setItems="@{viewModel.stories1.toData()}"
-            app:showWhenSuccess="@{viewModel.stories1}"
+            app:setItems="@{viewModel.stories.toData()}"
+            app:showWhenSuccess="@{viewModel.stories}"
             app:spanCount="2"
             tools:listitem="@layout/item_stories" />
 
@@ -42,7 +42,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:showWhenLoading="@{viewModel.stories1}" />
+            app:showWhenLoading="@{viewModel.stories}" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -55,7 +55,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:showWhenError="@{viewModel.stories1}" />
+            app:showWhenError="@{viewModel.stories}" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
