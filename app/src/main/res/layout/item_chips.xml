@@ -22,12 +22,13 @@
             android:id="@+id/chip_all_series"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
+            style="@style/Widget.MaterialComponents.Chip.Choice"
             android:text="@string/all_series" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip_comic"
             android:layout_width="wrap_content"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
             android:layout_height="wrap_content"
             android:text="@string/comic" />
 
@@ -35,11 +36,13 @@
             android:id="@+id/chip_magazine"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
             android:text="@string/magazine" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip_trade_paperback"
             android:layout_width="wrap_content"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
             android:layout_height="wrap_content"
             android:text="@string/trade_paperback" />
 
@@ -47,6 +50,7 @@
             android:id="@+id/chip_hardcover"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
             android:text="@string/hardcover" />
 
     </com.google.android.material.chip.ChipGroup>
