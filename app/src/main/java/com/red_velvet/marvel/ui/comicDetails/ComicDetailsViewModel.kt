@@ -15,7 +15,7 @@ import com.red_velvet.marvel.ui.comicDetails.adapter.ComicDetailsCreatorListener
 
 class ComicDetailsViewModel : BaseViewModel(), ComicDetailsCreatorListenerInteraction,
     ComicDetailsCharacterListenerInteraction {
-
+    private val comicId = 1749
     private val _comicsDetails: MutableLiveData<State<List<ComicsResponse>>> = MutableLiveData()
     val comicsDetails: LiveData<State<List<ComicsResponse>>> get() = _comicsDetails
 
@@ -27,7 +27,11 @@ class ComicDetailsViewModel : BaseViewModel(), ComicDetailsCreatorListenerIntera
 
     private val repository: MarvelRepository = MarvelRepositoryImpl(RetrofitClient.apiService)
 
-    fun fetchData(comicId: Int) {
+    init {
+        fetchData(comicId)
+    }
+
+    private fun fetchData(comicId: Int) {
         fetchComicDetailsData(comicId)
         fetchCreatorsByComicIDData(comicId)
         fetchCharactersByComicIDData(comicId)
