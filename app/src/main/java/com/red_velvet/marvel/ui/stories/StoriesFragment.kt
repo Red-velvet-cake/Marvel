@@ -11,7 +11,7 @@ class StoriesFragment : BaseFragment<FragmentStoriesBinding>() {
 
     override fun setUp() {
         binding.root.setOnClickListener {
-            viewModel.getStories()
+//            viewModel.getStories()
         }
     }
 }
