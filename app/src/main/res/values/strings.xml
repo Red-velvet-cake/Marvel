@@ -53,4 +53,10 @@
     <string name="next_week">Next week</string>
     <string name="this_month">This month</string>
     <string name="try_again">Try again</string>
+    <string name="creators_title">Creators</string>
+    <string name="all_series">all series</string>
+    <string name="comic">comic</string>
+    <string name="magazine">magazine</string>
+    <string name="trade_paperback">trade paperback</string>
+    <string name="hardcover">hardcover</string>
 </resources>

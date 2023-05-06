@@ -25,6 +25,7 @@
     <dimen name="padding_normal">12dp</dimen>
     <dimen name="app_bar_height">56dp</dimen>
     <dimen name="card_creator_size">100dp</dimen>
+    <dimen name="chars_image_size">140dp</dimen>
 
     <dimen name="comic_width">160dp</dimen>
     <dimen name="comic_height">240dp</dimen>
