@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="viewModel"
             type="com.red_velvet.marvel.ui.series.SeriesViewModel" />
@@ -16,15 +15,21 @@
         android:layout_margin="@dimen/spacing_medium"
         android:orientation="vertical">
 
+        <EditText
+            android:id="@+id/edit_text_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_search"
+            android:layout_marginHorizontal="@dimen/spacing_medium"
+            android:layout_marginTop="@dimen/spacing_normal"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="@={viewModel.searchQuery}"/>
 
-        <include
-            android:id="@+id/search_bar"
-            layout="@layout/item_search" />
 
         <include
             android:id="@+id/chips"
             layout="@layout/item_chips" />
-
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewSeries"
@@ -35,8 +40,6 @@
             app:setItems="@{viewModel.series.toData()}"
             app:showWhenSuccess="@{viewModel.series}"
             tools:listitem="@layout/item_series" />
-
-
 
         <ProgressBar
             android:id="@+id/lading"

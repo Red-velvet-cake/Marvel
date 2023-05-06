@@ -1,5 +1,6 @@
 package com.red_velvet.marvel.ui.series
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.red_velvet.marvel.data.model.SeriesResponse
@@ -9,6 +10,8 @@ import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
 import com.red_velvet.marvel.data.util.State
 import com.red_velvet.marvel.ui.base.BaseViewModel
 import com.red_velvet.marvel.ui.character.SeriesInteractionListener
+import io.reactivex.rxjava3.core.Observable
+import java.util.concurrent.TimeUnit
 
 
 class SeriesViewModel : BaseViewModel(), SeriesInteractionListener {
@@ -16,11 +19,18 @@ class SeriesViewModel : BaseViewModel(), SeriesInteractionListener {
     private val _series: MutableLiveData<State<List<SeriesResponse>>> = MutableLiveData()
     val series: LiveData<State<List<SeriesResponse>>> get() = _series
     val repository: MarvelRepository = MarvelRepositoryImpl(RetrofitClient.apiService)
+    val searchQuery = MutableLiveData<String>()
 
     init {
         getAllSeries()
+        searchResult()
     }
-
+    private fun search(query: String) {
+        bindStateUpdates(
+            repository.getAllSeries(contains = query),
+            ::error,
+            ::onSuccess )
+    }
     fun getAllSeries() {
         bindStateUpdates(repository.getAllSeries(), ::error, ::onSuccess)
     }
@@ -40,6 +50,28 @@ class SeriesViewModel : BaseViewModel(), SeriesInteractionListener {
     fun filterSeries(filter: String) {
         bindStateUpdates(repository.getAllSeries(contains = filter), ::error, ::onSuccess)
     }
+    private fun searchResult() {
+        Observable.create { emitter ->
+            searchQuery.observeForever { query ->
+                emitter.onNext(query)
+            }
+        }
+            .debounce(1, TimeUnit.MILLISECONDS)
+            .distinctUntilChanged()
+            .subscribe { query ->
+
+                if (query.isEmpty()) {
+
+                    getAllSeries()
+                } else {
+                    Log.d("ethaar",query)
+                    search(query)
+                }
+            }
+
+
+    }
+
 }
 
 
