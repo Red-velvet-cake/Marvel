@@ -13,36 +13,44 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.characters.CharactersFragment">
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/text_input_layout_search"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edit_text_search"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="Search"
                 android:inputType="text"
-                app:onSearchTextChanged="@{viewModel}"/>
+                android:text="@={viewModel.searchQuery}" />
         </com.google.android.material.textfield.TextInputLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView_chars"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
-            app:setItems="@{viewModel.characters.toData()}"
-            app:showWhenSuccess="@{viewModel.characters}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/text_input_layout_search"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/text_input_layout_search"
-            app:layout_constraintTop_toBottomOf="@+id/text_input_layout_search" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_input_layout_search"
+            app:layout_constraintVertical_bias="0.0"
+            app:setItems="@{viewModel.characters.toData()}"
+            app:showWhenSuccess="@{viewModel.characters}" />
+
         <ProgressBar
             android:id="@+id/loading_progress"
             android:layout_width="100dp"

@@ -55,16 +55,3 @@ fun <T> setRecyclerItems(view: RecyclerView, items:List<T>?){
         (view.adapter as BaseAdapter<T>).setItems(emptyList())
     }
 }
-
-@BindingAdapter("app:onSearchTextChanged")
-fun onSearchTextChanged(view: TextInputEditText, viewModel: CharactersViewModel) {
-    view.addTextChangedListener(
-        object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
-            override fun afterTextChanged(s: Editable) {
-                viewModel.searchCharacters(s.toString())
-            }
-        }
-    )
-}

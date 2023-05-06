@@ -8,15 +8,23 @@ import com.red_velvet.marvel.data.repository.MarvelRepository
 import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
 import com.red_velvet.marvel.data.util.State
 import com.red_velvet.marvel.ui.base.BaseViewModel
-import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.kotlin.addTo
+import io.reactivex.rxjava3.subjects.PublishSubject
 import java.util.concurrent.TimeUnit
 
 class CharactersViewModel : BaseViewModel(), CharacterDetailsInteractionListener {
     private val _characters: MutableLiveData<State<List<CharactersResponse>>> = MutableLiveData()
-    val characters: LiveData<State<List<CharactersResponse>>>  = _characters
+    val characters: LiveData<State<List<CharactersResponse>>> get() = _characters
 
-    private var _searchQuery = MutableLiveData<String>()
-    val searchQuery: LiveData<String> get() = _searchQuery
+    private val _searchQuery = MutableLiveData<String>()
+    private val searchQueryChanges: PublishSubject<String> = PublishSubject.create()
+
+    var searchQuery: String
+        get() = _searchQuery.value ?: ""
+        set(value) {
+            _searchQuery.value = value
+            searchQueryChanges.onNext(value)
+        }
 
     private val repository: MarvelRepository = MarvelRepositoryImpl(RetrofitClient.apiService)
 
@@ -26,13 +34,7 @@ class CharactersViewModel : BaseViewModel(), CharacterDetailsInteractionListener
     }
 
     private fun searchResult() {
-        Observable.create<String> { emitter ->
-            searchQuery.observeForever { query ->
-                if (query != null) {
-                    emitter.onNext(query)
-                }
-            }
-        }
+        searchQueryChanges
             .debounce(300, TimeUnit.MILLISECONDS)
             .distinctUntilChanged()
             .subscribe { query ->
@@ -41,7 +43,7 @@ class CharactersViewModel : BaseViewModel(), CharacterDetailsInteractionListener
                 } else {
                     searchCharacters(query)
                 }
-            }
+            }.addTo(compositeDisposable)
     }
 
     private fun getCharacters() {
@@ -61,7 +63,7 @@ class CharactersViewModel : BaseViewModel(), CharacterDetailsInteractionListener
         _characters.postValue(State.Failed(error.message.toString()))
     }
 
-    fun searchCharacters(query: String) {
+    private fun searchCharacters(query: String) {
         if (query.isEmpty()) {
             getCharacters()
         } else {
