@@ -9,6 +9,7 @@ import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
 import com.red_velvet.marvel.data.util.State
 import com.red_velvet.marvel.ui.base.BaseViewModel
 import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.kotlin.addTo
 import java.util.concurrent.TimeUnit
 
 class CharactersViewModel : BaseViewModel(), CharacterDetailsInteractionListener {
@@ -22,18 +23,17 @@ class CharactersViewModel : BaseViewModel(), CharacterDetailsInteractionListener
 
     init {
         getCharacters()
-        searchResult()
+        initSearchObservable()
     }
 
-    private fun searchResult() {
-        Observable.create<String> { emitter ->
+    private fun initSearchObservable() {
+        Observable.create { emitter ->
             searchQuery.observeForever { query ->
                 if (query != null) {
                     emitter.onNext(query)
                 }
             }
-        }
-            .debounce(300, TimeUnit.MILLISECONDS)
+        }.debounce(300, TimeUnit.MILLISECONDS)
             .distinctUntilChanged()
             .subscribe { query ->
                 if (query.isEmpty()) {
@@ -41,7 +41,7 @@ class CharactersViewModel : BaseViewModel(), CharacterDetailsInteractionListener
                 } else {
                     searchCharacters(query)
                 }
-            }
+            }.addTo(compositeDisposable)
     }
 
     private fun getCharacters() {
