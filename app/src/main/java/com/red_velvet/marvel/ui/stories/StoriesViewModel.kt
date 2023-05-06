@@ -15,10 +15,17 @@ class StoriesViewModel : BaseViewModel() {
     val stories: LiveData<State<List<StoryResponse>>> get() = _stories
 
     init {
+
 //        getStories()
     }
 
 //    fun getStories() {
 ////        bindStateUpdates(_stories, repository.getStories())
 //    }
+
+   
+
+    fun getAllStories() {
+//        bindStateUpdates(_stories, repository.getStories())
+    }
 }
