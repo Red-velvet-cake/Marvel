@@ -43,12 +43,29 @@
             android:id="@+id/main_iv_error"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_error"
+            android:src="@drawable/baseline_error_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:showWhenError="@{viewModel.comicCollections}" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="@{() -> viewModel.onTryAgainClicked()}"
+            android:padding="@dimen/spacing_medium"
+            android:text="@string/try_again"
+            android:textColor="@color/primary"
+            android:textSize="@dimen/font_size_title"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/main_iv_error"
+            app:layout_constraintStart_toStartOf="@id/main_iv_error"
+            app:layout_constraintTop_toBottomOf="@id/main_iv_error"
+            app:showWhenError="@{viewModel.comicCollections}" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

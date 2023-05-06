@@ -110,6 +110,11 @@ class ComicsViewModel : BaseViewModel(), ComicsInteractionListener {
 
     override fun onComicClicked(comic: ComicsResponse) {}
 
+    override fun onTryAgainClicked() {
+        getAllComicsCollections()
+    }
+
+
     companion object {
         private const val THIS_WEEK = "thisWeek"
         private const val NEXT_WEEK = "nextWeek"

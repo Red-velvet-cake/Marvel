@@ -5,4 +5,6 @@ import com.red_velvet.marvel.ui.base.BaseInteractionListener
 
 interface ComicsInteractionListener : BaseInteractionListener {
     fun onComicClicked(comic: ComicsResponse)
+
+    fun onTryAgainClicked()
 }
