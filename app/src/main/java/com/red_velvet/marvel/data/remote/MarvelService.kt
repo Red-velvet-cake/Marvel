@@ -100,4 +100,9 @@ interface MarvelService {
     fun getSerieCreatorsBySeriesId(
         @Path("seriesId") seriesId: Int
     ): Single<Response<MarvelResponse<List<CreatorsResponse>>>>
+
+    @GET("characters")
+    fun searchCharacters(
+        @Query("nameStartsWith") nameStartsWith: String? = null
+    ): Single<Response<MarvelResponse<List<CharactersResponse>>>>
 }
