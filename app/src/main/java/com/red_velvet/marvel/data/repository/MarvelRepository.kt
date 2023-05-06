@@ -7,6 +7,7 @@ import com.red_velvet.marvel.data.model.CreatorsResponse
 import com.red_velvet.marvel.data.model.EventsResponse
 import com.red_velvet.marvel.data.model.SeriesResponse
 import com.red_velvet.marvel.data.model.StoryResponse
+import io.reactivex.rxjava3.core.Single
 import com.red_velvet.marvel.data.util.State
 import io.reactivex.rxjava3.core.Observable
 
@@ -40,6 +41,7 @@ interface MarvelRepository {
 
     fun getCharsByComicId(comicId: Int): Observable<State<List<CharactersResponse>?>>
 
+    fun getEventDetails(eventId:Int):Observable<State<List<EventsResponse>?>>
     fun getCharacters(): Observable<State<List<CharactersResponse>?>>
 
     fun getCharacterByCharacterId(characterId: Int): Observable<State<List<CharactersResponse>?>>
@@ -48,6 +50,8 @@ interface MarvelRepository {
 
     fun getSeriesByCharacterId(characterId: Int): Observable<State<List<SeriesResponse>?>>
 
+
     fun searchCharacters(nameStartsWith: String?): Observable<State<List<CharactersResponse>?>>
 
 }
+

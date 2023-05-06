@@ -102,9 +102,17 @@ class MarvelRepositoryImpl(
         return wrapWithState { marvelServiceImpl.getSeriesByCharacterId(characterId) }
     }
 
+
+    override fun getEventDetails(
+        eventId: Int
+    ): Observable<State<List<EventsResponse>?>> {
+       return wrapWithState {  marvelServiceImpl.getEventDetails(eventId) }
+    }
+
     override fun getSerieCreatorsBySeriesId(seriesId: Int): Observable<State<List<CreatorsResponse>?>> {
         return wrapWithState { marvelServiceImpl.getSerieCreatorsBySeriesId(seriesId) }
     }
+
     override fun searchCharacters(nameStartsWith: String?): Observable<State<List<CharactersResponse>?>> {
         return wrapWithState { marvelServiceImpl.searchCharacters(nameStartsWith) }
     }
