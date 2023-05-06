@@ -11,6 +11,7 @@ import com.red_velvet.marvel.data.util.State
 import com.red_velvet.marvel.ui.base.BaseViewModel
 import com.red_velvet.marvel.ui.character.SeriesInteractionListener
 import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.kotlin.addTo
 import java.util.concurrent.TimeUnit
 
 
@@ -25,17 +26,20 @@ class SeriesViewModel : BaseViewModel(), SeriesInteractionListener {
         getAllSeries()
         searchResult()
     }
+
     private fun search(query: String) {
         bindStateUpdates(
             repository.getAllSeries(contains = query),
-            ::error,
-            ::onSuccess )
-    }
-    fun getAllSeries() {
-        bindStateUpdates(repository.getAllSeries(), ::error, ::onSuccess)
+            ::onError,
+            ::onSuccess
+        )
     }
 
-    private fun error(error: Throwable) {
+    fun getAllSeries() {
+        bindStateUpdates(repository.getAllSeries(), ::onError, ::onSuccess)
+    }
+
+    private fun onError(error: Throwable) {
         _series.postValue(State.Failed(error.message.toString()))
     }
 
@@ -46,17 +50,16 @@ class SeriesViewModel : BaseViewModel(), SeriesInteractionListener {
         }
     }
 
-
     fun filterSeries(filter: String) {
-        bindStateUpdates(repository.getAllSeries(contains = filter), ::error, ::onSuccess)
+        bindStateUpdates(repository.getAllSeries(contains = filter), ::onError, ::onSuccess)
     }
+
     private fun searchResult() {
         Observable.create { emitter ->
             searchQuery.observeForever { query ->
                 emitter.onNext(query)
             }
-        }
-            .debounce(1, TimeUnit.MILLISECONDS)
+        }.debounce(1, TimeUnit.MILLISECONDS)
             .distinctUntilChanged()
             .subscribe { query ->
 
@@ -64,12 +67,10 @@ class SeriesViewModel : BaseViewModel(), SeriesInteractionListener {
 
                     getAllSeries()
                 } else {
-                    Log.d("ethaar",query)
+                    Log.d("ethaar", query)
                     search(query)
                 }
-            }
-
-
+            }.addTo(compositeDisposable)
     }
 
 }

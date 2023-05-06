@@ -34,6 +34,11 @@ class SeriesFragment : BaseFragment<FragmentSeriesBinding>() {
         }
 
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel.searchQuery.removeObservers(this)
+    }
 }
 
 

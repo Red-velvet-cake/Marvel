@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.red_velvet.marvel.ui.series.SeriesViewModel" />
@@ -19,12 +20,12 @@
             android:id="@+id/edit_text_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_search"
             android:layout_marginHorizontal="@dimen/spacing_medium"
             android:layout_marginTop="@dimen/spacing_normal"
-            app:layout_constraintTop_toTopOf="parent"
+            android:hint="@string/hint_search"
+            android:text="@={viewModel.searchQuery}"
             app:layout_constraintStart_toStartOf="parent"
-            android:text="@={viewModel.searchQuery}"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <include
@@ -35,8 +36,8 @@
             android:id="@+id/recyclerViewSeries"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             android:layout_marginTop="@dimen/spacing_medium"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:setItems="@{viewModel.series.toData()}"
             app:showWhenSuccess="@{viewModel.series}"
             tools:listitem="@layout/item_series" />
@@ -45,18 +46,18 @@
             android:id="@+id/lading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:showWhenLoading="@{viewModel.series}"
-            android:indeterminate="true"
             android:layout_gravity="center"
+            android:indeterminate="true"
             android:indeterminateTint="@color/primary"
-            android:indeterminateTintMode="src_atop"/>
+            android:indeterminateTintMode="src_atop"
+            app:showWhenLoading="@{viewModel.series}" />
 
         <ImageView
             android:id="@+id/main_iv_error"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_error"
             android:layout_gravity="center"
+            android:src="@drawable/ic_error"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
