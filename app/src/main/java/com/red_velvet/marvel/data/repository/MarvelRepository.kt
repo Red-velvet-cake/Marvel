@@ -22,7 +22,10 @@ interface MarvelRepository {
 
     fun getComicsByCharacterId(characterId: Int): Observable<State<List<ComicsResponse>?>>
 
-    fun getAllSeries(): Observable<State<List<SeriesResponse>?>>
+    fun getAllSeries(
+        startYear: Int? = null,
+        contains: String? = null
+    ): Observable<State<List<SeriesResponse>?>>
 
     fun getComicCreatorByComicId(comicId: Int): Observable<State<List<CreatorsResponse>?>>
 
@@ -52,6 +55,9 @@ interface MarvelRepository {
     fun getSerieCreatorsBySeriesId(seriesId: Int): Observable<State<List<CreatorsResponse>?>>
 
     fun getSeriesByCharacterId(characterId: Int): Observable<State<List<SeriesResponse>?>>
+
+
+    fun searchCharacters(nameStartsWith: String?): Observable<State<List<CharactersResponse>?>>
 
 }
 

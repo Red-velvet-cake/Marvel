@@ -106,4 +106,8 @@ interface MarvelService {
         @Path("eventId") eventId:Int
     ): Single<Response<MarvelResponse<List<EventsResponse>>>>
 
+    @GET("characters")
+    fun searchCharacters(
+        @Query("nameStartsWith") nameStartsWith: String? = null
+    ): Single<Response<MarvelResponse<List<CharactersResponse>>>>
 }
