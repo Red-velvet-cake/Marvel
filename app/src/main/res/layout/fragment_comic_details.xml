@@ -21,52 +21,8 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_view_comic_desc"
-                tools:listitem="@layout/comic_item_nested"/>
-
-        <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/image_view_details"
-                style="@style/CardImageStyle"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/zero"
-                android:scaleType="fitXY"
-                app:imageUrl="@{viewModel.comicsDetails.toData().get(0).thumbnail}"
-                app:layout_constraintDimensionRatio="16:9"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:showWhenSuccess="@{viewModel.comicsDetails}"
-                tools:srcCompat="@tools:sample/backgrounds/scenic"/>
-
-        <TextView
-                android:id="@+id/text_view_comic_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/spacing_medium"
-                android:text="@{viewModel.comicsDetails.toData().get(0).title}"
-                app:showWhenSuccess="@{viewModel.comicsDetails}"
-                app:layout_constraintTop_toBottomOf="@id/image_view_details"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:fontFamily="@font/roboto_medium"
-                android:textSize="@dimen/font_size_title_medium"
-                android:textColor="@color/tertiary_87"
-                tools:text="Iron man"/>
-
-        <TextView
-                android:id="@+id/text_view_comic_desc"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/spacing_medium"
-                android:fontFamily="@font/roboto"
-                android:text="@{viewModel.comicsDetails.toData().get(0).description}"
-                android:textColor="@color/tertiary_87"
-                android:textSize="@dimen/font_size_title"
-                app:showWhenSuccess="@{viewModel.comicsDetails}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_view_comic_title"
-                tools:text="sakafklsanfskafnsakfnasksakfnksasfsafsaffssafsaasfsasafssasfsafsafsfsasfasfsaffsafffasassafsafssfasffs"/>
+                tools:listitem="@layout/comic_item_nested"/>
 
         <ProgressBar
                 android:layout_width="match_parent"
