@@ -85,6 +85,25 @@
                     app:showWhenError="@{viewModel.comicsDetails}"
                     android:contentDescription="@string/error_image"/>
 
+
+            <TextView
+                    android:id="@+id/creators_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_medium"
+                    android:layout_marginBottom="@dimen/spacing_small"
+                    android:layout_marginHorizontal="@dimen/spacing_medium"
+                    android:text="Creators"
+                    app:showWhenSuccess="@{viewModel.comicsDetails}"
+                    app:layout_constraintTop_toBottomOf="@id/text_view_comic_desc"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:fontFamily="@font/roboto_medium"
+                    android:textSize="@dimen/font_size_title_medium"
+                    android:textColor="@color/tertiary_87"
+            />
+
+
             <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_view_comic_creators"
                     android:layout_width="match_parent"
@@ -96,10 +115,26 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_view_comic_desc"
+                    app:layout_constraintTop_toBottomOf="@+id/creators_title"
                     app:showWhenSuccess="@{viewModel.creators}"
                     tools:listitem="@layout/comic_item_creator"/>
 
+
+            <TextView
+                    android:id="@+id/characters_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_medium"
+                    android:layout_marginBottom="@dimen/spacing_small"
+                    android:layout_marginHorizontal="@dimen/spacing_medium"
+                    android:text="Characters"
+                    app:showWhenSuccess="@{viewModel.comicsDetails}"
+                    app:layout_constraintTop_toBottomOf="@id/recycler_view_comic_creators"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:fontFamily="@font/roboto_medium"
+                    android:textSize="@dimen/font_size_title_medium"
+                    android:textColor="@color/tertiary_87"/>
             <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_view_comic_characters"
                     android:layout_width="match_parent"
@@ -111,7 +146,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/recycler_view_comic_creators"
+                    app:layout_constraintTop_toBottomOf="@+id/characters_title"
                     app:showWhenSuccess="@{viewModel.characters}"
                     tools:listitem="@layout/comic_item_character"/>
 
