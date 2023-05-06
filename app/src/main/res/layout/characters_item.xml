@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="item"
+            type="com.red_velvet.marvel.data.model.CharactersResponse" />
+        <variable
+            name="listener"
+            type="com.red_velvet.marvel.ui.characters.CharacterDetailsInteractionListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:onClick="@{() -> listener.onCharacterSelected(item)}">
+
+        <TextView
+            android:id="@+id/textview_hero_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:gravity="center_horizontal"
+            android:text="@{item.name}"
+            app:layout_constraintStart_toEndOf="@+id/imageview_hero_image"
+            app:layout_constraintTop_toTopOf="@+id/imageview_hero_image"
+            tools:text="Hero Name"/>
+
+        <ImageView
+            android:id="@+id/imageview_hero_image"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:gravity="center_horizontal"
+            app:imageUrl="@{item.thumbnail}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/backgrounds/scenic"/>
+
+        <TextView
+            android:id="@+id/textview_hero_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:gravity="center_horizontal"
+            android:text="@{item.description}"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageview_hero_image"
+            app:layout_constraintStart_toEndOf="@+id/imageview_hero_image"
+            tools:text="@string/description"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
