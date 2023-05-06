@@ -25,17 +25,23 @@ class StoryViewModel : BaseViewModel(), BaseInteractionListener {
 
     private val repository: MarvelRepository = MarvelRepositoryImpl(RetrofitClient.apiService)
 
-    init {
+    fun getStory(storyId: Int) {
         bindStateUpdates(
-            repository.getStory(8),
+            repository.getStory(storyId),
             onNext = ::onGetStorySuccess,
             onError = ::onGetStoryError
         )
+    }
+
+    fun getStoryComics(storyId: Int) {
         bindStateUpdates(
-            repository.getComicsByStoryId(8),
+            repository.getComicsByStoryId(storyId),
             onNext = ::onGetComicsSuccess,
             onError = ::onGetComicsError
         )
+    }
+
+    fun getStoryCreators(storyId: Int) {
         bindStateUpdates(
             repository.getSerieCreatorsBySeriesId(8),
             onNext = ::onGetCreatorSuccess,
