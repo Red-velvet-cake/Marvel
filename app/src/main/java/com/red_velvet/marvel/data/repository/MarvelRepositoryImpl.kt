@@ -113,4 +113,7 @@ class MarvelRepositoryImpl(
         return wrapWithState { marvelServiceImpl.getSerieCreatorsBySeriesId(seriesId) }
     }
 
+    override fun searchCharacters(nameStartsWith: String?): Observable<State<List<CharactersResponse>?>> {
+        return wrapWithState { marvelServiceImpl.searchCharacters(nameStartsWith) }
+    }
 }
