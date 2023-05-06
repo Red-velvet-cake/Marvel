@@ -18,8 +18,11 @@ class MarvelRepositoryImpl(
     private val marvelServiceImpl: MarvelService
 ) : MarvelRepository {
 
-    override fun getComics(): Observable<State<List<ComicsResponse>?>> {
-        return wrapWithState { marvelServiceImpl.getAllComics() }
+    override fun getComics(
+        titleStartsWith: String?,
+        dateDescriptor: String?
+    ): Observable<State<List<ComicsResponse>?>> {
+        return wrapWithState { marvelServiceImpl.getAllComics(titleStartsWith, dateDescriptor) }
     }
 
     private fun <T> wrapWithState(function: () -> Single<Response<MarvelResponse<T>>>): Observable<State<T?>> {
@@ -42,8 +45,11 @@ class MarvelRepositoryImpl(
     }
 
 
-    override fun getAllSeries(): Observable<State<List<SeriesResponse>?>> {
-        return wrapWithState { marvelServiceImpl.getAllSeries() }
+    override fun getAllSeries(
+        startYear: Int?,
+        contains: String?
+    ): Observable<State<List<SeriesResponse>?>> {
+        return wrapWithState { marvelServiceImpl.getAllSeries(contains = contains) }
     }
 
     override fun getCharsByComicId(comicId: Int): Observable<State<List<CharactersResponse>?>> {
@@ -102,7 +108,18 @@ class MarvelRepositoryImpl(
         return wrapWithState { marvelServiceImpl.getSeriesByCharacterId(characterId) }
     }
 
+
+    override fun getEventDetails(
+        eventId: Int
+    ): Observable<State<List<EventsResponse>?>> {
+        return wrapWithState { marvelServiceImpl.getEventDetails(eventId) }
+    }
+
     override fun getSerieCreatorsBySeriesId(seriesId: Int): Observable<State<List<CreatorsResponse>?>> {
         return wrapWithState { marvelServiceImpl.getSerieCreatorsBySeriesId(seriesId) }
+    }
+
+    override fun searchCharacters(nameStartsWith: String?): Observable<State<List<CharactersResponse>?>> {
+        return wrapWithState { marvelServiceImpl.searchCharacters(nameStartsWith) }
     }
 }
