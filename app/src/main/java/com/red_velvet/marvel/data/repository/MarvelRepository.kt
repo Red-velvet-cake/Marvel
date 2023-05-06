@@ -13,7 +13,10 @@ import io.reactivex.rxjava3.core.Observable
 
 interface MarvelRepository {
 
-    fun getComics(): Observable<State<List<ComicsResponse>?>>
+    fun getComics(
+        titleStartsWith: String? = null,
+        dateDescriptor: String? = null,
+    ): Observable<State<List<ComicsResponse>?>>
 
     fun getComicDetail(comicId: Int): Observable<State<List<ComicsResponse>?>>
 
