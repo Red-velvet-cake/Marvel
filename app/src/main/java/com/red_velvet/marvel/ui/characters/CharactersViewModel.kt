@@ -14,19 +14,18 @@ import java.util.concurrent.TimeUnit
 
 class CharactersViewModel : BaseViewModel(), CharacterDetailsInteractionListener {
     private val _characters: MutableLiveData<State<List<CharactersResponse>>> = MutableLiveData()
-    val characters: LiveData<State<List<CharactersResponse>>>  = _characters
+    val characters: LiveData<State<List<CharactersResponse>>> get() = _characters
 
-    private var _searchQuery = MutableLiveData<String>()
-    val searchQuery: LiveData<String> get() = _searchQuery
+    val searchQuery = MutableLiveData<String>()
 
     private val repository: MarvelRepository = MarvelRepositoryImpl(RetrofitClient.apiService)
 
     init {
         getCharacters()
-        initSearchObservable()
+        searchResult()
     }
 
-    private fun initSearchObservable() {
+    private fun searchResult() {
         Observable.create { emitter ->
             searchQuery.observeForever { query ->
                 if (query != null) {
@@ -61,7 +60,7 @@ class CharactersViewModel : BaseViewModel(), CharacterDetailsInteractionListener
         _characters.postValue(State.Failed(error.message.toString()))
     }
 
-    fun searchCharacters(query: String) {
+    private fun searchCharacters(query: String) {
         if (query.isEmpty()) {
             getCharacters()
         } else {
