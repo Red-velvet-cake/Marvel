@@ -16,8 +16,8 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>() {
         viewModel.getEvent(eventId)
         viewModel.getCharactersEventId(eventId)
         viewModel.getCreatorsEventId(eventId)
-        val charactersAdapter = CharactersAdapter(mutableListOf())
-        val creatorsAdapter = CreatorsAdapter(mutableListOf())
+        val charactersAdapter = CharactersAdapter(mutableListOf(), viewModel)
+        val creatorsAdapter = CreatorsAdapter(mutableListOf(), viewModel)
         binding.recyclerViewEventChars.adapter = charactersAdapter
         binding.recyclerViewEventCreators.adapter = creatorsAdapter
     }

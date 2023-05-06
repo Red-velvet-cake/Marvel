@@ -9,7 +9,8 @@ import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
 import com.red_velvet.marvel.data.util.State
 import com.red_velvet.marvel.ui.base.BaseViewModel
 
-class EventDetailVewModel : BaseViewModel() {
+class EventDetailVewModel : BaseViewModel(), CharactersInteractionListener,
+    CreatorsInteractionListener {
 
 
     private val repository = MarvelRepositoryImpl(RetrofitClient.apiService)
