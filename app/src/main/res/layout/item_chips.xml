@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:scrollbars="none"
+    android:paddingHorizontal="@dimen/spacing_medium"
+    android:layout_marginBottom="@dimen/spacing_normal"
+    android:layout_marginTop="@dimen/spacing_medium"
+    android:clipToPadding="false"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chips_filter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:checkedChip="@+id/chip_all_series"
+        app:chipSpacingHorizontal="@dimen/spacing_small"
+        app:selectionRequired="true"
+        app:singleSelection="true">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_all_series"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:text="@string/all_series" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_comic"
+            android:layout_width="wrap_content"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_height="wrap_content"
+            android:text="@string/comic" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_magazine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:text="@string/magazine" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_trade_paperback"
+            android:layout_width="wrap_content"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_height="wrap_content"
+            android:text="@string/trade_paperback" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_hardcover"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:text="@string/hardcover" />
+
+    </com.google.android.material.chip.ChipGroup>
+
+</HorizontalScrollView>

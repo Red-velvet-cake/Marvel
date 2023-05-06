@@ -99,7 +99,12 @@ interface MarvelService {
     @GET("series/{seriesId}/creators")
     fun getSerieCreatorsBySeriesId(
         @Path("seriesId") seriesId: Int
-    ): Single<Response<MarvelResponse<List<CreatorsResponse>>>>
+    ):Single<Response<MarvelResponse<List<CreatorsResponse>>>>
+
+    @GET("events/{eventId}")
+    fun getEventDetails(
+        @Path("eventId") eventId:Int
+    ): Single<Response<MarvelResponse<List<EventsResponse>>>>
 
     @GET("characters")
     fun searchCharacters(
