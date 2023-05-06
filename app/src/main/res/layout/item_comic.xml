@@ -22,7 +22,6 @@
         app:cardCornerRadius="@dimen/radius_medium">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/card_recipe"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
