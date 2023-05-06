@@ -56,8 +56,7 @@ class EventsViewModel : BaseViewModel(), BaseInteractionListener {
             searchQuery.observeForever { query ->
                 emitter.onNext(query)
             }
-        }
-            .debounce(300, TimeUnit.MILLISECONDS)
+        }.debounce(300, TimeUnit.MILLISECONDS)
             .distinctUntilChanged()
             .subscribe { query ->
                 if (query.isEmpty()) {

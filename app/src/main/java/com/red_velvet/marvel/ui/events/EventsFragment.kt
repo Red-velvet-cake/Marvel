@@ -1,12 +1,10 @@
 package com.red_velvet.marvel.ui.events
 
 
-
 import androidx.fragment.app.viewModels
 import com.red_velvet.marvel.R
 import com.red_velvet.marvel.databinding.FragmentEventsBinding
 import com.red_velvet.marvel.ui.base.BaseFragment
-
 
 
 class EventsFragment() : BaseFragment<FragmentEventsBinding>() {
