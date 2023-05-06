@@ -13,15 +13,33 @@
             type="com.red_velvet.marvel.ui.character.SeriesInteractionListener" />
     </data>
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/creator_image_view"
-        android:layout_width="160dp"
-        android:layout_height="140dp"
-        android:layout_marginEnd="@dimen/spacing_small"
-        android:scaleType="centerCrop"
-        app:imageUrl="@{item.thumbnail}"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:shapeAppearanceOverlay="@style/RoundedShapeableImageView" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/spacing_normal">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/creator_image_view"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_marginEnd="@dimen/spacing_small"
+            android:scaleType="centerCrop"
+            app:imageUrl="@{item.thumbnail}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/RoundedShapeableImageView" />
+
+        <TextView
+            android:id="@+id/creator_name_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:text="@{item.firstName}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/creator_image_view" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </layout>
