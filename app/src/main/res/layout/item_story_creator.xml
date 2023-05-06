@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.red_velvet.marvel.data.model.CreatorsResponse" />
+
+        <variable
+            name="listner"
+            type="com.red_velvet.marvel.ui.character.SeriesInteractionListener" />
+    </data>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/creator_image_view"
+        android:layout_width="160dp"
+        android:layout_height="140dp"
+        android:layout_marginEnd="@dimen/spacing_small"
+        android:scaleType="centerCrop"
+        app:imageUrl="@{item.thumbnail}"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/RoundedShapeableImageView" />
+
+</layout>

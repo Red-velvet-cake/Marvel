@@ -1,6 +1,5 @@
 package com.red_velvet.marvel.ui.story
 
-import android.util.Log
 import androidx.fragment.app.viewModels
 import com.red_velvet.marvel.R
 import com.red_velvet.marvel.databinding.FragmentStoryBinding
@@ -12,7 +11,8 @@ class StoryFragment :   BaseFragment<FragmentStoryBinding>()  {
     override val viewModel: StoryViewModel by viewModels()
 
     override fun setUp() {
-      Log.i("marvel","setUp")
+        val storyCreatorAdapter = StoryCreatorAdapter(mutableListOf(), viewModel)
+        binding.creatorRecyclerView.adapter = storyCreatorAdapter
     }
 
 
