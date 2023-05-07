@@ -50,7 +50,7 @@ class ComicsViewModel : BaseViewModel(), ComicsInteractionListener {
         bindStateUpdates(
             repository.getComics(dateDescriptor = THIS_WEEK),
             ::handleThisWeekComicsFailure,
-            ::handleThisWeekComicsSuccess
+            ::handleThisWeekComicsNextState
         )
     }
 
@@ -58,7 +58,7 @@ class ComicsViewModel : BaseViewModel(), ComicsInteractionListener {
         _thisWeekComics.postValue(State.Failed(throwable.message ?: UNKNOWN_ERROR))
     }
 
-    private fun handleThisWeekComicsSuccess(state: State<List<ComicsResponse>?>) {
+    private fun handleThisWeekComicsNextState(state: State<List<ComicsResponse>?>) {
         _thisWeekComics.postValue(State.Loading)
         state.toData()?.let {
             _thisWeekComics.postValue(State.Success(it))
@@ -70,7 +70,7 @@ class ComicsViewModel : BaseViewModel(), ComicsInteractionListener {
         bindStateUpdates(
             repository.getComics(dateDescriptor = NEXT_WEEK),
             ::handleNextWeekComicsFailure,
-            ::handleNextWeekComicsSuccess
+            ::handleNextWeekComicsNextState
         )
     }
 
@@ -78,7 +78,7 @@ class ComicsViewModel : BaseViewModel(), ComicsInteractionListener {
         _nextWeekComics.postValue(State.Failed(throwable.message ?: UNKNOWN_ERROR))
     }
 
-    private fun handleNextWeekComicsSuccess(state: State<List<ComicsResponse>?>) {
+    private fun handleNextWeekComicsNextState(state: State<List<ComicsResponse>?>) {
         _nextWeekComics.postValue(State.Loading)
         state.toData()?.let {
             _nextWeekComics.postValue(State.Success(it))
@@ -90,7 +90,7 @@ class ComicsViewModel : BaseViewModel(), ComicsInteractionListener {
         bindStateUpdates(
             repository.getComics(dateDescriptor = LAST_WEEK),
             ::handleLastWeekComicsFailure,
-            ::handleLastWeekComicsSuccess
+            ::handleLastWeekComicsNextState
         )
     }
 
@@ -98,7 +98,7 @@ class ComicsViewModel : BaseViewModel(), ComicsInteractionListener {
         _lastWeekComics.postValue(State.Failed(throwable.message ?: UNKNOWN_ERROR))
     }
 
-    private fun handleLastWeekComicsSuccess(state: State<List<ComicsResponse>?>) {
+    private fun handleLastWeekComicsNextState(state: State<List<ComicsResponse>?>) {
         _lastWeekComics.postValue(State.Loading)
         state.toData()?.let {
             _lastWeekComics.postValue(State.Success(it))
@@ -110,7 +110,7 @@ class ComicsViewModel : BaseViewModel(), ComicsInteractionListener {
         bindStateUpdates(
             repository.getComics(dateDescriptor = THIS_MONTH),
             ::handleThisMonthComicsFailure,
-            ::handleThisMonthComicsSuccess
+            ::handleThisMonthComicsNextState
         )
     }
 
@@ -118,7 +118,7 @@ class ComicsViewModel : BaseViewModel(), ComicsInteractionListener {
         _thisMonthComics.postValue(State.Failed(throwable.message ?: UNKNOWN_ERROR))
     }
 
-    private fun handleThisMonthComicsSuccess(state: State<List<ComicsResponse>?>) {
+    private fun handleThisMonthComicsNextState(state: State<List<ComicsResponse>?>) {
         _thisMonthComics.postValue(State.Loading)
         state.toData()?.let {
             _thisMonthComics.postValue(State.Success(it))
