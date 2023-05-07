@@ -48,7 +48,6 @@ class ComicDetailsViewModel : BaseViewModel(), ComicDetailsCreatorListenerIntera
         )
     }
 
-
     private fun fetchCreatorsByComicIDData(comicId: Int) {
         bindStateUpdates(
             repository.getComicCreatorByComicId(comicId),
@@ -66,37 +65,27 @@ class ComicDetailsViewModel : BaseViewModel(), ComicDetailsCreatorListenerIntera
         )
     }
 
-
-    private fun onGetComicDetailsDataSuccess(state: State<List<Comic>?>) {
-        _comicsDetails.postValue(State.Loading)
-        state.toData()?.let {
-            _comicsDetails.postValue(State.Success(it))
-        }
+    private fun onGetComicDetailsDataSuccess(state: State<List<Comic>>) {
+        _comicsDetails.postValue(state)
     }
 
     private fun onGetComicDetailsDataError(e: Throwable) {
         _comicsDetails.postValue(State.Failed(e.message.toString()))
     }
 
-    private fun onGetCreatorsByComicIDDataSuccess(state: State<List<Creator>?>) {
-        state.toData()?.let {
-            _creators.postValue(State.Success(it))
-        }
+    private fun onGetCreatorsByComicIDDataSuccess(state: State<List<Creator>>) {
+        _creators.postValue(state)
     }
 
     private fun onGetCreatorsByComicIDDataError(e: Throwable) {
         _creators.postValue(State.Failed(e.message.toString()))
     }
 
-    private fun onGetCharactersByComicIDDataSuccess(state: State<List<Character>?>) {
-        state.toData()?.let {
-            _characters.postValue(State.Success(it))
-        }
+    private fun onGetCharactersByComicIDDataSuccess(state: State<List<Character>>) {
+        _characters.postValue(state)
     }
 
     private fun onGetCharactersByComicIDDataError(e: Throwable) {
         _characters.postValue(State.Failed(e.message.toString()))
     }
-
-
 }
