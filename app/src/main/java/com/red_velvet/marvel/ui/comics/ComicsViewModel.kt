@@ -26,9 +26,8 @@ class ComicsViewModel : BaseViewModel(), ComicsInteractionListener {
     @StringRes
     private val thisMonthStringResource = R.string.this_month
 
-    private val _comicsCollections: MutableLiveData<List<ComicsCollection>> = MutableLiveData(
-        emptyList()
-    )
+    private val _comicsCollections: MutableLiveData<List<ComicsCollection>> =
+        MutableLiveData(emptyList())
     val comicCollections: LiveData<List<ComicsCollection>> = _comicsCollections
 
     private val _thisWeekComics = MutableLiveData<State<List<ComicsResponse>>>(State.Loading)
