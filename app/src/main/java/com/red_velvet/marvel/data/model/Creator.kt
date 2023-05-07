@@ -2,31 +2,31 @@ package com.red_velvet.marvel.data.model
 import com.google.gson.annotations.SerializedName
 data class Creator(
     @SerializedName("id")
-    var id: Int? = null,
+    val id: Int? = null,
     @SerializedName("firstName")
-    var firstName: String? = null,
+    val firstName: String? = null,
     @SerializedName("middleName")
-    var middleName: String? = null,
+    val middleName: String? = null,
     @SerializedName("lastName")
-    var lastName: String? = null,
+    val lastName: String? = null,
     @SerializedName("suffix")
-    var suffix: String? = null,
+    val suffix: String? = null,
     @SerializedName("fullName")
-    var fullName: String? = null,
+    val fullName: String? = null,
     @SerializedName("modified")
-    var modified: String? = null,
+    val modified: String? = null,
     @SerializedName("thumbnail")
-    var thumbnail: Thumbnail? = Thumbnail(),
+    val thumbnail: Thumbnail? = Thumbnail(),
     @SerializedName("resourceURI")
-    var resourceURI: String? = null,
+    val resourceURI: String? = null,
     @SerializedName("comics")
-    var comics: ResourceCollection? = ResourceCollection(),
+    val comics: ResourceCollection? = ResourceCollection(),
     @SerializedName("series")
-    var series: ResourceCollection? = ResourceCollection(),
+    val series: ResourceCollection? = ResourceCollection(),
     @SerializedName("stories")
-    var stories: ResourceCollection? = ResourceCollection(),
+    val stories: ResourceCollection? = ResourceCollection(),
     @SerializedName("events")
-    var events: ResourceCollection? = ResourceCollection(),
+    val events: ResourceCollection? = ResourceCollection(),
     @SerializedName("urls")
-    var urls: List<Url> = listOf()
+    val urls: List<Url> = listOf()
 )
