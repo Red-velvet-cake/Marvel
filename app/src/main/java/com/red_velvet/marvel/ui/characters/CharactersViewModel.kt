@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit
 
 class CharactersViewModel : BaseViewModel(), CharacterDetailsInteractionListener {
     private val _characters: MutableLiveData<State<List<Character>>> = MutableLiveData()
-    val characters: LiveData<State<List<Character>>> get() = _characters
+    val characters: LiveData<State<List<Character>>> = _characters
 
     val searchQuery = MutableLiveData<String>()
 
@@ -51,9 +51,8 @@ class CharactersViewModel : BaseViewModel(), CharacterDetailsInteractionListener
         )
     }
 
-    private fun onGetCharactersSuccess(state: State<List<Character>?>) {
-        _characters.postValue(State.Loading)
-        state.toData()?.let { _characters.postValue(State.Success(it)) }
+    private fun onGetCharactersSuccess(state: State<List<Character>>) {
+        _characters.postValue(state)
     }
 
     private fun onGetCharactersError(error: Throwable) {
