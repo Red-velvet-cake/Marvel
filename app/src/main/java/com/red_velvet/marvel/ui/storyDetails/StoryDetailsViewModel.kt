@@ -52,35 +52,25 @@ class StoryDetailsViewModel : BaseViewModel(), StoryCreatorInteractionListener {
         _creators.postValue(State.Failed(error.message.toString()))
     }
 
-    private fun onGetCreatorSuccess(state: State<List<Creator>?>) {
-        _creators.postValue(State.Loading)
-        state.toData()?.let {
-            _creators.postValue(State.Success(it))
-        }
+    private fun onGetCreatorSuccess(state: State<List<Creator>>) {
+        _creators.postValue(state)
     }
 
     private fun onGetComicsError(error: Throwable) {
         _comics.postValue(State.Failed(error.message.toString()))
     }
 
-    private fun onGetComicsSuccess(state: State<List<Comic>?>) {
-        _comics.postValue(State.Loading)
-        state.toData()?.let {
-            _comics.postValue(State.Success(it))
-        }
+    private fun onGetComicsSuccess(state: State<List<Comic>>) {
+        _comics.postValue(state)
     }
 
     private fun onGetStoryError(error: Throwable) {
         _story.postValue(State.Failed(error.message.toString()))
     }
 
-    private fun onGetStorySuccess(state: State<List<Story>?>) {
-        _story.postValue(State.Loading)
-        state.toData()?.let {
-            _story.postValue(State.Success(it))
-        }
+    private fun onGetStorySuccess(state: State<List<Story>>) {
+        _story.postValue(state)
     }
-
 
 }
 

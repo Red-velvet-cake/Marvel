@@ -28,16 +28,13 @@ class CharacterViewModel : BaseViewModel(), SeriesInteractionListener, ComicsInt
     fun getCharacterDetails(characterId: Int) {
         bindStateUpdates(
             repository.getCharacterByCharacterId(characterId),
-            onNext = ::onGetCharacterDetailsSuccess,
+            onNext = ::onGetCharacterDetailsNextState,
             onError = ::onGetCharacterDetailsError
         )
     }
 
-    private fun onGetCharacterDetailsSuccess(state: State<List<Character>?>) {
-        _characterDetails.postValue(State.Loading)
-        state.toData()?.let {
-            _characterDetails.postValue(State.Success(it))
-        }
+    private fun onGetCharacterDetailsNextState(state: State<List<Character>>) {
+        _characterDetails.postValue(state)
     }
 
     private fun onGetCharacterDetailsError(error: Throwable) {
@@ -47,16 +44,13 @@ class CharacterViewModel : BaseViewModel(), SeriesInteractionListener, ComicsInt
     fun getComicsDyCharacterId(characterId: Int) {
         bindStateUpdates(
             repository.getComicsByCharacterId(characterId),
-            onNext = ::onGetComicsDyCharacterIdSuccess,
+            onNext = ::onGetComicsDyCharacterIdNextState,
             onError = ::onGetComicsDyCharacterIdError
         )
     }
 
-    private fun onGetComicsDyCharacterIdSuccess(state: State<List<Comic>?>) {
-        _comics.postValue(State.Loading)
-        state.toData()?.let {
-            _comics.postValue(State.Success(it))
-        }
+    private fun onGetComicsDyCharacterIdNextState(state: State<List<Comic>>) {
+        _comics.postValue(state)
     }
 
     private fun onGetComicsDyCharacterIdError(error: Throwable) {
@@ -66,16 +60,13 @@ class CharacterViewModel : BaseViewModel(), SeriesInteractionListener, ComicsInt
     fun getSeriesDyCharacterId(characterId: Int) {
         bindStateUpdates(
             repository.getSeriesByCharacterId(characterId),
-            onNext = ::onGetSeriesDyCharacterIdSuccess,
+            onNext = ::onGetSeriesDyCharacterIdNextState,
             onError = ::onGetSeriesDyCharacterIdError
         )
     }
 
-    private fun onGetSeriesDyCharacterIdSuccess(state: State<List<Series>?>) {
-        _series.postValue(State.Loading)
-        state.toData()?.let {
-            _series.postValue(State.Success(it))
-        }
+    private fun onGetSeriesDyCharacterIdNextState(state: State<List<Series>>) {
+        _series.postValue(state)
     }
 
     private fun onGetSeriesDyCharacterIdError(error: Throwable) {

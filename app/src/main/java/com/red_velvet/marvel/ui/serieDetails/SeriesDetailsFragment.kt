@@ -5,7 +5,6 @@ import androidx.navigation.fragment.navArgs
 import com.red_velvet.marvel.R
 import com.red_velvet.marvel.databinding.FragmentSeriesDetailsBinding
 import com.red_velvet.marvel.ui.base.BaseFragment
-import com.red_velvet.marvel.ui.serieDetails.adapter.CreatorsAdapter
 
 class SeriesDetailsFragment : BaseFragment<FragmentSeriesDetailsBinding>() {
 

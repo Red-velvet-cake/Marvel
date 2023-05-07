@@ -22,7 +22,6 @@ class EventsViewModel : BaseViewModel(), EventsInteractionListener {
     private val _navigationToEventDetails = MutableLiveData<SingleEvent<Int>>()
     val navigationToEventDetails: LiveData<SingleEvent<Int>> = _navigationToEventDetails
 
-
     val searchQuery = MutableLiveData<String>()
 
     init {
@@ -46,9 +45,8 @@ class EventsViewModel : BaseViewModel(), EventsInteractionListener {
         )
     }
 
-    private fun onGetAllEventsSuccess(event: State<List<Event>?>) {
-        _events.postValue(State.Loading)
-        event.toData()?.let { _events.postValue(State.Success(it)) }
+    private fun onGetAllEventsSuccess(state: State<List<Event>>) {
+        _events.postValue(state)
     }
 
     private fun onGetAllEventsError(e: Throwable) {

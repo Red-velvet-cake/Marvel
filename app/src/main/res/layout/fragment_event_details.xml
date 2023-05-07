@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.red_velvet.marvel.ui.eventDetails.EventDetailVewModel" />
+            type="com.red_velvet.marvel.ui.eventDetails.EventDetailViewModel" />
     </data>
 
     <ScrollView
@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:background="@color/background"
             android:orientation="vertical"
-            tools:context=".ui.eventDetails.EventDetailVewModel">
+            tools:context=".ui.eventDetails.EventDetailViewModel">
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/image_view_details"

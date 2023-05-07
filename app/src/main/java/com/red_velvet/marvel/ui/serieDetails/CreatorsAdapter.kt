@@ -1,4 +1,4 @@
-package com.red_velvet.marvel.ui.serieDetails.adapter
+package com.red_velvet.marvel.ui.serieDetails
 
 import com.red_velvet.marvel.R
 import com.red_velvet.marvel.data.model.Creator

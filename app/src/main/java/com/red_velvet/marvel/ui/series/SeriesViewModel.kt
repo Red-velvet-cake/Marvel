@@ -46,11 +46,8 @@ class SeriesViewModel : BaseViewModel(), SeriesInteractionListener {
         _series.postValue(State.Failed(error.message.toString()))
     }
 
-    private fun onSuccess(state: State<List<Series>?>) {
-        _series.postValue(State.Loading)
-        state.toData()?.let {
-            _series.postValue(State.Success(it))
-        }
+    private fun onSuccess(state: State<List<Series>>) {
+        _series.postValue(state)
     }
 
     fun filterSeries(filter: String) {

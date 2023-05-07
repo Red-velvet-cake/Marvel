@@ -55,9 +55,8 @@ class CharactersViewModel : BaseViewModel(), CharacterDetailsInteractionListener
         )
     }
 
-    private fun onGetCharactersSuccess(state: State<List<Character>?>) {
-        _characters.postValue(State.Loading)
-        state.toData()?.let { _characters.postValue(State.Success(it)) }
+    private fun onGetCharactersSuccess(state: State<List<Character>>) {
+        _characters.postValue(state)
     }
 
     private fun onGetCharactersError(error: Throwable) {

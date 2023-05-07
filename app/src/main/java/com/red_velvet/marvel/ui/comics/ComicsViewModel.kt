@@ -62,12 +62,9 @@ class ComicsViewModel : BaseViewModel(), ComicsInteractionListener {
         _thisWeekComics.postValue(State.Failed(throwable.message ?: UNKNOWN_ERROR))
     }
 
-    private fun handleThisWeekComicsNextState(state: State<List<Comic>?>) {
-        _thisWeekComics.postValue(State.Loading)
-        state.toData()?.let {
-            _thisWeekComics.postValue(State.Success(it))
-            insertNewComicsCollection(thisWeekStringResource, state)
-        }
+    private fun handleThisWeekComicsNextState(state: State<List<Comic>>) {
+        _thisWeekComics.postValue(state)
+        if (state is State.Success) insertNewComicsCollection(thisWeekStringResource, state)
     }
 
     private fun getNextWeekComics() {
@@ -82,12 +79,9 @@ class ComicsViewModel : BaseViewModel(), ComicsInteractionListener {
         _nextWeekComics.postValue(State.Failed(throwable.message ?: UNKNOWN_ERROR))
     }
 
-    private fun handleNextWeekComicsNextState(state: State<List<Comic>?>) {
-        _nextWeekComics.postValue(State.Loading)
-        state.toData()?.let {
-            _nextWeekComics.postValue(State.Success(it))
-            insertNewComicsCollection(nextWeekStringResource, state)
-        }
+    private fun handleNextWeekComicsNextState(state: State<List<Comic>>) {
+        _nextWeekComics.postValue(state)
+        if (state is State.Success) insertNewComicsCollection(nextWeekStringResource, state)
     }
 
     private fun getLastWeekComics() {
@@ -102,12 +96,9 @@ class ComicsViewModel : BaseViewModel(), ComicsInteractionListener {
         _lastWeekComics.postValue(State.Failed(throwable.message ?: UNKNOWN_ERROR))
     }
 
-    private fun handleLastWeekComicsNextState(state: State<List<Comic>?>) {
-        _lastWeekComics.postValue(State.Loading)
-        state.toData()?.let {
-            _lastWeekComics.postValue(State.Success(it))
-            insertNewComicsCollection(lastWeekStringResource, state)
-        }
+    private fun handleLastWeekComicsNextState(state: State<List<Comic>>) {
+        _lastWeekComics.postValue(state)
+        if (state is State.Success) insertNewComicsCollection(lastWeekStringResource, state)
     }
 
     private fun getThisMonthComics() {
@@ -122,12 +113,9 @@ class ComicsViewModel : BaseViewModel(), ComicsInteractionListener {
         _thisMonthComics.postValue(State.Failed(throwable.message ?: UNKNOWN_ERROR))
     }
 
-    private fun handleThisMonthComicsNextState(state: State<List<Comic>?>) {
-        _thisMonthComics.postValue(State.Loading)
-        state.toData()?.let {
-            _thisMonthComics.postValue(State.Success(it))
-            insertNewComicsCollection(thisMonthStringResource, state)
-        }
+    private fun handleThisMonthComicsNextState(state: State<List<Comic>>) {
+        _thisMonthComics.postValue(state)
+        if (state is State.Success) insertNewComicsCollection(thisMonthStringResource, state)
     }
 
     private fun insertNewComicsCollection(titleId: Int, comics: State<List<Comic>?>) {
