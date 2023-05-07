@@ -21,96 +21,96 @@ class MarvelRepositoryImpl(
     override fun getComics(
         titleStartsWith: String?,
         dateDescriptor: String?
-    ): Observable<State<List<ComicsResponse>>> {
+    ): Observable<State<List<Comic>>> {
         return wrapWithState { marvelServiceImpl.getAllComics(titleStartsWith, dateDescriptor) }
     }
 
-    override fun getComicDetail(comicId: Int): Observable<State<List<ComicsResponse>>> {
+    override fun getComicDetail(comicId: Int): Observable<State<List<Comic>>> {
         return wrapWithState { marvelServiceImpl.getComicDetail(comicId) }
     }
 
-    override fun getComicsByCharacterId(characterId: Int): Observable<State<List<ComicsResponse>>> {
+    override fun getComicsByCharacterId(characterId: Int): Observable<State<List<Comic>>> {
         return wrapWithState { marvelServiceImpl.getComicsByCharacterId(characterId) }
     }
 
     override fun getAllSeries(
         startYear: Int?,
         contains: String?
-    ): Observable<State<List<SeriesResponse>>> {
+    ): Observable<State<List<Series>>> {
         return wrapWithState { marvelServiceImpl.getAllSeries(contains = contains) }
     }
 
-    override fun getCharsByComicId(comicId: Int): Observable<State<List<CharactersResponse>>> {
+    override fun getCharsByComicId(comicId: Int): Observable<State<List<Character>>> {
         return wrapWithState { marvelServiceImpl.getCharsByComicId(comicId) }
     }
 
-    override fun getSeriesDetails(seriesId: Int): Observable<State<List<SeriesResponse>>> {
+    override fun getSeriesDetails(seriesId: Int): Observable<State<List<Series>>> {
         return wrapWithState { marvelServiceImpl.getSerieDetails(seriesId) }
     }
 
-    override fun getEvents(query: String?): Observable<State<List<EventsResponse>>> {
+    override fun getEvents(query: String?): Observable<State<List<Event>>> {
         return wrapWithState { marvelServiceImpl.getAllEvents(query) }
     }
 
-    override fun getComicCreatorByComicId(comicId: Int): Observable<State<List<CreatorsResponse>>> {
+    override fun getComicCreatorByComicId(comicId: Int): Observable<State<List<Creator>>> {
         return wrapWithState { marvelServiceImpl.getComicCreatorByComicId(comicId) }
     }
 
-    override fun getCharactersByEventId(eventId: Int): Observable<State<List<CharactersResponse>>> {
+    override fun getCharactersByEventId(eventId: Int): Observable<State<List<Character>>> {
         return wrapWithState { marvelServiceImpl.getCharactersByEventId(eventId) }
     }
 
-    override fun getCharacters(): Observable<State<List<CharactersResponse>>> {
+    override fun getCharacters(): Observable<State<List<Character>>> {
         return wrapWithState { marvelServiceImpl.getCharacters() }
     }
 
-    override fun getCharacterByCharacterId(characterId: Int): Observable<State<List<CharactersResponse>>> {
+    override fun getCharacterByCharacterId(characterId: Int): Observable<State<List<Character>>> {
         return wrapWithState { marvelServiceImpl.getCharacterByCharacterId(characterId) }
     }
 
 
-    override fun getCreatorsByEventId(eventId: Int): Observable<State<List<CreatorsResponse>>> {
+    override fun getCreatorsByEventId(eventId: Int): Observable<State<List<Creator>>> {
         return wrapWithState { marvelServiceImpl.getCreatorsByEventId(eventId) }
     }
 
-    override fun getStories(): Observable<State<List<StoryResponse>>> {
+    override fun getStories(): Observable<State<List<Story>>> {
         return wrapWithState { marvelServiceImpl.getAllStories() }
     }
 
-    override fun getStory(storyId: Int): Observable<State<List<StoryResponse>>> {
+    override fun getStory(storyId: Int): Observable<State<List<Story>>> {
         return wrapWithState { marvelServiceImpl.getStory(storyId) }
     }
 
-    override fun getStoryCreatorsByStoryId(storyId: Int): Observable<State<List<CreatorsResponse>>> {
+    override fun getStoryCreatorsByStoryId(storyId: Int): Observable<State<List<Creator>>> {
         return wrapWithState { marvelServiceImpl.getStoryCreatorsByStoryId(storyId) }
     }
 
-    override fun getComicsByStoryId(storyId: Int): Observable<State<List<ComicsResponse>>> {
+    override fun getComicsByStoryId(storyId: Int): Observable<State<List<Comic>>> {
         return wrapWithState { marvelServiceImpl.getComicsByStoryId(storyId) }
     }
 
     override fun getSeriesByCharacterId(
         characterId: Int
-    ): Observable<State<List<SeriesResponse>>> {
+    ): Observable<State<List<Series>>> {
         return wrapWithState { marvelServiceImpl.getSeriesByCharacterId(characterId) }
     }
 
 
     override fun getEventDetails(
         eventId: Int
-    ): Observable<State<List<EventsResponse>>> {
+    ): Observable<State<List<Event>>> {
         return wrapWithState { marvelServiceImpl.getEventDetails(eventId) }
     }
 
-    override fun getSerieCreatorsBySeriesId(seriesId: Int): Observable<State<List<CreatorsResponse>>> {
+    override fun getSerieCreatorsBySeriesId(seriesId: Int): Observable<State<List<Creator>>> {
         return wrapWithState { marvelServiceImpl.getSerieCreatorsBySeriesId(seriesId) }
     }
 
-    override fun searchCharacters(nameStartsWith: String?): Observable<State<List<CharactersResponse>>> {
+    override fun searchCharacters(nameStartsWith: String?): Observable<State<List<Character>>> {
         return wrapWithState { marvelServiceImpl.searchCharacters(nameStartsWith) }
     }
 
-    private fun <T> wrapWithState(function: () -> Single<Response<MarvelResponse<T>>>): Observable<State<T>> {
+    private fun <T> wrapWithState(function: () -> Single<Response<BaseResponse<T>>>): Observable<State<T>> {
         return function()
             .map<State<T>> { response ->
                 if (response.isSuccessful) {
