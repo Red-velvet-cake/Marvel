@@ -10,4 +10,6 @@ class SeriesAdapter(items: List<SeriesResponse>, listener: SeriesInteractionList
     override val layoutId: Int = R.layout.item_series
 }
 
-interface SeriesInteractionListener : BaseInteractionListener
+interface SeriesInteractionListener : BaseInteractionListener {
+    fun onSeriesClicked(seriesId: Int)
+}

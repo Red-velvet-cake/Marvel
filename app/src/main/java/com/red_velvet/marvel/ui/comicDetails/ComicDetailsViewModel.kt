@@ -8,8 +8,8 @@ import com.red_velvet.marvel.data.model.CreatorsResponse
 import com.red_velvet.marvel.data.remote.RetrofitClient
 import com.red_velvet.marvel.data.repository.MarvelRepository
 import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
-import com.red_velvet.marvel.data.util.State
 import com.red_velvet.marvel.ui.base.BaseViewModel
+import com.red_velvet.marvel.ui.utils.State
 
 class ComicDetailsViewModel : BaseViewModel(), ComicDetailsCreatorListenerInteraction,
     ComicDetailsCharacterListenerInteraction {

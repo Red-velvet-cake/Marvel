@@ -6,8 +6,8 @@ import com.red_velvet.marvel.data.model.CreatorsResponse
 import com.red_velvet.marvel.data.model.EventsResponse
 import com.red_velvet.marvel.data.remote.RetrofitClient
 import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
-import com.red_velvet.marvel.data.util.State
 import com.red_velvet.marvel.ui.base.BaseViewModel
+import com.red_velvet.marvel.ui.utils.State
 
 class EventDetailVewModel : BaseViewModel(), CharactersInteractionListener,
     CreatorsInteractionListener {

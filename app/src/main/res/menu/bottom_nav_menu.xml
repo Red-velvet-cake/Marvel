@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/comicsFragment"
+        android:icon="@drawable/ic_error"
+        android:title="@string/comics" />
+
+    <item
+        android:id="@+id/charactersFragment"
+        android:icon="@drawable/ic_error"
+        android:title="@string/characters" />
+
+    <item
+        android:id="@+id/eventsFragment"
+        android:icon="@drawable/ic_error"
+        android:title="@string/events" />
+
+    <item
+        android:id="@+id/seriesFragment"
+        android:icon="@drawable/ic_error"
+        android:title="@string/series" />
+
+    <item
+        android:id="@+id/storiesFragment"
+        android:icon="@drawable/ic_error"
+        android:title="@string/stories" />
+
+</menu>
