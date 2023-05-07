@@ -22,8 +22,8 @@
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintTop_toTopOf="parent"
-            app:setItems="@{viewModel.comicCollections.toData()}"
-            app:showWhenSuccess="@{viewModel.comicCollections}"
+            app:setItems="@{viewModel.comicCollections}"
+            app:showWhenSuccess="@{viewModel.thisWeekComicsLiveData}"
             tools:listitem="@layout/list_comics" />
 
         <ProgressBar
@@ -37,7 +37,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:showWhenLoading="@{viewModel.comicCollections}" />
+            app:showWhenLoading="@{viewModel.thisWeekComicsLiveData}" />
 
         <ImageView
             android:id="@+id/image_view_error"
@@ -48,7 +48,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:showWhenError="@{viewModel.comicCollections}" />
+            app:showWhenError="@{viewModel.thisWeekComicsLiveData}" />
 
         <TextView
             android:id="@+id/text_view_error"
@@ -65,6 +65,6 @@
             app:layout_constraintEnd_toEndOf="@id/image_view_error"
             app:layout_constraintStart_toStartOf="@id/image_view_error"
             app:layout_constraintTop_toBottomOf="@id/image_view_error"
-            app:showWhenError="@{viewModel.comicCollections}" />
+            app:showWhenError="@{viewModel.thisWeekComicsLiveData}" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
