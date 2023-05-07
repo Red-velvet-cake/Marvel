@@ -10,7 +10,7 @@ import com.red_velvet.marvel.ui.base.BaseFragment
 class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>() {
 
     override val layoutIdFragment = R.layout.fragment_event_details
-    override val viewModel: EventDetailVewModel by viewModels()
+    override val viewModel: EventDetailViewModel by viewModels()
     private val eventId = 116
     override fun setUp() {
         viewModel.getEvent(eventId)
