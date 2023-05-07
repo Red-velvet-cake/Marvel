@@ -4,20 +4,19 @@ import androidx.annotation.StringRes
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.red_velvet.marvel.R
-import com.red_velvet.marvel.data.model.ComicsResponse
+import com.red_velvet.marvel.data.model.Comic
 import com.red_velvet.marvel.data.remote.RetrofitClient
 import com.red_velvet.marvel.data.repository.MarvelRepository
 import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
 import com.red_velvet.marvel.ui.base.BaseViewModel
-import com.red_velvet.marvel.ui.utils.Event
+import com.red_velvet.marvel.ui.utils.SingleEvent
 import com.red_velvet.marvel.ui.utils.State
-import io.reactivex.rxjava3.core.Observable
 
 class ComicsViewModel : BaseViewModel(), ComicsInteractionListener {
     private val repository: MarvelRepository = MarvelRepositoryImpl(RetrofitClient.apiService)
 
-    private val _navigationToComicDetails: MutableLiveData<Event<Int>> = MutableLiveData()
-    val navigationToComicDetails: LiveData<Event<Int>> = _navigationToComicDetails
+    private val _navigationToComicDetails: MutableLiveData<SingleEvent<Int>> = MutableLiveData()
+    val navigationToComicDetails: LiveData<SingleEvent<Int>> = _navigationToComicDetails
 
     @StringRes
     private val thisWeekStringResource = R.string.this_week
@@ -35,14 +34,14 @@ class ComicsViewModel : BaseViewModel(), ComicsInteractionListener {
         MutableLiveData(emptyList())
     val comicCollections: LiveData<List<ComicsCollection>> = _comicsCollections
 
-    private val _thisWeekComics = MutableLiveData<State<List<ComicsResponse>>>(State.Loading)
-    val thisWeekComicsLiveData: LiveData<State<List<ComicsResponse>>> = _thisWeekComics
+    private val _thisWeekComics = MutableLiveData<State<List<Comic>>>(State.Loading)
+    val thisWeekComicsLiveData: LiveData<State<List<Comic>>> = _thisWeekComics
 
-    private val _nextWeekComics = MutableLiveData<State<List<ComicsResponse>>>(State.Loading)
+    private val _nextWeekComics = MutableLiveData<State<List<Comic>>>(State.Loading)
 
-    private val _lastWeekComics = MutableLiveData<State<List<ComicsResponse>>>(State.Loading)
+    private val _lastWeekComics = MutableLiveData<State<List<Comic>>>(State.Loading)
 
-    private val _thisMonthComics = MutableLiveData<State<List<ComicsResponse>>>(State.Loading)
+    private val _thisMonthComics = MutableLiveData<State<List<Comic>>>(State.Loading)
 
     init {
         getThisWeekComics()
@@ -63,7 +62,7 @@ class ComicsViewModel : BaseViewModel(), ComicsInteractionListener {
         _thisWeekComics.postValue(State.Failed(throwable.message ?: UNKNOWN_ERROR))
     }
 
-    private fun handleThisWeekComicsNextState(state: State<List<ComicsResponse>?>) {
+    private fun handleThisWeekComicsNextState(state: State<List<Comic>?>) {
         _thisWeekComics.postValue(State.Loading)
         state.toData()?.let {
             _thisWeekComics.postValue(State.Success(it))
@@ -83,7 +82,7 @@ class ComicsViewModel : BaseViewModel(), ComicsInteractionListener {
         _nextWeekComics.postValue(State.Failed(throwable.message ?: UNKNOWN_ERROR))
     }
 
-    private fun handleNextWeekComicsNextState(state: State<List<ComicsResponse>?>) {
+    private fun handleNextWeekComicsNextState(state: State<List<Comic>?>) {
         _nextWeekComics.postValue(State.Loading)
         state.toData()?.let {
             _nextWeekComics.postValue(State.Success(it))
@@ -103,7 +102,7 @@ class ComicsViewModel : BaseViewModel(), ComicsInteractionListener {
         _lastWeekComics.postValue(State.Failed(throwable.message ?: UNKNOWN_ERROR))
     }
 
-    private fun handleLastWeekComicsNextState(state: State<List<ComicsResponse>?>) {
+    private fun handleLastWeekComicsNextState(state: State<List<Comic>?>) {
         _lastWeekComics.postValue(State.Loading)
         state.toData()?.let {
             _lastWeekComics.postValue(State.Success(it))
@@ -123,7 +122,7 @@ class ComicsViewModel : BaseViewModel(), ComicsInteractionListener {
         _thisMonthComics.postValue(State.Failed(throwable.message ?: UNKNOWN_ERROR))
     }
 
-    private fun handleThisMonthComicsNextState(state: State<List<ComicsResponse>?>) {
+    private fun handleThisMonthComicsNextState(state: State<List<Comic>?>) {
         _thisMonthComics.postValue(State.Loading)
         state.toData()?.let {
             _thisMonthComics.postValue(State.Success(it))
@@ -131,13 +130,13 @@ class ComicsViewModel : BaseViewModel(), ComicsInteractionListener {
         }
     }
 
-    private fun insertNewComicsCollection(titleId: Int, comics: State<List<ComicsResponse>?>) {
+    private fun insertNewComicsCollection(titleId: Int, comics: State<List<Comic>?>) {
         _comicsCollections.value =
             _comicsCollections.value!!.plus(ComicsCollection(titleId, comics))
     }
 
     override fun onComicClicked(comicId: Int) {
-        _navigationToComicDetails.postValue(Event(comicId))
+        _navigationToComicDetails.postValue(SingleEvent(comicId))
     }
 
     override fun onTryAgainClicked() {

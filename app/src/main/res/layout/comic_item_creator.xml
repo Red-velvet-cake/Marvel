@@ -6,7 +6,7 @@
     <data>
         <variable
             name="item"
-            type="com.red_velvet.marvel.data.model.CreatorsResponse" />
+            type="com.red_velvet.marvel.data.model.Creator" />
         <variable
             name="listener"
             type="com.red_velvet.marvel.ui.comicDetails.ComicDetailsCharacterListenerInteraction" />

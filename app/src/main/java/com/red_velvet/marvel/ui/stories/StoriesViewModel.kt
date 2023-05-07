@@ -2,22 +2,26 @@ package com.red_velvet.marvel.ui.stories
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.red_velvet.marvel.data.model.StoryResponse
+import com.red_velvet.marvel.data.model.Story
 import com.red_velvet.marvel.data.remote.RetrofitClient
 import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
 import com.red_velvet.marvel.ui.base.BaseViewModel
-import com.red_velvet.marvel.ui.utils.Event
+import com.red_velvet.marvel.ui.utils.SingleEvent
 import com.red_velvet.marvel.ui.utils.State
 
 
 class StoriesViewModel : BaseViewModel(), StoriesInteractionListener {
 
-    private val _navigationToStoryDetails: MutableLiveData<Event<Int>> = MutableLiveData()
-    val navigationToStoryDetails: LiveData<Event<Int>> = _navigationToStoryDetails
+    private val _navigationToStoryDetails: MutableLiveData<SingleEvent<Int>> = MutableLiveData()
+    val navigationToStoryDetails: LiveData<SingleEvent<Int>> = _navigationToStoryDetails
 
     private val repository = MarvelRepositoryImpl(RetrofitClient.apiService)
-    private val _stories: MutableLiveData<State<List<StoryResponse>>> = MutableLiveData()
-    val stories: LiveData<State<List<StoryResponse>>> get() = _stories
+    private val _stories: MutableLiveData<State<List<Story>>> = MutableLiveData()
+    val stories: LiveData<State<List<Story>>> get() = _stories
+
+    init {
+        getAllStories()
+    }
 
     fun getAllStories() {
         bindStateUpdates(
@@ -27,7 +31,7 @@ class StoriesViewModel : BaseViewModel(), StoriesInteractionListener {
         )
     }
 
-    private fun onGetStoriesSuccess(state: State<List<StoryResponse>?>) {
+    private fun onGetStoriesSuccess(state: State<List<Story>?>) {
         _stories.postValue(State.Loading)
         state.toData()?.let {
             _stories.postValue(State.Success(it))
@@ -39,6 +43,6 @@ class StoriesViewModel : BaseViewModel(), StoriesInteractionListener {
     }
 
     override fun onStoryClicked(storyId: Int) {
-        _navigationToStoryDetails.postValue(Event(storyId))
+        _navigationToStoryDetails.postValue(SingleEvent(storyId))
     }
 }

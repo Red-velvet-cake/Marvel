@@ -2,11 +2,11 @@ package com.red_velvet.marvel.ui.events
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.red_velvet.marvel.data.model.EventsResponse
+import com.red_velvet.marvel.data.model.Event
 import com.red_velvet.marvel.data.remote.RetrofitClient
 import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
 import com.red_velvet.marvel.ui.base.BaseViewModel
-import com.red_velvet.marvel.ui.utils.Event
+import com.red_velvet.marvel.ui.utils.SingleEvent
 import com.red_velvet.marvel.ui.utils.State
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.kotlin.addTo
@@ -16,12 +16,12 @@ class EventsViewModel : BaseViewModel(), EventsInteractionListener {
 
     private val repository = MarvelRepositoryImpl(RetrofitClient.apiService)
 
-    private val _navigationToEventDetails: MutableLiveData<Event<Int>> = MutableLiveData()
-    val navigationToEventDetails: LiveData<Event<Int>> = _navigationToEventDetails
+    private val _events = MutableLiveData<State<List<Event>>>()
+    val events: LiveData<State<List<Event>>> = _events
 
-    private val _events = MutableLiveData<State<List<EventsResponse>>>()
-    val events: LiveData<State<List<EventsResponse>>>
-        get() = _events
+    private val _navigationToEventDetails = MutableLiveData<SingleEvent<Int>>()
+    val navigationToEventDetails: LiveData<SingleEvent<Int>> = _navigationToEventDetails
+
 
     val searchQuery = MutableLiveData<String>()
 
@@ -46,9 +46,9 @@ class EventsViewModel : BaseViewModel(), EventsInteractionListener {
         )
     }
 
-    private fun onGetAllEventsSuccess(eventsResponse: State<List<EventsResponse>?>) {
+    private fun onGetAllEventsSuccess(event: State<List<Event>?>) {
         _events.postValue(State.Loading)
-        eventsResponse.toData()?.let { _events.postValue(State.Success(it)) }
+        event.toData()?.let { _events.postValue(State.Success(it)) }
     }
 
     private fun onGetAllEventsError(e: Throwable) {
@@ -73,7 +73,7 @@ class EventsViewModel : BaseViewModel(), EventsInteractionListener {
     }
 
     override fun onEventClicked(eventId: Int) {
-        _navigationToEventDetails.postValue(Event(eventId))
+        _navigationToEventDetails.postValue(SingleEvent(eventId))
     }
 
 }

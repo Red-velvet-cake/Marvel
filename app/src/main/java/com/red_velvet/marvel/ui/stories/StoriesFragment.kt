@@ -11,7 +11,6 @@ class StoriesFragment : BaseFragment<FragmentStoriesBinding>() {
     override val viewModel: StoriesViewModel by viewModels()
 
     override fun setUp() {
-        viewModel.getAllStories()
         val adapter = StoriesAdapter(emptyList(), viewModel)
         binding.storiesRecyclerView.adapter = adapter
         navigateToStoryDetails()

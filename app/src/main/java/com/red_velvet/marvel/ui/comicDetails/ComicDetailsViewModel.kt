@@ -2,9 +2,9 @@ package com.red_velvet.marvel.ui.comicDetails
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.red_velvet.marvel.data.model.CharactersResponse
-import com.red_velvet.marvel.data.model.ComicsResponse
-import com.red_velvet.marvel.data.model.CreatorsResponse
+import com.red_velvet.marvel.data.model.Character
+import com.red_velvet.marvel.data.model.Comic
+import com.red_velvet.marvel.data.model.Creator
 import com.red_velvet.marvel.data.remote.RetrofitClient
 import com.red_velvet.marvel.data.repository.MarvelRepository
 import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
@@ -14,14 +14,14 @@ import com.red_velvet.marvel.ui.utils.State
 class ComicDetailsViewModel : BaseViewModel(), ComicDetailsCreatorListenerInteraction,
     ComicDetailsCharacterListenerInteraction {
 
-    private val _comicsDetails: MutableLiveData<State<List<ComicsResponse>>> = MutableLiveData()
-    val comicsDetails: LiveData<State<List<ComicsResponse>>> get() = _comicsDetails
+    private val _comicsDetails: MutableLiveData<State<List<Comic>>> = MutableLiveData()
+    val comicsDetails: LiveData<State<List<Comic>>> get() = _comicsDetails
 
-    private val _creators: MutableLiveData<State<List<CreatorsResponse>>> = MutableLiveData()
-    val creators: LiveData<State<List<CreatorsResponse>>> get() = _creators
+    private val _creators: MutableLiveData<State<List<Creator>>> = MutableLiveData()
+    val creators: LiveData<State<List<Creator>>> get() = _creators
 
-    private val _characters: MutableLiveData<State<List<CharactersResponse>>> = MutableLiveData()
-    val characters: LiveData<State<List<CharactersResponse>>> get() = _characters
+    private val _characters: MutableLiveData<State<List<Character>>> = MutableLiveData()
+    val characters: LiveData<State<List<Character>>> get() = _characters
 
     private val repository: MarvelRepository = MarvelRepositoryImpl(RetrofitClient.apiService)
 
@@ -31,11 +31,11 @@ class ComicDetailsViewModel : BaseViewModel(), ComicDetailsCreatorListenerIntera
         fetchCharactersByComicIDData(comicId)
     }
 
-    override fun onClickCharacter(creator: CreatorsResponse) {
+    override fun onClickCharacter(creator: Creator) {
         TODO("Not yet implemented")
     }
 
-    override fun onClickCreator(creator: CreatorsResponse) {
+    override fun onClickCreator(creator: Creator) {
         TODO("Not yet implemented")
     }
 
@@ -67,7 +67,7 @@ class ComicDetailsViewModel : BaseViewModel(), ComicDetailsCreatorListenerIntera
     }
 
 
-    private fun onGetComicDetailsDataSuccess(state: State<List<ComicsResponse>?>) {
+    private fun onGetComicDetailsDataSuccess(state: State<List<Comic>?>) {
         _comicsDetails.postValue(State.Loading)
         state.toData()?.let {
             _comicsDetails.postValue(State.Success(it))
@@ -78,7 +78,7 @@ class ComicDetailsViewModel : BaseViewModel(), ComicDetailsCreatorListenerIntera
         _comicsDetails.postValue(State.Failed(e.message.toString()))
     }
 
-    private fun onGetCreatorsByComicIDDataSuccess(state: State<List<CreatorsResponse>?>) {
+    private fun onGetCreatorsByComicIDDataSuccess(state: State<List<Creator>?>) {
         state.toData()?.let {
             _creators.postValue(State.Success(it))
         }
@@ -88,7 +88,7 @@ class ComicDetailsViewModel : BaseViewModel(), ComicDetailsCreatorListenerIntera
         _creators.postValue(State.Failed(e.message.toString()))
     }
 
-    private fun onGetCharactersByComicIDDataSuccess(state: State<List<CharactersResponse>?>) {
+    private fun onGetCharactersByComicIDDataSuccess(state: State<List<Character>?>) {
         state.toData()?.let {
             _characters.postValue(State.Success(it))
         }
