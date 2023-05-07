@@ -4,8 +4,6 @@ import androidx.fragment.app.viewModels
 import com.red_velvet.marvel.R
 import com.red_velvet.marvel.databinding.FragmentComicDetailsBinding
 import com.red_velvet.marvel.ui.base.BaseFragment
-import com.red_velvet.marvel.ui.comicDetails.adapter.ComicDetailsCharactersAdapter
-import com.red_velvet.marvel.ui.comicDetails.adapter.ComicDetailsCreatorsAdapter
 
 class ComicDetailsFragment : BaseFragment<FragmentComicDetailsBinding>() {
 

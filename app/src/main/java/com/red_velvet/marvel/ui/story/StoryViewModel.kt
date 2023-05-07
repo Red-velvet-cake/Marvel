@@ -9,10 +9,9 @@ import com.red_velvet.marvel.data.remote.RetrofitClient
 import com.red_velvet.marvel.data.repository.MarvelRepository
 import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
 import com.red_velvet.marvel.data.util.State
-import com.red_velvet.marvel.ui.base.BaseInteractionListener
 import com.red_velvet.marvel.ui.base.BaseViewModel
 
-class StoryViewModel : BaseViewModel(), BaseInteractionListener {
+class StoryViewModel : BaseViewModel(), StoryCreatorInteractionListener {
 
     private val _story: MutableLiveData<State<List<StoryResponse>>> = MutableLiveData()
     val story: LiveData<State<List<StoryResponse>>> = _story
