@@ -1,7 +1,6 @@
 package com.red_velvet.marvel.ui.comics
 
 import com.red_velvet.marvel.R
-import com.red_velvet.marvel.data.model.ComicsResponse
 import com.red_velvet.marvel.databinding.ListComicsBinding
 import com.red_velvet.marvel.ui.base.BaseAdapter
 import com.red_velvet.marvel.ui.base.BaseInteractionListener
@@ -26,7 +25,7 @@ class ComicsScreenAdapter(
 }
 
 interface ComicsInteractionListener : BaseInteractionListener {
-    fun onComicClicked(comic: ComicsResponse)
+    fun onComicClicked(comicId: Int)
 
     fun onTryAgainClicked()
 }

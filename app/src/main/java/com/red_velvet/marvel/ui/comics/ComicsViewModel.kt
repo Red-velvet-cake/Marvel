@@ -108,7 +108,8 @@ class ComicsViewModel : BaseViewModel(), ComicsInteractionListener {
         comicsCollections.postValue(state)
     }
 
-    override fun onComicClicked(comic: ComicsResponse) {}
+    override fun onComicClicked(comicId: Int) {
+    }
 
     override fun onTryAgainClicked() {
         getAllComicsCollections()
