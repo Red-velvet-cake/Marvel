@@ -13,5 +13,5 @@ class CharactersAdapter(
 }
 
 interface CharacterDetailsInteractionListener : BaseInteractionListener {
-    fun onCharacterSelected(character: Character)
+    fun onCharacterSelected(characterId: Int)
 }

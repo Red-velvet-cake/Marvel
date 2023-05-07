@@ -26,7 +26,7 @@ class ComicsScreenAdapter(
 }
 
 interface ComicsInteractionListener : BaseInteractionListener {
-    fun onComicClicked(comic: Comic)
+    fun onComicClicked(comicId: Int)
 
     fun onTryAgainClicked()
 }

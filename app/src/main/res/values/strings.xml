@@ -59,4 +59,9 @@
     <string name="magazine">magazine</string>
     <string name="trade_paperback">trade paperback</string>
     <string name="hardcover">hardcover</string>
+    <string name="comics">Comics</string>
+    <string name="characters">Characters</string>
+    <string name="events">Events</string>
+    <string name="series">Series</string>
+    <string name="stories">Stories</string>
 </resources>

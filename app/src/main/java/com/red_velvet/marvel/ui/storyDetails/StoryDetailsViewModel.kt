@@ -1,4 +1,4 @@
-package com.red_velvet.marvel.ui.story
+package com.red_velvet.marvel.ui.storyDetails
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -8,10 +8,10 @@ import com.red_velvet.marvel.data.model.Story
 import com.red_velvet.marvel.data.remote.RetrofitClient
 import com.red_velvet.marvel.data.repository.MarvelRepository
 import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
-import com.red_velvet.marvel.data.util.State
 import com.red_velvet.marvel.ui.base.BaseViewModel
+import com.red_velvet.marvel.ui.utils.State
 
-class StoryViewModel : BaseViewModel(), StoryCreatorInteractionListener {
+class StoryDetailsViewModel : BaseViewModel(), StoryCreatorInteractionListener {
 
     private val _story: MutableLiveData<State<List<Story>>> = MutableLiveData()
     val story: LiveData<State<List<Story>>> = _story

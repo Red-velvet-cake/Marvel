@@ -1,5 +1,7 @@
-package com.red_velvet.marvel.data.util
+package com.red_velvet.marvel.ui.utils
 
+import androidx.activity.addCallback
+import androidx.fragment.app.Fragment
 import com.red_velvet.marvel.data.model.Thumbnail
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
@@ -15,4 +17,11 @@ fun <T : Any> Observable<T>.applySchedulers(): Observable<T> {
     return this.subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
 }
-fun Thumbnail.toUrl() = this.path+"."+this.extension
+
+fun Thumbnail.toUrl() = this.path + "." + this.extension
+
+fun Fragment.onBackPressed(function: () -> Unit) {
+    requireActivity().onBackPressedDispatcher.addCallback(requireActivity()) {
+        function()
+    }
+}

@@ -1,4 +1,4 @@
-package com.red_velvet.marvel.data.util
+package com.red_velvet.marvel.ui.utils
 
 import android.view.View
 import android.widget.ImageView

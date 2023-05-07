@@ -1,7 +1,7 @@
 package com.red_velvet.marvel.ui.base
 
 import androidx.lifecycle.ViewModel
-import com.red_velvet.marvel.data.util.State
+import com.red_velvet.marvel.ui.utils.State
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.disposables.CompositeDisposable
