@@ -7,31 +7,54 @@
     <fragment
         android:id="@+id/storyFragment"
         android:name="com.red_velvet.marvel.ui.story.StoryFragment"
-        android:label="Story Details" />
+        android:label="Story Details">
+        <argument
+            android:name="storyId"
+            app:argType="integer" />
+    </fragment>
     <fragment
         android:id="@+id/comicsFragment"
         android:name="com.red_velvet.marvel.ui.comics.ComicsFragment"
         android:label="Comics">
         <action
             android:id="@+id/action_comicsFragment_to_comicDetailsFragment"
-            app:destination="@id/comicDetailsFragment" />
+            app:destination="@id/comicDetailsFragment"
+            app:launchSingleTop="false"
+            app:popUpTo="@id/comicsFragment" />
     </fragment>
     <fragment
         android:id="@+id/characterFragment"
         android:name="com.red_velvet.marvel.ui.character.CharacterFragment"
-        android:label="CharacterFragment" />
+        android:label="CharacterFragment">
+        <argument
+            android:name="characterId"
+            app:argType="integer" />
+    </fragment>
     <fragment
         android:id="@+id/eventDetailsFragment"
         android:name="com.red_velvet.marvel.ui.eventDetails.EventDetailsFragment"
-        android:label="EventDetailsFragment" />
+        android:label="EventDetailsFragment">
+        <argument
+            android:name="eventId"
+            app:argType="integer" />
+    </fragment>
     <fragment
         android:id="@+id/seriesDetailsFragment"
         android:name="com.red_velvet.marvel.ui.serieDetails.SeriesDetailsFragment"
-        android:label="SeriesDetailsFragment" />
+        android:label="SeriesDetailsFragment">
+        <argument
+            android:name="seriesId"
+            app:argType="integer" />
+    </fragment>
     <fragment
         android:id="@+id/charactersFragment"
         android:name="com.red_velvet.marvel.ui.characters.CharactersFragment"
-        android:label="CharactersFragment" />
+        android:label="CharactersFragment">
+        <action
+            android:id="@+id/action_charactersFragment_to_characterFragment"
+            app:destination="@id/characterFragment"
+            app:popUpTo="@id/charactersFragment" />
+    </fragment>
     <fragment
         android:id="@+id/comicDetailsFragment"
         android:name="com.red_velvet.marvel.ui.comicDetails.ComicDetailsFragment"
@@ -43,14 +66,30 @@
     <fragment
         android:id="@+id/eventsFragment"
         android:name="com.red_velvet.marvel.ui.events.EventsFragment"
-        android:label="EventsFragment" />
+        android:label="EventsFragment">
+        <action
+            android:id="@+id/action_eventsFragment_to_eventDetailsFragment"
+            app:destination="@id/eventDetailsFragment"
+            app:launchSingleTop="false"
+            app:popUpTo="@id/eventsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/seriesFragment"
         android:name="com.red_velvet.marvel.ui.series.SeriesFragment"
-        android:label="SeriesFragment" />
+        android:label="SeriesFragment">
+        <action
+            android:id="@+id/action_seriesFragment_to_seriesDetailsFragment"
+            app:destination="@id/seriesDetailsFragment"
+            app:popUpTo="@id/seriesFragment" />
+    </fragment>
     <fragment
         android:id="@+id/storiesFragment"
         android:name="com.red_velvet.marvel.ui.stories.StoriesFragment"
-        android:label="StoriesFragment" />
+        android:label="StoriesFragment">
+        <action
+            android:id="@+id/action_storiesFragment_to_storyFragment"
+            app:destination="@id/storyFragment"
+            app:popUpTo="@id/storiesFragment" />
+    </fragment>
 
 </navigation>

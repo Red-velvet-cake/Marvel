@@ -6,6 +6,7 @@ import com.red_velvet.marvel.data.model.StoryResponse
 import com.red_velvet.marvel.data.remote.RetrofitClient
 import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
 import com.red_velvet.marvel.ui.base.BaseViewModel
+import com.red_velvet.marvel.ui.utils.Navigation
 import com.red_velvet.marvel.ui.utils.State
 
 
@@ -31,5 +32,10 @@ class StoriesViewModel : BaseViewModel(), StoriesInteractionListener {
 
     private fun onGetStoriesError(error: Throwable) {
         _stories.postValue(State.Failed(error.message.toString()))
+    }
+
+    override fun onStoryClicked(storyId: Int) {
+        val directions = StoriesFragmentDirections.actionStoriesFragmentToStoryFragment(storyId)
+        _navigation.postValue(Navigation.Direction(directions))
     }
 }

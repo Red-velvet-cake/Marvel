@@ -7,6 +7,7 @@ import com.red_velvet.marvel.data.remote.RetrofitClient
 import com.red_velvet.marvel.data.repository.MarvelRepository
 import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
 import com.red_velvet.marvel.ui.base.BaseViewModel
+import com.red_velvet.marvel.ui.utils.Navigation
 import com.red_velvet.marvel.ui.utils.State
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.kotlin.addTo
@@ -72,7 +73,10 @@ class CharactersViewModel : BaseViewModel(), CharacterDetailsInteractionListener
         }
     }
 
-    override fun onCharacterSelected(character: CharactersResponse) {
-        TODO("Not yet implemented")
+    override fun onCharacterSelected(characterId: Int) {
+        val action =
+            CharactersFragmentDirections.actionCharactersFragmentToCharacterFragment(characterId)
+        _navigation.postValue(Navigation.Direction(action))
     }
+
 }

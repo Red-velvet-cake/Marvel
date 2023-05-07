@@ -16,9 +16,6 @@ import io.reactivex.rxjava3.core.Observable
 class ComicsViewModel : BaseViewModel(), ComicsInteractionListener {
     private val repository: MarvelRepository = MarvelRepositoryImpl(RetrofitClient.apiService)
 
-    private val _navigation: MutableLiveData<Navigation> = MutableLiveData()
-    val navigation: LiveData<Navigation> = _navigation
-
     @StringRes
     private val thisWeekStringResource = R.string.this_week
 
@@ -122,11 +119,6 @@ class ComicsViewModel : BaseViewModel(), ComicsInteractionListener {
     override fun onTryAgainClicked() {
         getAllComicsCollections()
     }
-
-    fun navigateBack() {
-        _navigation.postValue(Navigation.Back)
-    }
-
 
     companion object {
         private const val THIS_WEEK = "thisWeek"

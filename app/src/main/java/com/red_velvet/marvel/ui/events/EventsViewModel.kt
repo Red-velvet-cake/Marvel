@@ -6,6 +6,7 @@ import com.red_velvet.marvel.data.model.EventsResponse
 import com.red_velvet.marvel.data.remote.RetrofitClient
 import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
 import com.red_velvet.marvel.ui.base.BaseViewModel
+import com.red_velvet.marvel.ui.utils.Navigation
 import com.red_velvet.marvel.ui.utils.State
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.kotlin.addTo
@@ -30,22 +31,24 @@ class EventsViewModel : BaseViewModel(), EventsInteractionListener {
         bindStateUpdates(
             repository.getEvents(),
             ::onGetAllEventsError,
-            ::onGetAllEventsSuccess)
+            ::onGetAllEventsSuccess
+        )
     }
 
     private fun searchEvents(query: String? = null) {
         bindStateUpdates(
             repository.getEvents(query),
             ::onGetAllEventsError,
-            ::onGetAllEventsSuccess)
+            ::onGetAllEventsSuccess
+        )
     }
 
-    private fun onGetAllEventsSuccess(eventsResponse: State<List<EventsResponse>?>){
+    private fun onGetAllEventsSuccess(eventsResponse: State<List<EventsResponse>?>) {
         _events.postValue(State.Loading)
         eventsResponse.toData()?.let { _events.postValue(State.Success(it)) }
     }
 
-    private fun onGetAllEventsError(e:Throwable){
+    private fun onGetAllEventsError(e: Throwable) {
         _events.postValue(State.Loading)
         _events.postValue(State.Failed(e.message.toString()))
     }
@@ -66,5 +69,10 @@ class EventsViewModel : BaseViewModel(), EventsInteractionListener {
             }.addTo(compositeDisposable)
     }
 
+    override fun onEventClicked(eventId: Int) {
+        val directions =
+            EventsFragmentDirections.actionEventsFragmentToEventDetailsFragment(eventId)
+        _navigation.postValue(Navigation.Direction(directions))
+    }
 
 }
