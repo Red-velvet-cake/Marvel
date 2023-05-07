@@ -4,7 +4,7 @@ import androidx.annotation.StringRes
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.red_velvet.marvel.R
-import com.red_velvet.marvel.data.model.ComicsResponse
+import com.red_velvet.marvel.data.model.Comic
 import com.red_velvet.marvel.data.remote.RetrofitClient
 import com.red_velvet.marvel.data.repository.MarvelRepository
 import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
@@ -55,10 +55,10 @@ class ComicsViewModel : BaseViewModel(), ComicsInteractionListener {
     }
 
     private fun handleComicsCollectionsState(
-        thisWeek: State<List<ComicsResponse>?>,
-        nextWeek: State<List<ComicsResponse>?>,
-        lastWeek: State<List<ComicsResponse>?>,
-        thisMonth: State<List<ComicsResponse>?>
+        thisWeek: State<List<Comic>?>,
+        nextWeek: State<List<Comic>?>,
+        lastWeek: State<List<Comic>?>,
+        thisMonth: State<List<Comic>?>
     ): State<List<ComicsCollection>> {
         return if (areAllComicsCollectionsSuccess(thisWeek, nextWeek, lastWeek, thisMonth)) {
             State.Success(
@@ -77,10 +77,10 @@ class ComicsViewModel : BaseViewModel(), ComicsInteractionListener {
     }
 
     private fun areAllComicsCollectionsSuccess(
-        thisWeek: State<List<ComicsResponse>?>,
-        nextWeek: State<List<ComicsResponse>?>,
-        lastWeek: State<List<ComicsResponse>?>,
-        thisMonth: State<List<ComicsResponse>?>
+        thisWeek: State<List<Comic>?>,
+        nextWeek: State<List<Comic>?>,
+        lastWeek: State<List<Comic>?>,
+        thisMonth: State<List<Comic>?>
     ): Boolean {
         return thisWeek is State.Success
                 && nextWeek is State.Success
@@ -89,10 +89,10 @@ class ComicsViewModel : BaseViewModel(), ComicsInteractionListener {
     }
 
     private fun isAnyComicsCollectionLoading(
-        thisWeek: State<List<ComicsResponse>?>,
-        nextWeek: State<List<ComicsResponse>?>,
-        lastWeek: State<List<ComicsResponse>?>,
-        thisMonth: State<List<ComicsResponse>?>
+        thisWeek: State<List<Comic>?>,
+        nextWeek: State<List<Comic>?>,
+        lastWeek: State<List<Comic>?>,
+        thisMonth: State<List<Comic>?>
     ): Boolean {
         return thisWeek is State.Loading
                 || nextWeek is State.Loading
@@ -108,7 +108,7 @@ class ComicsViewModel : BaseViewModel(), ComicsInteractionListener {
         comicsCollections.postValue(state)
     }
 
-    override fun onComicClicked(comic: ComicsResponse) {}
+    override fun onComicClicked(comic: Comic) {}
 
     override fun onTryAgainClicked() {
         getAllComicsCollections()

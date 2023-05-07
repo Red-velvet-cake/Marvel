@@ -3,7 +3,7 @@ package com.red_velvet.marvel.data.model
 
 import com.google.gson.annotations.SerializedName
 
-data class TextObject(
+data class TextBlurb(
     @SerializedName("language")
     val language: String? = null,
     @SerializedName("text")

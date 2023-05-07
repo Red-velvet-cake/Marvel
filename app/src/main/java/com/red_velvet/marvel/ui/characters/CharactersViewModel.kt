@@ -2,7 +2,7 @@ package com.red_velvet.marvel.ui.characters
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.red_velvet.marvel.data.model.CharactersResponse
+import com.red_velvet.marvel.data.model.Character
 import com.red_velvet.marvel.data.remote.RetrofitClient
 import com.red_velvet.marvel.data.repository.MarvelRepository
 import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
@@ -13,8 +13,8 @@ import io.reactivex.rxjava3.kotlin.addTo
 import java.util.concurrent.TimeUnit
 
 class CharactersViewModel : BaseViewModel(), CharacterDetailsInteractionListener {
-    private val _characters: MutableLiveData<State<List<CharactersResponse>>> = MutableLiveData()
-    val characters: LiveData<State<List<CharactersResponse>>> get() = _characters
+    private val _characters: MutableLiveData<State<List<Character>>> = MutableLiveData()
+    val characters: LiveData<State<List<Character>>> get() = _characters
 
     val searchQuery = MutableLiveData<String>()
 
@@ -51,7 +51,7 @@ class CharactersViewModel : BaseViewModel(), CharacterDetailsInteractionListener
         )
     }
 
-    private fun onGetCharactersSuccess(state: State<List<CharactersResponse>?>) {
+    private fun onGetCharactersSuccess(state: State<List<Character>?>) {
         _characters.postValue(State.Loading)
         state.toData()?.let { _characters.postValue(State.Success(it)) }
     }
@@ -72,7 +72,7 @@ class CharactersViewModel : BaseViewModel(), CharacterDetailsInteractionListener
         }
     }
 
-    override fun onCharacterSelected(character: CharactersResponse) {
+    override fun onCharacterSelected(character: Character) {
         TODO("Not yet implemented")
     }
 }

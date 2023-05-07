@@ -2,7 +2,7 @@ package com.red_velvet.marvel.ui.events
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.red_velvet.marvel.data.model.EventsResponse
+import com.red_velvet.marvel.data.model.Event
 import com.red_velvet.marvel.data.remote.RetrofitClient
 import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
 import com.red_velvet.marvel.data.util.State
@@ -15,8 +15,8 @@ class EventsViewModel : BaseViewModel(), EventsInteractionListener {
 
     private val repository = MarvelRepositoryImpl(RetrofitClient.apiService)
 
-    private val _events = MutableLiveData<State<List<EventsResponse>>>()
-    val events: LiveData<State<List<EventsResponse>>>
+    private val _events = MutableLiveData<State<List<Event>>>()
+    val events: LiveData<State<List<Event>>>
         get() = _events
 
     val searchQuery = MutableLiveData<String>()
@@ -40,9 +40,9 @@ class EventsViewModel : BaseViewModel(), EventsInteractionListener {
             ::onGetAllEventsSuccess)
     }
 
-    private fun onGetAllEventsSuccess(eventsResponse: State<List<EventsResponse>?>){
+    private fun onGetAllEventsSuccess(event: State<List<Event>?>) {
         _events.postValue(State.Loading)
-        eventsResponse.toData()?.let { _events.postValue(State.Success(it)) }
+        event.toData()?.let { _events.postValue(State.Success(it)) }
     }
 
     private fun onGetAllEventsError(e:Throwable){

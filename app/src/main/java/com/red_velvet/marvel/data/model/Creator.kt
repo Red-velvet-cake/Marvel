@@ -1,6 +1,6 @@
 package com.red_velvet.marvel.data.model
 import com.google.gson.annotations.SerializedName
-data class CreatorsResponse(
+data class Creator(
     @SerializedName("id")
     var id: Int? = null,
     @SerializedName("firstName")
@@ -11,22 +11,22 @@ data class CreatorsResponse(
     var lastName: String? = null,
     @SerializedName("suffix")
     var suffix: String? = null,
-    @SerializedName("fullName"    )
-    var fullName : String? = null,
+    @SerializedName("fullName")
+    var fullName: String? = null,
     @SerializedName("modified")
-    var modified : String?= null,
-    @SerializedName("thumbnail"   )
-    var thumbnail  : Thumbnail? = Thumbnail(),
-    @SerializedName("resourceURI" )
-    var resourceURI : String? = null,
+    var modified: String? = null,
+    @SerializedName("thumbnail")
+    var thumbnail: Thumbnail? = Thumbnail(),
+    @SerializedName("resourceURI")
+    var resourceURI: String? = null,
     @SerializedName("comics")
-    var comics: Content?= Content(),
+    var comics: ResourceCollection? = ResourceCollection(),
     @SerializedName("series")
-    var series : Content?= Content(),
+    var series: ResourceCollection? = ResourceCollection(),
     @SerializedName("stories")
-    var stories: Content?= Content(),
+    var stories: ResourceCollection? = ResourceCollection(),
     @SerializedName("events")
-    var events: Content? = Content(),
+    var events: ResourceCollection? = ResourceCollection(),
     @SerializedName("urls")
     var urls: List<Url> = listOf()
 )
