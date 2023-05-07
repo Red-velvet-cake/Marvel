@@ -12,7 +12,6 @@ import com.red_velvet.marvel.ui.base.BaseViewModel
 class EventDetailVewModel : BaseViewModel(), CharactersInteractionListener,
     CreatorsInteractionListener {
 
-
     private val repository = MarvelRepositoryImpl(RetrofitClient.apiService)
 
     private var _event: MutableLiveData<State<List<Event>>> = MutableLiveData()
@@ -24,7 +23,6 @@ class EventDetailVewModel : BaseViewModel(), CharactersInteractionListener,
     private var _creators: MutableLiveData<State<List<Creator>>> = MutableLiveData()
     val creators: MutableLiveData<State<List<Creator>>> = _creators
 
-
     fun getEvent(eventId: Int) {
         bindStateUpdates(
             repository.getEventDetails(eventId),
@@ -32,7 +30,6 @@ class EventDetailVewModel : BaseViewModel(), CharactersInteractionListener,
             onError = ::onGetEventError
         )
     }
-
 
     fun getCreatorsEventId(eventId: Int) {
         bindStateUpdates(
@@ -50,38 +47,28 @@ class EventDetailVewModel : BaseViewModel(), CharactersInteractionListener,
         )
     }
 
-    private fun onGetEventSuccess(state: State<List<Event>?>) {
-        _event.postValue(State.Loading)
-        state.toData()?.let {
-            _event.postValue(State.Success(it))
-        }
+    private fun onGetEventSuccess(state: State<List<Event>>) {
+        _event.postValue(state)
     }
 
     private fun onGetEventError(e: Throwable) {
         _event.postValue(State.Failed(e.message.toString()))
     }
 
-    private fun onGetEventCreatorsSuccess(state: State<List<Creator>?>) {
-        _creators.postValue(State.Loading)
-        state.toData()?.let {
-            _creators.postValue(State.Success(it))
-        }
+    private fun onGetEventCreatorsSuccess(state: State<List<Creator>>) {
+        _creators.postValue(state)
     }
 
     private fun onGetEventCreatorsError(e: Throwable) {
         _creators.postValue(State.Failed(e.message.toString()))
     }
 
-    private fun onGetEventCharactersSuccess(state: State<List<Character>?>) {
-        _characters.postValue(State.Loading)
-        state.toData()?.let {
-            _characters.postValue(State.Success(it))
-        }
+    private fun onGetEventCharactersSuccess(state: State<List<Character>>) {
+        _characters.postValue(state)
     }
 
     private fun onGetEventCharactersError(e: Throwable) {
         _characters.postValue(State.Failed(e.message.toString()))
     }
-
 
 }
