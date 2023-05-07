@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/storyFragment"
-        android:name="com.red_velvet.marvel.ui.story.StoryFragment"
+        android:name="com.red_velvet.marvel.ui.storyDetails.StoryDetailsFragment"
         android:label="Story Details">
         <argument
             android:name="storyId"
@@ -24,7 +24,7 @@
     </fragment>
     <fragment
         android:id="@+id/characterFragment"
-        android:name="com.red_velvet.marvel.ui.character.CharacterFragment"
+        android:name="com.red_velvet.marvel.ui.characterDetails.CharacterFragment"
         android:label="CharacterFragment">
         <argument
             android:name="characterId"

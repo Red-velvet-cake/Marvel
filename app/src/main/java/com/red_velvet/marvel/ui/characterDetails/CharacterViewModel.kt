@@ -1,4 +1,4 @@
-package com.red_velvet.marvel.ui.character
+package com.red_velvet.marvel.ui.characterDetails
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
