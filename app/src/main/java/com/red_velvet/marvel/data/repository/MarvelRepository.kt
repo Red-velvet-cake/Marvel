@@ -7,7 +7,6 @@ import com.red_velvet.marvel.data.model.CreatorsResponse
 import com.red_velvet.marvel.data.model.EventsResponse
 import com.red_velvet.marvel.data.model.SeriesResponse
 import com.red_velvet.marvel.data.model.StoryResponse
-import io.reactivex.rxjava3.core.Single
 import com.red_velvet.marvel.data.util.State
 import io.reactivex.rxjava3.core.Observable
 
@@ -16,48 +15,47 @@ interface MarvelRepository {
     fun getComics(
         titleStartsWith: String? = null,
         dateDescriptor: String? = null,
-    ): Observable<State<List<ComicsResponse>?>>
+    ): Observable<State<List<ComicsResponse>>>
 
-    fun getComicDetail(comicId: Int): Observable<State<List<ComicsResponse>?>>
+    fun getComicDetail(comicId: Int): Observable<State<List<ComicsResponse>>>
 
-    fun getComicsByCharacterId(characterId: Int): Observable<State<List<ComicsResponse>?>>
+    fun getComicsByCharacterId(characterId: Int): Observable<State<List<ComicsResponse>>>
 
     fun getAllSeries(
         startYear: Int? = null,
         contains: String? = null
-    ): Observable<State<List<SeriesResponse>?>>
+    ): Observable<State<List<SeriesResponse>>>
 
-    fun getComicCreatorByComicId(comicId: Int): Observable<State<List<CreatorsResponse>?>>
+    fun getComicCreatorByComicId(comicId: Int): Observable<State<List<CreatorsResponse>>>
 
-    fun getSeriesDetails(seriesId: Int): Observable<State<List<SeriesResponse>?>>
+    fun getSeriesDetails(seriesId: Int): Observable<State<List<SeriesResponse>>>
 
-    fun getEvents(query: String? = null): Observable<State<List<EventsResponse>?>>
+    fun getEvents(query: String? = null): Observable<State<List<EventsResponse>>>
 
-    fun getCharactersByEventId(eventId: Int): Observable<State<List<CharactersResponse>?>>
+    fun getCharactersByEventId(eventId: Int): Observable<State<List<CharactersResponse>>>
 
-    fun getCreatorsByEventId(eventId: Int): Observable<State<List<CreatorsResponse>?>>
+    fun getCreatorsByEventId(eventId: Int): Observable<State<List<CreatorsResponse>>>
 
-    fun getStories(): Observable<State<List<StoryResponse>?>>
+    fun getStories(): Observable<State<List<StoryResponse>>>
 
-    fun getStory(storyId: Int): Observable<State<List<StoryResponse>?>>
+    fun getStory(storyId: Int): Observable<State<List<StoryResponse>>>
 
-    fun getStoryCreatorsByStoryId(storyId: Int): Observable<State<List<CreatorsResponse>?>>
+    fun getStoryCreatorsByStoryId(storyId: Int): Observable<State<List<CreatorsResponse>>>
 
-    fun getComicsByStoryId(storyId: Int): Observable<State<List<ComicsResponse>?>>
+    fun getComicsByStoryId(storyId: Int): Observable<State<List<ComicsResponse>>>
 
-    fun getCharsByComicId(comicId: Int): Observable<State<List<CharactersResponse>?>>
+    fun getCharsByComicId(comicId: Int): Observable<State<List<CharactersResponse>>>
 
-    fun getEventDetails(eventId:Int):Observable<State<List<EventsResponse>?>>
-    fun getCharacters(): Observable<State<List<CharactersResponse>?>>
+    fun getEventDetails(eventId: Int): Observable<State<List<EventsResponse>>>
 
-    fun getCharacterByCharacterId(characterId: Int): Observable<State<List<CharactersResponse>?>>
+    fun getCharacters(): Observable<State<List<CharactersResponse>>>
 
-    fun getSerieCreatorsBySeriesId(seriesId: Int): Observable<State<List<CreatorsResponse>?>>
+    fun getCharacterByCharacterId(characterId: Int): Observable<State<List<CharactersResponse>>>
 
-    fun getSeriesByCharacterId(characterId: Int): Observable<State<List<SeriesResponse>?>>
+    fun getSerieCreatorsBySeriesId(seriesId: Int): Observable<State<List<CreatorsResponse>>>
 
+    fun getSeriesByCharacterId(characterId: Int): Observable<State<List<SeriesResponse>>>
 
-    fun searchCharacters(nameStartsWith: String?): Observable<State<List<CharactersResponse>?>>
-
+    fun searchCharacters(nameStartsWith: String?): Observable<State<List<CharactersResponse>>>
 }
 
