@@ -4,7 +4,7 @@ import androidx.annotation.StringRes
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.red_velvet.marvel.R
-import com.red_velvet.marvel.data.model.ComicsResponse
+import com.red_velvet.marvel.data.model.Comic
 import com.red_velvet.marvel.data.remote.RetrofitClient
 import com.red_velvet.marvel.data.repository.MarvelRepository
 import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
@@ -131,7 +131,7 @@ class ComicsViewModel : BaseViewModel(), ComicsInteractionListener {
             _comicsCollections.value!!.plus(ComicsCollection(titleId, comics))
     }
 
-    override fun onComicClicked(comic: ComicsResponse) {}
+    override fun onComicClicked(comic: Comic) {}
 
     override fun onTryAgainClicked() {
         getThisWeekComics()

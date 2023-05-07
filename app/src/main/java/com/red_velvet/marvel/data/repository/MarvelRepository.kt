@@ -1,12 +1,12 @@
 package com.red_velvet.marvel.data.repository
 
 
-import com.red_velvet.marvel.data.model.CharactersResponse
-import com.red_velvet.marvel.data.model.ComicsResponse
-import com.red_velvet.marvel.data.model.CreatorsResponse
-import com.red_velvet.marvel.data.model.EventsResponse
-import com.red_velvet.marvel.data.model.SeriesResponse
-import com.red_velvet.marvel.data.model.StoryResponse
+import com.red_velvet.marvel.data.model.Character
+import com.red_velvet.marvel.data.model.Comic
+import com.red_velvet.marvel.data.model.Creator
+import com.red_velvet.marvel.data.model.Event
+import com.red_velvet.marvel.data.model.Series
+import com.red_velvet.marvel.data.model.Story
 import com.red_velvet.marvel.data.util.State
 import io.reactivex.rxjava3.core.Observable
 

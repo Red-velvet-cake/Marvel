@@ -3,15 +3,15 @@ package com.red_velvet.marvel.data.model
 
 import com.google.gson.annotations.SerializedName
 
-data class ComicsResponse(
+data class Comic(
     @SerializedName("characters")
-    val characters: Content? = Content(),
+    val characters: ResourceCollection? = ResourceCollection(),
     @SerializedName("collectedIssues")
     val collectedIssues: List<CollectedIssue>? = listOf(),
     @SerializedName("collections")
-    val collections: List<Any>? = listOf(),
+    val collections: List<ResourceCollection>? = listOf(),
     @SerializedName("creators")
-    val creators: Content? = Content(),
+    val creators: ResourceCollection? = ResourceCollection(),
     @SerializedName("dates")
     val dates: List<Date>? = listOf(),
     @SerializedName("description")
@@ -23,7 +23,7 @@ data class ComicsResponse(
     @SerializedName("ean")
     val ean: String? = "",
     @SerializedName("events")
-    val events: Content? = Content(),
+    val events: ResourceCollection? = ResourceCollection(),
     @SerializedName("format")
     val format: String? = "",
     @SerializedName("id")
@@ -45,11 +45,11 @@ data class ComicsResponse(
     @SerializedName("resourceURI")
     val resourceURI: String? = "",
     @SerializedName("series")
-    val series: Content? = Content(),
+    val series: ResourceCollection? = ResourceCollection(),
     @SerializedName("stories")
-    val stories: Content? = Content(),
+    val stories: ResourceCollection? = ResourceCollection(),
     @SerializedName("textObjects")
-    val textObjects: List<TextObject>? = listOf(),
+    val textBlurbs: List<TextBlurb>? = listOf(),
     @SerializedName("thumbnail")
     val thumbnail: Thumbnail? = Thumbnail(),
     @SerializedName("title")
@@ -61,5 +61,5 @@ data class ComicsResponse(
     @SerializedName("variantDescription")
     val variantDescription: String? = "",
     @SerializedName("variants")
-    val variants: List<Variant>? = listOf()
+    val variants: List<Resource>? = listOf()
 )

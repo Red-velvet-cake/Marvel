@@ -1,9 +1,9 @@
 package com.red_velvet.marvel.ui.eventDetails
 
 import androidx.lifecycle.MutableLiveData
-import com.red_velvet.marvel.data.model.CharactersResponse
-import com.red_velvet.marvel.data.model.CreatorsResponse
-import com.red_velvet.marvel.data.model.EventsResponse
+import com.red_velvet.marvel.data.model.Character
+import com.red_velvet.marvel.data.model.Creator
+import com.red_velvet.marvel.data.model.Event
 import com.red_velvet.marvel.data.remote.RetrofitClient
 import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
 import com.red_velvet.marvel.data.util.State
@@ -15,14 +15,14 @@ class EventDetailVewModel : BaseViewModel(), CharactersInteractionListener,
 
     private val repository = MarvelRepositoryImpl(RetrofitClient.apiService)
 
-    private var _event: MutableLiveData<State<List<EventsResponse>>> = MutableLiveData()
-    val event: MutableLiveData<State<List<EventsResponse>>> = _event
+    private var _event: MutableLiveData<State<List<Event>>> = MutableLiveData()
+    val event: MutableLiveData<State<List<Event>>> = _event
 
-    private var _characters: MutableLiveData<State<List<CharactersResponse>>> = MutableLiveData()
-    val characters: MutableLiveData<State<List<CharactersResponse>>> = _characters
+    private var _characters: MutableLiveData<State<List<Character>>> = MutableLiveData()
+    val characters: MutableLiveData<State<List<Character>>> = _characters
 
-    private var _creators: MutableLiveData<State<List<CreatorsResponse>>> = MutableLiveData()
-    val creators: MutableLiveData<State<List<CreatorsResponse>>> = _creators
+    private var _creators: MutableLiveData<State<List<Creator>>> = MutableLiveData()
+    val creators: MutableLiveData<State<List<Creator>>> = _creators
 
 
     fun getEvent(eventId: Int) {
@@ -50,7 +50,7 @@ class EventDetailVewModel : BaseViewModel(), CharactersInteractionListener,
         )
     }
 
-    private fun onGetEventSuccess(state: State<List<EventsResponse>?>) {
+    private fun onGetEventSuccess(state: State<List<Event>?>) {
         _event.postValue(State.Loading)
         state.toData()?.let {
             _event.postValue(State.Success(it))
@@ -61,7 +61,7 @@ class EventDetailVewModel : BaseViewModel(), CharactersInteractionListener,
         _event.postValue(State.Failed(e.message.toString()))
     }
 
-    private fun onGetEventCreatorsSuccess(state: State<List<CreatorsResponse>?>) {
+    private fun onGetEventCreatorsSuccess(state: State<List<Creator>?>) {
         _creators.postValue(State.Loading)
         state.toData()?.let {
             _creators.postValue(State.Success(it))
@@ -72,7 +72,7 @@ class EventDetailVewModel : BaseViewModel(), CharactersInteractionListener,
         _creators.postValue(State.Failed(e.message.toString()))
     }
 
-    private fun onGetEventCharactersSuccess(state: State<List<CharactersResponse>?>) {
+    private fun onGetEventCharactersSuccess(state: State<List<Character>?>) {
         _characters.postValue(State.Loading)
         state.toData()?.let {
             _characters.postValue(State.Success(it))

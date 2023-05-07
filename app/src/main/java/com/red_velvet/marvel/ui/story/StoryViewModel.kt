@@ -2,9 +2,9 @@ package com.red_velvet.marvel.ui.story
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.red_velvet.marvel.data.model.ComicsResponse
-import com.red_velvet.marvel.data.model.CreatorsResponse
-import com.red_velvet.marvel.data.model.StoryResponse
+import com.red_velvet.marvel.data.model.Comic
+import com.red_velvet.marvel.data.model.Creator
+import com.red_velvet.marvel.data.model.Story
 import com.red_velvet.marvel.data.remote.RetrofitClient
 import com.red_velvet.marvel.data.repository.MarvelRepository
 import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
@@ -13,14 +13,14 @@ import com.red_velvet.marvel.ui.base.BaseViewModel
 
 class StoryViewModel : BaseViewModel(), StoryCreatorInteractionListener {
 
-    private val _story: MutableLiveData<State<List<StoryResponse>>> = MutableLiveData()
-    val story: LiveData<State<List<StoryResponse>>> = _story
+    private val _story: MutableLiveData<State<List<Story>>> = MutableLiveData()
+    val story: LiveData<State<List<Story>>> = _story
 
-    private val _comics: MutableLiveData<State<List<ComicsResponse>>> = MutableLiveData()
-    val comics: LiveData<State<List<ComicsResponse>>> get() = _comics
+    private val _comics: MutableLiveData<State<List<Comic>>> = MutableLiveData()
+    val comics: LiveData<State<List<Comic>>> get() = _comics
 
-    private val _creators: MutableLiveData<State<List<CreatorsResponse>>> = MutableLiveData()
-    val creators: LiveData<State<List<CreatorsResponse>>> get() = _creators
+    private val _creators: MutableLiveData<State<List<Creator>>> = MutableLiveData()
+    val creators: LiveData<State<List<Creator>>> get() = _creators
 
     private val repository: MarvelRepository = MarvelRepositoryImpl(RetrofitClient.apiService)
 
@@ -52,7 +52,7 @@ class StoryViewModel : BaseViewModel(), StoryCreatorInteractionListener {
         _creators.postValue(State.Failed(error.message.toString()))
     }
 
-    private fun onGetCreatorSuccess(state: State<List<CreatorsResponse>?>) {
+    private fun onGetCreatorSuccess(state: State<List<Creator>?>) {
         _creators.postValue(State.Loading)
         state.toData()?.let {
             _creators.postValue(State.Success(it))
@@ -63,7 +63,7 @@ class StoryViewModel : BaseViewModel(), StoryCreatorInteractionListener {
         _comics.postValue(State.Failed(error.message.toString()))
     }
 
-    private fun onGetComicsSuccess(state: State<List<ComicsResponse>?>) {
+    private fun onGetComicsSuccess(state: State<List<Comic>?>) {
         _comics.postValue(State.Loading)
         state.toData()?.let {
             _comics.postValue(State.Success(it))
@@ -74,7 +74,7 @@ class StoryViewModel : BaseViewModel(), StoryCreatorInteractionListener {
         _story.postValue(State.Failed(error.message.toString()))
     }
 
-    private fun onGetStorySuccess(state: State<List<StoryResponse>?>) {
+    private fun onGetStorySuccess(state: State<List<Story>?>) {
         _story.postValue(State.Loading)
         state.toData()?.let {
             _story.postValue(State.Success(it))

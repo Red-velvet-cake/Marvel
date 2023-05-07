@@ -6,7 +6,7 @@
     <data>
         <variable
             name="item"
-            type="com.red_velvet.marvel.data.model.ComicsResponse" />
+            type="com.red_velvet.marvel.data.model.Comic" />
 
         <variable
             name="listner"
