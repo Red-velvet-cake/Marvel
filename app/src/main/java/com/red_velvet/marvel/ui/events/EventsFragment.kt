@@ -9,8 +9,11 @@ import com.red_velvet.marvel.ui.base.BaseFragment
 
 
 class EventsFragment() : BaseFragment<FragmentEventsBinding>() {
+
     override val layoutIdFragment: Int = R.layout.fragment_events
+
     override val viewModel: EventsViewModel by viewModels()
+
     override fun setUp() {
         val adapter = EventsAdapter(emptyList(), viewModel)
         binding.recyclerViewEvents.adapter = adapter
