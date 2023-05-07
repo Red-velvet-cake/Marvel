@@ -39,8 +39,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-
-        return true
+        onBackPressedDispatcher.onBackPressed()
+        return navController.navigateUp()
     }
 
     private fun hideActionBar() {
@@ -52,7 +52,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 R.id.eventsFragment, R.id.storiesFragment -> {
                     this.supportActionBar?.hide()
                 }
-
                 else -> {
                     supportActionBar?.show()
                 }

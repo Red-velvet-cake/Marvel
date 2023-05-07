@@ -10,10 +10,14 @@ import com.red_velvet.marvel.data.repository.MarvelRepository
 import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
 import com.red_velvet.marvel.data.util.State
 import com.red_velvet.marvel.ui.base.BaseViewModel
+import com.red_velvet.marvel.ui.utils.Navigation
 import io.reactivex.rxjava3.core.Observable
 
 class ComicsViewModel : BaseViewModel(), ComicsInteractionListener {
     private val repository: MarvelRepository = MarvelRepositoryImpl(RetrofitClient.apiService)
+
+    private val _navigation: MutableLiveData<Navigation> = MutableLiveData()
+    val navigation: LiveData<Navigation> = _navigation
 
     @StringRes
     private val thisWeekStringResource = R.string.this_week
@@ -109,10 +113,18 @@ class ComicsViewModel : BaseViewModel(), ComicsInteractionListener {
     }
 
     override fun onComicClicked(comicId: Int) {
+        val action =
+            ComicsFragmentDirections.actionComicsFragmentToComicDetailsFragment(comicId)
+
+        _navigation.postValue(Navigation.Direction(action))
     }
 
     override fun onTryAgainClicked() {
         getAllComicsCollections()
+    }
+
+    fun navigateBack() {
+        _navigation.postValue(Navigation.Back)
     }
 
 
