@@ -1,6 +1,7 @@
 package com.red_velvet.marvel.ui.series
 
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.red_velvet.marvel.R
 import com.red_velvet.marvel.databinding.FragmentSeriesBinding
 import com.red_velvet.marvel.ui.base.BaseFragment
@@ -32,6 +33,17 @@ class SeriesFragment : BaseFragment<FragmentSeriesBinding>() {
             viewModel.filterSeries(binding.chips.chipTradePaperback.text.toString())
         }
 
+        navigateToSeriesDetails()
+    }
+
+    private fun navigateToSeriesDetails() {
+        viewModel.navigationToSeriesDetails.observe(viewLifecycleOwner) { event ->
+            event.getContentIfNotHandled()?.let {
+                val directions =
+                    SeriesFragmentDirections.actionSeriesFragmentToSeriesDetailsFragment(it)
+                findNavController().navigate(directions)
+            }
+        }
     }
 
     override fun onDestroy() {
