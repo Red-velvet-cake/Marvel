@@ -7,8 +7,7 @@ import com.red_velvet.marvel.data.model.CreatorsResponse
 import com.red_velvet.marvel.data.model.EventsResponse
 import com.red_velvet.marvel.data.model.SeriesResponse
 import com.red_velvet.marvel.data.model.StoryResponse
-import io.reactivex.rxjava3.core.Single
-import com.red_velvet.marvel.data.util.State
+import com.red_velvet.marvel.ui.utils.State
 import io.reactivex.rxjava3.core.Observable
 
 interface MarvelRepository {

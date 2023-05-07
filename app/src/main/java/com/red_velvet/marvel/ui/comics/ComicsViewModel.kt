@@ -8,9 +8,9 @@ import com.red_velvet.marvel.data.model.ComicsResponse
 import com.red_velvet.marvel.data.remote.RetrofitClient
 import com.red_velvet.marvel.data.repository.MarvelRepository
 import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
-import com.red_velvet.marvel.data.util.State
 import com.red_velvet.marvel.ui.base.BaseViewModel
 import com.red_velvet.marvel.ui.utils.Navigation
+import com.red_velvet.marvel.ui.utils.State
 import io.reactivex.rxjava3.core.Observable
 
 class ComicsViewModel : BaseViewModel(), ComicsInteractionListener {

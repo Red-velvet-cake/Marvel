@@ -39,9 +39,6 @@
         <argument
             android:name="comicId"
             app:argType="integer" />
-        <action
-            android:id="@+id/action_comicDetailsFragment_to_comicsFragment"
-            app:destination="@id/comicsFragment" />
     </fragment>
     <fragment
         android:id="@+id/eventsFragment"

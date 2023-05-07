@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import com.red_velvet.marvel.data.model.StoryResponse
 import com.red_velvet.marvel.data.remote.RetrofitClient
 import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
-import com.red_velvet.marvel.data.util.State
 import com.red_velvet.marvel.ui.base.BaseViewModel
+import com.red_velvet.marvel.ui.utils.State
 
 
 class StoriesViewModel : BaseViewModel(), StoriesInteractionListener {
