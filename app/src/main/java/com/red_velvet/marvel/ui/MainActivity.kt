@@ -3,8 +3,7 @@ package com.red_velvet.marvel.ui
 import android.view.Menu
 import android.view.MenuItem
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.red_velvet.marvel.R
 import com.red_velvet.marvel.databinding.ActivityMainBinding
@@ -12,7 +11,6 @@ import com.red_velvet.marvel.ui.base.BaseActivity
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
-    private lateinit var appBarConfiguration: AppBarConfiguration
     override val LOG_TAG: String = "MainActivity"
 
     override fun getLayoutResId() = R.layout.activity_main
@@ -21,8 +19,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     override fun setup() {
         setSupportActionBar(binding.toolbar)
         hideActionBar()
-        appBarConfiguration = AppBarConfiguration(navController.graph)
-        setupActionBarWithNavController(navController, appBarConfiguration)
+
+        NavigationUI.setupActionBarWithNavController(this, navController)
         binding.contentMain.bottomNav.setupWithNavController(navController)
     }
 
@@ -39,8 +37,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        onBackPressedDispatcher.onBackPressed()
-        return navController.navigateUp()
+        return findNavController(R.id.nav_host_fragment_content_main).navigateUp()
+                || super.onSupportNavigateUp()
     }
 
     private fun hideActionBar() {

@@ -6,7 +6,6 @@ import com.red_velvet.marvel.data.model.EventsResponse
 import com.red_velvet.marvel.data.remote.RetrofitClient
 import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
 import com.red_velvet.marvel.ui.base.BaseViewModel
-import com.red_velvet.marvel.ui.utils.Navigation
 import com.red_velvet.marvel.ui.utils.State
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.kotlin.addTo
@@ -70,9 +69,7 @@ class EventsViewModel : BaseViewModel(), EventsInteractionListener {
     }
 
     override fun onEventClicked(eventId: Int) {
-        val directions =
-            EventsFragmentDirections.actionEventsFragmentToEventDetailsFragment(eventId)
-        _navigation.postValue(Navigation.Direction(directions))
+
     }
 
 }
