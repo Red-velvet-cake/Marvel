@@ -19,6 +19,10 @@ class StoriesViewModel : BaseViewModel(), StoriesInteractionListener {
     private val _stories: MutableLiveData<State<List<Story>>> = MutableLiveData()
     val stories: LiveData<State<List<Story>>> get() = _stories
 
+    init {
+        getAllStories()
+    }
+
     fun getAllStories() {
         bindStateUpdates(
             repository.getStories(),
