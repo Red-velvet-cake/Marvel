@@ -22,11 +22,8 @@ class StoriesViewModel : BaseViewModel(), StoriesInteractionListener {
         )
     }
 
-    private fun onGetStoriesSuccess(state: State<List<Story>?>) {
-        _stories.postValue(State.Loading)
-        state.toData()?.let {
-            _stories.postValue(State.Success(it))
-        }
+    private fun onGetStoriesSuccess(state: State<List<Story>>) {
+        _stories.postValue(state)
     }
 
     private fun onGetStoriesError(error: Throwable) {
