@@ -9,7 +9,7 @@
             type="com.red_velvet.marvel.data.model.Creator" />
         <variable
             name="listener"
-            type="com.red_velvet.marvel.ui.serieDetails.adapter.CreatorListenerInteraction" />
+            type="com.red_velvet.marvel.ui.serieDetails.CreatorListenerInteraction" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
