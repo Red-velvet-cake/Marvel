@@ -38,22 +38,16 @@ class SeriesDetailsViewModel : BaseViewModel(), CreatorListenerInteraction {
         )
     }
 
-    private fun onGetSeriesDetailsSuccess(state: State<List<Series>?>) {
-        _series.postValue(State.Loading)
-        state.toData()?.let {
-            _series.postValue(State.Success(it))
-        }
+    private fun onGetSeriesDetailsSuccess(state: State<List<Series>>) {
+        _series.postValue(state)
     }
 
     private fun onGetSeriesDetailsError(error: Throwable) {
         _series.postValue(State.Failed(error.message.toString()))
     }
 
-    private fun onGetCreatorsBySeriesIdSuccess(state: State<List<Creator>?>) {
-        _creators.postValue(State.Loading)
-        state.toData()?.let {
-            _creators.postValue(State.Success(it))
-        }
+    private fun onGetCreatorsBySeriesIdSuccess(state: State<List<Creator>>) {
+        _creators.postValue(state)
     }
 
     private fun onGetCreatorsBySeriesDetailsError(error: Throwable) {
