@@ -9,7 +9,7 @@ data class Comic(
     @SerializedName("collectedIssues")
     val collectedIssues: List<CollectedIssue>? = listOf(),
     @SerializedName("collections")
-    val collections: List<Any>? = listOf(),
+    val collections: List<ResourceCollection>? = listOf(),
     @SerializedName("creators")
     val creators: ResourceCollection? = ResourceCollection(),
     @SerializedName("dates")
