@@ -7,9 +7,9 @@ import com.red_velvet.marvel.data.model.Series
 import com.red_velvet.marvel.data.remote.RetrofitClient
 import com.red_velvet.marvel.data.repository.MarvelRepository
 import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
-import com.red_velvet.marvel.data.util.State
 import com.red_velvet.marvel.ui.base.BaseViewModel
 import com.red_velvet.marvel.ui.serieDetails.adapter.CreatorListenerInteraction
+import com.red_velvet.marvel.ui.utils.State
 
 class SeriesDetailsViewModel : BaseViewModel(), CreatorListenerInteraction {
 

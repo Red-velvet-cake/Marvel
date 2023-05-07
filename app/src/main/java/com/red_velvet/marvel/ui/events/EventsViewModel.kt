@@ -5,8 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import com.red_velvet.marvel.data.model.Event
 import com.red_velvet.marvel.data.remote.RetrofitClient
 import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
-import com.red_velvet.marvel.data.util.State
 import com.red_velvet.marvel.ui.base.BaseViewModel
+import com.red_velvet.marvel.ui.utils.SingleEvent
+import com.red_velvet.marvel.ui.utils.State
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.kotlin.addTo
 import java.util.concurrent.TimeUnit
@@ -16,7 +17,10 @@ class EventsViewModel : BaseViewModel(), EventsInteractionListener {
     private val repository = MarvelRepositoryImpl(RetrofitClient.apiService)
 
     private val _events = MutableLiveData<State<List<Event>>>()
-    val events: LiveData<State<List<Event>>> get() = _events
+    val events: LiveData<State<List<Event>>> = _events
+
+    private val _navigationToEventDetails = MutableLiveData<SingleEvent<Int>>()
+    val navigationToEventDetails: LiveData<SingleEvent<Int>> = _navigationToEventDetails
 
     val searchQuery = MutableLiveData<String>()
 
@@ -66,5 +70,8 @@ class EventsViewModel : BaseViewModel(), EventsInteractionListener {
             }.addTo(compositeDisposable)
     }
 
+    override fun onEventClicked(eventId: Int) {
+        _navigationToEventDetails.postValue(SingleEvent(eventId))
+    }
 
 }

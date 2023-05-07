@@ -8,11 +8,16 @@
         <variable
             name="item"
             type="com.red_velvet.marvel.data.model.Series" />
+
+        <variable
+            name="listener"
+            type="com.red_velvet.marvel.ui.series.SeriesInteractionListener" />
     </data>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="@{() -> listener.onSeriesClicked(item.id)}"
         android:layout_margin="@dimen/spacing_medium"
         app:cardCornerRadius="@dimen/spacing_medium">
 

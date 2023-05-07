@@ -9,7 +9,7 @@ import com.red_velvet.marvel.data.model.Event
 import com.red_velvet.marvel.data.model.Series
 import com.red_velvet.marvel.data.model.Story
 import com.red_velvet.marvel.data.remote.MarvelService
-import com.red_velvet.marvel.data.util.State
+import com.red_velvet.marvel.ui.utils.State
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import retrofit2.Response

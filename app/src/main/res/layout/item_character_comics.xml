@@ -10,7 +10,7 @@
 
         <variable
             name="listner"
-            type="com.red_velvet.marvel.ui.character.ComicsInteractionListener" />
+            type="com.red_velvet.marvel.ui.characterDetails.ComicsInteractionListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

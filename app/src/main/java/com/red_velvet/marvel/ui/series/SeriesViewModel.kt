@@ -7,14 +7,18 @@ import com.red_velvet.marvel.data.model.Series
 import com.red_velvet.marvel.data.remote.RetrofitClient
 import com.red_velvet.marvel.data.repository.MarvelRepository
 import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
-import com.red_velvet.marvel.data.util.State
 import com.red_velvet.marvel.ui.base.BaseViewModel
+import com.red_velvet.marvel.ui.utils.SingleEvent
+import com.red_velvet.marvel.ui.utils.State
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.kotlin.addTo
 import java.util.concurrent.TimeUnit
 
 
 class SeriesViewModel : BaseViewModel(), SeriesInteractionListener {
+
+    private val _navigationToSeriesDetails: MutableLiveData<SingleEvent<Int>> = MutableLiveData()
+    val navigationToSeriesDetails: LiveData<SingleEvent<Int>> = _navigationToSeriesDetails
 
     private val _series: MutableLiveData<State<List<Series>>> = MutableLiveData()
     val series: LiveData<State<List<Series>>> get() = _series
@@ -67,6 +71,10 @@ class SeriesViewModel : BaseViewModel(), SeriesInteractionListener {
                     search(query)
                 }
             }.addTo(compositeDisposable)
+    }
+
+    override fun onSeriesClicked(seriesId: Int) {
+        _navigationToSeriesDetails.postValue(SingleEvent(seriesId))
     }
 
 }

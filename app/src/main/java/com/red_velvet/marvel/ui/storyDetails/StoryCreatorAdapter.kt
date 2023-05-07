@@ -1,4 +1,4 @@
-package com.red_velvet.marvel.ui.story
+package com.red_velvet.marvel.ui.storyDetails
 
 import com.red_velvet.marvel.R
 import com.red_velvet.marvel.data.model.Creator

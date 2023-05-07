@@ -8,11 +8,15 @@ import com.red_velvet.marvel.data.model.Comic
 import com.red_velvet.marvel.data.remote.RetrofitClient
 import com.red_velvet.marvel.data.repository.MarvelRepository
 import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
-import com.red_velvet.marvel.data.util.State
 import com.red_velvet.marvel.ui.base.BaseViewModel
+import com.red_velvet.marvel.ui.utils.SingleEvent
+import com.red_velvet.marvel.ui.utils.State
 
 class ComicsViewModel : BaseViewModel(), ComicsInteractionListener {
     private val repository: MarvelRepository = MarvelRepositoryImpl(RetrofitClient.apiService)
+
+    private val _navigationToComicDetails: MutableLiveData<SingleEvent<Int>> = MutableLiveData()
+    val navigationToComicDetails: LiveData<SingleEvent<Int>> = _navigationToComicDetails
 
     @StringRes
     private val thisWeekStringResource = R.string.this_week
@@ -119,7 +123,9 @@ class ComicsViewModel : BaseViewModel(), ComicsInteractionListener {
             _comicsCollections.value!!.plus(ComicsCollection(titleId, comics))
     }
 
-    override fun onComicClicked(comic: Comic) {}
+    override fun onComicClicked(comicId: Int) {
+        _navigationToComicDetails.postValue(SingleEvent(comicId))
+    }
 
     override fun onTryAgainClicked() {
         getThisWeekComics()

@@ -11,4 +11,6 @@ class EventsAdapter(items: List<Event>, listener: EventsInteractionListener) :
     override val layoutId: Int = R.layout.item_event
 }
 
-interface EventsInteractionListener : BaseInteractionListener
+interface EventsInteractionListener : BaseInteractionListener {
+    fun onEventClicked(eventId: Int)
+}

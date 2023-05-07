@@ -11,4 +11,6 @@ class StoriesAdapter(stories: List<Story>, listener: StoriesInteractionListener)
     override val layoutId = R.layout.item_stories
 }
 
-interface StoriesInteractionListener : BaseInteractionListener
+interface StoriesInteractionListener : BaseInteractionListener {
+    fun onStoryClicked(storyId: Int)
+}
