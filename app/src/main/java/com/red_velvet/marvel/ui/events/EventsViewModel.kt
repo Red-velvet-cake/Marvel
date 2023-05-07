@@ -16,8 +16,7 @@ class EventsViewModel : BaseViewModel(), EventsInteractionListener {
     private val repository = MarvelRepositoryImpl(RetrofitClient.apiService)
 
     private val _events = MutableLiveData<State<List<Event>>>()
-    val events: LiveData<State<List<Event>>>
-        get() = _events
+    val events: LiveData<State<List<Event>>> get() = _events
 
     val searchQuery = MutableLiveData<String>()
 
@@ -30,22 +29,23 @@ class EventsViewModel : BaseViewModel(), EventsInteractionListener {
         bindStateUpdates(
             repository.getEvents(),
             ::onGetAllEventsError,
-            ::onGetAllEventsSuccess)
+            ::onGetAllEventsSuccess
+        )
     }
 
     private fun searchEvents(query: String? = null) {
         bindStateUpdates(
             repository.getEvents(query),
             ::onGetAllEventsError,
-            ::onGetAllEventsSuccess)
+            ::onGetAllEventsSuccess
+        )
     }
 
-    private fun onGetAllEventsSuccess(event: State<List<Event>?>) {
-        _events.postValue(State.Loading)
-        event.toData()?.let { _events.postValue(State.Success(it)) }
+    private fun onGetAllEventsSuccess(state: State<List<Event>>) {
+        _events.postValue(state)
     }
 
-    private fun onGetAllEventsError(e:Throwable){
+    private fun onGetAllEventsError(e: Throwable) {
         _events.postValue(State.Loading)
         _events.postValue(State.Failed(e.message.toString()))
     }
