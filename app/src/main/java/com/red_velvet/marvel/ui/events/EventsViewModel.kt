@@ -5,8 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import com.red_velvet.marvel.data.model.EventsResponse
 import com.red_velvet.marvel.data.remote.RetrofitClient
 import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
-import com.red_velvet.marvel.data.util.State
 import com.red_velvet.marvel.ui.base.BaseViewModel
+import com.red_velvet.marvel.ui.utils.Event
+import com.red_velvet.marvel.ui.utils.State
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.kotlin.addTo
 import java.util.concurrent.TimeUnit
@@ -14,6 +15,9 @@ import java.util.concurrent.TimeUnit
 class EventsViewModel : BaseViewModel(), EventsInteractionListener {
 
     private val repository = MarvelRepositoryImpl(RetrofitClient.apiService)
+
+    private val _navigationToEventDetails: MutableLiveData<Event<Int>> = MutableLiveData()
+    val navigationToEventDetails: LiveData<Event<Int>> = _navigationToEventDetails
 
     private val _events = MutableLiveData<State<List<EventsResponse>>>()
     val events: LiveData<State<List<EventsResponse>>>
@@ -30,22 +34,24 @@ class EventsViewModel : BaseViewModel(), EventsInteractionListener {
         bindStateUpdates(
             repository.getEvents(),
             ::onGetAllEventsError,
-            ::onGetAllEventsSuccess)
+            ::onGetAllEventsSuccess
+        )
     }
 
     private fun searchEvents(query: String? = null) {
         bindStateUpdates(
             repository.getEvents(query),
             ::onGetAllEventsError,
-            ::onGetAllEventsSuccess)
+            ::onGetAllEventsSuccess
+        )
     }
 
-    private fun onGetAllEventsSuccess(eventsResponse: State<List<EventsResponse>?>){
+    private fun onGetAllEventsSuccess(eventsResponse: State<List<EventsResponse>?>) {
         _events.postValue(State.Loading)
         eventsResponse.toData()?.let { _events.postValue(State.Success(it)) }
     }
 
-    private fun onGetAllEventsError(e:Throwable){
+    private fun onGetAllEventsError(e: Throwable) {
         _events.postValue(State.Loading)
         _events.postValue(State.Failed(e.message.toString()))
     }
@@ -66,5 +72,8 @@ class EventsViewModel : BaseViewModel(), EventsInteractionListener {
             }.addTo(compositeDisposable)
     }
 
+    override fun onEventClicked(eventId: Int) {
+        _navigationToEventDetails.postValue(Event(eventId))
+    }
 
 }

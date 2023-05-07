@@ -1,19 +1,12 @@
-package com.red_velvet.marvel.data.util
+package com.red_velvet.marvel.ui.utils
 
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.google.android.material.textfield.TextInputEditText
-import com.red_velvet.marvel.data.model.CharactersResponse
 import com.red_velvet.marvel.data.model.Thumbnail
 import com.red_velvet.marvel.ui.base.BaseAdapter
-import com.red_velvet.marvel.ui.characters.CharacterDetailsInteractionListener
-import com.red_velvet.marvel.ui.characters.CharactersAdapter
-import com.red_velvet.marvel.ui.characters.CharactersViewModel
 
 @BindingAdapter(value = ["app:showWhenLoading"])
 fun <T> showWhenLoading(view: View, state: State<T>?) {

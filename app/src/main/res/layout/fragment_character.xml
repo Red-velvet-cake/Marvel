@@ -7,13 +7,13 @@
 
         <variable
             name="viewModel"
-            type="com.red_velvet.marvel.ui.character.CharacterViewModel" />
+            type="com.red_velvet.marvel.ui.characterDetails.CharacterViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.character.CharacterFragment">
+        tools:context=".ui.characterDetails.CharacterFragment">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/character_image_view"

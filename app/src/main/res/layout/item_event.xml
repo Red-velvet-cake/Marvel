@@ -8,11 +8,12 @@
             type="com.red_velvet.marvel.data.model.EventsResponse" />
         <variable
             name="listener"
-            type="com.red_velvet.marvel.ui.base.BaseInteractionListener" />
+            type="com.red_velvet.marvel.ui.events.EventsInteractionListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
+        android:onClick="@{() -> listener.onEventClicked(item.id)}"
         android:layout_height="wrap_content">
 
         <ImageView
