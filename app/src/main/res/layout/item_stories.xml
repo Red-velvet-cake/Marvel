@@ -37,7 +37,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-
+                android:background="@drawable/bg_bottom_linear_transparent"
                 />
 
             <TextView
@@ -48,6 +48,7 @@
                 android:layout_marginBottom="4dp"
                 android:ellipsize="end"
                 android:lines="2"
+                android:textColor="#f1f1f1f1"
                 android:text="@{item.title}"
                 app:layout_constraintBottom_toBottomOf="@id/image_item"
                 app:layout_constraintStart_toStartOf="@id/image_item" />
