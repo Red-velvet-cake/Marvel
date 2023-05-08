@@ -67,6 +67,7 @@
             android:fontFamily="@font/roboto_medium"
             android:text="Creators"
             android:textSize="@dimen/font_size_title"
+            app:showIfData="@{viewModel.creators.toData()}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/description_text_view" />
 
