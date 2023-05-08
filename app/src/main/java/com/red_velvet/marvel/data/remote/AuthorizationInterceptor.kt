@@ -8,8 +8,8 @@ class AuthorizationInterceptor : Interceptor {
         val request = chain.request()
 
         val url = request.url.newBuilder()
-            .addQueryParameter("apikey", "194ab147353122cab8c2a660639fc434")
-            .addQueryParameter("hash", "3e6fb23bb896e05f25121a20a9b160db")
+            .addQueryParameter("apikey", "bed3380a9c72ce9cd974909412585352")
+            .addQueryParameter("hash", "59cfb1f6824ff03db3832888c4787cc3")
             .addQueryParameter("ts", "1")
             .build()
 
