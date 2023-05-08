@@ -20,8 +20,8 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/creator_image_view"
-            android:layout_width="90dp"
-            android:layout_height="90dp"
+            android:layout_width="@dimen/card_creator_size"
+            android:layout_height="@dimen/card_creator_size"
             android:layout_marginEnd="@dimen/spacing_small"
             android:scaleType="centerCrop"
             app:imageUrl="@{item.thumbnail}"
