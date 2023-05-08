@@ -8,11 +8,11 @@ import com.red_velvet.marvel.databinding.FragmentEventsBinding
 import com.red_velvet.marvel.ui.base.BaseFragment
 
 
-class EventsFragment() : BaseFragment<FragmentEventsBinding,EventsViewModel>() {
+class EventsFragment : BaseFragment<FragmentEventsBinding, EventsViewModel>() {
 
     override val layoutIdFragment: Int = R.layout.fragment_events
 
-    override val viewModel:EventsViewModel by viewModels()
+    override val viewModel: EventsViewModel by viewModels()
 
     override fun setUp() {
         val adapter = EventsAdapter(emptyList(), viewModel)

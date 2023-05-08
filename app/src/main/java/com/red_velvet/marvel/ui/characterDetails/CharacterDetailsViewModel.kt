@@ -15,15 +15,14 @@ import com.red_velvet.marvel.ui.utils.State
 class CharacterDetailsViewModel : BaseViewModel(), SeriesInteractionListener,
     ComicsInteractionListener {
 
-    private val _characterDetails: MutableLiveData<State<List<Character>>> =
-        MutableLiveData()
-    val characterDetails: LiveData<State<List<Character>>> get() = _characterDetails
+    private val _characterDetails: MutableLiveData<State<List<Character>>> = MutableLiveData()
+    val characterDetails: LiveData<State<List<Character>>> = _characterDetails
 
     private val _comics: MutableLiveData<State<List<Comic>>> = MutableLiveData()
-    val comics: LiveData<State<List<Comic>>> get() = _comics
+    val comics: LiveData<State<List<Comic>>> = _comics
 
     private val _series: MutableLiveData<State<List<Series>>> = MutableLiveData()
-    val series: LiveData<State<List<Series>>> get() = _series
+    val series: LiveData<State<List<Series>>> = _series
 
     private val repository: MarvelRepository = MarvelRepositoryImpl(RetrofitClient.apiService)
 

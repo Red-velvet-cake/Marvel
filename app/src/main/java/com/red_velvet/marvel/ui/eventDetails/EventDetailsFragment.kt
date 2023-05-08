@@ -10,11 +10,11 @@ import com.red_velvet.marvel.databinding.FragmentEventDetailsBinding
 import com.red_velvet.marvel.ui.base.BaseFragment
 
 
-class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding,EventDetailViewModel>() {
+class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding, EventDetailViewModel>() {
 
     override val layoutIdFragment = R.layout.fragment_event_details
 
-    override val viewModel: EventDetailViewModel  by viewModels()
+    override val viewModel: EventDetailViewModel by viewModels()
 
     private val args: EventDetailsFragmentArgs by navArgs()
 

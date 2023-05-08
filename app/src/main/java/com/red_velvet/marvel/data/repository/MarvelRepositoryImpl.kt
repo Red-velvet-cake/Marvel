@@ -68,7 +68,6 @@ class MarvelRepositoryImpl(
         return wrapWithState { marvelServiceImpl.getCharacterByCharacterId(characterId) }
     }
 
-
     override fun getCreatorsByEventId(eventId: Int): Observable<State<List<Creator>>> {
         return wrapWithState { marvelServiceImpl.getCreatorsByEventId(eventId) }
     }
@@ -95,14 +94,13 @@ class MarvelRepositoryImpl(
         return wrapWithState { marvelServiceImpl.getSeriesByCharacterId(characterId) }
     }
 
-
     override fun getEventDetails(
         eventId: Int
     ): Observable<State<List<Event>>> {
         return wrapWithState { marvelServiceImpl.getEventDetails(eventId) }
     }
 
-    override fun getSerieCreatorsBySeriesId(seriesId: Int): Observable<State<List<Creator>>> {
+    override fun getSeriesCreatorsBySeriesId(seriesId: Int): Observable<State<List<Creator>>> {
         return wrapWithState { marvelServiceImpl.getSerieCreatorsBySeriesId(seriesId) }
     }
 

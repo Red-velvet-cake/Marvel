@@ -67,5 +67,4 @@ abstract class BaseAdapter<T>(
 
     abstract class BaseViewHolder(binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root)
 
-
 }

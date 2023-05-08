@@ -50,6 +50,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 R.id.eventsFragment, R.id.storiesFragment -> {
                     this.supportActionBar?.hide()
                 }
+
                 else -> {
                     supportActionBar?.show()
                 }
