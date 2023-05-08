@@ -1,13 +1,14 @@
 package com.red_velvet.marvel.ui
 
-import android.view.Menu
-import android.view.MenuItem
+
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.red_velvet.marvel.R
 import com.red_velvet.marvel.databinding.ActivityMainBinding
 import com.red_velvet.marvel.ui.base.BaseActivity
+import com.red_velvet.marvel.ui.utils.hideView
+import com.red_velvet.marvel.ui.utils.showView
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
@@ -24,17 +25,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         binding.contentMain.bottomNav.setupWithNavController(navController)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
 
     override fun onSupportNavigateUp(): Boolean {
         return findNavController(R.id.nav_host_fragment_content_main).navigateUp()
@@ -47,11 +37,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 R.id.comicsFragment,
                 R.id.charactersFragment,
                 R.id.seriesFragment,
-                R.id.eventsFragment, R.id.storiesFragment -> {
+                R.id.eventsFragment,
+                R.id.storiesFragment -> {
                     this.supportActionBar?.hide()
+                    binding.contentMain.bottomNav.showView()
                 }
 
                 else -> {
+                    binding.contentMain.bottomNav.hideView()
                     supportActionBar?.show()
                 }
             }

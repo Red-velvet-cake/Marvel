@@ -2,9 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-
     <data>
-
         <variable
             name="viewModel"
             type="com.red_velvet.marvel.ui.characterDetails.CharacterDetailsViewModel" />
@@ -20,7 +18,7 @@
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/character_image_view"
             android:layout_width="match_parent"
-            android:layout_height="160dp"
+            android:layout_height="@dimen/comic_width"
             android:layout_marginHorizontal="@dimen/spacing_medium"
             android:layout_marginTop="@dimen/spacing_medium"
             android:scaleType="centerCrop"
@@ -44,7 +42,7 @@
 
         <TextView
             android:id="@+id/character_desc_text_view"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/no_width"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_medium"
             android:layout_marginTop="@dimen/spacing_normal"
