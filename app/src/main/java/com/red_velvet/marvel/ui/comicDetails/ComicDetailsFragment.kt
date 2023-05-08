@@ -1,6 +1,7 @@
 package com.red_velvet.marvel.ui.comicDetails
 
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.red_velvet.marvel.R
 import com.red_velvet.marvel.databinding.FragmentComicDetailsBinding
@@ -25,6 +26,19 @@ class ComicDetailsFragment : BaseFragment<FragmentComicDetailsBinding>() {
         binding.recyclerViewComicCreators.adapter = creatorsAdapter
         binding.recyclerViewComicCharacters.adapter = charactersAdapter
 
+        navigateToCharacterDetails()
+
+    }
+
+    private fun navigateToCharacterDetails() {
+        viewModel.navigationToCharacterDetails.observe(viewLifecycleOwner) { event ->
+            event.getContentIfNotHandled()?.let {
+                val directions =
+                    ComicDetailsFragmentDirections.actionComicDetailsFragmentToCharacterFragment(it)
+                findNavController().navigate(directions)
+            }
+
+        }
     }
 }
 
