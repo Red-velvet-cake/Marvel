@@ -42,7 +42,7 @@ fun loadImage(view: ImageView, thumbnail: Thumbnail?, loadingPlaceholder: Lottie
     Glide.with(view)
         .load(thumbnail?.toUrl())
         .listener(
-            GlideImageLoadingListener(
+            GlideImageListener(
                 loadingPlaceholder,
                 view.context.getDrawable(R.drawable.baseline_broken_image_24),
                 view,
