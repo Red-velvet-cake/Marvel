@@ -10,7 +10,7 @@ class ComicDetailsCharactersAdapter(
     items: List<Character>,
     listener: ComicDetailsCharacterListenerInteraction,
 ) : BaseAdapter<Character>(items, listener) {
-    override val layoutId: Int = R.layout.comic_item_character
+    override val layoutId: Int = R.layout.item_comic_character
 }
 
 interface ComicDetailsCharacterListenerInteraction : BaseInteractionListener {
