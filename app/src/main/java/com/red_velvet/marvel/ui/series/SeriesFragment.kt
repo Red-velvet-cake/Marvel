@@ -10,7 +10,7 @@ class SeriesFragment : BaseFragment<FragmentSeriesBinding,SeriesViewModel>() {
 
     override val layoutIdFragment = R.layout.fragment_series
 
-    override val viewModel= SeriesViewModel()
+    override val viewModel: SeriesViewModel  by viewModels()
 
     override fun setUp() {
         val adapter = SeriesAdapter(emptyList(), viewModel)

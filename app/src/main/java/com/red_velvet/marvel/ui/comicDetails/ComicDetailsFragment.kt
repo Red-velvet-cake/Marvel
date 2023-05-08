@@ -12,7 +12,7 @@ class ComicDetailsFragment : BaseFragment<FragmentComicDetailsBinding,ComicDetai
 
     override val layoutIdFragment = R.layout.fragment_comic_details
 
-    override val viewModel=ComicDetailsViewModel ()
+    override val viewModel:ComicDetailsViewModel  by viewModels()
 
     private val args: ComicDetailsFragmentArgs by navArgs()
 

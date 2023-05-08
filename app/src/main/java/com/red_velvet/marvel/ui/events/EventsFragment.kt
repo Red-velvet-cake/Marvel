@@ -12,7 +12,7 @@ class EventsFragment() : BaseFragment<FragmentEventsBinding,EventsViewModel>() {
 
     override val layoutIdFragment: Int = R.layout.fragment_events
 
-    override val viewModel=EventsViewModel()
+    override val viewModel:EventsViewModel by viewModels()
 
     override fun setUp() {
         val adapter = EventsAdapter(emptyList(), viewModel)

@@ -14,7 +14,7 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding,EventDetai
 
     override val layoutIdFragment = R.layout.fragment_event_details
 
-    override val viewModel= EventDetailViewModel()
+    override val viewModel: EventDetailViewModel  by viewModels()
 
     private val args: EventDetailsFragmentArgs by navArgs()
 

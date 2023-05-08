@@ -12,7 +12,7 @@ class SeriesDetailsFragment : BaseFragment<FragmentSeriesDetailsBinding,SeriesDe
     override val layoutIdFragment = R.layout.fragment_series_details
 
     private val args: SeriesDetailsFragmentArgs by navArgs()
-    override val viewModel=SeriesDetailsViewModel ()
+    override val viewModel: SeriesDetailsViewModel  by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

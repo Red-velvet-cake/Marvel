@@ -10,7 +10,7 @@ class ComicsFragment : BaseFragment<FragmentComicsBinding,ComicsViewModel>() {
 
     override val layoutIdFragment = R.layout.fragment_comics
 
-    override val viewModel=ComicsViewModel()
+    override val viewModel:ComicsViewModel  by viewModels()
 
     override fun setUp() {
         val comicsAdapter = ComicsScreenAdapter(emptyList(), viewModel)

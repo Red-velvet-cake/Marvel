@@ -10,7 +10,7 @@ import com.red_velvet.marvel.ui.base.BaseFragment
 
 class StoryDetailsFragment : BaseFragment<FragmentStoryBinding,StoryDetailsViewModel>() {
     override val layoutIdFragment: Int = R.layout.fragment_story
-    override val viewModel= StoryDetailsViewModel()
+    override val viewModel: StoryDetailsViewModel by viewModels()
 
     private val args: StoryDetailsFragmentArgs by navArgs()
 

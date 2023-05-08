@@ -8,7 +8,7 @@ import com.red_velvet.marvel.ui.base.BaseFragment
 
 class StoriesFragment : BaseFragment<FragmentStoriesBinding,StoriesViewModel>() {
     override val layoutIdFragment = R.layout.fragment_stories
-    override val viewModel= StoriesViewModel()
+    override val viewModel:StoriesViewModel  by viewModels()
 
     override fun setUp() {
         val adapter = StoriesAdapter(emptyList(), viewModel)
