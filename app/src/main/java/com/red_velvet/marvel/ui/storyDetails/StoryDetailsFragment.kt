@@ -1,5 +1,6 @@
 package com.red_velvet.marvel.ui.storyDetails
 
+import android.os.Bundle
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.red_velvet.marvel.R
@@ -13,11 +14,15 @@ class StoryDetailsFragment : BaseFragment<FragmentStoryBinding>() {
 
     private val args: StoryDetailsFragmentArgs by navArgs()
 
-    override fun setUp() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         val storyId = args.storyId
         viewModel.getStory(storyId)
         viewModel.getStoryComics(storyId)
         viewModel.getStoryCreators(storyId)
+    }
+
+    override fun setUp() {
         val storyCreatorAdapter = StoryCreatorAdapter(mutableListOf(), viewModel)
         binding.creatorRecyclerView.adapter = storyCreatorAdapter
     }

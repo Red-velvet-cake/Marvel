@@ -1,5 +1,6 @@
 package com.red_velvet.marvel.ui.characterDetails
 
+import android.os.Bundle
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -14,12 +15,15 @@ class CharacterDetailsFragment : BaseFragment<FragmentCharacterBinding>() {
 
     private val args: CharacterDetailsFragmentArgs by navArgs()
 
-    override fun setUp() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         val characterId = args.characterId
         viewModel.getCharacterDetails(characterId)
         viewModel.getComicsDyCharacterId(characterId)
         viewModel.getSeriesDyCharacterId(characterId)
+    }
 
+    override fun setUp() {
         val comicsAdapter = ComicsByCharacterAdapter(mutableListOf(), viewModel)
         binding.comicsRecyclerView.adapter = comicsAdapter
 
