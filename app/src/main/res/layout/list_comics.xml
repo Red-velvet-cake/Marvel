@@ -40,7 +40,7 @@
             app:layout_constraintTop_toBottomOf="@id/text_view_title"
             app:setItems="@{item.comics.toData()}"
             app:showWhenSuccess="@{item.comics}"
-            tools:listitem="@layout/item_comic" />
+            tools:listitem="@layout/item_card" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
