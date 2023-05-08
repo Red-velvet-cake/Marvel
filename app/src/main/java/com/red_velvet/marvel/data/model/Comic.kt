@@ -7,7 +7,7 @@ data class Comic(
     @SerializedName("characters")
     val characters: ResourceCollection? = ResourceCollection(),
     @SerializedName("collectedIssues")
-    val collectedIssues: List<CollectedIssue>? = listOf(),
+    val collectedIssues: List<Resource>? = listOf(),
     @SerializedName("collections")
     val collections: List<ResourceCollection>? = listOf(),
     @SerializedName("creators")
@@ -29,7 +29,7 @@ data class Comic(
     @SerializedName("id")
     val id: Int? = 0,
     @SerializedName("images")
-    val images: List<Image>? = listOf(),
+    val images: List<Thumbnail>? = listOf(),
     @SerializedName("isbn")
     val isbn: String? = "",
     @SerializedName("issn")
