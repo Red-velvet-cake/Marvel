@@ -13,19 +13,29 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="@dimen/spacing_medium"
+        android:layout_marginTop="@dimen/spacing_xlarge"
         android:orientation="vertical">
 
-        <EditText
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/edit_text_search"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacing_medium"
-            android:layout_marginTop="@dimen/spacing_normal"
-            android:hint="@string/hint_search"
-            android:text="@={viewModel.searchQuery}"
+            android:layout_height="@dimen/search_height"
+            android:layout_marginStart="@dimen/spacing_medium"
+            android:layout_marginEnd="@dimen/spacing_medium"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.TextInputLayout.Rounded"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Search"
+            android:inputType="text"
+            android:text="@={viewModel.searchQuery}" />
+        </com.google.android.material.textfield.TextInputLayout>
 
 
         <include
