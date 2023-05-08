@@ -10,4 +10,6 @@ class CharactersAdapter(items: List<Character>, listener: CharactersInteractionL
     override val layoutId: Int = R.layout.item_charactors
 }
 
-interface CharactersInteractionListener : BaseInteractionListener
+interface CharactersInteractionListener : BaseInteractionListener {
+    fun onCharacterClicked(characterId: Int)
+}

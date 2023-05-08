@@ -2,6 +2,7 @@ package com.red_velvet.marvel.ui.eventDetails
 
 
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.red_velvet.marvel.R
 import com.red_velvet.marvel.databinding.FragmentEventDetailsBinding
@@ -27,5 +28,17 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding>() {
 
         binding.recyclerViewEventChars.adapter = charactersAdapter
         binding.recyclerViewEventCreators.adapter = creatorsAdapter
+
+        navigateToCharacterDetails()
+    }
+
+    private fun navigateToCharacterDetails() {
+        viewModel.navigationToCharacterDetails.observe(viewLifecycleOwner) { event ->
+            event.getContentIfNotHandled()?.let {
+                val directions =
+                    EventDetailsFragmentDirections.actionEventDetailsFragmentToCharacterFragment(it)
+                findNavController().navigate(directions)
+            }
+        }
     }
 }

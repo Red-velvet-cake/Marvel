@@ -1,5 +1,6 @@
 package com.red_velvet.marvel.ui.eventDetails
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.red_velvet.marvel.data.model.Character
 import com.red_velvet.marvel.data.model.Creator
@@ -7,6 +8,7 @@ import com.red_velvet.marvel.data.model.Event
 import com.red_velvet.marvel.data.remote.RetrofitClient
 import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
 import com.red_velvet.marvel.ui.base.BaseViewModel
+import com.red_velvet.marvel.ui.utils.SingleEvent
 import com.red_velvet.marvel.ui.utils.State
 
 class EventDetailViewModel : BaseViewModel(), CharactersInteractionListener,
@@ -22,6 +24,9 @@ class EventDetailViewModel : BaseViewModel(), CharactersInteractionListener,
 
     private var _creators: MutableLiveData<State<List<Creator>>> = MutableLiveData()
     val creators: MutableLiveData<State<List<Creator>>> = _creators
+
+    private val _navigationToCharacterDetails: MutableLiveData<SingleEvent<Int>> = MutableLiveData()
+    val navigationToCharacterDetails: LiveData<SingleEvent<Int>> = _navigationToCharacterDetails
 
     fun getEvent(eventId: Int) {
         bindStateUpdates(
@@ -69,6 +74,10 @@ class EventDetailViewModel : BaseViewModel(), CharactersInteractionListener,
 
     private fun onGetEventCharactersError(e: Throwable) {
         _characters.postValue(State.Failed(e.message.toString()))
+    }
+
+    override fun onCharacterClicked(characterId: Int) {
+        _navigationToCharacterDetails.postValue(SingleEvent(characterId))
     }
 
 }
