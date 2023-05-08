@@ -32,5 +32,7 @@
     <dimen name="search_height">56dp</dimen>
     <dimen name="loader_size">100dp</dimen>
     <dimen name="no_width">0dp</dimen>
+    <dimen name="image_height">200dp</dimen>
+    <dimen name="creator_card_size">90dp</dimen>
 
 </resources>
