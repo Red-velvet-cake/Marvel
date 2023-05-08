@@ -46,8 +46,11 @@
             android:id="@+id/recyclerViewSeries"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/spacing_medium"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+            app:spanCount="2"
+            android:layout_marginHorizontal="16dp"
+            android:clipToPadding="false"
+            android:paddingTop="16dp"
             app:setItems="@{viewModel.series.toData()}"
             app:showWhenSuccess="@{viewModel.series}"
             tools:listitem="@layout/item_series" />

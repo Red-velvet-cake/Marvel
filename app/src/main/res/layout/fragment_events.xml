@@ -46,7 +46,6 @@
             android:layout_marginHorizontal="16dp"
             android:clipToPadding="false"
             android:paddingTop="16dp"
-
             app:showWhenSuccess="@{viewModel.events}"
             app:setItems="@{viewModel.events.toData()}"
             app:layout_constraintStart_toStartOf="parent"

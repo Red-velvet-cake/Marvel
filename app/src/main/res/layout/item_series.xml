@@ -13,53 +13,42 @@
             name="listener"
             type="com.red_velvet.marvel.ui.series.SeriesInteractionListener" />
     </data>
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="@dimen/comic_width"
+        android:layout_height="@dimen/comic_height"
+        android:layout_margin="@dimen/spacing_normal"
         android:onClick="@{() -> listener.onSeriesClicked(item.id)}"
-        android:layout_margin="@dimen/spacing_medium"
-        app:cardCornerRadius="@dimen/spacing_medium">
+        app:cardCornerRadius="@dimen/radius_medium">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/spacing_medium">
+            android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/image_view_cover"
                 android:layout_width="match_parent"
-                android:layout_height="196dp"
-                android:src="@color/black"
+                android:layout_height="match_parent"
+                android:foreground="@drawable/bg_bottom_linear_transparent"
+                android:scaleType="centerCrop"
                 app:imageUrl="@{item.thumbnail}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                tools:src="@tools:sample/backgrounds/scenic" />
 
             <TextView
-                android:id="@+id/title"
-                android:layout_width="wrap_content"
+                android:id="@+id/text_view_title"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_medium"
-                android:layout_marginTop="12dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:padding="@dimen/spacing_normal"
                 android:text="@{item.title}"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView"
-                tools:text="title" />
-
-            <TextView
-                android:id="@+id/type"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_normal"
-                android:text="@{item.type}"
-                app:layout_constraintStart_toStartOf="@+id/title"
-                app:layout_constraintTop_toBottomOf="@+id/title"
-                tools:text="type" />
+                android:textColor="@color/secondary"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:text="@string/lorem_ipsum" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
+
+
+
 </layout>
