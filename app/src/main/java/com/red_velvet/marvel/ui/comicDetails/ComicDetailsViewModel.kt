@@ -9,6 +9,7 @@ import com.red_velvet.marvel.data.remote.RetrofitClient
 import com.red_velvet.marvel.data.repository.MarvelRepository
 import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
 import com.red_velvet.marvel.ui.base.BaseViewModel
+import com.red_velvet.marvel.ui.utils.SingleEvent
 import com.red_velvet.marvel.ui.utils.State
 
 class ComicDetailsViewModel : BaseViewModel(), ComicDetailsCreatorListenerInteraction,
@@ -25,14 +26,13 @@ class ComicDetailsViewModel : BaseViewModel(), ComicDetailsCreatorListenerIntera
 
     private val repository: MarvelRepository = MarvelRepositoryImpl(RetrofitClient.apiService)
 
+    private val _navigationToCharacterDetails: MutableLiveData<SingleEvent<Int>> = MutableLiveData()
+    val navigationToCharacterDetails: LiveData<SingleEvent<Int>> = _navigationToCharacterDetails
+
     fun fetchData(comicId: Int) {
         fetchComicDetailsData(comicId)
         fetchCreatorsByComicIDData(comicId)
         fetchCharactersByComicIDData(comicId)
-    }
-
-    override fun onClickCharacter(creator: Creator) {
-        TODO("Not yet implemented")
     }
 
     override fun onClickCreator(creator: Creator) {
@@ -87,5 +87,9 @@ class ComicDetailsViewModel : BaseViewModel(), ComicDetailsCreatorListenerIntera
 
     private fun onGetCharactersByComicIDDataError(e: Throwable) {
         _characters.postValue(State.Failed(e.message.toString()))
+    }
+
+    override fun onClickCharacter(characterId: Int) {
+        _navigationToCharacterDetails.postValue(SingleEvent(characterId))
     }
 }

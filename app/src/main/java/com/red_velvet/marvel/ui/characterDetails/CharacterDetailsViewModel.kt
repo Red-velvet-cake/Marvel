@@ -9,9 +9,11 @@ import com.red_velvet.marvel.data.remote.RetrofitClient
 import com.red_velvet.marvel.data.repository.MarvelRepository
 import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
 import com.red_velvet.marvel.ui.base.BaseViewModel
+import com.red_velvet.marvel.ui.utils.SingleEvent
 import com.red_velvet.marvel.ui.utils.State
 
-class CharacterViewModel : BaseViewModel(), SeriesInteractionListener, ComicsInteractionListener {
+class CharacterDetailsViewModel : BaseViewModel(), SeriesInteractionListener,
+    ComicsInteractionListener {
 
     private val _characterDetails: MutableLiveData<State<List<Character>>> =
         MutableLiveData()
@@ -24,6 +26,12 @@ class CharacterViewModel : BaseViewModel(), SeriesInteractionListener, ComicsInt
     val series: LiveData<State<List<Series>>> get() = _series
 
     private val repository: MarvelRepository = MarvelRepositoryImpl(RetrofitClient.apiService)
+
+    private val _navigationToComicDetails: MutableLiveData<SingleEvent<Int>> = MutableLiveData()
+    val navigationToComicDetails: LiveData<SingleEvent<Int>> = _navigationToComicDetails
+
+    private val _navigationToSeriesDetails: MutableLiveData<SingleEvent<Int>> = MutableLiveData()
+    val navigationToSeriesDetails: LiveData<SingleEvent<Int>> = _navigationToSeriesDetails
 
     fun getCharacterDetails(characterId: Int) {
         bindStateUpdates(
@@ -71,6 +79,14 @@ class CharacterViewModel : BaseViewModel(), SeriesInteractionListener, ComicsInt
 
     private fun onGetSeriesDyCharacterIdError(error: Throwable) {
         _series.postValue(State.Failed(error.message.toString()))
+    }
+
+    override fun onComicClicked(comicId: Int) {
+        _navigationToComicDetails.postValue(SingleEvent(comicId))
+    }
+
+    override fun onSeriesClicked(seriesId: Int) {
+        _navigationToSeriesDetails.postValue(SingleEvent(seriesId))
     }
 
 }

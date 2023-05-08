@@ -1,26 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
+
         <variable
             name="item"
             type="com.red_velvet.marvel.data.model.Character" />
+
+        <variable
+            name="listener"
+            type="com.red_velvet.marvel.ui.eventDetails.CharactersInteractionListener" />
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/spacing_small"
-        android:layout_height="wrap_content">
+        android:onClick="@{()->listener.onCharacterClicked(item.id)}">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/image_view_event"
             android:layout_width="@dimen/chars_image_size"
             android:layout_height="@dimen/chars_image_size"
-            android:scaleType="centerCrop"
             android:layout_marginEnd="@dimen/spacing_small"
-            app:shapeAppearanceOverlay="@style/RoundedShapeableImageView"
+            android:scaleType="centerCrop"
             app:imageUrl="@{item.thumbnail}"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/RoundedShapeableImageView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -24,11 +24,18 @@
     </fragment>
     <fragment
         android:id="@+id/characterFragment"
-        android:name="com.red_velvet.marvel.ui.characterDetails.CharacterFragment"
+        android:name="com.red_velvet.marvel.ui.characterDetails.CharacterDetailsFragment"
         android:label="CharacterFragment">
         <argument
             android:name="characterId"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_characterFragment_to_comicDetailsFragment"
+            app:destination="@id/comicDetailsFragment" />
+        <action
+            android:id="@+id/action_characterFragment_to_seriesDetailsFragment2"
+            app:destination="@id/seriesDetailsFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/eventDetailsFragment"
@@ -37,6 +44,9 @@
         <argument
             android:name="eventId"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_eventDetailsFragment_to_characterFragment"
+            app:destination="@id/characterFragment" />
     </fragment>
     <fragment
         android:id="@+id/seriesDetailsFragment"
@@ -62,6 +72,9 @@
         <argument
             android:name="comicId"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_comicDetailsFragment_to_characterFragment"
+            app:destination="@id/characterFragment" />
     </fragment>
     <fragment
         android:id="@+id/eventsFragment"

@@ -4,9 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="item"
             type="com.red_velvet.marvel.data.model.Character" />
+
         <variable
             name="listener"
             type="com.red_velvet.marvel.ui.comicDetails.ComicDetailsCharacterListenerInteraction" />
@@ -14,7 +16,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> listener.onClickCharacter(item.id)}">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/image_view_creator"
@@ -22,22 +25,23 @@
             android:layout_width="@dimen/card_creator_size"
             android:layout_height="@dimen/card_creator_size"
             android:layout_margin="@dimen/spacing_normal"
+            app:imageUrl="@{item.thumbnail}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:imageUrl="@{item.thumbnail}"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{item.name}"
-            android:fontFamily="@font/roboto"
-            android:textSize="@dimen/font_size_title"
-            app:layout_constraintTop_toBottomOf="@id/image_view_creator"
-            app:layout_constraintStart_toStartOf="@id/image_view_creator"
-            app:layout_constraintEnd_toEndOf="@id/image_view_creator"
             android:layout_margin="@dimen/spacing_small"
-            tools:text="frank"/>
+            android:fontFamily="@font/roboto"
+            android:text="@{item.name}"
+            android:textSize="@dimen/font_size_title"
+            app:layout_constraintEnd_toEndOf="@id/image_view_creator"
+            app:layout_constraintStart_toStartOf="@id/image_view_creator"
+            app:layout_constraintTop_toBottomOf="@id/image_view_creator"
+            tools:text="frank" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
