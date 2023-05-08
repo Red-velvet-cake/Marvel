@@ -12,6 +12,4 @@ class ComicDetailsCreatorsAdapter(
     override val layoutId: Int = R.layout.item_comic_creator
 }
 
-interface ComicDetailsCreatorListenerInteraction : BaseInteractionListener {
-    fun onClickCreator(creator: Creator)
-}
+interface ComicDetailsCreatorListenerInteraction : BaseInteractionListener

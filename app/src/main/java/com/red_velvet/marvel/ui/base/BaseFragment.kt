@@ -9,9 +9,9 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import com.red_velvet.marvel.BR
 
-abstract class BaseFragment<VDB : ViewDataBinding> : Fragment() {
+abstract class BaseFragment<VDB : ViewDataBinding, VM : BaseViewModel> : Fragment() {
     abstract val layoutIdFragment: Int
-    abstract val viewModel: BaseViewModel
+    abstract val viewModel: VM
 
     private lateinit var _binding: VDB
     protected val binding: VDB

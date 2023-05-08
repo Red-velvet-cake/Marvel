@@ -21,8 +21,10 @@ class SeriesViewModel : BaseViewModel(), SeriesInteractionListener {
     val navigationToSeriesDetails: LiveData<SingleEvent<Int>> = _navigationToSeriesDetails
 
     private val _series: MutableLiveData<State<List<Series>>> = MutableLiveData()
-    val series: LiveData<State<List<Series>>> get() = _series
+    val series: LiveData<State<List<Series>>> = _series
+
     val repository: MarvelRepository = MarvelRepositoryImpl(RetrofitClient.apiService)
+
     val searchQuery = MutableLiveData<String>()
 
     init {

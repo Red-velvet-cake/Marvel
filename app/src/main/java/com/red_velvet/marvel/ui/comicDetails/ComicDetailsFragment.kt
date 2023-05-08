@@ -8,7 +8,7 @@ import com.red_velvet.marvel.R
 import com.red_velvet.marvel.databinding.FragmentComicDetailsBinding
 import com.red_velvet.marvel.ui.base.BaseFragment
 
-class ComicDetailsFragment : BaseFragment<FragmentComicDetailsBinding>() {
+class ComicDetailsFragment : BaseFragment<FragmentComicDetailsBinding, ComicDetailsViewModel>() {
 
     override val layoutIdFragment = R.layout.fragment_comic_details
 
@@ -42,8 +42,6 @@ class ComicDetailsFragment : BaseFragment<FragmentComicDetailsBinding>() {
                     ComicDetailsFragmentDirections.actionComicDetailsFragmentToCharacterFragment(it)
                 findNavController().navigate(directions)
             }
-
         }
     }
 }
-

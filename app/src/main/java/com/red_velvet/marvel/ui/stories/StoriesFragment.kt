@@ -6,7 +6,7 @@ import com.red_velvet.marvel.R
 import com.red_velvet.marvel.databinding.FragmentStoriesBinding
 import com.red_velvet.marvel.ui.base.BaseFragment
 
-class StoriesFragment : BaseFragment<FragmentStoriesBinding>() {
+class StoriesFragment : BaseFragment<FragmentStoriesBinding, StoriesViewModel>() {
     override val layoutIdFragment = R.layout.fragment_stories
     override val viewModel: StoriesViewModel by viewModels()
 

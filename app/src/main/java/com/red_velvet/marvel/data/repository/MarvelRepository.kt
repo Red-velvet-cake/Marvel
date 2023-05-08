@@ -52,7 +52,7 @@ interface MarvelRepository {
 
     fun getCharacterByCharacterId(characterId: Int): Observable<State<List<Character>>>
 
-    fun getSerieCreatorsBySeriesId(seriesId: Int): Observable<State<List<Creator>>>
+    fun getSeriesCreatorsBySeriesId(seriesId: Int): Observable<State<List<Creator>>>
 
     fun getSeriesByCharacterId(characterId: Int): Observable<State<List<Series>>>
 

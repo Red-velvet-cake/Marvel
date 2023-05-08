@@ -6,7 +6,7 @@ import com.red_velvet.marvel.R
 import com.red_velvet.marvel.databinding.FragmentSeriesBinding
 import com.red_velvet.marvel.ui.base.BaseFragment
 
-class SeriesFragment : BaseFragment<FragmentSeriesBinding>() {
+class SeriesFragment : BaseFragment<FragmentSeriesBinding, SeriesViewModel>() {
 
     override val layoutIdFragment = R.layout.fragment_series
 
@@ -15,7 +15,6 @@ class SeriesFragment : BaseFragment<FragmentSeriesBinding>() {
     override fun setUp() {
         val adapter = SeriesAdapter(emptyList(), viewModel)
         binding.recyclerViewSeries.adapter = adapter
-
 
         binding.chips.chipAllSeries.setOnClickListener {
             viewModel.getAllSeries()

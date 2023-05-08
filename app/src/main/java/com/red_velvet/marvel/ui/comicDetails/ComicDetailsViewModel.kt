@@ -16,13 +16,13 @@ class ComicDetailsViewModel : BaseViewModel(), ComicDetailsCreatorListenerIntera
     ComicDetailsCharacterListenerInteraction {
 
     private val _comicsDetails: MutableLiveData<State<List<Comic>>> = MutableLiveData()
-    val comicsDetails: LiveData<State<List<Comic>>> get() = _comicsDetails
+    val comicsDetails: LiveData<State<List<Comic>>> = _comicsDetails
 
     private val _creators: MutableLiveData<State<List<Creator>>> = MutableLiveData()
-    val creators: LiveData<State<List<Creator>>> get() = _creators
+    val creators: LiveData<State<List<Creator>>> = _creators
 
     private val _characters: MutableLiveData<State<List<Character>>> = MutableLiveData()
-    val characters: LiveData<State<List<Character>>> get() = _characters
+    val characters: LiveData<State<List<Character>>> = _characters
 
     private val repository: MarvelRepository = MarvelRepositoryImpl(RetrofitClient.apiService)
 
@@ -34,11 +34,6 @@ class ComicDetailsViewModel : BaseViewModel(), ComicDetailsCreatorListenerIntera
         fetchCreatorsByComicIDData(comicId)
         fetchCharactersByComicIDData(comicId)
     }
-
-    override fun onClickCreator(creator: Creator) {
-        TODO("Not yet implemented")
-    }
-
 
     private fun fetchComicDetailsData(comicId: Int) {
         bindStateUpdates(
