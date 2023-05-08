@@ -8,11 +8,11 @@ import com.red_velvet.marvel.R
 import com.red_velvet.marvel.databinding.FragmentComicDetailsBinding
 import com.red_velvet.marvel.ui.base.BaseFragment
 
-class ComicDetailsFragment : BaseFragment<FragmentComicDetailsBinding>() {
+class ComicDetailsFragment : BaseFragment<FragmentComicDetailsBinding,ComicDetailsViewModel>() {
 
     override val layoutIdFragment = R.layout.fragment_comic_details
 
-    override val viewModel: ComicDetailsViewModel by viewModels()
+    override val viewModel=ComicDetailsViewModel ()
 
     private val args: ComicDetailsFragmentArgs by navArgs()
 

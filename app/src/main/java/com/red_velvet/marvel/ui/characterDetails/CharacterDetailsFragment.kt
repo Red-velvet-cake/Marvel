@@ -8,10 +8,10 @@ import com.red_velvet.marvel.R
 import com.red_velvet.marvel.databinding.FragmentCharacterBinding
 import com.red_velvet.marvel.ui.base.BaseFragment
 
-class CharacterDetailsFragment : BaseFragment<FragmentCharacterBinding>() {
+class CharacterDetailsFragment : BaseFragment<FragmentCharacterBinding,CharacterDetailsViewModel>() {
     override val layoutIdFragment: Int = R.layout.fragment_character
 
-    override val viewModel: CharacterDetailsViewModel by viewModels()
+    override val viewModel=CharacterDetailsViewModel()
 
     private val args: CharacterDetailsFragmentArgs by navArgs()
 
