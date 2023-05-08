@@ -46,4 +46,12 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">@dimen/radius_medium</item>
     </style>
+    <style name="RoundedShapeableImageSmallView" parent="Widget.MaterialComponents.ShapeableImageView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+    <style name="ShapeAppearanceOverlay.TextInputLayout.Rounded" parent="">
+        <item name="cornerSize">20dp</item>
+    </style>
+
 </resources>

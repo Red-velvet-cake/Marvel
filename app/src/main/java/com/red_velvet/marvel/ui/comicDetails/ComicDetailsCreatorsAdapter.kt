@@ -9,7 +9,7 @@ class ComicDetailsCreatorsAdapter(
     items: List<Creator>,
     listener: ComicDetailsCreatorListenerInteraction,
 ) : BaseAdapter<Creator>(items, listener) {
-    override val layoutId: Int = R.layout.comic_item_creator
+    override val layoutId: Int = R.layout.item_comic_creator
 }
 
 interface ComicDetailsCreatorListenerInteraction : BaseInteractionListener {

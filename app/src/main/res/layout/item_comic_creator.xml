@@ -4,9 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="item"
             type="com.red_velvet.marvel.data.model.Creator" />
+
         <variable
             name="listener"
             type="com.red_velvet.marvel.ui.comicDetails.ComicDetailsCharacterListenerInteraction" />
@@ -14,31 +16,29 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/spacing_normal">
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/image_view_creator"
-            style="@style/CardImageStyle"
-            android:layout_width="@dimen/card_creator_size"
-            android:layout_height="@dimen/card_creator_size"
-            android:layout_margin="@dimen/spacing_normal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/creator_image_view"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_marginEnd="@dimen/spacing_small"
+            android:scaleType="centerCrop"
             app:imageUrl="@{item.thumbnail}"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+            app:shapeAppearanceOverlay="@style/RoundedShapeableImageSmallView" />
+
         <TextView
+            android:id="@+id/creator_name_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_normal"
             android:text="@{item.fullName}"
-            android:fontFamily="@font/roboto"
-            android:textSize="@dimen/font_size_title"
-            app:layout_constraintTop_toBottomOf="@id/image_view_creator"
-            app:layout_constraintStart_toStartOf="@id/image_view_creator"
-            app:layout_constraintEnd_toEndOf="@id/image_view_creator"
-            android:layout_margin="@dimen/spacing_small"
-            tools:text="frank"/>
-
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/creator_image_view" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

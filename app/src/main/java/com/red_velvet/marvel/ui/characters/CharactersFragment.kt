@@ -10,11 +10,8 @@ class CharactersFragment : BaseFragment<FragmentCharactersBinding>() {
     override val layoutIdFragment = R.layout.fragment_characters
     override val viewModel: CharactersViewModel by viewModels()
     override fun setUp() {
-        binding.viewModel = viewModel
-        binding.lifecycleOwner = viewLifecycleOwner
         binding.recyclerViewChars.adapter = CharactersAdapter(emptyList(), viewModel)
         navigateToCharacterDetails()
-
     }
 
     private fun navigateToCharacterDetails() {
