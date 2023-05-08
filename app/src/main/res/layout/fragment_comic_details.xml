@@ -117,7 +117,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/creators_title"
                     app:showWhenSuccess="@{viewModel.creators}"
-                    tools:listitem="@layout/comic_item_creator"/>
+                    tools:listitem="@layout/item_comic_creator"/>
 
 
             <TextView
@@ -148,7 +148,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/characters_title"
                     app:showWhenSuccess="@{viewModel.characters}"
-                    tools:listitem="@layout/comic_item_character"/>
+                    tools:listitem="@layout/item_comic_character"/>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
