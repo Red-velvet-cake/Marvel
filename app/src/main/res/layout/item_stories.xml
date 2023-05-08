@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
@@ -12,45 +13,41 @@
             name="listener"
             type="com.red_velvet.marvel.ui.stories.StoriesInteractionListener" />
     </data>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/story_card"
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="@dimen/comic_height"
+        android:layout_marginTop="8dp"
         android:layout_marginHorizontal="4dp"
-        android:layout_marginVertical="4dp"
-        android:onClick="@{() -> listener.onStoryClicked(item.id)}">
+        android:onClick="@{() -> listener.onStoryClicked(item.id)}"
+        app:cardCornerRadius="@dimen/radius_medium">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/image_item"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                app:imageUrl="@{item.thumbnail}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <View
+                android:id="@+id/image_view_cover"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-
-                />
+                android:foreground="@drawable/bg_bottom_linear_transparent"
+                android:scaleType="centerCrop"
+                app:imageUrl="@{item.thumbnail}"
+                tools:src="@tools:sample/backgrounds/scenic" />
 
             <TextView
-                android:id="@+id/title"
-                android:layout_width="wrap_content"
+                android:id="@+id/text_view_title"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginBottom="4dp"
                 android:ellipsize="end"
-                android:lines="2"
+                android:maxLines="2"
+                android:padding="@dimen/spacing_normal"
                 android:text="@{item.title}"
-                app:layout_constraintBottom_toBottomOf="@id/image_item"
-                app:layout_constraintStart_toStartOf="@id/image_item" />
+                android:textColor="@color/secondary"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:text="@string/lorem_ipsum" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+
+    </com.google.android.material.card.MaterialCardView>
+
 </layout>

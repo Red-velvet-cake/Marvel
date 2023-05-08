@@ -29,5 +29,6 @@
 
     <dimen name="comic_width">160dp</dimen>
     <dimen name="comic_height">240dp</dimen>
+    <dimen name="search_height">56dp</dimen>
 
 </resources>
