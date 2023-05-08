@@ -27,7 +27,7 @@
             app:imageUrl="@{item.thumbnail}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:shapeAppearanceOverlay="@style/RoundedShapeableImageView" />
+            app:shapeAppearanceOverlay="@style/RoundedShapeableImageSmallView" />
 
         <TextView
             android:id="@+id/creator_name_text_view"
