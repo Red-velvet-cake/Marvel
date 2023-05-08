@@ -42,7 +42,7 @@ class StoryDetailsViewModel : BaseViewModel(), StoryCreatorInteractionListener {
 
     fun getStoryCreators(storyId: Int) {
         bindStateUpdates(
-            repository.getSerieCreatorsBySeriesId(8),
+            repository.getSerieCreatorsBySeriesId(storyId),
             onNext = ::onGetCreatorSuccess,
             onError = ::onGetSeriesError
         )
