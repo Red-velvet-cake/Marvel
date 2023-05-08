@@ -94,7 +94,7 @@
                     android:layout_marginBottom="@dimen/spacing_small"
                     android:layout_marginHorizontal="@dimen/spacing_medium"
                     android:text="Creators"
-                    app:showWhenSuccess="@{viewModel.comicsDetails}"
+                    app:showIfData="@{viewModel.creators.toData()}"
                     app:layout_constraintTop_toBottomOf="@id/text_view_comic_desc"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -117,7 +117,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/creators_title"
                     app:showWhenSuccess="@{viewModel.creators}"
-                    tools:listitem="@layout/comic_item_creator"/>
+                    tools:listitem="@layout/item_comic_creator"/>
 
 
             <TextView
@@ -128,7 +128,7 @@
                     android:layout_marginBottom="@dimen/spacing_small"
                     android:layout_marginHorizontal="@dimen/spacing_medium"
                     android:text="Characters"
-                    app:showWhenSuccess="@{viewModel.comicsDetails}"
+                    app:showIfData="@{viewModel.characters.toData()}"
                     app:layout_constraintTop_toBottomOf="@id/recycler_view_comic_creators"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -148,7 +148,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/characters_title"
                     app:showWhenSuccess="@{viewModel.characters}"
-                    tools:listitem="@layout/comic_item_character"/>
+                    tools:listitem="@layout/item_comic_character"/>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

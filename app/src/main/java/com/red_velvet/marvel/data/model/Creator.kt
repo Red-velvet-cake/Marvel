@@ -1,5 +1,7 @@
 package com.red_velvet.marvel.data.model
+
 import com.google.gson.annotations.SerializedName
+
 data class Creator(
     @SerializedName("id")
     val id: Int? = null,

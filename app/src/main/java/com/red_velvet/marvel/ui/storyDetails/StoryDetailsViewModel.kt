@@ -17,10 +17,10 @@ class StoryDetailsViewModel : BaseViewModel(), StoryCreatorInteractionListener {
     val story: LiveData<State<List<Story>>> = _story
 
     private val _comics: MutableLiveData<State<List<Comic>>> = MutableLiveData()
-    val comics: LiveData<State<List<Comic>>> get() = _comics
+    val comics: LiveData<State<List<Comic>>> = _comics
 
     private val _creators: MutableLiveData<State<List<Creator>>> = MutableLiveData()
-    val creators: LiveData<State<List<Creator>>> get() = _creators
+    val creators: LiveData<State<List<Creator>>> = _creators
 
     private val repository: MarvelRepository = MarvelRepositoryImpl(RetrofitClient.apiService)
 
@@ -42,7 +42,7 @@ class StoryDetailsViewModel : BaseViewModel(), StoryCreatorInteractionListener {
 
     fun getStoryCreators(storyId: Int) {
         bindStateUpdates(
-            repository.getSerieCreatorsBySeriesId(8),
+            repository.getSeriesCreatorsBySeriesId(storyId),
             onNext = ::onGetCreatorSuccess,
             onError = ::onGetSeriesError
         )
@@ -73,5 +73,3 @@ class StoryDetailsViewModel : BaseViewModel(), StoryCreatorInteractionListener {
     }
 
 }
-
-

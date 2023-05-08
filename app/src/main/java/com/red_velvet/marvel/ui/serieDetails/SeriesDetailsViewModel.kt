@@ -15,10 +15,10 @@ class SeriesDetailsViewModel : BaseViewModel(), CreatorListenerInteraction {
     private val repository: MarvelRepository = MarvelRepositoryImpl(RetrofitClient.apiService)
 
     private val _series: MutableLiveData<State<List<Series>>> = MutableLiveData()
-    val series: LiveData<State<List<Series>>> get() = _series
+    val series: LiveData<State<List<Series>>> = _series
 
     private val _creators: MutableLiveData<State<List<Creator>>> = MutableLiveData()
-    val creators: LiveData<State<List<Creator>>> get() = _creators
+    val creators: LiveData<State<List<Creator>>> = _creators
 
 
     fun getSeries(seriesId: Int) {
@@ -31,7 +31,7 @@ class SeriesDetailsViewModel : BaseViewModel(), CreatorListenerInteraction {
 
     fun getCreators(seriesId: Int) {
         bindStateUpdates(
-            repository.getSerieCreatorsBySeriesId(seriesId),
+            repository.getSeriesCreatorsBySeriesId(seriesId),
             onNext = ::onGetCreatorsBySeriesIdSuccess,
             onError = ::onGetCreatorsBySeriesDetailsError
         )

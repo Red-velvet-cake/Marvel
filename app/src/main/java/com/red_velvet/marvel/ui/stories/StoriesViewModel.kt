@@ -12,12 +12,13 @@ import com.red_velvet.marvel.ui.utils.State
 
 class StoriesViewModel : BaseViewModel(), StoriesInteractionListener {
 
+    private val repository = MarvelRepositoryImpl(RetrofitClient.apiService)
+
     private val _navigationToStoryDetails: MutableLiveData<SingleEvent<Int>> = MutableLiveData()
     val navigationToStoryDetails: LiveData<SingleEvent<Int>> = _navigationToStoryDetails
 
-    private val repository = MarvelRepositoryImpl(RetrofitClient.apiService)
     private val _stories: MutableLiveData<State<List<Story>>> = MutableLiveData()
-    val stories: LiveData<State<List<Story>>> get() = _stories
+    val stories: LiveData<State<List<Story>>> = _stories
 
     init {
         getAllStories()

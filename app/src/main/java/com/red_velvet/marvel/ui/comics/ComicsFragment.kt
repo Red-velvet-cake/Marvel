@@ -6,7 +6,7 @@ import com.red_velvet.marvel.R
 import com.red_velvet.marvel.databinding.FragmentComicsBinding
 import com.red_velvet.marvel.ui.base.BaseFragment
 
-class ComicsFragment : BaseFragment<FragmentComicsBinding>() {
+class ComicsFragment : BaseFragment<FragmentComicsBinding, ComicsViewModel>() {
 
     override val layoutIdFragment = R.layout.fragment_comics
 

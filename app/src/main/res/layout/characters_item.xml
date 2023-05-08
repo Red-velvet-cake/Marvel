@@ -4,11 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="item"
             type="com.red_velvet.marvel.data.model.Character" />
-
         <variable
             name="listener"
             type="com.red_velvet.marvel.ui.characters.CharacterDetailsInteractionListener" />
@@ -18,8 +16,8 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="@dimen/comic_height"
-        android:layout_marginHorizontal="4dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/spacing_normal"
+        android:layout_marginHorizontal="@dimen/spacing_small"
         android:onClick="@{() -> listener.onCharacterSelected(item.id)}"
         app:cardCornerRadius="@dimen/radius_medium">
 

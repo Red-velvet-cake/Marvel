@@ -7,7 +7,7 @@ import com.red_velvet.marvel.R
 import com.red_velvet.marvel.databinding.FragmentSeriesDetailsBinding
 import com.red_velvet.marvel.ui.base.BaseFragment
 
-class SeriesDetailsFragment : BaseFragment<FragmentSeriesDetailsBinding>() {
+class SeriesDetailsFragment : BaseFragment<FragmentSeriesDetailsBinding, SeriesDetailsViewModel>() {
 
     override val layoutIdFragment = R.layout.fragment_series_details
 
