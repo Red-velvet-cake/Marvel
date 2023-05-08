@@ -16,7 +16,7 @@
 
         <TextView
             android:id="@+id/text_view_title"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/zero"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_medium"
             android:paddingBottom="@dimen/spacing_normal"
