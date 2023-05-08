@@ -101,7 +101,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/text_view_event_desc"
-                app:showWhenSuccess="@{viewModel.creators}"
+                app:showIfData="@{viewModel.creators.toData()}"
                 tools:text="Characters" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -130,7 +130,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/recycler_view_event_creators"
-                app:showWhenSuccess="@{viewModel.characters}" />
+                app:showIfData="@{viewModel.characters.toData()}" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_event_chars"
