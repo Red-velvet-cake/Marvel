@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/spacing_xlarge"
+
         tools:context=".ui.events.EventsFragment">
 
 
@@ -42,10 +43,10 @@
             android:layout_height="0dp"
             app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
             app:spanCount="2"
-            android:layout_marginTop="16dp"
-            android:clipToPadding="true"
-            android:paddingStart="8dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginHorizontal="16dp"
+            android:clipToPadding="false"
+            android:paddingTop="16dp"
+
             app:showWhenSuccess="@{viewModel.events}"
             app:setItems="@{viewModel.events.toData()}"
             app:layout_constraintStart_toStartOf="parent"

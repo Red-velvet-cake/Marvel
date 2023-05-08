@@ -1,26 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
             name="item"
             type="com.red_velvet.marvel.data.model.Character" />
     </data>
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
-        android:layout_marginEnd="@dimen/spacing_small"
-        android:layout_height="wrap_content">
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="@dimen/comic_width"
+        android:layout_height="@dimen/comic_height"
+        android:layout_margin="@dimen/spacing_normal"
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/image_view_event"
-            android:layout_width="@dimen/chars_image_size"
-            android:layout_height="@dimen/chars_image_size"
-            android:scaleType="centerCrop"
-            android:layout_marginEnd="@dimen/spacing_small"
-            app:shapeAppearanceOverlay="@style/RoundedShapeableImageView"
-            app:imageUrl="@{item.thumbnail}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        app:cardCornerRadius="@dimen/radius_medium">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/image_view_cover"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:foreground="@drawable/bg_bottom_linear_transparent"
+                android:scaleType="centerCrop"
+                app:imageUrl="@{item.thumbnail}"
+                tools:src="@tools:sample/backgrounds/scenic" />
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 </layout>
