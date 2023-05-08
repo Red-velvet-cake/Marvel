@@ -1,5 +1,6 @@
 package com.red_velvet.marvel.ui.comicDetails
 
+import android.os.Bundle
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -15,11 +16,15 @@ class ComicDetailsFragment : BaseFragment<FragmentComicDetailsBinding>() {
 
     private val args: ComicDetailsFragmentArgs by navArgs()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val comicId = args.comicId
+        viewModel.fetchData(comicId)
+    }
+
 
     override fun setUp() {
 
-        val comicId = args.comicId
-        viewModel.fetchData(comicId)
         val creatorsAdapter = ComicDetailsCreatorsAdapter(mutableListOf(), viewModel)
         val charactersAdapter = ComicDetailsCharactersAdapter(mutableListOf(), viewModel)
 
