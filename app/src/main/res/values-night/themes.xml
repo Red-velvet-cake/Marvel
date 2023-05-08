@@ -8,6 +8,14 @@
         <item name="android:statusBarColor">?attr/background</item>
         <item name="background">@color/background</item>
     </style>
+    <style name="RoundedShapeableImageView" parent="Widget.MaterialComponents.ShapeableImageView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/radius_medium</item>
+    </style>
+    <style name="RoundedShapeableImageSmallView" parent="Widget.MaterialComponents.ShapeableImageView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
     <style name="ShapeAppearanceOverlay.TextInputLayout.Rounded" parent="">
         <item name="cornerSize">20dp</item>
     </style>

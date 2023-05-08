@@ -14,9 +14,10 @@
 
 
     <com.google.android.material.card.MaterialCardView
-        android:layout_width="@dimen/comic_width"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/comic_height"
-        android:layout_margin="@dimen/spacing_normal"
+        android:layout_marginTop="8dp"
+        android:layout_marginHorizontal="4dp"
         android:onClick="@{() -> listener.onEventClicked(item.id)}"
         app:cardCornerRadius="@dimen/radius_medium">
 
