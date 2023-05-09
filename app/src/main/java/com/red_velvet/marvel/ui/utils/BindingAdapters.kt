@@ -4,7 +4,6 @@ import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
 import com.red_velvet.marvel.R
 import com.red_velvet.marvel.data.model.Thumbnail
@@ -37,17 +36,12 @@ fun <T> showWhenSuccess(view: View, state: State<T>?) {
     }
 }
 
-@BindingAdapter(value = ["app:imageUrl", "app:loadingPlaceholder"], requireAll = false)
-fun loadImage(view: ImageView, thumbnail: Thumbnail?, loadingPlaceholder: LottieAnimationView?) {
-    Glide.with(view)
-        .load(thumbnail?.toUrl())
-        .listener(
-            GlideImageListener(
-                loadingPlaceholder,
-                view.context.getDrawable(R.drawable.baseline_broken_image_24),
-                view,
-            )
-        )
+@BindingAdapter(value = ["app:imageUrl"])
+fun loadImage(view: ImageView, thumbnail: Thumbnail?) {
+    Glide.with(view).load(thumbnail?.toUrl())
+        .thumbnail(Glide.with(view).load(R.raw.loading))
+        .fitCenter()
+        .centerCrop()
         .into(view)
 }
 
