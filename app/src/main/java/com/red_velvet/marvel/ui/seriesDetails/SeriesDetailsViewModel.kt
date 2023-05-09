@@ -1,4 +1,4 @@
-package com.red_velvet.marvel.ui.serieDetails
+package com.red_velvet.marvel.ui.seriesDetails
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -54,5 +54,11 @@ class SeriesDetailsViewModel : BaseViewModel(), CreatorListenerInteraction {
     }
 
     override fun onClickCreator(creator: Creator) {
+    }
+
+    fun onTryAgainClicked() {
+        TODO("You need ID inside the viewModel")
+        getSeries(404)
+        getCreators(404)
     }
 }
