@@ -72,4 +72,11 @@ class StoryDetailsViewModel : BaseViewModel(), StoryCreatorInteractionListener {
         _story.postValue(state)
     }
 
+    fun onTryAgainClicked() {
+        TODO("You need ID inside the viewModel")
+        getStory(404)
+        getStoryComics(404)
+        getStoryCreators(404)
+    }
+
 }
