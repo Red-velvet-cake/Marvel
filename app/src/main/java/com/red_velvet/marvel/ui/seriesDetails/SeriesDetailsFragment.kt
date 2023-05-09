@@ -1,4 +1,4 @@
-package com.red_velvet.marvel.ui.serieDetails
+package com.red_velvet.marvel.ui.seriesDetails
 
 import android.os.Bundle
 import androidx.fragment.app.viewModels
