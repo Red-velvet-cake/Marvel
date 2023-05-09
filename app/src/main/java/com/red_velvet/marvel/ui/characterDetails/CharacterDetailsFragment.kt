@@ -18,10 +18,10 @@ class CharacterDetailsFragment :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.characterId.value = args.characterId
-        viewModel.getCharacterDetails()
-        viewModel.getComicsDyCharacterId()
-        viewModel.getSeriesDyCharacterId()
+        val characterId = args.characterId
+        viewModel.getCharacterDetails(characterId)
+        viewModel.getComicsDyCharacterId(characterId)
+        viewModel.getSeriesDyCharacterId(characterId)
     }
 
     override fun setUp() {

@@ -32,16 +32,12 @@ class CharacterDetailsViewModel : BaseViewModel(), SeriesInteractionListener,
     private val _navigationToSeriesDetails: MutableLiveData<SingleEvent<Int>> = MutableLiveData()
     val navigationToSeriesDetails: LiveData<SingleEvent<Int>> = _navigationToSeriesDetails
 
-    val characterId: MutableLiveData<Int> = MutableLiveData()
-
-    fun getCharacterDetails() {
-        characterId.value?.let {
-            bindStateUpdates(
-                repository.getCharacterByCharacterId(it),
-                onNext = ::onGetCharacterDetailsNextState,
-                onError = ::onGetCharacterDetailsError
-            )
-        }
+    fun getCharacterDetails(characterId: Int) {
+        bindStateUpdates(
+            repository.getCharacterByCharacterId(characterId),
+            onNext = ::onGetCharacterDetailsNextState,
+            onError = ::onGetCharacterDetailsError
+        )
     }
 
     private fun onGetCharacterDetailsNextState(state: State<List<Character>>) {
@@ -52,14 +48,12 @@ class CharacterDetailsViewModel : BaseViewModel(), SeriesInteractionListener,
         _characterDetails.postValue(State.Failed(error.message.toString()))
     }
 
-    fun getComicsDyCharacterId() {
-        characterId.value?.let {
-            bindStateUpdates(
-                repository.getComicsByCharacterId(it),
-                onNext = ::onGetComicsDyCharacterIdNextState,
-                onError = ::onGetComicsDyCharacterIdError
-            )
-        }
+    fun getComicsDyCharacterId(characterId: Int) {
+        bindStateUpdates(
+            repository.getComicsByCharacterId(characterId),
+            onNext = ::onGetComicsDyCharacterIdNextState,
+            onError = ::onGetComicsDyCharacterIdError
+        )
     }
 
     private fun onGetComicsDyCharacterIdNextState(state: State<List<Comic>>) {
@@ -70,14 +64,13 @@ class CharacterDetailsViewModel : BaseViewModel(), SeriesInteractionListener,
         _characterDetails.postValue(State.Failed(error.message.toString()))
     }
 
-    fun getSeriesDyCharacterId() {
-        characterId.value?.let {
-            bindStateUpdates(
-                repository.getSeriesByCharacterId(it),
-                onNext = ::onGetSeriesDyCharacterIdNextState,
-                onError = ::onGetSeriesDyCharacterIdError
-            )
-        }
+    fun getSeriesDyCharacterId(characterId: Int) {
+        bindStateUpdates(
+            repository.getSeriesByCharacterId(characterId),
+            onNext = ::onGetSeriesDyCharacterIdNextState,
+            onError = ::onGetSeriesDyCharacterIdError
+        )
+
     }
 
     private fun onGetSeriesDyCharacterIdNextState(state: State<List<Series>>) {
@@ -97,9 +90,10 @@ class CharacterDetailsViewModel : BaseViewModel(), SeriesInteractionListener,
     }
 
     fun onTryAgainClicked() {
-        getCharacterDetails()
-        getComicsDyCharacterId()
-        getSeriesDyCharacterId()
+        TODO("You need characterId inside the viewModel")
+        getCharacterDetails(404)
+        getComicsDyCharacterId(404)
+        getSeriesDyCharacterId(404)
     }
 
 }
