@@ -92,5 +92,8 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
     implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
 
+    // Another Lottie (Delete it when merge)
+    implementation("com.airbnb.android:lottie:6.0.0")
+
 
 }
