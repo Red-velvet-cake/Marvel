@@ -80,4 +80,11 @@ class EventDetailViewModel : BaseViewModel(), CharactersInteractionListener,
         _navigationToCharacterDetails.postValue(SingleEvent(characterId))
     }
 
+    fun onTryAgainClicked() {
+        TODO("You need ID inside the viewModel")
+        getEvent(404)
+        getCharactersEventId(404)
+        getCreatorsEventId(404)
+    }
+
 }

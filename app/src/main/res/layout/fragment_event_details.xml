@@ -65,30 +65,6 @@
                 app:showWhenSuccess="@{viewModel.event}"
                 tools:text="happy day of gradation" />
 
-            <ProgressBar
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:indeterminate="true"
-                android:indeterminateTint="@color/primary"
-                android:indeterminateTintMode="src_atop"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:showWhenLoading="@{viewModel.event}"
-
-                />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/error_image"
-                android:src="@drawable/baseline_error_24"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:showWhenError="@{viewModel.creators}" />
             <TextView
                 android:id="@+id/text_view_event_creators"
                 android:layout_width="match_parent"
@@ -118,6 +94,7 @@
                 app:setItems="@{viewModel.creators.toData()}"
                 app:showWhenSuccess="@{viewModel.creators}"
                 tools:listitem="@layout/item_creators_event" />
+
             <TextView
                 android:id="@+id/text_view_event_chars"
                 android:layout_width="match_parent"
@@ -147,7 +124,46 @@
                 app:showWhenSuccess="@{viewModel.characters}"
                 tools:listitem="@layout/item_charactors" />
 
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                android:indeterminateTint="@color/primary"
+                android:indeterminateTintMode="src_atop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:showWhenLoading="@{viewModel.event}" />
 
+            <ImageView
+                android:id="@+id/image_view_error"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_error_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:showWhenError="@{viewModel.event}" />
+
+            <TextView
+                android:id="@+id/text_view_error"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{() -> viewModel.onTryAgainClicked()}"
+                android:padding="@dimen/spacing_medium"
+                android:text="@string/try_again"
+                android:textColor="@color/primary"
+                android:textSize="@dimen/font_size_title"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@id/image_view_error"
+                app:layout_constraintStart_toStartOf="@id/image_view_error"
+                app:layout_constraintTop_toBottomOf="@id/image_view_error"
+                app:showWhenError="@{viewModel.event}" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
