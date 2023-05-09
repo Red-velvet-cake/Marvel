@@ -1,3 +1,4 @@
+import java.util.Properties
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -17,6 +18,18 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        val localProperties = Properties()
+        val localPropertiesFile = rootProject.file("local.properties")
+
+        if (localPropertiesFile.exists()) {
+            localPropertiesFile.reader(charset("UTF-8")).use { reader ->
+                localProperties.load(reader)
+            }
+        }
+
+        buildConfigField("String", "PUBLIC_KEY", localProperties.getProperty("publicKey") ?: "\"\"")
+        buildConfigField("String", "PRIVATE_KEY", localProperties.getProperty("privateKey") ?: "\"\"")
     }
 
     buildTypes {
@@ -29,17 +42,20 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_19
+        targetCompatibility = JavaVersion.VERSION_19
     }
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = "19"
     }
     dataBinding{
         enable = true
     }
     viewBinding {
         enable = true
+    }
+    buildFeatures {
+        buildConfig = true
     }
 }
 
