@@ -87,4 +87,9 @@ class ComicDetailsViewModel : BaseViewModel(), ComicDetailsCreatorListenerIntera
     override fun onClickCharacter(characterId: Int) {
         _navigationToCharacterDetails.postValue(SingleEvent(characterId))
     }
+
+    fun onTryAgainClicked() {
+        TODO("You need ID inside the viewModel")
+        fetchData(404)
+    }
 }
