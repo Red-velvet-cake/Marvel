@@ -74,4 +74,9 @@ class EventsViewModel : BaseViewModel(), EventsInteractionListener {
         _navigationToEventDetails.postValue(SingleEvent(eventId))
     }
 
+    fun onTryAgainClicked() {
+        getAllEvents()
+        initSearchObservable()
+    }
+
 }
