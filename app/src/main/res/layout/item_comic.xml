@@ -32,7 +32,6 @@
                 android:foreground="@drawable/bg_bottom_linear_transparent"
                 android:scaleType="centerCrop"
                 app:imageUrl="@{item.thumbnail}"
-                app:loadingPlaceholder="@{animationViewLoading}"
                 tools:src="@tools:sample/backgrounds/scenic" />
 
             <TextView
@@ -46,18 +45,6 @@
                 android:textColor="@color/secondary"
                 app:layout_constraintBottom_toBottomOf="parent"
                 tools:text="@string/lorem_ipsum" />
-
-            <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/animation_view_loading"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@id/image_view_cover"
-                app:layout_constraintEnd_toEndOf="@id/image_view_cover"
-                app:layout_constraintStart_toStartOf="@id/image_view_cover"
-                app:layout_constraintTop_toTopOf="@id/image_view_cover"
-                app:lottie_autoPlay="true"
-                app:lottie_loop="true"
-                app:lottie_rawRes="@raw/loading_animation" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
