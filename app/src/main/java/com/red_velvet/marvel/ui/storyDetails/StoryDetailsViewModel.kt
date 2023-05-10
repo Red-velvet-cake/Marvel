@@ -22,7 +22,9 @@ class StoryDetailsViewModel : BaseViewModel(), StoryCreatorInteractionListener {
     private val _creators: MutableLiveData<State<List<Creator>>> = MutableLiveData()
     val creators: LiveData<State<List<Creator>>> = _creators
 
-    private val repository: MarvelRepository = MarvelRepositoryImpl(RetrofitClient.apiService)
+    private val repository: MarvelRepository by lazy {
+        MarvelRepositoryImpl(RetrofitClient.apiService)
+    }
 
     fun getStory(storyId: Int) {
         bindStateUpdates(

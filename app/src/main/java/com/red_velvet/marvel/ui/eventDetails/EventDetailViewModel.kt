@@ -14,7 +14,7 @@ import com.red_velvet.marvel.ui.utils.State
 class EventDetailViewModel : BaseViewModel(), CharactersInteractionListener,
     CreatorsInteractionListener {
 
-    private val repository = MarvelRepositoryImpl(RetrofitClient.apiService)
+    private val repository by lazy { MarvelRepositoryImpl(RetrofitClient.apiService) }
 
     private var _event: MutableLiveData<State<List<Event>>> = MutableLiveData()
     val event: MutableLiveData<State<List<Event>>> = _event
