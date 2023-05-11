@@ -3,27 +3,27 @@
 
     <item
         android:id="@+id/comicsFragment"
-        android:icon="@drawable/ic_error"
+        android:icon="@drawable/comics"
         android:title="@string/comics" />
 
     <item
         android:id="@+id/charactersFragment"
-        android:icon="@drawable/ic_error"
+        android:icon="@drawable/characters"
         android:title="@string/characters" />
 
     <item
         android:id="@+id/eventsFragment"
-        android:icon="@drawable/ic_error"
+        android:icon="@drawable/events"
         android:title="@string/events" />
 
     <item
         android:id="@+id/seriesFragment"
-        android:icon="@drawable/ic_error"
+        android:icon="@drawable/series"
         android:title="@string/series" />
 
     <item
         android:id="@+id/storiesFragment"
-        android:icon="@drawable/ic_error"
+        android:icon="@drawable/stories"
         android:title="@string/stories" />
 
 </menu>
