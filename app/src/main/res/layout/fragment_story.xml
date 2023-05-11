@@ -67,9 +67,9 @@
             android:fontFamily="@font/roboto_medium"
             android:text="Creators"
             android:textSize="@dimen/font_size_title"
-            app:showIfData="@{viewModel.creators.toData()}"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/description_text_view" />
+            app:layout_constraintTop_toBottomOf="@id/description_text_view"
+            app:showIfData="@{viewModel.creators.toData()}" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/creator_recycler_view"
@@ -87,6 +87,46 @@
             app:setItems="@{viewModel.creators.toData()}"
             app:showWhenSuccess="@{viewModel.creators}"
             tools:listitem="@layout/item_character_series" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/primary"
+            android:indeterminateTintMode="src_atop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:showWhenLoading="@{viewModel.story}" />
+
+        <ImageView
+            android:id="@+id/image_view_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_error_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:showWhenError="@{viewModel.story}" />
+
+        <TextView
+            android:id="@+id/text_view_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="@dimen/spacing_medium"
+            android:text="@string/try_again"
+            android:textColor="@color/primary"
+            android:textSize="@dimen/font_size_title"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/image_view_error"
+            app:layout_constraintStart_toStartOf="@id/image_view_error"
+            app:layout_constraintTop_toBottomOf="@id/image_view_error"
+            app:showWhenError="@{viewModel.story}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

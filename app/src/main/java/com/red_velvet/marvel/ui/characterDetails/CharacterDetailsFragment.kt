@@ -18,18 +18,19 @@ class CharacterDetailsFragment :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val characterId = args.characterId
-        viewModel.getCharacterDetails(characterId)
-        viewModel.getComicsDyCharacterId(characterId)
-        viewModel.getSeriesDyCharacterId(characterId)
+        viewModel.loadCharacterDetails(args.characterId)
     }
 
     override fun setUp() {
         val comicsAdapter = ComicsByCharacterAdapter(mutableListOf(), viewModel)
-        binding.comicsRecyclerView.adapter = comicsAdapter
-
         val seriesAdapter = CharacterSeriesAdapter(mutableListOf(), viewModel)
-        binding.seriesRecyclerView.adapter = seriesAdapter
+
+        binding.apply {
+            comicsRecyclerView.adapter = comicsAdapter
+            seriesRecyclerView.adapter = seriesAdapter
+        }
+
+        binding.textViewError.setOnClickListener { viewModel.loadCharacterDetails(args.characterId) }
 
         navigateToComicDetails()
         navigateToSeriesDetails()

@@ -2,7 +2,9 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
             name="viewModel"
             type="com.red_velvet.marvel.ui.characters.CharactersViewModel" />
@@ -20,10 +22,10 @@
             android:layout_height="@dimen/search_height"
             android:layout_marginStart="@dimen/spacing_medium"
             android:layout_marginEnd="@dimen/spacing_medium"
-            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.TextInputLayout.Rounded"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.TextInputLayout.Rounded">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edit_text_search"
@@ -54,13 +56,45 @@
             tools:listitem="@layout/item_event" />
 
         <ProgressBar
-            android:id="@+id/loading_progress"
-            android:layout_width="@dimen/loader_size"
-            android:layout_height="@dimen/loader_size"
-            app:showWhenLoading="@{viewModel.characters}"
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/primary"
+            android:indeterminateTintMode="src_atop"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"
+            app:showWhenLoading="@{viewModel.characters}" />
+
+        <ImageView
+            android:id="@+id/image_view_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_error_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:showWhenError="@{viewModel.characters}" />
+
+        <TextView
+            android:id="@+id/text_view_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="@{() -> viewModel.onTryAgainClicked()}"
+            android:padding="@dimen/spacing_medium"
+            android:text="@string/try_again"
+            android:textColor="@color/primary"
+            android:textSize="@dimen/font_size_title"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/image_view_error"
+            app:layout_constraintStart_toStartOf="@id/image_view_error"
+            app:layout_constraintTop_toBottomOf="@id/image_view_error"
+            app:showWhenError="@{viewModel.characters}" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
