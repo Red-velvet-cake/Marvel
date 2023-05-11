@@ -32,16 +32,16 @@ class EventsViewModel : BaseViewModel(), EventsInteractionListener {
     private fun getAllEvents() {
         bindStateUpdates(
             repository.getEvents(),
-            ::onGetAllEventsError,
-            ::onGetAllEventsSuccess
+            onError = ::onGetAllEventsError,
+            onNext = ::onGetAllEventsSuccess
         )
     }
 
     private fun searchEvents(query: String? = null) {
         bindStateUpdates(
             repository.getEvents(query),
-            ::onGetAllEventsError,
-            ::onGetAllEventsSuccess
+            onError = ::onGetAllEventsError,
+            onNext = ::onGetAllEventsSuccess
         )
     }
 

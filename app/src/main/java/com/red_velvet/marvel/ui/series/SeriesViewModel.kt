@@ -35,25 +35,25 @@ class SeriesViewModel : BaseViewModel(), SeriesInteractionListener {
     private fun search(query: String) {
         bindStateUpdates(
             repository.getAllSeries(contains = query),
-            ::onError,
-            ::onSuccess
+            onError = ::onGetSeriesError,
+            onNext = ::onGetSeriesSuccess
         )
     }
 
     fun getAllSeries() {
-        bindStateUpdates(repository.getAllSeries(), ::onError, ::onSuccess)
+        bindStateUpdates(repository.getAllSeries(), ::onGetSeriesError, ::onGetSeriesSuccess)
     }
 
-    private fun onError(error: Throwable) {
+    private fun onGetSeriesError(error: Throwable) {
         _series.postValue(State.Failed(error.message.toString()))
     }
 
-    private fun onSuccess(state: State<List<Series>>) {
+    private fun onGetSeriesSuccess(state: State<List<Series>>) {
         _series.postValue(state)
     }
 
     fun filterSeries(filter: String) {
-        bindStateUpdates(repository.getAllSeries(contains = filter), ::onError, ::onSuccess)
+        bindStateUpdates(repository.getAllSeries(contains = filter), ::onGetSeriesError, ::onGetSeriesSuccess)
     }
 
     private fun searchResult() {
