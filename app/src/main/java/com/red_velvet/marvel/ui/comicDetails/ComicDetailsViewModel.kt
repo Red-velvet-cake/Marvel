@@ -29,7 +29,7 @@ class ComicDetailsViewModel : BaseViewModel(), ComicDetailsCreatorListenerIntera
     private val _navigationToCharacterDetails: MutableLiveData<SingleEvent<Int>> = MutableLiveData()
     val navigationToCharacterDetails: LiveData<SingleEvent<Int>> = _navigationToCharacterDetails
 
-    fun fetchData(comicId: Int) {
+    fun loadComicDetails(comicId: Int) {
         fetchComicDetailsData(comicId)
         fetchCreatorsByComicIDData(comicId)
         fetchCharactersByComicIDData(comicId)
@@ -87,4 +87,5 @@ class ComicDetailsViewModel : BaseViewModel(), ComicDetailsCreatorListenerIntera
     override fun onClickCharacter(characterId: Int) {
         _navigationToCharacterDetails.postValue(SingleEvent(characterId))
     }
+
 }

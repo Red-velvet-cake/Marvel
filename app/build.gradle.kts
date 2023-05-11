@@ -17,6 +17,18 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        val localProperties = Properties()
+        val localPropertiesFile = rootProject.file("local.properties")
+
+        if (localPropertiesFile.exists()) {
+            localPropertiesFile.reader(charset("UTF-8")).use { reader ->
+                localProperties.load(reader)
+            }
+        }
+
+        buildConfigField("String", "PUBLIC_KEY", localProperties.getProperty("publicKey") ?: "\"\"")
+        buildConfigField("String", "PRIVATE_KEY", localProperties.getProperty("privateKey") ?: "\"\"")
     }
 
     buildTypes {
@@ -40,6 +52,9 @@ android {
     }
     viewBinding {
         enable = true
+    }
+    buildFeatures {
+        buildConfig = true
     }
 }
 
@@ -92,8 +107,6 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
     implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
 
-    // Another Lottie (Delete it when merge)
+    // Lottie Animation
     implementation("com.airbnb.android:lottie:6.0.0")
-
-
 }

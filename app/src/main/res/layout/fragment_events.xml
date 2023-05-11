@@ -14,9 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/spacing_xlarge"
-
         tools:context=".ui.events.EventsFragment">
-
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/edit_text_search"
@@ -30,7 +28,6 @@
             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.TextInputLayout.Rounded">
 
             <com.google.android.material.textfield.TextInputEditText
-
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="@string/search"
@@ -58,6 +55,9 @@
             android:id="@+id/progress_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/primary"
+            android:indeterminateTintMode="src_atop"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -101,6 +101,34 @@
             app:layout_constraintStart_toStartOf="@id/animation_view_search_empty"
             app:layout_constraintTop_toBottomOf="@id/animation_view_search_empty"
             app:showWhenEmpty="@{viewModel.events}" />
+
+        <ImageView
+            android:id="@+id/image_view_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_error_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:showWhenError="@{viewModel.events}" />
+
+        <TextView
+            android:id="@+id/text_view_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="@{() -> viewModel.onTryAgainClicked()}"
+            android:padding="@dimen/spacing_medium"
+            android:text="@string/try_again"
+            android:textColor="@color/primary"
+            android:textSize="@dimen/font_size_title"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/image_view_error"
+            app:layout_constraintStart_toStartOf="@id/image_view_error"
+            app:layout_constraintTop_toBottomOf="@id/image_view_error"
+            app:showWhenError="@{viewModel.events}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
