@@ -1,4 +1,4 @@
-package com.red_velvet.marvel.ui.serieDetails
+package com.red_velvet.marvel.ui.seriesDetails
 
 import android.os.Bundle
 import androidx.fragment.app.viewModels
@@ -16,14 +16,12 @@ class SeriesDetailsFragment : BaseFragment<FragmentSeriesDetailsBinding, SeriesD
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        val seriesId = args.seriesId
-        viewModel.getSeries(seriesId)
-        viewModel.getCreators(seriesId)
+        viewModel.loadSeriesDetails(args.seriesId)
     }
 
     override fun setUp() {
         val creatorsAdapter = CreatorsAdapter(mutableListOf(), viewModel)
         binding.recyclerViewSerieCreators.adapter = creatorsAdapter
+        binding.textViewError.setOnClickListener { viewModel.loadSeriesDetails(args.seriesId) }
     }
 }

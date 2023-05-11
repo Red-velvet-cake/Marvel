@@ -50,7 +50,7 @@
     </fragment>
     <fragment
         android:id="@+id/seriesDetailsFragment"
-        android:name="com.red_velvet.marvel.ui.serieDetails.SeriesDetailsFragment"
+        android:name="com.red_velvet.marvel.ui.seriesDetails.SeriesDetailsFragment"
         android:label="Series Details">
         <argument
             android:name="seriesId"
