@@ -62,3 +62,16 @@ fun <T> showIfData(view: View, data: List<T>?) {
         view.visibility = View.VISIBLE
     }
 }
+
+@BindingAdapter("app:showWhenEmpty")
+fun <T> showWhenEmpty(view: View, state: State<List<T>?>?) {
+    if (state is State.Success) {
+        if (state.data.isNullOrEmpty()) {
+            view.visibility = View.VISIBLE
+        } else {
+            view.visibility = View.GONE
+        }
+    } else {
+        view.visibility = View.GONE
+    }
+}

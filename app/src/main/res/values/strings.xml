@@ -65,4 +65,5 @@
     <string name="series">Series</string>
     <string name="stories">Stories</string>
     <string name="search">Search</string>
+    <string name="empty_search">Looks like Thanos snapped this search result away. \nTry searching for something else.</string>
 </resources>
