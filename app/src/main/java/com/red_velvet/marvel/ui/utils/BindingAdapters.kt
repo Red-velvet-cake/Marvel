@@ -38,7 +38,11 @@ fun <T> showWhenSuccess(view: View, state: State<T>?) {
 
 @BindingAdapter(value = ["app:imageUrl"])
 fun loadImage(view: ImageView, thumbnail: Thumbnail?) {
-    Glide.with(view).load(thumbnail?.toUrl()).placeholder(R.drawable.baseline_image_24).into(view)
+    Glide.with(view).load(thumbnail?.toUrl())
+        .thumbnail(Glide.with(view).load(R.raw.loading))
+        .fitCenter()
+        .centerCrop()
+        .into(view)
 }
 
 @BindingAdapter(value = ["app:setItems"])
