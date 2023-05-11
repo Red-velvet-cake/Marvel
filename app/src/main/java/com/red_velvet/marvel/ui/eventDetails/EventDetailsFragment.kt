@@ -20,19 +20,18 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding, EventDeta
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        val eventId = args.eventId
-        viewModel.getEvent(eventId)
-        viewModel.getCharactersEventId(eventId)
-        viewModel.getCreatorsEventId(eventId)
+        viewModel.loadEventDetails(args.eventId)
     }
 
     override fun setUp() {
         val charactersAdapter = CharactersAdapter(mutableListOf(), viewModel)
         val creatorsAdapter = CreatorsAdapter(mutableListOf(), viewModel)
 
-        binding.recyclerViewEventChars.adapter = charactersAdapter
-        binding.recyclerViewEventCreators.adapter = creatorsAdapter
+        binding.apply {
+            recyclerViewEventChars.adapter = charactersAdapter
+            recyclerViewEventCreators.adapter = creatorsAdapter
+        }
+        binding.textViewError.setOnClickListener { viewModel.loadEventDetails(args.eventId) }
 
         navigateToCharacterDetails()
     }

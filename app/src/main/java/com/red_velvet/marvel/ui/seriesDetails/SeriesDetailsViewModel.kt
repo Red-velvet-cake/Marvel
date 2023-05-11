@@ -20,8 +20,12 @@ class SeriesDetailsViewModel : BaseViewModel(), CreatorListenerInteraction {
     private val _creators: MutableLiveData<State<List<Creator>>> = MutableLiveData()
     val creators: LiveData<State<List<Creator>>> = _creators
 
+    fun loadSeriesDetails(seriesId: Int) {
+        getSeries(seriesId)
+        getCreators(seriesId)
+    }
 
-    fun getSeries(seriesId: Int) {
+    private fun getSeries(seriesId: Int) {
         bindStateUpdates(
             repository.getSeriesDetails(seriesId),
             onNext = ::onGetSeriesDetailsSuccess,
@@ -29,7 +33,7 @@ class SeriesDetailsViewModel : BaseViewModel(), CreatorListenerInteraction {
         )
     }
 
-    fun getCreators(seriesId: Int) {
+    private fun getCreators(seriesId: Int) {
         bindStateUpdates(
             repository.getSeriesCreatorsBySeriesId(seriesId),
             onNext = ::onGetCreatorsBySeriesIdSuccess,
@@ -56,9 +60,4 @@ class SeriesDetailsViewModel : BaseViewModel(), CreatorListenerInteraction {
     override fun onClickCreator(creator: Creator) {
     }
 
-    fun onTryAgainClicked() {
-        TODO("You need ID inside the viewModel")
-        getSeries(404)
-        getCreators(404)
-    }
 }

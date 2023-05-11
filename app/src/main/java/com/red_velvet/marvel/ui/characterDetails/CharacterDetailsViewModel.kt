@@ -32,7 +32,13 @@ class CharacterDetailsViewModel : BaseViewModel(), SeriesInteractionListener,
     private val _navigationToSeriesDetails: MutableLiveData<SingleEvent<Int>> = MutableLiveData()
     val navigationToSeriesDetails: LiveData<SingleEvent<Int>> = _navigationToSeriesDetails
 
-    fun getCharacterDetails(characterId: Int) {
+    fun loadCharacterDetails(characterId: Int) {
+        getCharacterDetails(characterId)
+        getComicsDyCharacterId(characterId)
+        getSeriesDyCharacterId(characterId)
+    }
+
+    private fun getCharacterDetails(characterId: Int) {
         bindStateUpdates(
             repository.getCharacterByCharacterId(characterId),
             onNext = ::onGetCharacterDetailsNextState,
@@ -48,7 +54,7 @@ class CharacterDetailsViewModel : BaseViewModel(), SeriesInteractionListener,
         _characterDetails.postValue(State.Failed(error.message.toString()))
     }
 
-    fun getComicsDyCharacterId(characterId: Int) {
+    private fun getComicsDyCharacterId(characterId: Int) {
         bindStateUpdates(
             repository.getComicsByCharacterId(characterId),
             onNext = ::onGetComicsDyCharacterIdNextState,
@@ -64,13 +70,12 @@ class CharacterDetailsViewModel : BaseViewModel(), SeriesInteractionListener,
         _characterDetails.postValue(State.Failed(error.message.toString()))
     }
 
-    fun getSeriesDyCharacterId(characterId: Int) {
+    private fun getSeriesDyCharacterId(characterId: Int) {
         bindStateUpdates(
             repository.getSeriesByCharacterId(characterId),
             onNext = ::onGetSeriesDyCharacterIdNextState,
             onError = ::onGetSeriesDyCharacterIdError
         )
-
     }
 
     private fun onGetSeriesDyCharacterIdNextState(state: State<List<Series>>) {
@@ -87,13 +92,6 @@ class CharacterDetailsViewModel : BaseViewModel(), SeriesInteractionListener,
 
     override fun onSeriesClicked(seriesId: Int) {
         _navigationToSeriesDetails.postValue(SingleEvent(seriesId))
-    }
-
-    fun onTryAgainClicked() {
-        TODO("You need characterId inside the viewModel")
-        getCharacterDetails(404)
-        getComicsDyCharacterId(404)
-        getSeriesDyCharacterId(404)
     }
 
 }
