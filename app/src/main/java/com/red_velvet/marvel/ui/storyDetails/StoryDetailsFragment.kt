@@ -16,15 +16,12 @@ class StoryDetailsFragment : BaseFragment<FragmentStoryBinding, StoryDetailsView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val storyId = args.storyId
-        viewModel.getStory(storyId)
-        viewModel.getStoryComics(storyId)
-        viewModel.getStoryCreators(storyId)
+        viewModel.loadStoryDetails(args.storyId)
     }
 
     override fun setUp() {
         val storyCreatorAdapter = StoryCreatorAdapter(mutableListOf(), viewModel)
         binding.creatorRecyclerView.adapter = storyCreatorAdapter
+        binding.textViewError.setOnClickListener { viewModel.loadStoryDetails(args.storyId) }
     }
-
 }

@@ -79,4 +79,9 @@ class CharactersViewModel : BaseViewModel(), CharacterDetailsInteractionListener
         _navigationToCharacterDetails.postValue(SingleEvent(characterId))
     }
 
+    fun onTryAgainClicked() {
+        getCharacters()
+        searchResult()
+    }
+
 }

@@ -18,21 +18,22 @@ class ComicDetailsFragment : BaseFragment<FragmentComicDetailsBinding, ComicDeta
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val comicId = args.comicId
-        viewModel.fetchData(comicId)
+        viewModel.loadComicDetails(args.comicId)
     }
 
 
     override fun setUp() {
-
         val creatorsAdapter = ComicDetailsCreatorsAdapter(mutableListOf(), viewModel)
         val charactersAdapter = ComicDetailsCharactersAdapter(mutableListOf(), viewModel)
 
-        binding.recyclerViewComicCreators.adapter = creatorsAdapter
-        binding.recyclerViewComicCharacters.adapter = charactersAdapter
+        binding.apply {
+            recyclerViewComicCreators.adapter = creatorsAdapter
+            recyclerViewComicCharacters.adapter = charactersAdapter
+        }
+
+        binding.textViewError.setOnClickListener { viewModel.loadComicDetails(args.comicId) }
 
         navigateToCharacterDetails()
-
     }
 
     private fun navigateToCharacterDetails() {
