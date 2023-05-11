@@ -16,20 +16,9 @@ class SeriesFragment : BaseFragment<FragmentSeriesBinding, SeriesViewModel>() {
         val adapter = SeriesAdapter(emptyList(), viewModel)
         binding.recyclerViewSeries.adapter = adapter
 
-        binding.chips.chipAllSeries.setOnClickListener {
-            viewModel.getAllSeries()
-        }
-        binding.chips.chipComic.setOnClickListener {
-            viewModel.filterSeries(binding.chips.chipComic.text.toString())
-        }
-        binding.chips.chipMagazine.setOnClickListener {
-            viewModel.filterSeries(binding.chips.chipMagazine.text.toString())
-        }
-        binding.chips.chipHardcover.setOnClickListener {
-            viewModel.filterSeries(binding.chips.chipHardcover.text.toString())
-        }
-        binding.chips.chipTradePaperback.setOnClickListener {
-            viewModel.filterSeries(binding.chips.chipTradePaperback.text.toString())
+        setUpChipsListener()
+        viewModel.searchQuery.observe(viewLifecycleOwner) {
+            setUpChipsListener(it)
         }
 
         navigateToSeriesDetails()
@@ -42,6 +31,24 @@ class SeriesFragment : BaseFragment<FragmentSeriesBinding, SeriesViewModel>() {
                     SeriesFragmentDirections.actionSeriesFragmentToSeriesDetailsFragment(it)
                 findNavController().navigate(directions)
             }
+        }
+    }
+
+    private fun setUpChipsListener(searchQuery: String? = null) {
+        binding.chips.chipAllSeries.setOnClickListener {
+            viewModel.getAllSeries()
+        }
+        binding.chips.chipComic.setOnClickListener {
+            viewModel.getAllSeries(searchQuery, binding.chips.chipComic.text.toString())
+        }
+        binding.chips.chipMagazine.setOnClickListener {
+            viewModel.getAllSeries(searchQuery, binding.chips.chipMagazine.text.toString())
+        }
+        binding.chips.chipHardcover.setOnClickListener {
+            viewModel.getAllSeries(searchQuery, binding.chips.chipHardcover.text.toString())
+        }
+        binding.chips.chipTradePaperback.setOnClickListener {
+            viewModel.getAllSeries(searchQuery, binding.chips.chipTradePaperback.text.toString())
         }
     }
 

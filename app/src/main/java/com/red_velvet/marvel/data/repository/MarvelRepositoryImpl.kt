@@ -34,10 +34,10 @@ class MarvelRepositoryImpl(
     }
 
     override fun getAllSeries(
-        startYear: Int?,
+        titleStartsWith: String?,
         contains: String?
     ): Observable<State<List<Series>>> {
-        return wrapWithState { marvelServiceImpl.getAllSeries(contains = contains) }
+        return wrapWithState { marvelServiceImpl.getAllSeries(titleStartsWith, contains) }
     }
 
     override fun getCharsByComicId(comicId: Int): Observable<State<List<Character>>> {

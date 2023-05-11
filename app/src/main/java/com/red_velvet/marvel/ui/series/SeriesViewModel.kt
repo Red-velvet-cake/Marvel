@@ -28,20 +28,12 @@ class SeriesViewModel : BaseViewModel(), SeriesInteractionListener {
     val searchQuery = MutableLiveData<String>()
 
     init {
+        initSearchObservable()
         getAllSeries()
-        searchResult()
     }
 
-    private fun search(query: String) {
-        bindStateUpdates(
-            repository.getAllSeries(contains = query),
-            ::onError,
-            ::onSuccess
-        )
-    }
-
-    fun getAllSeries() {
-        bindStateUpdates(repository.getAllSeries(), ::onError, ::onSuccess)
+    fun getAllSeries(titleStartsWith: String? = null, contains: String? = null) {
+        bindStateUpdates(repository.getAllSeries(titleStartsWith, contains), ::onError, ::onSuccess)
     }
 
     private fun onError(error: Throwable) {
@@ -52,25 +44,20 @@ class SeriesViewModel : BaseViewModel(), SeriesInteractionListener {
         _series.postValue(state)
     }
 
-    fun filterSeries(filter: String) {
-        bindStateUpdates(repository.getAllSeries(contains = filter), ::onError, ::onSuccess)
-    }
-
-    private fun searchResult() {
+    private fun initSearchObservable() {
         Observable.create { emitter ->
             searchQuery.observeForever { query ->
                 emitter.onNext(query)
             }
-        }.debounce(1, TimeUnit.MILLISECONDS)
+        }.debounce(500, TimeUnit.MILLISECONDS)
             .distinctUntilChanged()
             .subscribe { query ->
 
                 if (query.isEmpty()) {
-
                     getAllSeries()
                 } else {
-                    Log.d("ethaar", query)
-                    search(query)
+                    Log.d("thio", query)
+                    getAllSeries(query)
                 }
             }.addTo(compositeDisposable)
     }
