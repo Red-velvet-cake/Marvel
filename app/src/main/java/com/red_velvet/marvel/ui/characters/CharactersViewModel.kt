@@ -19,7 +19,9 @@ class CharactersViewModel : BaseViewModel(), CharacterDetailsInteractionListener
 
     val searchQuery = MutableLiveData<String>()
 
-    private val repository: MarvelRepository = MarvelRepositoryImpl(RetrofitClient.apiService)
+    private val repository: MarvelRepository by lazy {
+        MarvelRepositoryImpl(RetrofitClient.apiService)
+    }
 
     private val _navigationToCharacterDetails: MutableLiveData<SingleEvent<Int>> = MutableLiveData()
     val navigationToCharacterDetails: LiveData<SingleEvent<Int>> = _navigationToCharacterDetails
@@ -77,6 +79,11 @@ class CharactersViewModel : BaseViewModel(), CharacterDetailsInteractionListener
 
     override fun onCharacterSelected(characterId: Int) {
         _navigationToCharacterDetails.postValue(SingleEvent(characterId))
+    }
+
+    fun onTryAgainClicked() {
+        getCharacters()
+        searchResult()
     }
 
 }

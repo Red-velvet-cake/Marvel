@@ -13,7 +13,10 @@ import com.red_velvet.marvel.ui.utils.SingleEvent
 import com.red_velvet.marvel.ui.utils.State
 
 class ComicsViewModel : BaseViewModel(), ComicsInteractionListener {
-    private val repository: MarvelRepository = MarvelRepositoryImpl(RetrofitClient.apiService)
+
+    private val repository: MarvelRepository by lazy {
+        MarvelRepositoryImpl(RetrofitClient.apiService)
+    }
 
     private val _navigationToComicDetails: MutableLiveData<SingleEvent<Int>> = MutableLiveData()
     val navigationToComicDetails: LiveData<SingleEvent<Int>> = _navigationToComicDetails

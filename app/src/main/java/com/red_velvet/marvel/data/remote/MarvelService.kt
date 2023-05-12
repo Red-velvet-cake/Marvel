@@ -38,7 +38,7 @@ interface MarvelService {
 
     @GET("series")
     fun getAllSeries(
-        @Query("startYear") startYear: Int? = null,
+        @Query("titleStartsWith") titleStartsWith: String? = null,
         @Query("contains") contains: String? = null
     ): Single<Response<BaseResponse<List<Series>>>>
 

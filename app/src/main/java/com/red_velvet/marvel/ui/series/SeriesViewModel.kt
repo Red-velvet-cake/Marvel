@@ -23,25 +23,17 @@ class SeriesViewModel : BaseViewModel(), SeriesInteractionListener {
     private val _series: MutableLiveData<State<List<Series>>> = MutableLiveData()
     val series: LiveData<State<List<Series>>> = _series
 
-    val repository: MarvelRepository = MarvelRepositoryImpl(RetrofitClient.apiService)
+    val repository: MarvelRepository by lazy { MarvelRepositoryImpl(RetrofitClient.apiService) }
 
     val searchQuery = MutableLiveData<String>()
 
     init {
+        initSearchObservable()
         getAllSeries()
-        searchResult()
     }
 
-    private fun search(query: String) {
-        bindStateUpdates(
-            repository.getAllSeries(contains = query),
-            onError = ::onGetSeriesError,
-            onNext = ::onGetSeriesSuccess
-        )
-    }
-
-    fun getAllSeries() {
-        bindStateUpdates(repository.getAllSeries(), ::onGetSeriesError, ::onGetSeriesSuccess)
+    fun getAllSeries(titleStartsWith: String? = null, contains: String? = null) {
+        bindStateUpdates(repository.getAllSeries(titleStartsWith, contains), ::onGetSeriesError, ::onGetSeriesSuccess)
     }
 
     private fun onGetSeriesError(error: Throwable) {
@@ -52,25 +44,19 @@ class SeriesViewModel : BaseViewModel(), SeriesInteractionListener {
         _series.postValue(state)
     }
 
-    fun filterSeries(filter: String) {
-        bindStateUpdates(repository.getAllSeries(contains = filter), ::onGetSeriesError, ::onGetSeriesSuccess)
-    }
-
-    private fun searchResult() {
+    private fun initSearchObservable() {
         Observable.create { emitter ->
             searchQuery.observeForever { query ->
                 emitter.onNext(query)
             }
-        }.debounce(1, TimeUnit.MILLISECONDS)
+        }.debounce(500, TimeUnit.MILLISECONDS)
             .distinctUntilChanged()
             .subscribe { query ->
-
                 if (query.isEmpty()) {
-
                     getAllSeries()
                 } else {
-                    Log.d("ethaar", query)
-                    search(query)
+                    Log.d("thio", query)
+                    getAllSeries(query)
                 }
             }.addTo(compositeDisposable)
     }
@@ -80,5 +66,3 @@ class SeriesViewModel : BaseViewModel(), SeriesInteractionListener {
     }
 
 }
-
-
