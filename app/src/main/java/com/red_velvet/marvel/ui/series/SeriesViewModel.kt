@@ -33,14 +33,14 @@ class SeriesViewModel : BaseViewModel(), SeriesInteractionListener {
     }
 
     fun getAllSeries(titleStartsWith: String? = null, contains: String? = null) {
-        bindStateUpdates(repository.getAllSeries(titleStartsWith, contains), ::onError, ::onSuccess)
+        bindStateUpdates(repository.getAllSeries(titleStartsWith, contains), ::onGetSeriesError, ::onGetSeriesSuccess)
     }
 
-    private fun onError(error: Throwable) {
+    private fun onGetSeriesError(error: Throwable) {
         _series.postValue(State.Failed(error.message.toString()))
     }
 
-    private fun onSuccess(state: State<List<Series>>) {
+    private fun onGetSeriesSuccess(state: State<List<Series>>) {
         _series.postValue(state)
     }
 
@@ -52,7 +52,6 @@ class SeriesViewModel : BaseViewModel(), SeriesInteractionListener {
         }.debounce(500, TimeUnit.MILLISECONDS)
             .distinctUntilChanged()
             .subscribe { query ->
-
                 if (query.isEmpty()) {
                     getAllSeries()
                 } else {
@@ -67,5 +66,3 @@ class SeriesViewModel : BaseViewModel(), SeriesInteractionListener {
     }
 
 }
-
-

@@ -56,8 +56,8 @@ class ComicsViewModel : BaseViewModel(), ComicsInteractionListener {
     private fun getThisWeekComics() {
         bindStateUpdates(
             repository.getComics(dateDescriptor = THIS_WEEK),
-            ::handleThisWeekComicsFailure,
-            ::handleThisWeekComicsNextState
+            onError = ::handleThisWeekComicsFailure,
+            onNext = ::handleThisWeekComicsNextState
         )
     }
 
@@ -73,8 +73,8 @@ class ComicsViewModel : BaseViewModel(), ComicsInteractionListener {
     private fun getNextWeekComics() {
         bindStateUpdates(
             repository.getComics(dateDescriptor = NEXT_WEEK),
-            ::handleNextWeekComicsFailure,
-            ::handleNextWeekComicsNextState
+            onError = ::handleNextWeekComicsFailure,
+            onNext = ::handleNextWeekComicsNextState
         )
     }
 
@@ -90,8 +90,8 @@ class ComicsViewModel : BaseViewModel(), ComicsInteractionListener {
     private fun getLastWeekComics() {
         bindStateUpdates(
             repository.getComics(dateDescriptor = LAST_WEEK),
-            ::handleLastWeekComicsFailure,
-            ::handleLastWeekComicsNextState
+            onError = ::handleLastWeekComicsFailure,
+            onNext = ::handleLastWeekComicsNextState
         )
     }
 
@@ -107,8 +107,8 @@ class ComicsViewModel : BaseViewModel(), ComicsInteractionListener {
     private fun getThisMonthComics() {
         bindStateUpdates(
             repository.getComics(dateDescriptor = THIS_MONTH),
-            ::handleThisMonthComicsFailure,
-            ::handleThisMonthComicsNextState
+            onError = ::handleThisMonthComicsFailure,
+            onNext = ::handleThisMonthComicsNextState
         )
     }
 
