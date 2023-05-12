@@ -22,7 +22,7 @@ interface MarvelRepository {
     fun getComicsByCharacterId(characterId: Int): Observable<State<List<Comic>>>
 
     fun getAllSeries(
-        startYear: Int? = null,
+        titleStartsWith: String? = null,
         contains: String? = null
     ): Observable<State<List<Series>>>
 
