@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit
 
 class EventsViewModel : BaseViewModel(), EventsInteractionListener {
 
-    private val repository = MarvelRepositoryImpl(RetrofitClient.apiService)
+    private val repository by lazy { MarvelRepositoryImpl(RetrofitClient.apiService) }
 
     private val _events = MutableLiveData<State<List<Event>>>()
     val events: LiveData<State<List<Event>>> = _events

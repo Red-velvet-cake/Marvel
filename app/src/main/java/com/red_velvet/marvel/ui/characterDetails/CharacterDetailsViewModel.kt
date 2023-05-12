@@ -24,7 +24,10 @@ class CharacterDetailsViewModel : BaseViewModel(), SeriesInteractionListener,
     private val _series: MutableLiveData<State<List<Series>>> = MutableLiveData()
     val series: LiveData<State<List<Series>>> = _series
 
-    private val repository: MarvelRepository = MarvelRepositoryImpl(RetrofitClient.apiService)
+
+    private val repository: MarvelRepository by lazy {
+        MarvelRepositoryImpl(RetrofitClient.apiService)
+    }
 
     private val _navigationToComicDetails: MutableLiveData<SingleEvent<Int>> = MutableLiveData()
     val navigationToComicDetails: LiveData<SingleEvent<Int>> = _navigationToComicDetails
