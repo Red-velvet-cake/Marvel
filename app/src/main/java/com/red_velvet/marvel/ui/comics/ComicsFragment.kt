@@ -1,5 +1,7 @@
 package com.red_velvet.marvel.ui.comics
 
+import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.red_velvet.marvel.R
@@ -12,13 +14,22 @@ class ComicsFragment : BaseFragment<FragmentComicsBinding, ComicsViewModel>() {
 
     override val viewModel: ComicsViewModel by viewModels()
 
-    override fun setUp() {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         val comicsAdapter = ComicsScreenAdapter(emptyList(), viewModel)
         binding.recyclerComics.adapter = comicsAdapter
-        navigateToComicDetails()
+        binding.textViewError.setOnClickListener {
+            viewModel.apply {
+                getThisWeekComics()
+                getNextWeekComics()
+                getLastWeekComics()
+                getThisMonthComics()
+            }
+        }
+        initNavigateToComicDetails()
     }
 
-    private fun navigateToComicDetails() {
+    private fun initNavigateToComicDetails() {
         viewModel.navigationToComicDetails.observe(viewLifecycleOwner) { event ->
             event.getContentIfNotHandled()?.let {
                 val directions =

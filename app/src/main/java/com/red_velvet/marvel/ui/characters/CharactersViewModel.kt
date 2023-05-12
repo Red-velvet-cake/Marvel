@@ -27,37 +27,35 @@ class CharactersViewModel : BaseViewModel(), CharacterDetailsInteractionListener
     val navigationToCharacterDetails: LiveData<SingleEvent<Int>> = _navigationToCharacterDetails
 
     init {
-        getCharacters()
-        searchResult()
+        getAllCharacters()
+        initSearchObservable()
     }
 
-    private fun searchResult() {
+    private fun initSearchObservable() {
         Observable.create { emitter ->
             searchQuery.observeForever { query ->
-                if (query != null) {
-                    emitter.onNext(query)
-                }
+                emitter.onNext(query)
             }
-        }.debounce(300, TimeUnit.MILLISECONDS)
+        }.debounce(500, TimeUnit.MILLISECONDS)
             .distinctUntilChanged()
             .subscribe { query ->
                 if (query.isEmpty()) {
-                    getCharacters()
+                    getAllCharacters()
                 } else {
-                    searchCharacters(query)
+                    getAllCharacters(query)
                 }
             }.addTo(compositeDisposable)
     }
 
-    private fun getCharacters() {
+    fun getAllCharacters(nameStartsWith: String? = null) {
         bindStateUpdates(
-            repository.getCharacters(),
-            onNext = ::onGetCharactersSuccess,
+            repository.getAllCharacters(nameStartsWith),
+            onNext = ::onGetCharactersState,
             onError = ::onGetCharactersError
         )
     }
 
-    private fun onGetCharactersSuccess(state: State<List<Character>>) {
+    private fun onGetCharactersState(state: State<List<Character>>) {
         _characters.postValue(state)
     }
 
@@ -65,25 +63,7 @@ class CharactersViewModel : BaseViewModel(), CharacterDetailsInteractionListener
         _characters.postValue(State.Failed(error.message.toString()))
     }
 
-    private fun searchCharacters(query: String) {
-        if (query.isEmpty()) {
-            getCharacters()
-        } else {
-            bindStateUpdates(
-                repository.searchCharacters(query),
-                onNext = ::onGetCharactersSuccess,
-                onError = ::onGetCharactersError
-            )
-        }
-    }
-
-    override fun onCharacterSelected(characterId: Int) {
+    override fun doOnCharacterClicked(characterId: Int) {
         _navigationToCharacterDetails.postValue(SingleEvent(characterId))
     }
-
-    fun onTryAgainClicked() {
-        getCharacters()
-        searchResult()
-    }
-
 }

@@ -12,5 +12,5 @@ class StoriesAdapter(stories: List<Story>, listener: StoriesInteractionListener)
 }
 
 interface StoriesInteractionListener : BaseInteractionListener {
-    fun onStoryClicked(storyId: Int)
+    fun doOnStoryClicked(storyId: Int)
 }

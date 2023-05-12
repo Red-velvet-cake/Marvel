@@ -29,60 +29,60 @@ class EventDetailViewModel : BaseViewModel(), CharactersInteractionListener,
     val navigationToCharacterDetails: LiveData<SingleEvent<Int>> = _navigationToCharacterDetails
 
     fun loadEventDetails(eventId: Int) {
-        getEvent(eventId)
-        getCharactersEventId(eventId)
-        getCreatorsEventId(eventId)
+        getEventById(eventId)
+        getCharactersByEventId(eventId)
+        getCreatorsByEventId(eventId)
     }
 
-    private fun getEvent(eventId: Int) {
+    private fun getEventById(eventId: Int) {
         bindStateUpdates(
-            repository.getEventDetails(eventId),
-            onNext = ::onGetEventSuccess,
-            onError = ::onGetEventError
+            repository.getEventById(eventId),
+            onNext = ::onGetEventState,
+            onError = ::onGetEventFailure
         )
     }
 
-    private fun getCreatorsEventId(eventId: Int) {
+    private fun getCreatorsByEventId(eventId: Int) {
         bindStateUpdates(
             repository.getCreatorsByEventId(eventId),
-            onNext = ::onGetEventCreatorsSuccess,
-            onError = ::onGetEventCreatorsError
+            onNext = ::onGetEventCreatorsState,
+            onError = ::onGetEventCreatorsFailure
         )
     }
 
-    private fun getCharactersEventId(eventId: Int) {
+    private fun getCharactersByEventId(eventId: Int) {
         bindStateUpdates(
             repository.getCharactersByEventId(eventId),
-            onNext = ::onGetEventCharactersSuccess,
-            onError = ::onGetEventCharactersError
+            onNext = ::onGetEventCharactersState,
+            onError = ::onGetEventCharactersFailure
         )
     }
 
-    private fun onGetEventSuccess(state: State<List<Event>>) {
+    private fun onGetEventState(state: State<List<Event>>) {
         _event.postValue(state)
     }
 
-    private fun onGetEventError(e: Throwable) {
+    private fun onGetEventFailure(e: Throwable) {
         _event.postValue(State.Failed(e.message.toString()))
     }
 
-    private fun onGetEventCreatorsSuccess(state: State<List<Creator>>) {
+    private fun onGetEventCreatorsState(state: State<List<Creator>>) {
         _creators.postValue(state)
     }
 
-    private fun onGetEventCreatorsError(e: Throwable) {
+    private fun onGetEventCreatorsFailure(e: Throwable) {
         _creators.postValue(State.Failed(e.message.toString()))
     }
 
-    private fun onGetEventCharactersSuccess(state: State<List<Character>>) {
+    private fun onGetEventCharactersState(state: State<List<Character>>) {
         _characters.postValue(state)
     }
 
-    private fun onGetEventCharactersError(e: Throwable) {
+    private fun onGetEventCharactersFailure(e: Throwable) {
         _characters.postValue(State.Failed(e.message.toString()))
     }
 
-    override fun onCharacterClicked(characterId: Int) {
+    override fun doOnCharacterClicked(characterId: Int) {
         _navigationToCharacterDetails.postValue(SingleEvent(characterId))
     }
 

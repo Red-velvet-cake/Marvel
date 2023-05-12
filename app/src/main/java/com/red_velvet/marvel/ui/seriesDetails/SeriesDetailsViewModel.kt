@@ -27,7 +27,7 @@ class SeriesDetailsViewModel : BaseViewModel(), CreatorListenerInteraction {
 
     private fun getSeries(seriesId: Int) {
         bindStateUpdates(
-            repository.getSeriesDetails(seriesId),
+            repository.getSeriesById(seriesId),
             onNext = ::onGetSeriesDetailsSuccess,
             onError = ::onGetSeriesDetailsError
         )
@@ -35,7 +35,7 @@ class SeriesDetailsViewModel : BaseViewModel(), CreatorListenerInteraction {
 
     private fun getCreators(seriesId: Int) {
         bindStateUpdates(
-            repository.getSeriesCreatorsBySeriesId(seriesId),
+            repository.getCreatorsBySeriesId(seriesId),
             onNext = ::onGetCreatorsBySeriesIdSuccess,
             onError = ::onGetCreatorsBySeriesDetailsError
         )
@@ -56,8 +56,4 @@ class SeriesDetailsViewModel : BaseViewModel(), CreatorListenerInteraction {
     private fun onGetCreatorsBySeriesDetailsError(error: Throwable) {
         _creators.postValue(State.Failed(error.message.toString()))
     }
-
-    override fun onClickCreator(creator: Creator) {
-    }
-
 }

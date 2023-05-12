@@ -53,88 +53,81 @@ class ComicsViewModel : BaseViewModel(), ComicsInteractionListener {
         getThisMonthComics()
     }
 
-    private fun getThisWeekComics() {
+    fun getThisWeekComics() {
         bindStateUpdates(
-            repository.getComics(dateDescriptor = THIS_WEEK),
-            onError = ::handleThisWeekComicsFailure,
-            onNext = ::handleThisWeekComicsNextState
+            repository.getAllComics(dateDescriptor = THIS_WEEK),
+            onError = ::onGetThisWeekComicsFailure,
+            onNext = ::onGetThisWeekComicsState
         )
     }
 
-    private fun handleThisWeekComicsFailure(throwable: Throwable) {
+    private fun onGetThisWeekComicsFailure(throwable: Throwable) {
         _thisWeekComics.postValue(State.Failed(throwable.message ?: UNKNOWN_ERROR))
     }
 
-    private fun handleThisWeekComicsNextState(state: State<List<Comic>>) {
+    private fun onGetThisWeekComicsState(state: State<List<Comic>>) {
         _thisWeekComics.postValue(state)
         if (state is State.Success) insertNewComicsCollection(thisWeekStringResource, state)
     }
 
-    private fun getNextWeekComics() {
+    fun getNextWeekComics() {
         bindStateUpdates(
-            repository.getComics(dateDescriptor = NEXT_WEEK),
-            onError = ::handleNextWeekComicsFailure,
-            onNext = ::handleNextWeekComicsNextState
+            repository.getAllComics(dateDescriptor = NEXT_WEEK),
+            onError = ::onGetNextWeekComicsFailure,
+            onNext = ::onGetNextWeekComicsState
         )
     }
 
-    private fun handleNextWeekComicsFailure(throwable: Throwable) {
+    private fun onGetNextWeekComicsFailure(throwable: Throwable) {
         _nextWeekComics.postValue(State.Failed(throwable.message ?: UNKNOWN_ERROR))
     }
 
-    private fun handleNextWeekComicsNextState(state: State<List<Comic>>) {
+    private fun onGetNextWeekComicsState(state: State<List<Comic>>) {
         _nextWeekComics.postValue(state)
         if (state is State.Success) insertNewComicsCollection(nextWeekStringResource, state)
     }
 
-    private fun getLastWeekComics() {
+    fun getLastWeekComics() {
         bindStateUpdates(
-            repository.getComics(dateDescriptor = LAST_WEEK),
-            onError = ::handleLastWeekComicsFailure,
-            onNext = ::handleLastWeekComicsNextState
+            repository.getAllComics(dateDescriptor = LAST_WEEK),
+            onError = ::onGetLastWeekComicsFailure,
+            onNext = ::onGetLastWeekComicsState
         )
     }
 
-    private fun handleLastWeekComicsFailure(throwable: Throwable) {
+    private fun onGetLastWeekComicsFailure(throwable: Throwable) {
         _lastWeekComics.postValue(State.Failed(throwable.message ?: UNKNOWN_ERROR))
     }
 
-    private fun handleLastWeekComicsNextState(state: State<List<Comic>>) {
+    private fun onGetLastWeekComicsState(state: State<List<Comic>>) {
         _lastWeekComics.postValue(state)
         if (state is State.Success) insertNewComicsCollection(lastWeekStringResource, state)
     }
 
-    private fun getThisMonthComics() {
+    fun getThisMonthComics() {
         bindStateUpdates(
-            repository.getComics(dateDescriptor = THIS_MONTH),
-            onError = ::handleThisMonthComicsFailure,
-            onNext = ::handleThisMonthComicsNextState
+            repository.getAllComics(dateDescriptor = THIS_MONTH),
+            onError = ::onGetThisMonthComicsFailure,
+            onNext = ::onGetThisMonthComicsState
         )
     }
 
-    private fun handleThisMonthComicsFailure(throwable: Throwable) {
+    private fun onGetThisMonthComicsFailure(throwable: Throwable) {
         _thisMonthComics.postValue(State.Failed(throwable.message ?: UNKNOWN_ERROR))
     }
 
-    private fun handleThisMonthComicsNextState(state: State<List<Comic>>) {
+    private fun onGetThisMonthComicsState(state: State<List<Comic>>) {
         _thisMonthComics.postValue(state)
         if (state is State.Success) insertNewComicsCollection(thisMonthStringResource, state)
     }
 
-    private fun insertNewComicsCollection(titleId: Int, comics: State<List<Comic>?>) {
+    private fun insertNewComicsCollection(titleId: Int, comics: State<List<Comic>>) {
         _comicsCollections.value =
             _comicsCollections.value!!.plus(ComicsCollection(titleId, comics))
     }
 
-    override fun onComicClicked(comicId: Int) {
+    override fun doOnComicClicked(comicId: Int) {
         _navigationToComicDetails.postValue(SingleEvent(comicId))
-    }
-
-    override fun onTryAgainClicked() {
-        getThisWeekComics()
-        getNextWeekComics()
-        getLastWeekComics()
-        getThisMonthComics()
     }
 
     companion object {

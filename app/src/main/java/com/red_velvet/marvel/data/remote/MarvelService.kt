@@ -22,7 +22,9 @@ interface MarvelService {
     ): Single<Response<BaseResponse<List<Comic>>>>
 
     @GET("comics/{comicId}")
-    fun getComicDetail(@Path("comicId") comicId: Int): Single<Response<BaseResponse<List<Comic>>>>
+    fun getComicDetailById(
+        @Path("comicId") comicId: Int
+    ): Single<Response<BaseResponse<List<Comic>>>>
 
     @GET("characters/{characterId}/comics")
     fun getComicsByCharacterId(
@@ -32,7 +34,7 @@ interface MarvelService {
     ): Single<Response<BaseResponse<List<Comic>>>>
 
     @GET("comics/{comicId}/creators")
-    fun getComicCreatorByComicId(
+    fun getCreatorByComicId(
         @Path("comicId") comicId: Int? = null,
     ): Single<Response<BaseResponse<List<Creator>>>>
 
@@ -43,7 +45,7 @@ interface MarvelService {
     ): Single<Response<BaseResponse<List<Series>>>>
 
     @GET("series/{seriesId}")
-    fun getSerieDetails(
+    fun getSeriesById(
         @Path("seriesId") seriesId: Int
     ): Single<Response<BaseResponse<List<Series>>>>
 
@@ -53,7 +55,7 @@ interface MarvelService {
     ): Single<Response<BaseResponse<List<Event>>>>
 
     @GET("comics/{comicId}/characters")
-    fun getCharsByComicId(
+    fun getCharactersByComicId(
         @Path("comicId") comicId: Int? = null,
     ): Single<Response<BaseResponse<List<Character>>>>
 
@@ -71,10 +73,12 @@ interface MarvelService {
     fun getAllStories(): Single<Response<BaseResponse<List<Story>>>>
 
     @GET("stories/{storyId}")
-    fun getStory(@Path("storyId") storyId: Int): Single<Response<BaseResponse<List<Story>>>>
+    fun getStoryById(
+        @Path("storyId") storyId: Int
+    ): Single<Response<BaseResponse<List<Story>>>>
 
     @GET("stories/{storyId}/creators")
-    fun getStoryCreatorsByStoryId(
+    fun getCreatorsByStoryId(
         @Path("storyId") storyId: Int
     ): Single<Response<BaseResponse<List<Creator>>>>
 
@@ -84,10 +88,12 @@ interface MarvelService {
     ): Single<Response<BaseResponse<List<Comic>>>>
 
     @GET("characters")
-    fun getCharacters(): Single<Response<BaseResponse<List<Character>>>>
+    fun getAllCharacters(
+        @Query("nameStartsWith") nameStartsWith: String? = null
+    ): Single<Response<BaseResponse<List<Character>>>>
 
     @GET("characters/{characterId}")
-    fun getCharacterByCharacterId(
+    fun getCharacterById(
         @Path("characterId") characterId: Int
     ): Single<Response<BaseResponse<List<Character>>>>
 
@@ -97,17 +103,12 @@ interface MarvelService {
     ): Single<Response<BaseResponse<List<Series>>>>
 
     @GET("series/{seriesId}/creators")
-    fun getSerieCreatorsBySeriesId(
+    fun getCreatorsBySeriesId(
         @Path("seriesId") seriesId: Int
     ): Single<Response<BaseResponse<List<Creator>>>>
 
     @GET("events/{eventId}")
-    fun getEventDetails(
+    fun getEventById(
         @Path("eventId") eventId: Int
     ): Single<Response<BaseResponse<List<Event>>>>
-
-    @GET("characters")
-    fun searchCharacters(
-        @Query("nameStartsWith") nameStartsWith: String? = null
-    ): Single<Response<BaseResponse<List<Character>>>>
 }

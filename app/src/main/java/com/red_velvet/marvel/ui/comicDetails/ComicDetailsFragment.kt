@@ -1,6 +1,7 @@
 package com.red_velvet.marvel.ui.comicDetails
 
 import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -16,13 +17,9 @@ class ComicDetailsFragment : BaseFragment<FragmentComicDetailsBinding, ComicDeta
 
     private val args: ComicDetailsFragmentArgs by navArgs()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         viewModel.loadComicDetails(args.comicId)
-    }
-
-
-    override fun setUp() {
         val creatorsAdapter = ComicDetailsCreatorsAdapter(mutableListOf(), viewModel)
         val charactersAdapter = ComicDetailsCharactersAdapter(mutableListOf(), viewModel)
 
@@ -33,10 +30,10 @@ class ComicDetailsFragment : BaseFragment<FragmentComicDetailsBinding, ComicDeta
 
         binding.textViewError.setOnClickListener { viewModel.loadComicDetails(args.comicId) }
 
-        navigateToCharacterDetails()
+        initNavigateToCharacterDetails()
     }
 
-    private fun navigateToCharacterDetails() {
+    private fun initNavigateToCharacterDetails() {
         viewModel.navigationToCharacterDetails.observe(viewLifecycleOwner) { event ->
             event.getContentIfNotHandled()?.let {
                 val directions =

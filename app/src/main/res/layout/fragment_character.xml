@@ -26,7 +26,7 @@
                 android:layout_marginHorizontal="@dimen/spacing_medium"
                 android:layout_marginTop="@dimen/spacing_medium"
                 android:scaleType="centerCrop"
-                app:imageUrl="@{viewModel.characterDetailsLiveData.toData().get(0).thumbnail}"
+                app:imageUrl="@{viewModel.characterDetails.toData().get(0).thumbnail}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -40,7 +40,7 @@
                 android:layout_marginStart="@dimen/spacing_medium"
                 android:layout_marginTop="@dimen/spacing_medium"
                 android:fontFamily="@font/roboto_medium"
-                android:text="@{viewModel.characterDetailsLiveData.toData().get(0).name}"
+                android:text="@{viewModel.characterDetails.toData().get(0).name}"
                 android:textSize="@dimen/font_size_title"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/character_image_view" />
@@ -54,7 +54,7 @@
                 android:layout_marginEnd="@dimen/spacing_medium"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:text="@{viewModel.characterDetailsLiveData.toData().get(0).description}"
+                android:text="@{viewModel.characterDetails.toData().get(0).description}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/character_title_text_view" />
@@ -126,7 +126,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:showWhenLoading="@{viewModel.comics}" />
+                app:showWhenLoading="@{viewModel.characterDetails}" />
 
             <ImageView
                 android:id="@+id/image_view_error"

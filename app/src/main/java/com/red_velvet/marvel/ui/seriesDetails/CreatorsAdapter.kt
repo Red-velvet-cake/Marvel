@@ -12,6 +12,4 @@ class CreatorsAdapter(
     override val layoutId: Int = R.layout.item_creator
 }
 
-interface CreatorListenerInteraction : BaseInteractionListener {
-    fun onClickCreator(creator: Creator)
-}
+interface CreatorListenerInteraction : BaseInteractionListener

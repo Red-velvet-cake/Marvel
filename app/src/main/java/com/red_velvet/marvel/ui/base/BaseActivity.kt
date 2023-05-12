@@ -15,12 +15,9 @@ abstract class BaseActivity<VB : ViewDataBinding> : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, getLayoutResId())
-        setup()
     }
 
     abstract fun getLayoutResId(): Int
-
-    abstract fun setup()
 
     protected fun log(value: Any) {
         Log.v(LOG_TAG, value.toString())

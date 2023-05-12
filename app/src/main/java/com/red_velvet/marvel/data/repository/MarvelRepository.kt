@@ -12,12 +12,12 @@ import io.reactivex.rxjava3.core.Observable
 
 interface MarvelRepository {
 
-    fun getComics(
+    fun getAllComics(
         titleStartsWith: String? = null,
         dateDescriptor: String? = null,
     ): Observable<State<List<Comic>>>
 
-    fun getComicDetail(comicId: Int): Observable<State<List<Comic>>>
+    fun getComicById(comicId: Int): Observable<State<List<Comic>>>
 
     fun getComicsByCharacterId(characterId: Int): Observable<State<List<Comic>>>
 
@@ -26,36 +26,34 @@ interface MarvelRepository {
         contains: String? = null
     ): Observable<State<List<Series>>>
 
-    fun getComicCreatorByComicId(comicId: Int): Observable<State<List<Creator>>>
+    fun getCreatorByComicId(comicId: Int): Observable<State<List<Creator>>>
 
-    fun getSeriesDetails(seriesId: Int): Observable<State<List<Series>>>
+    fun getSeriesById(seriesId: Int): Observable<State<List<Series>>>
 
-    fun getEvents(query: String? = null): Observable<State<List<Event>>>
+    fun getAllEvents(query: String? = null): Observable<State<List<Event>>>
 
     fun getCharactersByEventId(eventId: Int): Observable<State<List<Character>>>
 
     fun getCreatorsByEventId(eventId: Int): Observable<State<List<Creator>>>
 
-    fun getStories(): Observable<State<List<Story>>>
+    fun getAllStories(): Observable<State<List<Story>>>
 
-    fun getStory(storyId: Int): Observable<State<List<Story>>>
+    fun getStoryById(storyId: Int): Observable<State<List<Story>>>
 
-    fun getStoryCreatorsByStoryId(storyId: Int): Observable<State<List<Creator>>>
+    fun getCreatorsByStoryId(storyId: Int): Observable<State<List<Creator>>>
 
     fun getComicsByStoryId(storyId: Int): Observable<State<List<Comic>>>
 
-    fun getCharsByComicId(comicId: Int): Observable<State<List<Character>>>
+    fun getCharactersByComicId(comicId: Int): Observable<State<List<Character>>>
 
-    fun getEventDetails(eventId: Int): Observable<State<List<Event>>>
+    fun getEventById(eventId: Int): Observable<State<List<Event>>>
 
-    fun getCharacters(): Observable<State<List<Character>>>
+    fun getAllCharacters(nameStartsWith: String? = null): Observable<State<List<Character>>>
 
-    fun getCharacterByCharacterId(characterId: Int): Observable<State<List<Character>>>
+    fun getCharacterById(characterId: Int): Observable<State<List<Character>>>
 
-    fun getSeriesCreatorsBySeriesId(seriesId: Int): Observable<State<List<Creator>>>
+    fun getCreatorsBySeriesId(seriesId: Int): Observable<State<List<Creator>>>
 
     fun getSeriesByCharacterId(characterId: Int): Observable<State<List<Series>>>
-
-    fun searchCharacters(nameStartsWith: String?): Observable<State<List<Character>>>
 }
 

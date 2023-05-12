@@ -1,6 +1,7 @@
 package com.red_velvet.marvel.ui.characterDetails
 
 import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -10,18 +11,17 @@ import com.red_velvet.marvel.ui.base.BaseFragment
 
 class CharacterDetailsFragment :
     BaseFragment<FragmentCharacterBinding, CharacterDetailsViewModel>() {
+
     override val layoutIdFragment: Int = R.layout.fragment_character
 
     override val viewModel: CharacterDetailsViewModel by viewModels()
 
     private val args: CharacterDetailsFragmentArgs by navArgs()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         viewModel.loadCharacterDetails(args.characterId)
-    }
 
-    override fun setUp() {
         val comicsAdapter = ComicsByCharacterAdapter(mutableListOf(), viewModel)
         val seriesAdapter = CharacterSeriesAdapter(mutableListOf(), viewModel)
 
@@ -32,11 +32,11 @@ class CharacterDetailsFragment :
 
         binding.textViewError.setOnClickListener { viewModel.loadCharacterDetails(args.characterId) }
 
-        navigateToComicDetails()
-        navigateToSeriesDetails()
+        initNavigateToComicDetails()
+        initNavigateToSeriesDetails()
     }
 
-    private fun navigateToComicDetails() {
+    private fun initNavigateToComicDetails() {
         viewModel.navigationToComicDetails.observe(viewLifecycleOwner) { event ->
             event.getContentIfNotHandled()?.let {
                 val directions =
@@ -45,11 +45,10 @@ class CharacterDetailsFragment :
                     )
                 findNavController().navigate(directions)
             }
-
         }
     }
 
-    private fun navigateToSeriesDetails() {
+    private fun initNavigateToSeriesDetails() {
         viewModel.navigationToSeriesDetails.observe(viewLifecycleOwner) { event ->
             event.getContentIfNotHandled()?.let {
                 val directions =

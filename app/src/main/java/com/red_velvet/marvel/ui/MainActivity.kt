@@ -1,8 +1,9 @@
 package com.red_velvet.marvel.ui
 
 
+import android.os.Bundle
 import androidx.navigation.findNavController
-import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.red_velvet.marvel.R
 import com.red_velvet.marvel.databinding.ActivityMainBinding
@@ -17,21 +18,20 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     override fun getLayoutResId() = R.layout.activity_main
 
     private val navController by lazy { findNavController(R.id.nav_host_fragment_content_main) }
-    override fun setup() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         setSupportActionBar(binding.toolbar)
-        hideActionBar()
-
-        NavigationUI.setupActionBarWithNavController(this, navController)
+        initNavigationDestinationListener()
+        setupActionBarWithNavController(this, navController)
         binding.contentMain.bottomNav.setupWithNavController(navController)
     }
-
 
     override fun onSupportNavigateUp(): Boolean {
         return findNavController(R.id.nav_host_fragment_content_main).navigateUp()
                 || super.onSupportNavigateUp()
     }
 
-    private fun hideActionBar() {
+    private fun initNavigationDestinationListener() {
         navController.addOnDestinationChangedListener { _, destination, arguments ->
             when (destination.id) {
                 R.id.comicsFragment,

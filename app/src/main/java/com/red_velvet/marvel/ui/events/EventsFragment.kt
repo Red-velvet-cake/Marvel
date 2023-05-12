@@ -1,6 +1,8 @@
 package com.red_velvet.marvel.ui.events
 
 
+import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.red_velvet.marvel.R
@@ -14,13 +16,15 @@ class EventsFragment : BaseFragment<FragmentEventsBinding, EventsViewModel>() {
 
     override val viewModel: EventsViewModel by viewModels()
 
-    override fun setUp() {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         val adapter = EventsAdapter(emptyList(), viewModel)
         binding.recyclerViewEvents.adapter = adapter
-        navigateToEventDetails()
+        binding.textViewError.setOnClickListener { viewModel.getAllEvents() }
+        initNavigateToEventDetails()
     }
 
-    private fun navigateToEventDetails() {
+    private fun initNavigateToEventDetails() {
         viewModel.navigationToEventDetails.observe(viewLifecycleOwner) { event ->
             event.getContentIfNotHandled()?.let {
                 val directions =

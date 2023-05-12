@@ -32,62 +32,61 @@ class ComicDetailsViewModel : BaseViewModel(), ComicDetailsCreatorListenerIntera
     val navigationToCharacterDetails: LiveData<SingleEvent<Int>> = _navigationToCharacterDetails
 
     fun loadComicDetails(comicId: Int) {
-        fetchComicDetailsData(comicId)
-        fetchCreatorsByComicIDData(comicId)
-        fetchCharactersByComicIDData(comicId)
+        getComicById(comicId)
+        getCreatorsByComicId(comicId)
+        getCharactersByComicId(comicId)
     }
 
-    private fun fetchComicDetailsData(comicId: Int) {
+    private fun getComicById(comicId: Int) {
         bindStateUpdates(
-            repository.getComicDetail(comicId),
-            onNext = ::onGetComicDetailsDataSuccess,
-            onError = ::onGetComicDetailsDataError
+            repository.getComicById(comicId),
+            onNext = ::onGetComicState,
+            onError = ::onGetComicError
         )
     }
 
-    private fun fetchCreatorsByComicIDData(comicId: Int) {
+    private fun getCreatorsByComicId(comicId: Int) {
         bindStateUpdates(
-            repository.getComicCreatorByComicId(comicId),
-            onNext = ::onGetCreatorsByComicIDDataSuccess,
-            onError = ::onGetCreatorsByComicIDDataError
+            repository.getCreatorByComicId(comicId),
+            onNext = ::onGetCreatorsByComicIdState,
+            onError = ::onGetCreatorsByComicIdError
         )
     }
 
 
-    private fun fetchCharactersByComicIDData(comicId: Int) {
+    private fun getCharactersByComicId(comicId: Int) {
         bindStateUpdates(
-            repository.getCharsByComicId(comicId),
-            onNext = ::onGetCharactersByComicIDDataSuccess,
-            onError = ::onGetCharactersByComicIDDataError
+            repository.getCharactersByComicId(comicId),
+            onNext = ::onGetCharactersByComicIdState,
+            onError = ::onGetCharactersByComicIdError
         )
     }
 
-    private fun onGetComicDetailsDataSuccess(state: State<List<Comic>>) {
+    private fun onGetComicState(state: State<List<Comic>>) {
         _comicsDetails.postValue(state)
     }
 
-    private fun onGetComicDetailsDataError(e: Throwable) {
+    private fun onGetComicError(e: Throwable) {
         _comicsDetails.postValue(State.Failed(e.message.toString()))
     }
 
-    private fun onGetCreatorsByComicIDDataSuccess(state: State<List<Creator>>) {
+    private fun onGetCreatorsByComicIdState(state: State<List<Creator>>) {
         _creators.postValue(state)
     }
 
-    private fun onGetCreatorsByComicIDDataError(e: Throwable) {
+    private fun onGetCreatorsByComicIdError(e: Throwable) {
         _creators.postValue(State.Failed(e.message.toString()))
     }
 
-    private fun onGetCharactersByComicIDDataSuccess(state: State<List<Character>>) {
+    private fun onGetCharactersByComicIdState(state: State<List<Character>>) {
         _characters.postValue(state)
     }
 
-    private fun onGetCharactersByComicIDDataError(e: Throwable) {
+    private fun onGetCharactersByComicIdError(e: Throwable) {
         _characters.postValue(State.Failed(e.message.toString()))
     }
 
-    override fun onClickCharacter(characterId: Int) {
+    override fun doOnCharacterClicked(characterId: Int) {
         _navigationToCharacterDetails.postValue(SingleEvent(characterId))
     }
-
 }

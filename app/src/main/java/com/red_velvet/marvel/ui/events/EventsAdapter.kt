@@ -12,5 +12,5 @@ class EventsAdapter(items: List<Event>, listener: EventsInteractionListener) :
 }
 
 interface EventsInteractionListener : BaseInteractionListener {
-    fun onEventClicked(eventId: Int)
+    fun doOnEventClicked(eventId: Int)
 }

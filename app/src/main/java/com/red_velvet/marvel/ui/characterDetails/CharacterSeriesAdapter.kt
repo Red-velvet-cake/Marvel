@@ -11,5 +11,5 @@ class CharacterSeriesAdapter(items: List<Series>, listener: SeriesInteractionLis
 }
 
 interface SeriesInteractionListener : BaseInteractionListener {
-    fun onSeriesClicked(seriesId: Int)
+    fun doOnSeriesClicked(seriesId: Int)
 }

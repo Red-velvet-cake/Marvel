@@ -26,21 +26,21 @@ class StoriesViewModel : BaseViewModel(), StoriesInteractionListener {
 
     fun getAllStories() {
         bindStateUpdates(
-            repository.getStories(),
-            onError = ::onGetStoriesError,
-            onNext = ::onGetStoriesSuccess
+            repository.getAllStories(),
+            onError = ::onGetStoriesFailure,
+            onNext = ::onGetStoriesState
         )
     }
 
-    private fun onGetStoriesSuccess(state: State<List<Story>>) {
+    private fun onGetStoriesState(state: State<List<Story>>) {
         _stories.postValue(state)
     }
 
-    private fun onGetStoriesError(error: Throwable) {
+    private fun onGetStoriesFailure(error: Throwable) {
         _stories.postValue(State.Failed(error.message.toString()))
     }
 
-    override fun onStoryClicked(storyId: Int) {
+    override fun doOnStoryClicked(storyId: Int) {
         _navigationToStoryDetails.postValue(SingleEvent(storyId))
     }
 }

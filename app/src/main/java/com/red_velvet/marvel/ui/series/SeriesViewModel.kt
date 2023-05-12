@@ -33,14 +33,18 @@ class SeriesViewModel : BaseViewModel(), SeriesInteractionListener {
     }
 
     fun getAllSeries(titleStartsWith: String? = null, contains: String? = null) {
-        bindStateUpdates(repository.getAllSeries(titleStartsWith, contains), ::onGetSeriesError, ::onGetSeriesSuccess)
+        bindStateUpdates(
+            repository.getAllSeries(titleStartsWith, contains),
+            ::onGetSeriesFailure,
+            ::onGetSeriesState
+        )
     }
 
-    private fun onGetSeriesError(error: Throwable) {
+    private fun onGetSeriesFailure(error: Throwable) {
         _series.postValue(State.Failed(error.message.toString()))
     }
 
-    private fun onGetSeriesSuccess(state: State<List<Series>>) {
+    private fun onGetSeriesState(state: State<List<Series>>) {
         _series.postValue(state)
     }
 
@@ -61,7 +65,7 @@ class SeriesViewModel : BaseViewModel(), SeriesInteractionListener {
             }.addTo(compositeDisposable)
     }
 
-    override fun onSeriesClicked(seriesId: Int) {
+    override fun doOnSeriesClicked(seriesId: Int) {
         _navigationToSeriesDetails.postValue(SingleEvent(seriesId))
     }
 

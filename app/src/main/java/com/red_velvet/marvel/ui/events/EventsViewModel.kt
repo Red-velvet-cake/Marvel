@@ -29,28 +29,19 @@ class EventsViewModel : BaseViewModel(), EventsInteractionListener {
         initSearchObservable()
     }
 
-    private fun getAllEvents() {
+    fun getAllEvents(query: String? = null) {
         bindStateUpdates(
-            repository.getEvents(),
-            onError = ::onGetAllEventsError,
-            onNext = ::onGetAllEventsSuccess
+            repository.getAllEvents(query),
+            onError = ::onGetAllEventsFailure,
+            onNext = ::onGetAllEventsState
         )
     }
 
-    private fun searchEvents(query: String? = null) {
-        bindStateUpdates(
-            repository.getEvents(query),
-            onError = ::onGetAllEventsError,
-            onNext = ::onGetAllEventsSuccess
-        )
-    }
-
-    private fun onGetAllEventsSuccess(state: State<List<Event>>) {
+    private fun onGetAllEventsState(state: State<List<Event>>) {
         _events.postValue(state)
     }
 
-    private fun onGetAllEventsError(e: Throwable) {
-        _events.postValue(State.Loading)
+    private fun onGetAllEventsFailure(e: Throwable) {
         _events.postValue(State.Failed(e.message.toString()))
     }
 
@@ -65,18 +56,13 @@ class EventsViewModel : BaseViewModel(), EventsInteractionListener {
                 if (query.isEmpty()) {
                     getAllEvents()
                 } else {
-                    searchEvents(query)
+                    getAllEvents(query)
                 }
             }.addTo(compositeDisposable)
     }
 
-    override fun onEventClicked(eventId: Int) {
+    override fun doOnEventClicked(eventId: Int) {
         _navigationToEventDetails.postValue(SingleEvent(eventId))
-    }
-
-    fun onTryAgainClicked() {
-        getAllEvents()
-        initSearchObservable()
     }
 
 }

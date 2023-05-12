@@ -19,6 +19,6 @@ object RetrofitClient {
         .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
         .build()
 
-    val apiService = retrofit.create(MarvelService::class.java)
+    val apiService: MarvelService = retrofit.create(MarvelService::class.java)
 
 }

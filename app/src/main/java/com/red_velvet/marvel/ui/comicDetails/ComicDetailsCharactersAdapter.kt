@@ -13,5 +13,5 @@ class ComicDetailsCharactersAdapter(
 }
 
 interface ComicDetailsCharacterListenerInteraction : BaseInteractionListener {
-    fun onClickCharacter(characterId: Int)
+    fun doOnCharacterClicked(characterId: Int)
 }

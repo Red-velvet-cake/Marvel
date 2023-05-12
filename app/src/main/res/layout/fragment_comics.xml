@@ -57,7 +57,6 @@
             android:layout_height="wrap_content"
             android:clickable="true"
             android:focusable="true"
-            android:onClick="@{() -> viewModel.onTryAgainClicked()}"
             android:padding="@dimen/spacing_medium"
             android:text="@string/try_again"
             android:textColor="@color/primary"

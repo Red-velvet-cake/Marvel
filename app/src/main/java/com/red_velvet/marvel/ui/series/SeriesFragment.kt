@@ -1,5 +1,7 @@
 package com.red_velvet.marvel.ui.series
 
+import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.red_velvet.marvel.R
@@ -12,7 +14,8 @@ class SeriesFragment : BaseFragment<FragmentSeriesBinding, SeriesViewModel>() {
 
     override val viewModel: SeriesViewModel by viewModels()
 
-    override fun setUp() {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         val adapter = SeriesAdapter(emptyList(), viewModel)
         binding.recyclerViewSeries.adapter = adapter
 
@@ -21,10 +24,10 @@ class SeriesFragment : BaseFragment<FragmentSeriesBinding, SeriesViewModel>() {
             setUpChipsListener(it)
         }
 
-        navigateToSeriesDetails()
+        initNavigateToSeriesDetails()
     }
 
-    private fun navigateToSeriesDetails() {
+    private fun initNavigateToSeriesDetails() {
         viewModel.navigationToSeriesDetails.observe(viewLifecycleOwner) { event ->
             event.getContentIfNotHandled()?.let {
                 val directions =

@@ -11,5 +11,5 @@ class CharactersAdapter(items: List<Character>, listener: CharactersInteractionL
 }
 
 interface CharactersInteractionListener : BaseInteractionListener {
-    fun onCharacterClicked(characterId: Int)
+    fun doOnCharacterClicked(characterId: Int)
 }

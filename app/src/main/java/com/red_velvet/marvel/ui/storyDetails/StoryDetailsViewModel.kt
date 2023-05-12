@@ -27,56 +27,56 @@ class StoryDetailsViewModel : BaseViewModel(), StoryCreatorInteractionListener {
     }
 
     fun loadStoryDetails(storyId: Int) {
-        getStory(storyId)
-        getStoryComics(storyId)
-        getStoryCreators(storyId)
+        getStoryById(storyId)
+        getComicsByStoryId(storyId)
+        getCreatorsBySeriesId(storyId)
     }
 
-    private fun getStory(storyId: Int) {
+    private fun getStoryById(storyId: Int) {
         bindStateUpdates(
-            repository.getStory(storyId),
-            onNext = ::onGetStorySuccess,
-            onError = ::onGetStoryError
+            repository.getStoryById(storyId),
+            onNext = ::onGetStoryState,
+            onError = ::onGetStoryFailure
         )
     }
 
-    private fun getStoryComics(storyId: Int) {
+    private fun getComicsByStoryId(storyId: Int) {
         bindStateUpdates(
             repository.getComicsByStoryId(storyId),
-            onNext = ::onGetComicsSuccess,
-            onError = ::onGetComicsError
+            onNext = ::onGetComicsState,
+            onError = ::onGetComicsFailure
         )
     }
 
-    private fun getStoryCreators(storyId: Int) {
+    private fun getCreatorsBySeriesId(storyId: Int) {
         bindStateUpdates(
-            repository.getSeriesCreatorsBySeriesId(storyId),
-            onNext = ::onGetCreatorSuccess,
-            onError = ::onGetSeriesError
+            repository.getCreatorsBySeriesId(storyId),
+            onNext = ::onGetCreatorState,
+            onError = ::onGetSeriesFailure
         )
     }
 
-    private fun onGetSeriesError(error: Throwable) {
+    private fun onGetSeriesFailure(error: Throwable) {
         _creators.postValue(State.Failed(error.message.toString()))
     }
 
-    private fun onGetCreatorSuccess(state: State<List<Creator>>) {
+    private fun onGetCreatorState(state: State<List<Creator>>) {
         _creators.postValue(state)
     }
 
-    private fun onGetComicsError(error: Throwable) {
+    private fun onGetComicsFailure(error: Throwable) {
         _comics.postValue(State.Failed(error.message.toString()))
     }
 
-    private fun onGetComicsSuccess(state: State<List<Comic>>) {
+    private fun onGetComicsState(state: State<List<Comic>>) {
         _comics.postValue(state)
     }
 
-    private fun onGetStoryError(error: Throwable) {
+    private fun onGetStoryFailure(error: Throwable) {
         _story.postValue(State.Failed(error.message.toString()))
     }
 
-    private fun onGetStorySuccess(state: State<List<Story>>) {
+    private fun onGetStoryState(state: State<List<Story>>) {
         _story.postValue(state)
     }
 

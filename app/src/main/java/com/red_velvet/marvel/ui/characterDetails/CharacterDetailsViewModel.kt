@@ -15,19 +15,18 @@ import com.red_velvet.marvel.ui.utils.State
 class CharacterDetailsViewModel : BaseViewModel(), SeriesInteractionListener,
     ComicsInteractionListener {
 
+    private val repository: MarvelRepository by lazy {
+        MarvelRepositoryImpl(RetrofitClient.apiService)
+    }
+
     private val _characterDetails: MutableLiveData<State<List<Character>>> = MutableLiveData()
-    val characterDetailsLiveData: LiveData<State<List<Character>>> = _characterDetails
+    val characterDetails: LiveData<State<List<Character>>> = _characterDetails
 
     private val _comics: MutableLiveData<State<List<Comic>>> = MutableLiveData()
     val comics: LiveData<State<List<Comic>>> = _comics
 
     private val _series: MutableLiveData<State<List<Series>>> = MutableLiveData()
     val series: LiveData<State<List<Series>>> = _series
-
-
-    private val repository: MarvelRepository by lazy {
-        MarvelRepositoryImpl(RetrofitClient.apiService)
-    }
 
     private val _navigationToComicDetails: MutableLiveData<SingleEvent<Int>> = MutableLiveData()
     val navigationToComicDetails: LiveData<SingleEvent<Int>> = _navigationToComicDetails
@@ -36,64 +35,64 @@ class CharacterDetailsViewModel : BaseViewModel(), SeriesInteractionListener,
     val navigationToSeriesDetails: LiveData<SingleEvent<Int>> = _navigationToSeriesDetails
 
     fun loadCharacterDetails(characterId: Int) {
-        getCharacterDetails(characterId)
+        getCharacterById(characterId)
         getComicsDyCharacterId(characterId)
-        getSeriesDyCharacterId(characterId)
+        getSeriesByCharacterId(characterId)
     }
 
-    private fun getCharacterDetails(characterId: Int) {
+    private fun getCharacterById(characterId: Int) {
         bindStateUpdates(
-            repository.getCharacterByCharacterId(characterId),
-            onNext = ::onGetCharacterDetailsNextState,
-            onError = ::onGetCharacterDetailsError
+            repository.getCharacterById(characterId),
+            onNext = ::onGetCharacterState,
+            onError = ::onGetCharacterStateError
         )
     }
 
-    private fun onGetCharacterDetailsNextState(state: State<List<Character>>) {
+    private fun onGetCharacterState(state: State<List<Character>>) {
         _characterDetails.postValue(state)
     }
 
-    private fun onGetCharacterDetailsError(error: Throwable) {
+    private fun onGetCharacterStateError(error: Throwable) {
         _characterDetails.postValue(State.Failed(error.message.toString()))
     }
 
     private fun getComicsDyCharacterId(characterId: Int) {
         bindStateUpdates(
             repository.getComicsByCharacterId(characterId),
-            onNext = ::onGetComicsDyCharacterIdNextState,
-            onError = ::onGetComicsDyCharacterIdError
+            onNext = ::onGetComicsByCharacterIdState,
+            onError = ::onGetComicsByCharacterIdStateError
         )
     }
 
-    private fun onGetComicsDyCharacterIdNextState(state: State<List<Comic>>) {
+    private fun onGetComicsByCharacterIdState(state: State<List<Comic>>) {
         _comics.postValue(state)
     }
 
-    private fun onGetComicsDyCharacterIdError(error: Throwable) {
+    private fun onGetComicsByCharacterIdStateError(error: Throwable) {
         _characterDetails.postValue(State.Failed(error.message.toString()))
     }
 
-    private fun getSeriesDyCharacterId(characterId: Int) {
+    private fun getSeriesByCharacterId(characterId: Int) {
         bindStateUpdates(
             repository.getSeriesByCharacterId(characterId),
-            onNext = ::onGetSeriesDyCharacterIdNextState,
-            onError = ::onGetSeriesDyCharacterIdError
+            onNext = ::onGetSeriesByCharacterIdState,
+            onError = ::onGetSeriesByCharacterIdError
         )
     }
 
-    private fun onGetSeriesDyCharacterIdNextState(state: State<List<Series>>) {
+    private fun onGetSeriesByCharacterIdState(state: State<List<Series>>) {
         _series.postValue(state)
     }
 
-    private fun onGetSeriesDyCharacterIdError(error: Throwable) {
+    private fun onGetSeriesByCharacterIdError(error: Throwable) {
         _series.postValue(State.Failed(error.message.toString()))
     }
 
-    override fun onComicClicked(comicId: Int) {
+    override fun doOnComicClicked(comicId: Int) {
         _navigationToComicDetails.postValue(SingleEvent(comicId))
     }
 
-    override fun onSeriesClicked(seriesId: Int) {
+    override fun doOnSeriesClicked(seriesId: Int) {
         _navigationToSeriesDetails.postValue(SingleEvent(seriesId))
     }
 

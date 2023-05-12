@@ -2,6 +2,7 @@ package com.red_velvet.marvel.ui.eventDetails
 
 
 import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -18,12 +19,11 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding, EventDeta
 
     private val args: EventDetailsFragmentArgs by navArgs()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel.loadEventDetails(args.eventId)
-    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-    override fun setUp() {
+        viewModel.loadEventDetails(args.eventId)
+
         val charactersAdapter = CharactersAdapter(mutableListOf(), viewModel)
         val creatorsAdapter = CreatorsAdapter(mutableListOf(), viewModel)
 
@@ -33,10 +33,10 @@ class EventDetailsFragment : BaseFragment<FragmentEventDetailsBinding, EventDeta
         }
         binding.textViewError.setOnClickListener { viewModel.loadEventDetails(args.eventId) }
 
-        navigateToCharacterDetails()
+        initNavigateToCharacterDetails()
     }
 
-    private fun navigateToCharacterDetails() {
+    private fun initNavigateToCharacterDetails() {
         viewModel.navigationToCharacterDetails.observe(viewLifecycleOwner) { event ->
             event.getContentIfNotHandled()?.let {
                 val directions =

@@ -11,5 +11,5 @@ class ComicsByCharacterAdapter(items: List<Comic>, listener: SeriesInteractionLi
 }
 
 interface ComicsInteractionListener : BaseInteractionListener {
-    fun onComicClicked(comicId: Int)
+    fun doOnComicClicked(comicId: Int)
 }
