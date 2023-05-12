@@ -16,7 +16,7 @@ class CharacterDetailsViewModel : BaseViewModel(), SeriesInteractionListener,
     ComicsInteractionListener {
 
     private val _characterDetails: MutableLiveData<State<List<Character>>> = MutableLiveData()
-    val characterDetails: LiveData<State<List<Character>>> = _characterDetails
+    val characterDetailsLiveData: LiveData<State<List<Character>>> = _characterDetails
 
     private val _comics: MutableLiveData<State<List<Comic>>> = MutableLiveData()
     val comics: LiveData<State<List<Comic>>> = _comics
@@ -35,7 +35,13 @@ class CharacterDetailsViewModel : BaseViewModel(), SeriesInteractionListener,
     private val _navigationToSeriesDetails: MutableLiveData<SingleEvent<Int>> = MutableLiveData()
     val navigationToSeriesDetails: LiveData<SingleEvent<Int>> = _navigationToSeriesDetails
 
-    fun getCharacterDetails(characterId: Int) {
+    fun loadCharacterDetails(characterId: Int) {
+        getCharacterDetails(characterId)
+        getComicsDyCharacterId(characterId)
+        getSeriesDyCharacterId(characterId)
+    }
+
+    private fun getCharacterDetails(characterId: Int) {
         bindStateUpdates(
             repository.getCharacterByCharacterId(characterId),
             onNext = ::onGetCharacterDetailsNextState,
@@ -51,7 +57,7 @@ class CharacterDetailsViewModel : BaseViewModel(), SeriesInteractionListener,
         _characterDetails.postValue(State.Failed(error.message.toString()))
     }
 
-    fun getComicsDyCharacterId(characterId: Int) {
+    private fun getComicsDyCharacterId(characterId: Int) {
         bindStateUpdates(
             repository.getComicsByCharacterId(characterId),
             onNext = ::onGetComicsDyCharacterIdNextState,
@@ -67,7 +73,7 @@ class CharacterDetailsViewModel : BaseViewModel(), SeriesInteractionListener,
         _characterDetails.postValue(State.Failed(error.message.toString()))
     }
 
-    fun getSeriesDyCharacterId(characterId: Int) {
+    private fun getSeriesDyCharacterId(characterId: Int) {
         bindStateUpdates(
             repository.getSeriesByCharacterId(characterId),
             onNext = ::onGetSeriesDyCharacterIdNextState,

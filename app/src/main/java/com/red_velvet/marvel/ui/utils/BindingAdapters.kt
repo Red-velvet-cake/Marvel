@@ -38,7 +38,11 @@ fun <T> showWhenSuccess(view: View, state: State<T>?) {
 
 @BindingAdapter(value = ["app:imageUrl"])
 fun loadImage(view: ImageView, thumbnail: Thumbnail?) {
-    Glide.with(view).load(thumbnail?.toUrl()).placeholder(R.drawable.baseline_image_24).into(view)
+    Glide.with(view).load(thumbnail?.toUrl())
+        .thumbnail(Glide.with(view).load(R.raw.loading))
+        .fitCenter()
+        .centerCrop()
+        .into(view)
 }
 
 @BindingAdapter(value = ["app:setItems"])
@@ -56,5 +60,18 @@ fun <T> showIfData(view: View, data: List<T>?) {
         view.visibility = View.GONE
     } else {
         view.visibility = View.VISIBLE
+    }
+}
+
+@BindingAdapter("app:showWhenEmpty")
+fun <T> showWhenEmpty(view: View, state: State<List<T>?>?) {
+    if (state is State.Success) {
+        if (state.data.isNullOrEmpty()) {
+            view.visibility = View.VISIBLE
+        } else {
+            view.visibility = View.GONE
+        }
+    } else {
+        view.visibility = View.GONE
     }
 }

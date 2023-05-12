@@ -26,7 +26,13 @@ class StoryDetailsViewModel : BaseViewModel(), StoryCreatorInteractionListener {
         MarvelRepositoryImpl(RetrofitClient.apiService)
     }
 
-    fun getStory(storyId: Int) {
+    fun loadStoryDetails(storyId: Int) {
+        getStory(storyId)
+        getStoryComics(storyId)
+        getStoryCreators(storyId)
+    }
+
+    private fun getStory(storyId: Int) {
         bindStateUpdates(
             repository.getStory(storyId),
             onNext = ::onGetStorySuccess,
@@ -34,7 +40,7 @@ class StoryDetailsViewModel : BaseViewModel(), StoryCreatorInteractionListener {
         )
     }
 
-    fun getStoryComics(storyId: Int) {
+    private fun getStoryComics(storyId: Int) {
         bindStateUpdates(
             repository.getComicsByStoryId(storyId),
             onNext = ::onGetComicsSuccess,
@@ -42,7 +48,7 @@ class StoryDetailsViewModel : BaseViewModel(), StoryCreatorInteractionListener {
         )
     }
 
-    fun getStoryCreators(storyId: Int) {
+    private fun getStoryCreators(storyId: Int) {
         bindStateUpdates(
             repository.getSeriesCreatorsBySeriesId(storyId),
             onNext = ::onGetCreatorSuccess,

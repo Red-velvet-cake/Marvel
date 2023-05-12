@@ -28,7 +28,13 @@ class EventDetailViewModel : BaseViewModel(), CharactersInteractionListener,
     private val _navigationToCharacterDetails: MutableLiveData<SingleEvent<Int>> = MutableLiveData()
     val navigationToCharacterDetails: LiveData<SingleEvent<Int>> = _navigationToCharacterDetails
 
-    fun getEvent(eventId: Int) {
+    fun loadEventDetails(eventId: Int) {
+        getEvent(eventId)
+        getCharactersEventId(eventId)
+        getCreatorsEventId(eventId)
+    }
+
+    private fun getEvent(eventId: Int) {
         bindStateUpdates(
             repository.getEventDetails(eventId),
             onNext = ::onGetEventSuccess,
@@ -36,7 +42,7 @@ class EventDetailViewModel : BaseViewModel(), CharactersInteractionListener,
         )
     }
 
-    fun getCreatorsEventId(eventId: Int) {
+    private fun getCreatorsEventId(eventId: Int) {
         bindStateUpdates(
             repository.getCreatorsByEventId(eventId),
             onNext = ::onGetEventCreatorsSuccess,
@@ -44,7 +50,7 @@ class EventDetailViewModel : BaseViewModel(), CharactersInteractionListener,
         )
     }
 
-    fun getCharactersEventId(eventId: Int) {
+    private fun getCharactersEventId(eventId: Int) {
         bindStateUpdates(
             repository.getCharactersByEventId(eventId),
             onNext = ::onGetEventCharactersSuccess,
