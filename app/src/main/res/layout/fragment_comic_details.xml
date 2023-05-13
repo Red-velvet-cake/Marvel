@@ -78,7 +78,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/text_view_comic_desc"
-                app:showIfData="@{viewModel.creators.toData()}" />
+                app:showWhenData="@{viewModel.creators.toData().empty || viewModel.creators.toData() == null}" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_comic_creators"
@@ -109,7 +109,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/recycler_view_comic_creators"
-                app:showIfData="@{viewModel.characters.toData()}" />
+                app:showWhenData="@{viewModel.characters.toData().empty || viewModel.characters.toData() == null}" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_comic_characters"

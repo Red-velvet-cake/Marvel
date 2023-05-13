@@ -70,7 +70,7 @@
                 android:textSize="@dimen/font_size_title"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/character_desc_text_view"
-                app:showIfData="@{viewModel.comics.toData()}" />
+                app:showWhenData="@{viewModel.comics.toData().empty || viewModel.comics.toData() == null}" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/comics_recycler_view"
@@ -98,7 +98,7 @@
                 android:textSize="@dimen/font_size_title"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/comics_recycler_view"
-                app:showIfData="@{viewModel.series.toData()}" />
+                app:showWhenData="@{viewModel.series.toData().empty || viewModel.series.toData() == null}" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/series_recycler_view"

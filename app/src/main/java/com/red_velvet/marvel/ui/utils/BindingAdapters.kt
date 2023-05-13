@@ -54,9 +54,9 @@ fun <T> setRecyclerItems(view: RecyclerView, items: List<T>?) {
     }
 }
 
-@BindingAdapter("app:showIfData")
-fun <T> showIfData(view: View, data: List<T>?) {
-    if (data.isNullOrEmpty()) {
+@BindingAdapter("app:showWhenData")
+fun showWhenData(view: View, isEmpty: Boolean) {
+    if (isEmpty) {
         view.visibility = View.GONE
     } else {
         view.visibility = View.VISIBLE

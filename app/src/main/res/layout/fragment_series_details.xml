@@ -72,7 +72,7 @@
             android:textSize="@dimen/font_size_title"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_view_serie_desc"
-            app:showIfData="@{viewModel.creators.toData()}" />
+            app:showWhenData="@{viewModel.creators.toData().empty || viewModel.creators.toData() == null}" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_serie_creators"
