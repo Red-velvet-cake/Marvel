@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.red_velvet.marvel.ui.series.SeriesViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/spacing_xlarge"
+        android:orientation="vertical">
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edit_text_search"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/search_height"
+            android:layout_marginStart="@dimen/spacing_medium"
+            android:layout_marginEnd="@dimen/spacing_medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.TextInputLayout.Rounded">
+
+            <com.google.android.material.textfield.TextInputEditText
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/search"
+                android:inputType="text"
+                android:text="@={viewModel.searchQuery}" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <include
+            android:id="@+id/chips"
+            layout="@layout/item_chips" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewSeries"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="@dimen/spacing_medium"
+            android:clipToPadding="false"
+            android:paddingTop="@dimen/spacing_medium"
+            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+            app:setItems="@{viewModel.series.toData()}"
+            app:showWhenSuccess="@{viewModel.series}"
+            app:spanCount="2"
+            tools:listitem="@layout/item_series" />
+
+        <ProgressBar
+            android:id="@+id/lading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/primary"
+            android:indeterminateTintMode="src_atop"
+            app:showWhenLoading="@{viewModel.series}" />
+
+        <ImageView
+            android:id="@+id/main_iv_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_error"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:showWhenError="@{viewModel.series}" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animation_view_search_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/search_empty"
+            app:showWhenEmpty="@{viewModel.series}" />
+
+        <TextView
+            android:id="@+id/text_view_search_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/padding_normal"
+            android:text="@string/empty_search"
+            android:textColor="@color/tertiary_87"
+            android:textSize="@dimen/font_size_body"
+            app:layout_constraintEnd_toEndOf="@id/animation_view_search_empty"
+            app:layout_constraintStart_toStartOf="@id/animation_view_search_empty"
+            app:layout_constraintTop_toBottomOf="@id/animation_view_search_empty"
+            app:showWhenEmpty="@{viewModel.series}" />
+
+    </LinearLayout>
+
+</layout>

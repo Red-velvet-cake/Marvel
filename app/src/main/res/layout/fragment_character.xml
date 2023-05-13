@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    <variable
+            name="viewModel"
+            type="com.red_velvet.marvel.ui.characterDetails.CharacterDetailsViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context=".ui.characterDetails.CharacterDetailsFragment">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/character_image_view"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/comic_width"
+                android:layout_marginHorizontal="@dimen/spacing_medium"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:scaleType="centerCrop"
+                app:imageUrl="@{viewModel.characterDetails.toData().get(0).thumbnail}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearanceOverlay="@style/RoundedShapeableImageView"
+                tools:src="@tools:sample/backgrounds/scenic" />
+
+            <TextView
+                android:id="@+id/character_title_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_medium"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@{viewModel.characterDetails.toData().get(0).name}"
+                android:textSize="@dimen/font_size_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/character_image_view" />
+
+            <TextView
+                android:id="@+id/character_desc_text_view"
+                android:layout_width="@dimen/no_width"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_medium"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:layout_marginEnd="@dimen/spacing_medium"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="@{viewModel.characterDetails.toData().get(0).description}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/character_title_text_view" />
+
+            <TextView
+                android:id="@+id/comics_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_medium"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Comics"
+                android:textSize="@dimen/font_size_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/character_desc_text_view"
+                app:showWhenData="@{viewModel.comics.toData().empty || viewModel.comics.toData() == null}" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/comics_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/spacing_medium"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/comics_text_view"
+                app:setItems="@{viewModel.comics.toData()}"
+                app:showWhenSuccess="@{viewModel.comics}"
+                tools:listitem="@layout/item_character_comics" />
+
+            <TextView
+                android:id="@+id/series_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_medium"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Series"
+                android:textSize="@dimen/font_size_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/comics_recycler_view"
+                app:showWhenData="@{viewModel.series.toData().empty || viewModel.series.toData() == null}" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/series_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/spacing_medium"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/series_text_view"
+                app:setItems="@{viewModel.series.toData()}"
+                app:showWhenSuccess="@{viewModel.series}"
+                tools:listitem="@layout/item_character_series" />
+
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                android:indeterminateTint="@color/primary"
+                android:indeterminateTintMode="src_atop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:showWhenLoading="@{viewModel.characterDetails}" />
+
+            <ImageView
+                android:id="@+id/image_view_error"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_error_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:showWhenError="@{viewModel.comics}" />
+
+            <TextView
+                android:id="@+id/text_view_error"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="@dimen/spacing_medium"
+                android:text="@string/try_again"
+                android:textColor="@color/primary"
+                android:textSize="@dimen/font_size_title"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@id/image_view_error"
+                app:layout_constraintStart_toStartOf="@id/image_view_error"
+                app:layout_constraintTop_toBottomOf="@id/image_view_error"
+                app:showWhenError="@{viewModel.comics}" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>
