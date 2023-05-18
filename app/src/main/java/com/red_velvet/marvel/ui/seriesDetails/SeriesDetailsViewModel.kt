@@ -2,8 +2,8 @@ package com.red_velvet.marvel.ui.seriesDetails
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.red_velvet.marvel.data.model.Creator
-import com.red_velvet.marvel.data.model.Series
+import com.red_velvet.marvel.data.dto.CreatorDto
+import com.red_velvet.marvel.data.dto.SeriesDto
 import com.red_velvet.marvel.data.remote.RetrofitClient
 import com.red_velvet.marvel.data.repository.MarvelRepository
 import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
@@ -14,11 +14,11 @@ class SeriesDetailsViewModel : BaseViewModel(), CreatorListenerInteraction {
 
     private val repository: MarvelRepository = MarvelRepositoryImpl(RetrofitClient.apiService)
 
-    private val _series: MutableLiveData<State<List<Series>>> = MutableLiveData()
-    val series: LiveData<State<List<Series>>> = _series
+    private val _series: MutableLiveData<State<List<SeriesDto>>> = MutableLiveData()
+    val series: LiveData<State<List<SeriesDto>>> = _series
 
-    private val _creators: MutableLiveData<State<List<Creator>>> = MutableLiveData()
-    val creators: LiveData<State<List<Creator>>> = _creators
+    private val _creators: MutableLiveData<State<List<CreatorDto>>> = MutableLiveData()
+    val creators: LiveData<State<List<CreatorDto>>> = _creators
 
     fun loadSeriesDetails(seriesId: Int) {
         getSeries(seriesId)
@@ -41,7 +41,7 @@ class SeriesDetailsViewModel : BaseViewModel(), CreatorListenerInteraction {
         )
     }
 
-    private fun onGetSeriesDetailsSuccess(state: State<List<Series>>) {
+    private fun onGetSeriesDetailsSuccess(state: State<List<SeriesDto>>) {
         _series.postValue(state)
     }
 
@@ -49,7 +49,7 @@ class SeriesDetailsViewModel : BaseViewModel(), CreatorListenerInteraction {
         _series.postValue(State.Failed(error.message.toString()))
     }
 
-    private fun onGetCreatorsBySeriesIdSuccess(state: State<List<Creator>>) {
+    private fun onGetCreatorsBySeriesIdSuccess(state: State<List<CreatorDto>>) {
         _creators.postValue(state)
     }
 

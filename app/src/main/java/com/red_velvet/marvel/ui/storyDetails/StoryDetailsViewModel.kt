@@ -2,9 +2,9 @@ package com.red_velvet.marvel.ui.storyDetails
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.red_velvet.marvel.data.model.Comic
-import com.red_velvet.marvel.data.model.Creator
-import com.red_velvet.marvel.data.model.Story
+import com.red_velvet.marvel.data.dto.ComicDto
+import com.red_velvet.marvel.data.dto.CreatorDto
+import com.red_velvet.marvel.data.dto.StoryDto
 import com.red_velvet.marvel.data.remote.RetrofitClient
 import com.red_velvet.marvel.data.repository.MarvelRepository
 import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
@@ -13,14 +13,14 @@ import com.red_velvet.marvel.ui.utils.State
 
 class StoryDetailsViewModel : BaseViewModel(), StoryCreatorInteractionListener {
 
-    private val _story: MutableLiveData<State<List<Story>>> = MutableLiveData()
-    val story: LiveData<State<List<Story>>> = _story
+    private val _story: MutableLiveData<State<List<StoryDto>>> = MutableLiveData()
+    val story: LiveData<State<List<StoryDto>>> = _story
 
-    private val _comics: MutableLiveData<State<List<Comic>>> = MutableLiveData()
-    val comics: LiveData<State<List<Comic>>> = _comics
+    private val _comics: MutableLiveData<State<List<ComicDto>>> = MutableLiveData()
+    val comics: LiveData<State<List<ComicDto>>> = _comics
 
-    private val _creators: MutableLiveData<State<List<Creator>>> = MutableLiveData()
-    val creators: LiveData<State<List<Creator>>> = _creators
+    private val _creators: MutableLiveData<State<List<CreatorDto>>> = MutableLiveData()
+    val creators: LiveData<State<List<CreatorDto>>> = _creators
 
     private val repository: MarvelRepository by lazy {
         MarvelRepositoryImpl(RetrofitClient.apiService)
@@ -60,7 +60,7 @@ class StoryDetailsViewModel : BaseViewModel(), StoryCreatorInteractionListener {
         _creators.postValue(State.Failed(error.message.toString()))
     }
 
-    private fun onGetCreatorState(state: State<List<Creator>>) {
+    private fun onGetCreatorState(state: State<List<CreatorDto>>) {
         _creators.postValue(state)
     }
 
@@ -68,7 +68,7 @@ class StoryDetailsViewModel : BaseViewModel(), StoryCreatorInteractionListener {
         _comics.postValue(State.Failed(error.message.toString()))
     }
 
-    private fun onGetComicsState(state: State<List<Comic>>) {
+    private fun onGetComicsState(state: State<List<ComicDto>>) {
         _comics.postValue(state)
     }
 
@@ -76,7 +76,7 @@ class StoryDetailsViewModel : BaseViewModel(), StoryCreatorInteractionListener {
         _story.postValue(State.Failed(error.message.toString()))
     }
 
-    private fun onGetStoryState(state: State<List<Story>>) {
+    private fun onGetStoryState(state: State<List<StoryDto>>) {
         _story.postValue(state)
     }
 

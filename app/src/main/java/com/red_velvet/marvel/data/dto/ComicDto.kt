@@ -1,19 +1,19 @@
-package com.red_velvet.marvel.data.model
+package com.red_velvet.marvel.data.dto
 
 
 import com.google.gson.annotations.SerializedName
 
-data class Comic(
+data class ComicDto(
     @SerializedName("characters")
-    val characters: ResourceCollection? = ResourceCollection(),
+    val characters: ResourceCollectionDto? = ResourceCollectionDto(),
     @SerializedName("collectedIssues")
-    val collectedIssues: List<Resource>? = listOf(),
+    val collectedIssues: List<ResourceDto>? = listOf(),
     @SerializedName("collections")
-    val collections: List<ResourceCollection>? = listOf(),
+    val collections: List<ResourceCollectionDto>? = listOf(),
     @SerializedName("creators")
-    val creators: ResourceCollection? = ResourceCollection(),
+    val creators: ResourceCollectionDto? = ResourceCollectionDto(),
     @SerializedName("dates")
-    val dates: List<Date>? = listOf(),
+    val dates: List<DateDto>? = listOf(),
     @SerializedName("description")
     val description: String? = "",
     @SerializedName("diamondCode")
@@ -23,13 +23,13 @@ data class Comic(
     @SerializedName("ean")
     val ean: String? = "",
     @SerializedName("events")
-    val events: ResourceCollection? = ResourceCollection(),
+    val events: ResourceCollectionDto? = ResourceCollectionDto(),
     @SerializedName("format")
     val format: String? = "",
     @SerializedName("id")
     val id: Int? = 0,
     @SerializedName("images")
-    val images: List<Thumbnail>? = listOf(),
+    val images: List<ThumbnailDto>? = listOf(),
     @SerializedName("isbn")
     val isbn: String? = "",
     @SerializedName("issn")
@@ -41,25 +41,25 @@ data class Comic(
     @SerializedName("pageCount")
     val pageCount: Int? = 0,
     @SerializedName("prices")
-    val prices: List<Price>? = listOf(),
+    val prices: List<PriceDto>? = listOf(),
     @SerializedName("resourceURI")
     val resourceURI: String? = "",
     @SerializedName("series")
-    val series: ResourceCollection? = ResourceCollection(),
+    val series: ResourceCollectionDto? = ResourceCollectionDto(),
     @SerializedName("stories")
-    val stories: ResourceCollection? = ResourceCollection(),
+    val stories: ResourceCollectionDto? = ResourceCollectionDto(),
     @SerializedName("textObjects")
-    val textBlurbs: List<TextBlurb>? = listOf(),
+    val textBlurbs: List<TextBlurbDto>? = listOf(),
     @SerializedName("thumbnail")
-    val thumbnail: Thumbnail? = Thumbnail(),
+    val thumbnail: ThumbnailDto? = ThumbnailDto(),
     @SerializedName("title")
     val title: String? = "",
     @SerializedName("upc")
     val upc: String? = "",
     @SerializedName("urls")
-    val urls: List<Url>? = listOf(),
+    val urls: List<UrlDto>? = listOf(),
     @SerializedName("variantDescription")
     val variantDescription: String? = "",
     @SerializedName("variants")
-    val variants: List<Resource>? = listOf()
+    val variants: List<ResourceDto>? = listOf()
 )

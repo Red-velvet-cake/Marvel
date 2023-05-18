@@ -1,9 +1,9 @@
-package com.red_velvet.marvel.data.model
+package com.red_velvet.marvel.data.dto
 
 
 import com.google.gson.annotations.SerializedName
 
-data class Thumbnail(
+data class ThumbnailDto(
     @SerializedName("extension")
     val extension: String? = null,
     @SerializedName("path")

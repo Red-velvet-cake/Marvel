@@ -2,12 +2,12 @@ package com.red_velvet.marvel.ui.stories
 
 
 import com.red_velvet.marvel.R
-import com.red_velvet.marvel.data.model.Story
+import com.red_velvet.marvel.data.dto.StoryDto
 import com.red_velvet.marvel.ui.base.BaseAdapter
 import com.red_velvet.marvel.ui.base.BaseInteractionListener
 
-class StoriesAdapter(stories: List<Story>, listener: StoriesInteractionListener) :
-    BaseAdapter<Story>(stories, listener) {
+class StoriesAdapter(stories: List<StoryDto>, listener: StoriesInteractionListener) :
+    BaseAdapter<StoryDto>(stories, listener) {
     override val layoutId = R.layout.item_stories
 }
 

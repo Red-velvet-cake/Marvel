@@ -2,7 +2,7 @@ package com.red_velvet.marvel.ui.stories
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.red_velvet.marvel.data.model.Story
+import com.red_velvet.marvel.data.dto.StoryDto
 import com.red_velvet.marvel.data.remote.RetrofitClient
 import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
 import com.red_velvet.marvel.ui.base.BaseViewModel
@@ -17,8 +17,8 @@ class StoriesViewModel : BaseViewModel(), StoriesInteractionListener {
     private val _navigationToStoryDetails: MutableLiveData<SingleEvent<Int>> = MutableLiveData()
     val navigationToStoryDetails: LiveData<SingleEvent<Int>> = _navigationToStoryDetails
 
-    private val _stories: MutableLiveData<State<List<Story>>> = MutableLiveData()
-    val stories: LiveData<State<List<Story>>> = _stories
+    private val _stories: MutableLiveData<State<List<StoryDto>>> = MutableLiveData()
+    val stories: LiveData<State<List<StoryDto>>> = _stories
 
     init {
         getAllStories()
@@ -32,7 +32,7 @@ class StoriesViewModel : BaseViewModel(), StoriesInteractionListener {
         )
     }
 
-    private fun onGetStoriesState(state: State<List<Story>>) {
+    private fun onGetStoriesState(state: State<List<StoryDto>>) {
         _stories.postValue(state)
     }
 

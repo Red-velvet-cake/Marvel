@@ -1,9 +1,9 @@
 package com.red_velvet.marvel.ui.utils
 
 import android.view.View
-import com.red_velvet.marvel.data.model.Thumbnail
+import com.red_velvet.marvel.data.dto.ThumbnailDto
 
-fun Thumbnail.toUrl() = this.path + "." + this.extension
+fun ThumbnailDto.toUrl() = this.path + "." + this.extension
 
 fun View.hideView() {
     visibility = View.GONE

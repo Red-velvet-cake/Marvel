@@ -2,7 +2,7 @@ package com.red_velvet.marvel.ui.characters
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.red_velvet.marvel.data.model.Character
+import com.red_velvet.marvel.data.dto.CharacterDto
 import com.red_velvet.marvel.data.remote.RetrofitClient
 import com.red_velvet.marvel.data.repository.MarvelRepository
 import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
@@ -14,8 +14,8 @@ import io.reactivex.rxjava3.kotlin.addTo
 import java.util.concurrent.TimeUnit
 
 class CharactersViewModel : BaseViewModel(), CharacterDetailsInteractionListener {
-    private val _characters: MutableLiveData<State<List<Character>>> = MutableLiveData()
-    val characters: LiveData<State<List<Character>>> = _characters
+    private val _characters: MutableLiveData<State<List<CharacterDto>>> = MutableLiveData()
+    val characters: LiveData<State<List<CharacterDto>>> = _characters
 
     val searchQuery = MutableLiveData<String>()
 
@@ -55,7 +55,7 @@ class CharactersViewModel : BaseViewModel(), CharacterDetailsInteractionListener
         )
     }
 
-    private fun onGetCharactersState(state: State<List<Character>>) {
+    private fun onGetCharactersState(state: State<List<CharacterDto>>) {
         _characters.postValue(state)
     }
 

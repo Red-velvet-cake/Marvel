@@ -1,29 +1,29 @@
-package com.red_velvet.marvel.data.model
+package com.red_velvet.marvel.data.dto
 
 
 import com.google.gson.annotations.SerializedName
 
-data class Series(
+data class SeriesDto(
     @SerializedName("characters")
-    val characters: ResourceCollection?,
+    val characters: ResourceCollectionDto?,
     @SerializedName("comics")
-    val comics: ResourceCollection?,
+    val comics: ResourceCollectionDto?,
     @SerializedName("creators")
-    val creators: ResourceCollection?,
+    val creators: ResourceCollectionDto?,
     @SerializedName("description")
     val description: String?,
     @SerializedName("endYear")
     val endYear: Int?,
     @SerializedName("events")
-    val events: ResourceCollection?,
+    val events: ResourceCollectionDto?,
     @SerializedName("id")
     val id: Int?,
     @SerializedName("modified")
     val modified: String?,
     @SerializedName("next")
-    val next: Resource?,
+    val next: ResourceDto?,
     @SerializedName("previous")
-    val previous: Resource?,
+    val previous: ResourceDto?,
     @SerializedName("rating")
     val rating: String?,
     @SerializedName("resourceURI")
@@ -31,13 +31,13 @@ data class Series(
     @SerializedName("startYear")
     val startYear: Int?,
     @SerializedName("stories")
-    val stories: ResourceCollection?,
+    val stories: ResourceCollectionDto?,
     @SerializedName("thumbnail")
-    val thumbnail: Thumbnail?,
+    val thumbnail: ThumbnailDto?,
     @SerializedName("title")
     val title: String?,
     @SerializedName("type")
     val type: String?,
     @SerializedName("urls")
-    val urls: List<Url>?
+    val urls: List<UrlDto>?
 )
