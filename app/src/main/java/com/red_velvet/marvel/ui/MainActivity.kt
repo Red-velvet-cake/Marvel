@@ -34,7 +34,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     private fun initNavigationDestinationListener() {
         navController.addOnDestinationChangedListener { _, destination, arguments ->
             when (destination.id) {
-                R.id.comicsFragment,
+                R.id.homeFragment,
                 R.id.charactersFragment,
                 R.id.seriesFragment,
                 R.id.eventsFragment,
