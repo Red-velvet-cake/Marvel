@@ -1,7 +1,6 @@
 package com.red_velvet.marvel.data.repository
 
 
-import com.red_velvet.marvel.data.remote.MarvelService
 import com.red_velvet.marvel.data.remote.dto.BaseResponse
 import com.red_velvet.marvel.data.remote.dto.CharacterDto
 import com.red_velvet.marvel.data.remote.dto.ComicDto
@@ -9,6 +8,7 @@ import com.red_velvet.marvel.data.remote.dto.CreatorDto
 import com.red_velvet.marvel.data.remote.dto.EventDto
 import com.red_velvet.marvel.data.remote.dto.SeriesDto
 import com.red_velvet.marvel.data.remote.dto.StoryDto
+import com.red_velvet.marvel.data.remote.service.MarvelService
 import com.red_velvet.marvel.ui.utils.State
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single

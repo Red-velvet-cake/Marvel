@@ -1,4 +1,4 @@
-package com.red_velvet.marvel.data.remote
+package com.red_velvet.marvel.data.remote.service
 
 import com.red_velvet.marvel.data.remote.dto.BaseResponse
 import com.red_velvet.marvel.data.remote.dto.CharacterDto

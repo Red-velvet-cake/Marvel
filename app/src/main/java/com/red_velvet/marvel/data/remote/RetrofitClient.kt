@@ -1,5 +1,6 @@
 package com.red_velvet.marvel.data.remote
 
+import com.red_velvet.marvel.data.remote.service.MarvelService
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
