@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.red_velvet.marvel.data.dto.SeriesDto" />
+            type="com.red_velvet.marvel.data.remote.dto.SeriesDto" />
 
         <variable
             name="listener"

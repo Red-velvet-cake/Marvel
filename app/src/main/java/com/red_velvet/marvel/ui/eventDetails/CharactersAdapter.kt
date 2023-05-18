@@ -1,7 +1,7 @@
 package com.red_velvet.marvel.ui.eventDetails
 
 import com.red_velvet.marvel.R
-import com.red_velvet.marvel.data.dto.CharacterDto
+import com.red_velvet.marvel.data.remote.dto.CharacterDto
 import com.red_velvet.marvel.ui.base.BaseAdapter
 import com.red_velvet.marvel.ui.base.BaseInteractionListener
 

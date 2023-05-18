@@ -2,10 +2,10 @@ package com.red_velvet.marvel.ui.characterDetails
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.red_velvet.marvel.data.dto.CharacterDto
-import com.red_velvet.marvel.data.dto.ComicDto
-import com.red_velvet.marvel.data.dto.SeriesDto
 import com.red_velvet.marvel.data.remote.RetrofitClient
+import com.red_velvet.marvel.data.remote.dto.CharacterDto
+import com.red_velvet.marvel.data.remote.dto.ComicDto
+import com.red_velvet.marvel.data.remote.dto.SeriesDto
 import com.red_velvet.marvel.data.repository.MarvelRepository
 import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
 import com.red_velvet.marvel.ui.base.BaseViewModel

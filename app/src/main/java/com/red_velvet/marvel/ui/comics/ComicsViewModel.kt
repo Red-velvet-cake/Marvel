@@ -4,8 +4,8 @@ import androidx.annotation.StringRes
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.red_velvet.marvel.R
-import com.red_velvet.marvel.data.dto.ComicDto
 import com.red_velvet.marvel.data.remote.RetrofitClient
+import com.red_velvet.marvel.data.remote.dto.ComicDto
 import com.red_velvet.marvel.data.repository.MarvelRepository
 import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
 import com.red_velvet.marvel.ui.base.BaseViewModel

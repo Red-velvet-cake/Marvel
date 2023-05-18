@@ -1,4 +1,4 @@
-package com.red_velvet.marvel.data.dto
+package com.red_velvet.marvel.data.remote.dto
 
 import com.google.gson.annotations.SerializedName
 import com.red_velvet.marvel.data.dto.*

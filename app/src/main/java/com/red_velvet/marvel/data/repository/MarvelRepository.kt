@@ -1,12 +1,12 @@
 package com.red_velvet.marvel.data.repository
 
 
-import com.red_velvet.marvel.data.dto.CharacterDto
-import com.red_velvet.marvel.data.dto.ComicDto
-import com.red_velvet.marvel.data.dto.CreatorDto
-import com.red_velvet.marvel.data.dto.EventDto
-import com.red_velvet.marvel.data.dto.SeriesDto
-import com.red_velvet.marvel.data.dto.StoryDto
+import com.red_velvet.marvel.data.remote.dto.CharacterDto
+import com.red_velvet.marvel.data.remote.dto.ComicDto
+import com.red_velvet.marvel.data.remote.dto.CreatorDto
+import com.red_velvet.marvel.data.remote.dto.EventDto
+import com.red_velvet.marvel.data.remote.dto.SeriesDto
+import com.red_velvet.marvel.data.remote.dto.StoryDto
 import com.red_velvet.marvel.ui.utils.State
 import io.reactivex.rxjava3.core.Observable
 

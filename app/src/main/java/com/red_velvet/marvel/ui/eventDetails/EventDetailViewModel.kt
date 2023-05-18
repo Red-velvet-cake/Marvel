@@ -2,10 +2,10 @@ package com.red_velvet.marvel.ui.eventDetails
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.red_velvet.marvel.data.dto.CharacterDto
-import com.red_velvet.marvel.data.dto.CreatorDto
-import com.red_velvet.marvel.data.dto.EventDto
 import com.red_velvet.marvel.data.remote.RetrofitClient
+import com.red_velvet.marvel.data.remote.dto.CharacterDto
+import com.red_velvet.marvel.data.remote.dto.CreatorDto
+import com.red_velvet.marvel.data.remote.dto.EventDto
 import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
 import com.red_velvet.marvel.ui.base.BaseViewModel
 import com.red_velvet.marvel.ui.utils.SingleEvent

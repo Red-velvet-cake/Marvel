@@ -6,7 +6,7 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.red_velvet.marvel.R
-import com.red_velvet.marvel.data.dto.ThumbnailDto
+import com.red_velvet.marvel.data.remote.dto.ThumbnailDto
 import com.red_velvet.marvel.ui.base.BaseAdapter
 
 @BindingAdapter(value = ["app:showWhenLoading"])

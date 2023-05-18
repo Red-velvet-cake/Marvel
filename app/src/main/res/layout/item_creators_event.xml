@@ -5,7 +5,7 @@
     <data>
         <variable
             name="item"
-            type="com.red_velvet.marvel.data.dto.CreatorDto" />
+            type="com.red_velvet.marvel.data.remote.dto.CreatorDto" />
 
     </data>
 
