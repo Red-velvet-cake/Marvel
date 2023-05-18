@@ -111,4 +111,10 @@ dependencies {
 
     // Lottie Animation
     implementation("com.airbnb.android:lottie:6.0.0")
+
+    //room database
+    val room_version = "2.5.1"
+    implementation("androidx.room:room-rxjava3:$room_version")
+    implementation("androidx.room:room-runtime:$room_version")
+    kapt("androidx.room:room-compiler:$room_version")
 }
