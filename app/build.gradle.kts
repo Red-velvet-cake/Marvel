@@ -30,7 +30,11 @@ android {
         }
 
         buildConfigField("String", "PUBLIC_KEY", localProperties.getProperty("publicKey") ?: "\"\"")
-        buildConfigField("String", "PRIVATE_KEY", localProperties.getProperty("privateKey") ?: "\"\"")
+        buildConfigField(
+            "String",
+            "PRIVATE_KEY",
+            localProperties.getProperty("privateKey") ?: "\"\""
+        )
     }
 
     buildTypes {
@@ -49,7 +53,7 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
-    dataBinding{
+    dataBinding {
         enable = true
     }
     viewBinding {
@@ -105,10 +109,20 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:4.15.1")
 
     //navigation
-    val nav_version = "2.5.1"
-    implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
-    implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
+    val navVersion = "2.5.1"
+    implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
+    implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
 
     // Lottie Animation
     implementation("com.airbnb.android:lottie:6.0.0")
+
+    // Room Database
+    val roomVersion = "2.5.1"
+    implementation("androidx.room:room-runtime:$roomVersion")
+    kapt("androidx.room:room-compiler:$roomVersion")
+    implementation("androidx.room:room-ktx:$roomVersion")
+
+    // Dagger Hilt
+    implementation("com.google.dagger:hilt-android:2.42")
+    kapt("com.google.dagger:hilt-android-compiler:2.42")
 }
