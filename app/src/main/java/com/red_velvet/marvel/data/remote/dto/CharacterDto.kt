@@ -1,7 +1,7 @@
 package com.red_velvet.marvel.data.remote.dto
 
 import com.google.gson.annotations.SerializedName
-import com.red_velvet.marvel.data.dto.*
+import com.red_velvet.marvel.data.remote.dto.*
 
 data class CharacterDto(
     @SerializedName("comics")
