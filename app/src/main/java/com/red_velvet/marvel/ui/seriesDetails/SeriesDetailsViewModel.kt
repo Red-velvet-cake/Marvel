@@ -4,15 +4,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.red_velvet.marvel.data.model.Creator
 import com.red_velvet.marvel.data.model.Series
-import com.red_velvet.marvel.data.remote.RetrofitClient
-import com.red_velvet.marvel.data.repository.MarvelRepository
-import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
+import com.red_velvet.marvel.domain.repository.MarvelRepository
 import com.red_velvet.marvel.ui.base.BaseViewModel
 import com.red_velvet.marvel.ui.utils.State
-
-class SeriesDetailsViewModel : BaseViewModel(), CreatorListenerInteraction {
-
-    private val repository: MarvelRepository = MarvelRepositoryImpl(RetrofitClient.apiService)
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
+@HiltViewModel
+class SeriesDetailsViewModel @Inject constructor(
+    private val repository: MarvelRepository
+) : BaseViewModel(), CreatorListenerInteraction {
 
     private val _series: MutableLiveData<State<List<Series>>> = MutableLiveData()
     val series: LiveData<State<List<Series>>> = _series

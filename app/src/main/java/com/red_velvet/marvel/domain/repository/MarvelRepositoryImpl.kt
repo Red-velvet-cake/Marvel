@@ -1,35 +1,42 @@
-package com.red_velvet.marvel.data.repository
+package com.red_velvet.marvel.domain.repository
 
 
+import com.red_velvet.marvel.data.local.dao.DataBaseDao
 import com.red_velvet.marvel.data.model.BaseResponse
 import com.red_velvet.marvel.data.model.Character
-import com.red_velvet.marvel.data.model.Comic
+import com.red_velvet.marvel.data.model.ComicDto
 import com.red_velvet.marvel.data.model.Creator
 import com.red_velvet.marvel.data.model.Event
 import com.red_velvet.marvel.data.model.Series
 import com.red_velvet.marvel.data.model.Story
 import com.red_velvet.marvel.data.remote.MarvelService
+import com.red_velvet.marvel.domain.mapper.comics.ComicDtoToComicsEntityMapper
+import com.red_velvet.marvel.domain.mapper.comics.ComicsEntityToComicsMapper
 import com.red_velvet.marvel.ui.utils.State
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import retrofit2.Response
+import javax.inject.Inject
 
-class MarvelRepositoryImpl(
-    private val marvelServiceImpl: MarvelService
+class MarvelRepositoryImpl  @Inject constructor(
+    private val marvelServiceImpl: MarvelService,
+    private val marvelDataBaseDao: DataBaseDao,
+    private val comicDtoToComicsEntityMapper: ComicDtoToComicsEntityMapper,
+    private val comicsEntityToComicsMapper: ComicsEntityToComicsMapper
 ) : MarvelRepository {
 
     override fun getAllComics(
         titleStartsWith: String?,
         dateDescriptor: String?
-    ): Observable<State<List<Comic>>> {
+    ): Observable<State<List<ComicDto>>> {
         return wrapWithState { marvelServiceImpl.getAllComics(titleStartsWith, dateDescriptor) }
     }
 
-    override fun getComicById(comicId: Int): Observable<State<List<Comic>>> {
+    override fun getComicById(comicId: Int): Observable<State<List<ComicDto>>> {
         return wrapWithState { marvelServiceImpl.getComicDetailById(comicId) }
     }
 
-    override fun getComicsByCharacterId(characterId: Int): Observable<State<List<Comic>>> {
+    override fun getComicsByCharacterId(characterId: Int): Observable<State<List<ComicDto>>> {
         return wrapWithState { marvelServiceImpl.getComicsByCharacterId(characterId) }
     }
 
@@ -84,7 +91,7 @@ class MarvelRepositoryImpl(
         return wrapWithState { marvelServiceImpl.getCreatorsByStoryId(storyId) }
     }
 
-    override fun getComicsByStoryId(storyId: Int): Observable<State<List<Comic>>> {
+    override fun getComicsByStoryId(storyId: Int): Observable<State<List<ComicDto>>> {
         return wrapWithState { marvelServiceImpl.getComicsByStoryId(storyId) }
     }
 

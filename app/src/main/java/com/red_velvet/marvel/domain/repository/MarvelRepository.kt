@@ -1,8 +1,8 @@
-package com.red_velvet.marvel.data.repository
+package com.red_velvet.marvel.domain.repository
 
 
 import com.red_velvet.marvel.data.model.Character
-import com.red_velvet.marvel.data.model.Comic
+import com.red_velvet.marvel.data.model.ComicDto
 import com.red_velvet.marvel.data.model.Creator
 import com.red_velvet.marvel.data.model.Event
 import com.red_velvet.marvel.data.model.Series
@@ -15,11 +15,11 @@ interface MarvelRepository {
     fun getAllComics(
         titleStartsWith: String? = null,
         dateDescriptor: String? = null,
-    ): Observable<State<List<Comic>>>
+    ): Observable<State<List<ComicDto>>>
 
-    fun getComicById(comicId: Int): Observable<State<List<Comic>>>
+    fun getComicById(comicId: Int): Observable<State<List<ComicDto>>>
 
-    fun getComicsByCharacterId(characterId: Int): Observable<State<List<Comic>>>
+    fun getComicsByCharacterId(characterId: Int): Observable<State<List<ComicDto>>>
 
     fun getAllSeries(
         titleStartsWith: String? = null,
@@ -42,7 +42,7 @@ interface MarvelRepository {
 
     fun getCreatorsByStoryId(storyId: Int): Observable<State<List<Creator>>>
 
-    fun getComicsByStoryId(storyId: Int): Observable<State<List<Comic>>>
+    fun getComicsByStoryId(storyId: Int): Observable<State<List<ComicDto>>>
 
     fun getCharactersByComicId(comicId: Int): Observable<State<List<Character>>>
 

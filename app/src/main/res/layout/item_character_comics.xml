@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.red_velvet.marvel.data.model.Comic" />
+            type="com.red_velvet.marvel.data.model.ComicDto" />
 
         <variable
             name="listener"
