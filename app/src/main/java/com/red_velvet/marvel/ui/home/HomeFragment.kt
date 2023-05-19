@@ -10,7 +10,9 @@ import com.red_velvet.marvel.ui.base.BaseFragment
 import com.red_velvet.marvel.ui.home.adapter.CharactersAdapter
 import com.red_velvet.marvel.ui.home.adapter.ComicsAdapter
 import com.red_velvet.marvel.ui.home.adapter.EventsAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
     override val layoutIdFragment = R.layout.fragment_home

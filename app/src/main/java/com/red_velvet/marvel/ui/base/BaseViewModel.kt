@@ -2,6 +2,7 @@ package com.red_velvet.marvel.ui.base
 
 import androidx.lifecycle.ViewModel
 import com.red_velvet.marvel.ui.utils.State
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.disposables.CompositeDisposable
@@ -9,7 +10,7 @@ import io.reactivex.rxjava3.kotlin.addTo
 import io.reactivex.rxjava3.kotlin.subscribeBy
 import io.reactivex.rxjava3.schedulers.Schedulers
 
-abstract class BaseViewModel : ViewModel() {
+abstract class BaseViewModel  : ViewModel() {
 
     val compositeDisposable = CompositeDisposable()
 

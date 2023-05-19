@@ -10,12 +10,14 @@ import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
 import com.red_velvet.marvel.ui.base.BaseViewModel
 import com.red_velvet.marvel.ui.utils.SingleEvent
 import com.red_velvet.marvel.ui.utils.State
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.kotlin.addTo
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
-
-class SeriesViewModel : BaseViewModel(), SeriesInteractionListener {
+@HiltViewModel
+class SeriesViewModel @Inject constructor (private val repository: MarvelRepository) : BaseViewModel(), SeriesInteractionListener {
 
     private val _navigationToSeriesDetails: MutableLiveData<SingleEvent<Int>> = MutableLiveData()
     val navigationToSeriesDetails: LiveData<SingleEvent<Int>> = _navigationToSeriesDetails
@@ -23,7 +25,7 @@ class SeriesViewModel : BaseViewModel(), SeriesInteractionListener {
     private val _series: MutableLiveData<State<List<Series>>> = MutableLiveData()
     val series: LiveData<State<List<Series>>> = _series
 
-    val repository: MarvelRepository by lazy { MarvelRepositoryImpl(RetrofitClient.apiService) }
+
 
     val searchQuery = MutableLiveData<String>()
 

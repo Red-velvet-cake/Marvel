@@ -2,21 +2,22 @@ package com.red_velvet.marvel.ui.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.red_velvet.marvel.data.model.Character
-import com.red_velvet.marvel.data.model.Comic
-import com.red_velvet.marvel.data.model.Event
+import com.red_velvet.marvel.data.entity.CharsEntity
+import com.red_velvet.marvel.data.entity.ComicsEntity
+import com.red_velvet.marvel.data.entity.EventsEntity
 import com.red_velvet.marvel.data.remote.RetrofitClient
 import com.red_velvet.marvel.data.repository.MarvelRepository
 import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
 import com.red_velvet.marvel.ui.base.BaseViewModel
 import com.red_velvet.marvel.ui.utils.SingleEvent
-import com.red_velvet.marvel.ui.utils.State
+import dagger.hilt.android.lifecycle.HiltViewModel
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.schedulers.Schedulers
+import javax.inject.Inject
 
-class HomeViewModel : BaseViewModel(), HomeInteractionListener {
+@HiltViewModel
+class HomeViewModel @Inject constructor (private val repository: MarvelRepository)  : BaseViewModel(), HomeInteractionListener {
 
-    private val repository: MarvelRepository by lazy {
-        MarvelRepositoryImpl(RetrofitClient.apiService)
-    }
 
     private val _navigationToComicDetails: MutableLiveData<SingleEvent<Int>> = MutableLiveData()
     val navigationToComicDetails: LiveData<SingleEvent<Int>> = _navigationToComicDetails
@@ -27,15 +28,15 @@ class HomeViewModel : BaseViewModel(), HomeInteractionListener {
     private val _navigationToCharacterDetails: MutableLiveData<SingleEvent<Int>> = MutableLiveData()
     val navigationToCharacterDetails: LiveData<SingleEvent<Int>> = _navigationToCharacterDetails
 
-    private val _comics = MutableLiveData<State<List<Comic>>>(State.Loading)
-    val comicsLiveData: LiveData<State<List<Comic>>> = _comics
 
-    private val _events = MutableLiveData<State<List<Event>>>(State.Loading)
-    val eventLiveData: LiveData<State<List<Event>>> = _events
+    private val _events = MutableLiveData<List<EventsEntity>>()
+    val eventLiveData: LiveData<List<EventsEntity>> = _events
 
-    private val _characters = MutableLiveData<State<List<Character>>>(State.Loading)
-    val characterLiveData: LiveData<State<List<Character>>> = _characters
+    private val _characters = MutableLiveData<List<CharsEntity>>()
+    val characterLiveData: LiveData<List<CharsEntity>> = _characters
 
+    private val _comics = MutableLiveData<List<ComicsEntity>>()
+    val comics: LiveData<List<ComicsEntity>> get() = _comics
 
     init {
         getComics()
@@ -43,52 +44,54 @@ class HomeViewModel : BaseViewModel(), HomeInteractionListener {
         getCharacters()
     }
 
+
+
     fun getComics() {
-        bindStateUpdates(
-            repository.getAllComics(),
-            onError = ::onGetComicsFailure,
-            onNext = ::onGetComicsState
-        )
+        repository.getAllComics().subscribeOn(Schedulers.io()) .observeOn(
+                AndroidSchedulers
+                    .mainThread()
+                )
+            .subscribe(
+                ::onGetComicsState
+            )
     }
 
-    private fun onGetComicsFailure(throwable: Throwable) {
-        _comics.postValue(State.Failed(throwable.message ?: UNKNOWN_ERROR))
-    }
 
-    private fun onGetComicsState(state: State<List<Comic>>) {
-        _comics.postValue(state)
+
+    private fun onGetComicsState(comics: List<ComicsEntity>) {
+        _comics.postValue(comics)
     }
 
     fun getEvents() {
-        bindStateUpdates(
-            repository.getAllEvents(),
-            onError = ::onGetEventsFailure,
-            onNext = ::onGetEventsState
+        repository.getAllEvents().subscribeOn(Schedulers.io()) .observeOn(
+            AndroidSchedulers
+                .mainThread()
         )
+            .subscribe(
+                ::onGetEventsState
+            )
     }
 
-    private fun onGetEventsFailure(throwable: Throwable) {
-        _events.postValue(State.Failed(throwable.message ?: UNKNOWN_ERROR))
-    }
 
-    private fun onGetEventsState(state: State<List<Event>>) {
-        _events.postValue(state)
+
+    private fun onGetEventsState(eventsEntity: List<EventsEntity>) {
+        _events.postValue(eventsEntity)
     }
 
     fun getCharacters() {
-        bindStateUpdates(
-            repository.getAllCharacters(),
-            onError = ::onGetCharactersFailure,
-            onNext = ::onGetCharactersState
+        repository.getAllCharacters().subscribeOn(Schedulers.io()) .observeOn(
+            AndroidSchedulers
+                .mainThread()
         )
+            .subscribe(
+                ::onGetCharactersState
+            )
     }
 
-    private fun onGetCharactersFailure(throwable: Throwable) {
-        _characters.postValue(State.Failed(throwable.message ?: UNKNOWN_ERROR))
-    }
 
-    private fun onGetCharactersState(state: State<List<Character>>) {
-        _characters.postValue(state)
+
+    private fun onGetCharactersState(charsEntity: List<CharsEntity>) {
+        _characters.postValue(charsEntity)
     }
 
     override fun doOnComicClicked(comicId: Int) {

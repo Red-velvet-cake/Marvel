@@ -3,7 +3,7 @@ package com.red_velvet.marvel.data.model
 import com.google.gson.annotations.SerializedName
 import com.red_velvet.marvel.data.model.*
 
-data class Character(
+data class CharacterDto(
     @SerializedName("comics")
     val comics: ResourceCollection? = ResourceCollection(),
     @SerializedName("description")
