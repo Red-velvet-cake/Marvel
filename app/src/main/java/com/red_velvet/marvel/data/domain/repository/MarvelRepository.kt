@@ -1,4 +1,4 @@
-package com.red_velvet.marvel.data.repository
+package com.red_velvet.marvel.data.domain.repository
 
 
 import com.red_velvet.marvel.data.model.Character
