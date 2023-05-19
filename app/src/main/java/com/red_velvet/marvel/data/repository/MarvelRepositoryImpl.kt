@@ -1,6 +1,7 @@
 package com.red_velvet.marvel.data.repository
 
 
+import com.red_velvet.marvel.data.local.database.MarvelDatabase
 import com.red_velvet.marvel.data.remote.dto.BaseResponse
 import com.red_velvet.marvel.data.remote.dto.CharacterDto
 import com.red_velvet.marvel.data.remote.dto.ComicDto
@@ -13,9 +14,11 @@ import com.red_velvet.marvel.ui.utils.State
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import retrofit2.Response
+import javax.inject.Inject
 
-class MarvelRepositoryImpl(
-    private val marvelServiceImpl: MarvelService
+class MarvelRepositoryImpl @Inject constructor(
+    private val marvelServiceImpl: MarvelService,
+    private val marvelDatabase: MarvelDatabase,
 ) : MarvelRepository {
 
     override fun getAllComics(
