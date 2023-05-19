@@ -29,15 +29,15 @@ class MarvelRepositoryImpl(
         return wrapWithState { marvelServiceImpl.getAllComics(titleStartsWith, dateDescriptor) }
     }
 
-    override fun getAllComics(): Observable<ComicEntity> {
+    override fun getAllComics(): Observable<List<ComicEntity>> {
         return localDatabase.getAllComics()
     }
 
-    override fun getAllEvents(): Observable<EventEntity> {
+    override fun getAllEvents(): Observable<List<EventEntity>> {
         return localDatabase.getAllEvents()
     }
 
-    override fun getAllCharacters(): Observable<CharacterEntity> {
+    override fun getAllCharacters(): Observable<List<CharacterEntity>> {
         return localDatabase.getAllCharacters()
     }
 

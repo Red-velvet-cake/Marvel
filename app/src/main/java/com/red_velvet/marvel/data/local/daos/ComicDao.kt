@@ -21,11 +21,11 @@ interface ComicDao {
     fun insertCharacter(characterEntity: CharacterEntity)
 
     @Query("SELECT * FROM COMICENTITY")
-    fun getAllComics(): Observable<ComicEntity>
+    fun getAllComics(): Observable<List<ComicEntity>>
 
     @Query("SELECT * FROM CHARACTERENTITY")
-    fun getAllCharacters(): Observable<CharacterEntity>
+    fun getAllCharacters(): Observable<List<CharacterEntity>>
 
     @Query("SELECT * FROM EVENTENTITY")
-    fun getAllEvents(): Observable<EventEntity>
+    fun getAllEvents(): Observable<List<EventEntity>>
 }

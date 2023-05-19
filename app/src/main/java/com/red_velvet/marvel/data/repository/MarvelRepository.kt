@@ -61,8 +61,8 @@ interface MarvelRepository {
     fun refreshComics()
     fun refreshCharacters()
     fun refreshEvents()
-    fun getAllComics(): Observable<ComicEntity>
-    fun getAllEvents(): Observable<EventEntity>
-    fun getAllCharacters(): Observable<CharacterEntity>
+    fun getAllComics(): Observable<List<ComicEntity>>
+    fun getAllEvents(): Observable<List<EventEntity>>
+    fun getAllCharacters(): Observable<List<CharacterEntity>>
 }
 

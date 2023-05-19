@@ -2,6 +2,7 @@ package com.red_velvet.marvel.ui.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.red_velvet.marvel.data.local.entities.ComicEntity
 import com.red_velvet.marvel.data.model.Character
 import com.red_velvet.marvel.data.model.Comic
 import com.red_velvet.marvel.data.model.Event
@@ -11,6 +12,8 @@ import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
 import com.red_velvet.marvel.ui.base.BaseViewModel
 import com.red_velvet.marvel.ui.utils.SingleEvent
 import com.red_velvet.marvel.ui.utils.State
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.schedulers.Schedulers
 
 class HomeViewModel : BaseViewModel(), HomeInteractionListener {
 
@@ -35,6 +38,8 @@ class HomeViewModel : BaseViewModel(), HomeInteractionListener {
 
     private val _characters = MutableLiveData<State<List<Character>>>(State.Loading)
     val characterLiveData: LiveData<State<List<Character>>> = _characters
+    private val _comicLocal = MutableLiveData<List<ComicEntity>>()
+    val comicLocal: LiveData<List<ComicEntity>> get() = _comicLocal
 
 
     init {
@@ -44,11 +49,17 @@ class HomeViewModel : BaseViewModel(), HomeInteractionListener {
     }
 
     fun getComics() {
-        bindStateUpdates(
-            repository.getAllComics(),
-            onError = ::onGetComicsFailure,
-            onNext = ::onGetComicsState
-        )
+        repository.getAllComics()
+            .subscribeOn(Schedulers.io())
+            .observeOn(
+                AndroidSchedulers
+                    .mainThread()
+            )
+            .subscribe()
+    }
+
+    private fun onShowComicsSuccess(comicEntity: List<ComicEntity>) {
+        _comicLocal.postValue(comicEntity)
     }
 
     private fun onGetComicsFailure(throwable: Throwable) {
