@@ -1,7 +1,7 @@
 package com.red_velvet.marvel.domain.model
 
-data class Comic(
+data class Character(
     val id: Int,
-    val title: String,
+    val name: String,
     val imageUrl: String,
 )
