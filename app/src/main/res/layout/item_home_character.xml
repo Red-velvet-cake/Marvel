@@ -4,21 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="item"
             type="com.red_velvet.marvel.data.model.Character" />
+
         <variable
             name="listener"
-            type="com.red_velvet.marvel.ui.characters.CharacterDetailsInteractionListener" />
+            type="com.red_velvet.marvel.ui.home.HomeInteractionListener" />
     </data>
 
-
     <com.google.android.material.card.MaterialCardView
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/comic_width"
         android:layout_height="@dimen/comic_height"
-        android:layout_marginTop="@dimen/spacing_normal"
-        android:layout_marginHorizontal="@dimen/spacing_small"
-        android:onClick="@{() -> listener.doOnCharacterClicked(item.id)}"
+        android:layout_margin="@dimen/spacing_normal"
+        android:onClick="@{() -> listener.doOnComicClicked(item.id)}"
         app:cardCornerRadius="@dimen/radius_medium">
 
         <androidx.constraintlayout.widget.ConstraintLayout
