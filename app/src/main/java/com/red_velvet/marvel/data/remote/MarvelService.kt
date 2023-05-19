@@ -2,7 +2,7 @@ package com.red_velvet.marvel.data.remote
 
 import com.red_velvet.marvel.data.model.BaseResponse
 import com.red_velvet.marvel.data.model.Character
-import com.red_velvet.marvel.data.model.Comic
+import com.red_velvet.marvel.data.model.ComicDto
 import com.red_velvet.marvel.data.model.Creator
 import com.red_velvet.marvel.data.model.Event
 import com.red_velvet.marvel.data.model.Series
@@ -19,19 +19,19 @@ interface MarvelService {
     fun getAllComics(
         @Query("titleStartsWith") titleStartsWith: String? = null,
         @Query("dateDescriptor") dateDescriptor: String? = null,
-    ): Single<Response<BaseResponse<List<Comic>>>>
+    ): Single<Response<BaseResponse<List<ComicDto>>>>
 
     @GET("comics/{comicId}")
     fun getComicDetailById(
         @Path("comicId") comicId: Int
-    ): Single<Response<BaseResponse<List<Comic>>>>
+    ): Single<Response<BaseResponse<List<ComicDto>>>>
 
     @GET("characters/{characterId}/comics")
     fun getComicsByCharacterId(
         @Path("characterId") characterId: Int,
         @Query("titleStartsWith") titleStartsWith: String? = null,
         @Query("dateDescriptor") dateDescriptor: String? = null
-    ): Single<Response<BaseResponse<List<Comic>>>>
+    ): Single<Response<BaseResponse<List<ComicDto>>>>
 
     @GET("comics/{comicId}/creators")
     fun getCreatorByComicId(
@@ -85,7 +85,7 @@ interface MarvelService {
     @GET("stories/{storyId}/comics")
     fun getComicsByStoryId(
         @Path("storyId") storyId: Int
-    ): Single<Response<BaseResponse<List<Comic>>>>
+    ): Single<Response<BaseResponse<List<ComicDto>>>>
 
     @GET("characters")
     fun getAllCharacters(

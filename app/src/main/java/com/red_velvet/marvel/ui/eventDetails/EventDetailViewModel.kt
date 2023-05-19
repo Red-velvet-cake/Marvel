@@ -5,16 +5,17 @@ import androidx.lifecycle.MutableLiveData
 import com.red_velvet.marvel.data.model.Character
 import com.red_velvet.marvel.data.model.Creator
 import com.red_velvet.marvel.data.model.Event
-import com.red_velvet.marvel.data.remote.RetrofitClient
-import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
+import com.red_velvet.marvel.domain.repository.MarvelRepository
 import com.red_velvet.marvel.ui.base.BaseViewModel
 import com.red_velvet.marvel.ui.utils.SingleEvent
 import com.red_velvet.marvel.ui.utils.State
-
-class EventDetailViewModel : BaseViewModel(), CharactersInteractionListener,
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
+@HiltViewModel
+class EventDetailViewModel @Inject constructor(
+    private val repository: MarvelRepository
+) : BaseViewModel(), CharactersInteractionListener,
     CreatorsInteractionListener {
-
-    private val repository by lazy { MarvelRepositoryImpl(RetrofitClient.apiService) }
 
     private var _event: MutableLiveData<State<List<Event>>> = MutableLiveData()
     val event: MutableLiveData<State<List<Event>>> = _event

@@ -10,7 +10,10 @@ import com.red_velvet.marvel.databinding.ActivityMainBinding
 import com.red_velvet.marvel.ui.base.BaseActivity
 import com.red_velvet.marvel.ui.utils.hideView
 import com.red_velvet.marvel.ui.utils.showView
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.lifecycle.HiltViewModel
 
+@AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     override val LOG_TAG: String = "MainActivity"
