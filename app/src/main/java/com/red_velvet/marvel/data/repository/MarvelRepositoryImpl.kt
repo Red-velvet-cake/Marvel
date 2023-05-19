@@ -1,46 +1,78 @@
 package com.red_velvet.marvel.data.repository
 
 
+import com.red_velvet.marvel.data.local.daos.MarvelDao
 import com.red_velvet.marvel.data.model.BaseResponse
-import com.red_velvet.marvel.data.model.Character
-import com.red_velvet.marvel.data.model.Comic
 import com.red_velvet.marvel.data.model.Creator
-import com.red_velvet.marvel.data.model.Event
 import com.red_velvet.marvel.data.model.Series
 import com.red_velvet.marvel.data.model.Story
 import com.red_velvet.marvel.data.remote.MarvelService
+import com.red_velvet.marvel.data.remote.dtos.CharacterDto
+import com.red_velvet.marvel.data.remote.dtos.ComicDto
+import com.red_velvet.marvel.data.remote.dtos.EventDto
+import com.red_velvet.marvel.domain.mappers.CharacterEntityMapper
+import com.red_velvet.marvel.domain.mappers.CharacterMapper
+import com.red_velvet.marvel.domain.mappers.ComicEntityMapper
+import com.red_velvet.marvel.domain.mappers.ComicMapper
+import com.red_velvet.marvel.domain.mappers.EventEntityMapper
+import com.red_velvet.marvel.domain.mappers.EventMapper
+import com.red_velvet.marvel.domain.models.Charcter
+import com.red_velvet.marvel.domain.models.Comic
+import com.red_velvet.marvel.domain.models.Event
 import com.red_velvet.marvel.ui.utils.State
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.schedulers.Schedulers
 import retrofit2.Response
+import javax.inject.Inject
 
-class MarvelRepositoryImpl(
-    private val marvelServiceImpl: MarvelService
+class MarvelRepositoryImpl @Inject constructor(
+    private val marvelServiceImpl: MarvelService,
+    private val marvelDao: MarvelDao,
+    private val comicEntityMapper: ComicEntityMapper,
+    private val comicMapper: ComicMapper,
+    private val characterEntityMapper: CharacterEntityMapper,
+    private val characterMapper: CharacterMapper,
+    private val eventEntityMapper: EventEntityMapper,
+    private val eventMapper: EventMapper
 ) : MarvelRepository {
 
-    override fun getAllComics(
-        titleStartsWith: String?,
-        dateDescriptor: String?
-    ): Observable<State<List<Comic>>> {
-        return wrapWithState { marvelServiceImpl.getAllComics(titleStartsWith, dateDescriptor) }
+    override fun getAllComics(): Observable<List<Comic>> {
+        return marvelDao.getAllComics().map {
+            it.map { comicEntity ->
+                comicMapper.map(comicEntity)
+            }
+        }
     }
 
-    override fun getComicById(comicId: Int): Observable<State<List<Comic>>> {
+    override fun refreshComics() =
+        marvelServiceImpl.getAllComics()
+            .observeOn(Schedulers.io())
+            .map { responseWrapper ->
+                if (responseWrapper.isSuccessful) {
+                    val comicEntities = responseWrapper.body()?.body?.results?.map {
+                        comicEntityMapper.map(it)
+                    }
+                    marvelDao.insertComics(comicEntities!!)
+                }
+            }.subscribeOn(AndroidSchedulers.mainThread())
+
+    override fun getComicById(comicId: Int): Observable<State<List<ComicDto>>> {
         return wrapWithState { marvelServiceImpl.getComicDetailById(comicId) }
     }
 
-    override fun getComicsByCharacterId(characterId: Int): Observable<State<List<Comic>>> {
+    override fun getComicsByCharacterId(characterId: Int): Observable<State<List<ComicDto>>> {
         return wrapWithState { marvelServiceImpl.getComicsByCharacterId(characterId) }
     }
 
     override fun getAllSeries(
-        titleStartsWith: String?,
-        contains: String?
+        titleStartsWith: String?, contains: String?
     ): Observable<State<List<Series>>> {
         return wrapWithState { marvelServiceImpl.getAllSeries(titleStartsWith, contains) }
     }
 
-    override fun getCharactersByComicId(comicId: Int): Observable<State<List<Character>>> {
+    override fun getCharactersByComicId(comicId: Int): Observable<State<List<CharacterDto>>> {
         return wrapWithState { marvelServiceImpl.getCharactersByComicId(comicId) }
     }
 
@@ -48,23 +80,56 @@ class MarvelRepositoryImpl(
         return wrapWithState { marvelServiceImpl.getSeriesById(seriesId) }
     }
 
-    override fun getAllEvents(query: String?): Observable<State<List<Event>>> {
-        return wrapWithState { marvelServiceImpl.getAllEvents(query) }
+    override fun getAllEvents(query: String?): Observable<List<Event>> {
+        return marvelDao.getAllEvents().map {
+            it.map { eventEntity ->
+                eventMapper.map(eventEntity)
+            }
+        }
     }
+
+    override fun refreshEvents() =
+        marvelServiceImpl.getAllEvents()
+            .observeOn(Schedulers.io())
+            .map { responseWrapper ->
+                if (responseWrapper.isSuccessful) {
+                    val eventEntities = responseWrapper.body()?.body?.results?.map {
+                        eventEntityMapper.map(it)
+                    }
+                    marvelDao.insertEvents(eventEntities!!)
+                }
+            }.subscribeOn(AndroidSchedulers.mainThread())
 
     override fun getCreatorByComicId(comicId: Int): Observable<State<List<Creator>>> {
         return wrapWithState { marvelServiceImpl.getCreatorByComicId(comicId) }
     }
 
-    override fun getCharactersByEventId(eventId: Int): Observable<State<List<Character>>> {
+    override fun getCharactersByEventId(eventId: Int): Observable<State<List<CharacterDto>>> {
         return wrapWithState { marvelServiceImpl.getCharactersByEventId(eventId) }
     }
 
-    override fun getAllCharacters(nameStartsWith: String?): Observable<State<List<Character>>> {
-        return wrapWithState { marvelServiceImpl.getAllCharacters(nameStartsWith) }
+    override fun getAllCharacters(nameStartsWith: String?): Observable<List<Charcter>> {
+        return marvelDao.getAllCharacters().map {
+            it.map { characterEntity ->
+                characterMapper.map(characterEntity)
+            }
+        }
     }
 
-    override fun getCharacterById(characterId: Int): Observable<State<List<Character>>> {
+    override fun refreshCharacters() =
+        marvelServiceImpl.getAllCharacters()
+            .observeOn(Schedulers.io())
+            .map { responseWrapper ->
+                if (responseWrapper.isSuccessful) {
+                    val characterEntities = responseWrapper.body()?.body?.results?.map {
+                        characterEntityMapper.map(it)
+                    }
+                    marvelDao.insertCharacters(characterEntities!!)
+                }
+            }.subscribeOn(AndroidSchedulers.mainThread())
+
+
+    override fun getCharacterById(characterId: Int): Observable<State<List<CharacterDto>>> {
         return wrapWithState { marvelServiceImpl.getCharacterById(characterId) }
     }
 
@@ -84,7 +149,7 @@ class MarvelRepositoryImpl(
         return wrapWithState { marvelServiceImpl.getCreatorsByStoryId(storyId) }
     }
 
-    override fun getComicsByStoryId(storyId: Int): Observable<State<List<Comic>>> {
+    override fun getComicsByStoryId(storyId: Int): Observable<State<List<ComicDto>>> {
         return wrapWithState { marvelServiceImpl.getComicsByStoryId(storyId) }
     }
 
@@ -96,7 +161,7 @@ class MarvelRepositoryImpl(
 
     override fun getEventById(
         eventId: Int
-    ): Observable<State<List<Event>>> {
+    ): Observable<State<List<EventDto>>> {
         return wrapWithState { marvelServiceImpl.getEventById(eventId) }
     }
 
@@ -105,15 +170,13 @@ class MarvelRepositoryImpl(
     }
 
     private fun <T> wrapWithState(function: () -> Single<Response<BaseResponse<T>>>): Observable<State<T>> {
-        return function()
-            .map<State<T>> { response ->
-                if (response.isSuccessful) {
-                    State.Success(response.body()?.body?.results!!)
-                } else {
-                    State.Failed(response.message())
-                }
+        return function().map<State<T>> { response ->
+            if (response.isSuccessful) {
+                State.Success(response.body()?.body?.results!!)
+            } else {
+                State.Failed(response.message())
             }
-            .onErrorReturn { State.Failed(it.message ?: "Unknown error") }
+        }.onErrorReturn { State.Failed(it.message ?: "Unknown error") }
             .startWith(Observable.just(State.Loading))
     }
 }

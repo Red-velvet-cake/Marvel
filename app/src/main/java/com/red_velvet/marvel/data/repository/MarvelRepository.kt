@@ -1,25 +1,28 @@
 package com.red_velvet.marvel.data.repository
 
 
-import com.red_velvet.marvel.data.model.Character
-import com.red_velvet.marvel.data.model.Comic
 import com.red_velvet.marvel.data.model.Creator
-import com.red_velvet.marvel.data.model.Event
 import com.red_velvet.marvel.data.model.Series
 import com.red_velvet.marvel.data.model.Story
+import com.red_velvet.marvel.data.remote.dtos.CharacterDto
+import com.red_velvet.marvel.data.remote.dtos.ComicDto
+import com.red_velvet.marvel.data.remote.dtos.EventDto
+import com.red_velvet.marvel.domain.models.Charcter
+import com.red_velvet.marvel.domain.models.Comic
+import com.red_velvet.marvel.domain.models.Event
 import com.red_velvet.marvel.ui.utils.State
 import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.Single
 
 interface MarvelRepository {
 
-    fun getAllComics(
-        titleStartsWith: String? = null,
-        dateDescriptor: String? = null,
-    ): Observable<State<List<Comic>>>
+    fun getAllComics(): Observable<List<Comic>>
 
-    fun getComicById(comicId: Int): Observable<State<List<Comic>>>
+    fun refreshComics(): Single<Unit>
 
-    fun getComicsByCharacterId(characterId: Int): Observable<State<List<Comic>>>
+    fun getComicById(comicId: Int): Observable<State<List<ComicDto>>>
+
+    fun getComicsByCharacterId(characterId: Int): Observable<State<List<ComicDto>>>
 
     fun getAllSeries(
         titleStartsWith: String? = null,
@@ -30,9 +33,11 @@ interface MarvelRepository {
 
     fun getSeriesById(seriesId: Int): Observable<State<List<Series>>>
 
-    fun getAllEvents(query: String? = null): Observable<State<List<Event>>>
+    fun getAllEvents(query: String? = null): Observable<List<Event>>
 
-    fun getCharactersByEventId(eventId: Int): Observable<State<List<Character>>>
+    fun refreshEvents(): Single<Unit>
+
+    fun getCharactersByEventId(eventId: Int): Observable<State<List<CharacterDto>>>
 
     fun getCreatorsByEventId(eventId: Int): Observable<State<List<Creator>>>
 
@@ -42,15 +47,17 @@ interface MarvelRepository {
 
     fun getCreatorsByStoryId(storyId: Int): Observable<State<List<Creator>>>
 
-    fun getComicsByStoryId(storyId: Int): Observable<State<List<Comic>>>
+    fun getComicsByStoryId(storyId: Int): Observable<State<List<ComicDto>>>
 
-    fun getCharactersByComicId(comicId: Int): Observable<State<List<Character>>>
+    fun getCharactersByComicId(comicId: Int): Observable<State<List<CharacterDto>>>
 
-    fun getEventById(eventId: Int): Observable<State<List<Event>>>
+    fun getEventById(eventId: Int): Observable<State<List<EventDto>>>
 
-    fun getAllCharacters(nameStartsWith: String? = null): Observable<State<List<Character>>>
+    fun getAllCharacters(nameStartsWith: String? = null): Observable<List<Charcter>>
 
-    fun getCharacterById(characterId: Int): Observable<State<List<Character>>>
+    fun refreshCharacters(): Single<Unit>
+
+    fun getCharacterById(characterId: Int): Observable<State<List<CharacterDto>>>
 
     fun getCreatorsBySeriesId(seriesId: Int): Observable<State<List<Creator>>>
 

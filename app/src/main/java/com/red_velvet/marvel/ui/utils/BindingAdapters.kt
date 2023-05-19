@@ -45,6 +45,14 @@ fun loadImage(view: ImageView, thumbnail: Thumbnail?) {
         .into(view)
 }
 
+@BindingAdapter(value = ["app:setImage"])
+fun setImage(view: ImageView, imageUrl: String?) {
+    Glide.with(view).load(imageUrl)
+        .fitCenter()
+        .centerCrop()
+        .into(view)
+}
+
 @BindingAdapter(value = ["app:setItems"])
 fun <T> setRecyclerItems(view: RecyclerView, items: List<T>?) {
     if (items != null) {

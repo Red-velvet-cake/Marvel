@@ -2,21 +2,20 @@ package com.red_velvet.marvel.ui.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.red_velvet.marvel.data.model.Character
-import com.red_velvet.marvel.data.model.Comic
-import com.red_velvet.marvel.data.model.Event
-import com.red_velvet.marvel.data.remote.RetrofitClient
-import com.red_velvet.marvel.data.repository.MarvelRepository
 import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
+import com.red_velvet.marvel.domain.models.Charcter
+import com.red_velvet.marvel.domain.models.Comic
+import com.red_velvet.marvel.domain.models.Event
 import com.red_velvet.marvel.ui.base.BaseViewModel
 import com.red_velvet.marvel.ui.utils.SingleEvent
-import com.red_velvet.marvel.ui.utils.State
+import dagger.hilt.android.lifecycle.HiltViewModel
+import io.reactivex.rxjava3.kotlin.addTo
+import javax.inject.Inject
 
-class HomeViewModel : BaseViewModel(), HomeInteractionListener {
-
-    private val repository: MarvelRepository by lazy {
-        MarvelRepositoryImpl(RetrofitClient.apiService)
-    }
+@HiltViewModel
+class HomeViewModel @Inject constructor(private val repository: MarvelRepositoryImpl) :
+    BaseViewModel(),
+    HomeInteractionListener {
 
     private val _navigationToComicDetails: MutableLiveData<SingleEvent<Int>> = MutableLiveData()
     val navigationToComicDetails: LiveData<SingleEvent<Int>> = _navigationToComicDetails
@@ -27,67 +26,62 @@ class HomeViewModel : BaseViewModel(), HomeInteractionListener {
     private val _navigationToCharacterDetails: MutableLiveData<SingleEvent<Int>> = MutableLiveData()
     val navigationToCharacterDetails: LiveData<SingleEvent<Int>> = _navigationToCharacterDetails
 
-    private val _comics = MutableLiveData<State<List<Comic>>>(State.Loading)
-    val comicsLiveData: LiveData<State<List<Comic>>> = _comics
+    private val _comics = MutableLiveData<List<Comic>>()
+    val comicsLiveData: LiveData<List<Comic>> = _comics
 
-    private val _events = MutableLiveData<State<List<Event>>>(State.Loading)
-    val eventLiveData: LiveData<State<List<Event>>> = _events
+    private val _events = MutableLiveData<List<Event>>()
+    val eventsLiveData: LiveData<List<Event>> = _events
 
-    private val _characters = MutableLiveData<State<List<Character>>>(State.Loading)
-    val characterLiveData: LiveData<State<List<Character>>> = _characters
-
+    private val _characters = MutableLiveData<List<Charcter>>()
+    val charactersLiveData: LiveData<List<Charcter>> = _characters
 
     init {
+        repository.refreshComics().subscribe()
+        repository.refreshCharacters().subscribe()
+        repository.refreshEvents().subscribe()
         getComics()
         getEvents()
         getCharacters()
     }
 
-    fun getComics() {
-        bindStateUpdates(
-            repository.getAllComics(),
-            onError = ::onGetComicsFailure,
-            onNext = ::onGetComicsState
-        )
+    private fun getComics() {
+        repository.getAllComics().subscribe(::onGetComicsState, ::onGetComicsFailure)
+            .addTo(compositeDisposable)
     }
 
     private fun onGetComicsFailure(throwable: Throwable) {
-        _comics.postValue(State.Failed(throwable.message ?: UNKNOWN_ERROR))
     }
 
-    private fun onGetComicsState(state: State<List<Comic>>) {
+    private fun onGetComicsState(state: List<Comic>) {
         _comics.postValue(state)
     }
 
-    fun getEvents() {
-        bindStateUpdates(
-            repository.getAllEvents(),
-            onError = ::onGetEventsFailure,
-            onNext = ::onGetEventsState
-        )
+    private fun getEvents() {
+
+        repository.getAllEvents().subscribe(
+            ::onGetEventsState,
+            ::onGetEventsFailure
+        ).addTo(compositeDisposable)
+
+
     }
 
     private fun onGetEventsFailure(throwable: Throwable) {
-        _events.postValue(State.Failed(throwable.message ?: UNKNOWN_ERROR))
     }
 
-    private fun onGetEventsState(state: State<List<Event>>) {
+    private fun onGetEventsState(state: List<Event>) {
         _events.postValue(state)
     }
 
-    fun getCharacters() {
-        bindStateUpdates(
-            repository.getAllCharacters(),
-            onError = ::onGetCharactersFailure,
-            onNext = ::onGetCharactersState
-        )
+    private fun getCharacters() {
+        repository.getAllCharacters().subscribe(::onGetCharactersState, ::onGetCharactersFailure)
+            .addTo(compositeDisposable)
     }
 
     private fun onGetCharactersFailure(throwable: Throwable) {
-        _characters.postValue(State.Failed(throwable.message ?: UNKNOWN_ERROR))
     }
 
-    private fun onGetCharactersState(state: State<List<Character>>) {
+    private fun onGetCharactersState(state: List<Charcter>) {
         _characters.postValue(state)
     }
 
