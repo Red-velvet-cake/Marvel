@@ -2,26 +2,25 @@ package com.red_velvet.marvel.ui.characters
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.red_velvet.marvel.data.remote.RetrofitClient
 import com.red_velvet.marvel.data.remote.dto.CharacterDto
 import com.red_velvet.marvel.data.repository.MarvelRepository
-import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
 import com.red_velvet.marvel.ui.base.BaseViewModel
 import com.red_velvet.marvel.ui.utils.SingleEvent
 import com.red_velvet.marvel.ui.utils.State
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.kotlin.addTo
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
-class CharactersViewModel : BaseViewModel(), CharacterDetailsInteractionListener {
+@HiltViewModel
+class CharactersViewModel @Inject constructor(
+    private val repository: MarvelRepository,
+) : BaseViewModel(), CharacterDetailsInteractionListener {
     private val _characters: MutableLiveData<State<List<CharacterDto>>> = MutableLiveData()
     val characters: LiveData<State<List<CharacterDto>>> = _characters
 
     val searchQuery = MutableLiveData<String>()
-
-    private val repository: MarvelRepository by lazy {
-        MarvelRepositoryImpl(RetrofitClient.apiService)
-    }
 
     private val _navigationToCharacterDetails: MutableLiveData<SingleEvent<Int>> = MutableLiveData()
     val navigationToCharacterDetails: LiveData<SingleEvent<Int>> = _navigationToCharacterDetails

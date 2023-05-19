@@ -2,17 +2,20 @@ package com.red_velvet.marvel.ui.comicDetails
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.red_velvet.marvel.data.remote.RetrofitClient
 import com.red_velvet.marvel.data.remote.dto.CharacterDto
 import com.red_velvet.marvel.data.remote.dto.ComicDto
 import com.red_velvet.marvel.data.remote.dto.CreatorDto
 import com.red_velvet.marvel.data.repository.MarvelRepository
-import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
 import com.red_velvet.marvel.ui.base.BaseViewModel
 import com.red_velvet.marvel.ui.utils.SingleEvent
 import com.red_velvet.marvel.ui.utils.State
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class ComicDetailsViewModel : BaseViewModel(), ComicDetailsCreatorListenerInteraction,
+@HiltViewModel
+class ComicDetailsViewModel @Inject constructor(
+    private val repository: MarvelRepository,
+) : BaseViewModel(), ComicDetailsCreatorListenerInteraction,
     ComicDetailsCharacterListenerInteraction {
 
     private val _comicsDetails: MutableLiveData<State<List<ComicDto>>> = MutableLiveData()
@@ -23,10 +26,6 @@ class ComicDetailsViewModel : BaseViewModel(), ComicDetailsCreatorListenerIntera
 
     private val _characters: MutableLiveData<State<List<CharacterDto>>> = MutableLiveData()
     val characters: LiveData<State<List<CharacterDto>>> = _characters
-
-    private val repository: MarvelRepository by lazy {
-        MarvelRepositoryImpl(RetrofitClient.apiService)
-    }
 
     private val _navigationToCharacterDetails: MutableLiveData<SingleEvent<Int>> = MutableLiveData()
     val navigationToCharacterDetails: LiveData<SingleEvent<Int>> = _navigationToCharacterDetails
