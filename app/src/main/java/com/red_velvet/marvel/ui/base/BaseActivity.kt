@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import com.red_velvet.marvel.data.database.ComicsDataBase
 
 abstract class BaseActivity<VB : ViewDataBinding> : AppCompatActivity() {
 
@@ -14,6 +15,7 @@ abstract class BaseActivity<VB : ViewDataBinding> : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        ComicsDataBase.getInstance(applicationContext)
         binding = DataBindingUtil.setContentView(this, getLayoutResId())
     }
 

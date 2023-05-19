@@ -4,16 +4,41 @@ import androidx.annotation.StringRes
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.red_velvet.marvel.R
+import com.red_velvet.marvel.data.Comics
+import com.red_velvet.marvel.data.database.ComicsDataBase
 import com.red_velvet.marvel.data.model.Comic
 import com.red_velvet.marvel.data.remote.RetrofitClient
 import com.red_velvet.marvel.data.repository.MarvelRepository
 import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
+import com.red_velvet.marvel.data.repository.MovieRepository
 import com.red_velvet.marvel.ui.base.BaseViewModel
 import com.red_velvet.marvel.ui.utils.SingleEvent
 import com.red_velvet.marvel.ui.utils.State
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.schedulers.Schedulers
 
 class ComicsViewModel : BaseViewModel(), ComicsInteractionListener {
 
+    val movieRepository=  MovieRepository()
+
+    fun addCashedComics(){
+        movieRepository.
+        insertData(Comics(0,"aya","img"))
+            .subscribeOn(Schedulers.io())
+            .subscribe()
+    }
+    fun getCashedComics(){
+
+        movieRepository.
+        getComics()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                ::onGetComics,
+                ::onGetThisWeekComicsFailure,
+
+                )
+    }
     private val repository: MarvelRepository by lazy {
         MarvelRepositoryImpl(RetrofitClient.apiService)
     }
@@ -41,6 +66,10 @@ class ComicsViewModel : BaseViewModel(), ComicsInteractionListener {
     val thisWeekComicsLiveData: LiveData<State<List<Comic>>> = _thisWeekComics
 
     private val _nextWeekComics = MutableLiveData<State<List<Comic>>>(State.Loading)
+    private val _comics = MutableLiveData<List<Comic>>()
+     val comics : LiveData<List<Comic>> = _comics
+
+
 
     private val _lastWeekComics = MutableLiveData<State<List<Comic>>>(State.Loading)
 
@@ -68,6 +97,10 @@ class ComicsViewModel : BaseViewModel(), ComicsInteractionListener {
     private fun onGetThisWeekComicsState(state: State<List<Comic>>) {
         _thisWeekComics.postValue(state)
         if (state is State.Success) insertNewComicsCollection(thisWeekStringResource, state)
+    }
+    private fun onGetComics(comics: List<Comic>) {
+        _comics.postValue(comics)
+
     }
 
     fun getNextWeekComics() {
