@@ -1,6 +1,10 @@
 package com.red_velvet.marvel.data.repository
 
 
+import com.red_velvet.marvel.data.local.MarvelDatabase
+import com.red_velvet.marvel.data.local.entities.CharacterEntity
+import com.red_velvet.marvel.data.local.entities.ComicEntity
+import com.red_velvet.marvel.data.local.entities.EventEntity
 import com.red_velvet.marvel.data.model.BaseResponse
 import com.red_velvet.marvel.data.model.Character
 import com.red_velvet.marvel.data.model.Comic
@@ -17,12 +21,74 @@ import retrofit2.Response
 class MarvelRepositoryImpl(
     private val marvelServiceImpl: MarvelService
 ) : MarvelRepository {
-
+    val localDatabase = MarvelDatabase.getInstanceWithoutContext().MarvelDao()
     override fun getAllComics(
         titleStartsWith: String?,
-        dateDescriptor: String?
+        dateDescriptor: String?,
     ): Observable<State<List<Comic>>> {
         return wrapWithState { marvelServiceImpl.getAllComics(titleStartsWith, dateDescriptor) }
+    }
+
+    override fun getAllComics(): Observable<ComicEntity> {
+        return localDatabase.getAllComics()
+    }
+
+    override fun getAllEvents(): Observable<EventEntity> {
+        return localDatabase.getAllEvents()
+    }
+
+    override fun getAllCharacters(): Observable<CharacterEntity> {
+        return localDatabase.getAllCharacters()
+    }
+
+
+    override fun refreshComics() {
+        marvelServiceImpl.getAllComics().map { response ->
+            if (response.isSuccessful)
+                response.body()?.body?.results?.map { comic ->
+                    localDatabase.insertComic(
+                        ComicEntity(
+                            1, comic.title.toString(),
+                            comic.description.toString(),
+                            "${comic.thumbnail?.path}.${comic.thumbnail?.extension}"
+                        )
+                    )
+
+                }
+        }
+
+    }
+
+    override fun refreshCharacters() {
+        marvelServiceImpl.getAllCharacters().map { response ->
+            if (response.isSuccessful)
+                response.body()?.body?.results?.map { character ->
+                    localDatabase.insertComic(
+                        ComicEntity(
+                            1, character.name.toString(),
+                            character.description.toString(),
+                            "${character.thumbnail?.path}.${character.thumbnail?.extension}"
+                        )
+                    )
+
+                }
+        }
+    }
+
+    override fun refreshEvents() {
+        marvelServiceImpl.getAllEvents().map { response ->
+            if (response.isSuccessful)
+                response.body()?.body?.results?.map { event ->
+                    localDatabase.insertComic(
+                        ComicEntity(
+                            1, event.title.toString(),
+                            event.description.toString(),
+                            "${event.thumbnail?.path}.${event.thumbnail?.extension}"
+                        )
+                    )
+
+                }
+        }
     }
 
     override fun getComicById(comicId: Int): Observable<State<List<Comic>>> {
@@ -35,7 +101,7 @@ class MarvelRepositoryImpl(
 
     override fun getAllSeries(
         titleStartsWith: String?,
-        contains: String?
+        contains: String?,
     ): Observable<State<List<Series>>> {
         return wrapWithState { marvelServiceImpl.getAllSeries(titleStartsWith, contains) }
     }
@@ -52,6 +118,7 @@ class MarvelRepositoryImpl(
         return wrapWithState { marvelServiceImpl.getAllEvents(query) }
     }
 
+
     override fun getCreatorByComicId(comicId: Int): Observable<State<List<Creator>>> {
         return wrapWithState { marvelServiceImpl.getCreatorByComicId(comicId) }
     }
@@ -63,6 +130,7 @@ class MarvelRepositoryImpl(
     override fun getAllCharacters(nameStartsWith: String?): Observable<State<List<Character>>> {
         return wrapWithState { marvelServiceImpl.getAllCharacters(nameStartsWith) }
     }
+
 
     override fun getCharacterById(characterId: Int): Observable<State<List<Character>>> {
         return wrapWithState { marvelServiceImpl.getCharacterById(characterId) }

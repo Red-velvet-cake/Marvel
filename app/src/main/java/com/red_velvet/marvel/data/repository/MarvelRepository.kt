@@ -1,6 +1,9 @@
 package com.red_velvet.marvel.data.repository
 
 
+import com.red_velvet.marvel.data.local.entities.CharacterEntity
+import com.red_velvet.marvel.data.local.entities.ComicEntity
+import com.red_velvet.marvel.data.local.entities.EventEntity
 import com.red_velvet.marvel.data.model.Character
 import com.red_velvet.marvel.data.model.Comic
 import com.red_velvet.marvel.data.model.Creator
@@ -55,5 +58,11 @@ interface MarvelRepository {
     fun getCreatorsBySeriesId(seriesId: Int): Observable<State<List<Creator>>>
 
     fun getSeriesByCharacterId(characterId: Int): Observable<State<List<Series>>>
+    fun refreshComics()
+    fun refreshCharacters()
+    fun refreshEvents()
+    fun getAllComics(): Observable<ComicEntity>
+    fun getAllEvents(): Observable<EventEntity>
+    fun getAllCharacters(): Observable<CharacterEntity>
 }
 
