@@ -5,6 +5,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
     id("androidx.navigation.safeargs")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -62,6 +63,9 @@ android {
     buildFeatures {
         buildConfig = true
     }
+    kapt {
+        correctErrorTypes = true
+    }
 }
 
 dependencies {
@@ -84,6 +88,7 @@ dependencies {
 
     // LiveData
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
+    implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycleVersion")
 
     // Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
@@ -121,8 +126,10 @@ dependencies {
     implementation("androidx.room:room-runtime:$roomVersion")
     kapt("androidx.room:room-compiler:$roomVersion")
     implementation("androidx.room:room-ktx:$roomVersion")
+    implementation("androidx.room:room-rxjava3:$roomVersion")
 
     // Dagger Hilt
-    implementation("com.google.dagger:hilt-android:2.42")
-    kapt("com.google.dagger:hilt-android-compiler:2.42")
+    val hiltVersion = "2.44"
+    implementation("com.google.dagger:hilt-android:$hiltVersion")
+    kapt("com.google.dagger:hilt-android-compiler:$hiltVersion")
 }
