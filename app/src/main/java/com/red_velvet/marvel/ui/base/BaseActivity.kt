@@ -5,7 +5,6 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import com.red_velvet.marvel.data.database.ComicsDataBase
 
 abstract class BaseActivity<VB : ViewDataBinding> : AppCompatActivity() {
 

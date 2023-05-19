@@ -1,9 +1,9 @@
-package com.red_velvet.marvel.data.database
+package com.red_velvet.marvel.data.local.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.red_velvet.marvel.data.Comics
+import com.red_velvet.marvel.data.entity.Comics
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 
