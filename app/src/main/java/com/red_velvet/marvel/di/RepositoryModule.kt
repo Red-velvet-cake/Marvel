@@ -21,10 +21,14 @@ object RepositoryModule {
     fun provideMarvelRepository(
         marvelService: MarvelService,
         marvelDatabase: MarvelDatabase,
+        comicsEntityMapper: ComicEntityMapper,
+        localComicMapper: LocalComicMapper
     ): MarvelRepository {
         return MarvelRepositoryImpl(
             marvelService,
             marvelDatabase,
+            comicsEntityMapper,
+            localComicMapper,
         )
     }
 
