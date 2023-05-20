@@ -10,7 +10,9 @@ import com.red_velvet.marvel.data.remote.dtos.EventDto
 import com.red_velvet.marvel.domain.models.Character
 import com.red_velvet.marvel.domain.models.Comic
 import com.red_velvet.marvel.domain.models.Event
+import com.red_velvet.marvel.domain.models.SearchQuery
 import com.red_velvet.marvel.ui.utils.State
+import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 
@@ -62,5 +64,11 @@ interface MarvelRepository {
     fun getCreatorsBySeriesId(seriesId: Int): Observable<State<List<Creator>>>
 
     fun getSeriesByCharacterId(characterId: Int): Observable<State<List<Series>>>
+
+    fun getSearchQueries(): Observable<List<SearchQuery>>
+
+    fun insertSearchQuery(query: String): Completable
+
+    fun deleteSearchQuery(id: Int): Completable
 }
 
