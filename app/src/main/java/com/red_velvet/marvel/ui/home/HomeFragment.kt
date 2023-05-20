@@ -30,13 +30,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
             recyclerChars.adapter = charsAdapter
             recyclerEvents.adapter = eventsAdapter
         }
-//        binding.textViewError.setOnClickListener {
-//            viewModel.apply {
-////                getCharacters()
-//                getComics()
-////                getEvents()
-//            }
-//        }
         initNavigateToComicDetails()
     }
 
