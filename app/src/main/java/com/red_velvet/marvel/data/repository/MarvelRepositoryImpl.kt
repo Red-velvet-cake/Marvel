@@ -13,6 +13,7 @@ import com.red_velvet.marvel.data.remote.dto.EventDto
 import com.red_velvet.marvel.data.remote.dto.SeriesDto
 import com.red_velvet.marvel.data.remote.dto.StoryDto
 import com.red_velvet.marvel.data.remote.service.MarvelService
+import com.red_velvet.marvel.data.util.extractResults
 import com.red_velvet.marvel.domain.mapper.LocalCharacterMapper
 import com.red_velvet.marvel.domain.mapper.LocalComicMapper
 import com.red_velvet.marvel.domain.mapper.LocalEventMapper
@@ -158,7 +159,7 @@ class MarvelRepositoryImpl @Inject constructor(
     override fun refreshComics(): Completable {
         return marvelServiceImpl.getAllComics()
             .flatMapCompletable { responseWrapper ->
-                val comics = responseWrapper.body()?.body?.results
+                val comics = responseWrapper.extractResults()
                 val comicsEntities = comics?.map { ComicEntityMapper.map(it) }
                 comicsEntities?.let {
                     Completable.fromAction { marvelDatabase.comicDao().insertAll(it) }
@@ -173,7 +174,7 @@ class MarvelRepositoryImpl @Inject constructor(
     override fun refreshEvents(): Completable {
         return marvelServiceImpl.getAllEvents()
             .flatMapCompletable { responseWrapper ->
-                val events = responseWrapper.body()?.body?.results
+                val events = responseWrapper.extractResults()
                 val eventsEntities = events?.map { eventEntityMapper.map(it) }
                 eventsEntities?.let {
                     Completable.fromAction { marvelDatabase.eventDao().insertAll(it) }
@@ -188,7 +189,7 @@ class MarvelRepositoryImpl @Inject constructor(
     override fun refreshCharacters(): Completable {
         return marvelServiceImpl.getAllCharacters()
             .flatMapCompletable { responseWrapper ->
-                val characters = responseWrapper.body()?.body?.results
+                val characters = responseWrapper.extractResults()
                 val charactersEntities = characters?.map { characterEntityMapper.map(it) }
                 charactersEntities?.let {
                     Completable.fromAction { marvelDatabase.characterDao().insertAll(it) }
