@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.red_velvet.marvel.data.model.Creator
 import com.red_velvet.marvel.data.model.Story
 import com.red_velvet.marvel.data.remote.dtos.ComicDto
-import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
+import com.red_velvet.marvel.domain.repository.MarvelRepositoryImpl
 import com.red_velvet.marvel.ui.base.BaseViewModel
 import com.red_velvet.marvel.ui.utils.State
 import dagger.hilt.android.lifecycle.HiltViewModel

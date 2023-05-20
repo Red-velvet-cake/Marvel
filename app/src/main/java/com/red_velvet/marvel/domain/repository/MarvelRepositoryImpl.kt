@@ -1,4 +1,4 @@
-package com.red_velvet.marvel.data.repository
+package com.red_velvet.marvel.domain.repository
 
 
 import com.red_velvet.marvel.data.local.daos.MarvelDao
@@ -51,10 +51,11 @@ class MarvelRepositoryImpl @Inject constructor(
             .observeOn(Schedulers.io())
             .map { responseWrapper ->
                 if (responseWrapper.isSuccessful) {
-                    val comicEntities = responseWrapper.body()?.body?.results?.map {
+                    responseWrapper.body()?.body?.results?.map {
                         comicEntityMapper.map(it)
+                    }?.let {
+                        marvelDao.insertComics(it)
                     }
-                    marvelDao.insertComics(comicEntities!!)
                 }
             }.subscribeOn(AndroidSchedulers.mainThread())
 
@@ -93,10 +94,11 @@ class MarvelRepositoryImpl @Inject constructor(
             .observeOn(Schedulers.io())
             .map { responseWrapper ->
                 if (responseWrapper.isSuccessful) {
-                    val eventEntities = responseWrapper.body()?.body?.results?.map {
+                    responseWrapper.body()?.body?.results?.map {
                         eventEntityMapper.map(it)
+                    }?.let {
+                        marvelDao.insertEvents(it)
                     }
-                    marvelDao.insertEvents(eventEntities!!)
                 }
             }.subscribeOn(AndroidSchedulers.mainThread())
 
@@ -121,10 +123,11 @@ class MarvelRepositoryImpl @Inject constructor(
             .observeOn(Schedulers.io())
             .map { responseWrapper ->
                 if (responseWrapper.isSuccessful) {
-                    val characterEntities = responseWrapper.body()?.body?.results?.map {
+                    responseWrapper.body()?.body?.results?.map {
                         characterEntityMapper.map(it)
+                    }?.let {
+                        marvelDao.insertCharacters(it)
                     }
-                    marvelDao.insertCharacters(characterEntities!!)
                 }
             }.subscribeOn(AndroidSchedulers.mainThread())
 

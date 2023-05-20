@@ -2,7 +2,7 @@ package com.red_velvet.marvel.di
 
 import com.red_velvet.marvel.data.local.daos.MarvelDao
 import com.red_velvet.marvel.data.remote.MarvelService
-import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
+import com.red_velvet.marvel.domain.repository.MarvelRepositoryImpl
 import com.red_velvet.marvel.domain.mappers.CharacterEntityMapper
 import com.red_velvet.marvel.domain.mappers.CharacterMapper
 import com.red_velvet.marvel.domain.mappers.ComicEntityMapper

@@ -2,7 +2,7 @@ package com.red_velvet.marvel.ui.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
+import com.red_velvet.marvel.domain.repository.MarvelRepositoryImpl
 import com.red_velvet.marvel.domain.models.Charcter
 import com.red_velvet.marvel.domain.models.Comic
 import com.red_velvet.marvel.domain.models.Event
