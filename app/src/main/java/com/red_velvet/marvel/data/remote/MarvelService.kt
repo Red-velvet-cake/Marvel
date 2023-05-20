@@ -93,7 +93,7 @@ interface MarvelService {
     @GET("characters")
     fun getCharactersByTitle(
         @Query("nameStartsWith") titleStartsWith: String? = null
-    ): Response<BaseResponse<List<CharacterDto>>>
+    ): Single<Response<BaseResponse<List<CharacterDto>>>>
 
     @GET("characters/{characterId}")
     fun getCharacterById(

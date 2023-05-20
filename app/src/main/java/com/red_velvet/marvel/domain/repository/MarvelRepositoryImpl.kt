@@ -1,6 +1,7 @@
 package com.red_velvet.marvel.domain.repository
 
 
+import android.util.Log
 import com.red_velvet.marvel.data.local.daos.MarvelDao
 import com.red_velvet.marvel.data.local.entity.SearchQueryEntity
 import com.red_velvet.marvel.data.model.BaseResponse
@@ -88,11 +89,13 @@ class MarvelRepositoryImpl @Inject constructor(
     }
 
     override fun getAllEvents(query: String?): Observable<List<Event>> {
-        return marvelDao.getAllEvents().map {
-            it.map { eventEntity ->
-                eventMapper.map(eventEntity)
+        return marvelDao.getAllEvents()
+            .observeOn(Schedulers.io())
+            .map {
+                it.map { eventEntity ->
+                    eventMapper.map(eventEntity)
+                }
             }
-        }
     }
 
     override fun refreshEvents() =
@@ -121,7 +124,8 @@ class MarvelRepositoryImpl @Inject constructor(
             .observeOn(Schedulers.io())
             .map { characterEntities ->
                 if (characterEntities.isEmpty()) {
-                    val responseWrapper = getCharacterByTitle(titleStartsWith)
+                    val responseWrapper = marvelServiceImpl.getCharactersByTitle(titleStartsWith)
+                        .blockingGet()
                     if (responseWrapper.isSuccessful) {
                         val characterEntitiesList =
                             responseWrapper.body()?.body?.results?.map { characterDto ->
@@ -130,16 +134,14 @@ class MarvelRepositoryImpl @Inject constructor(
                         characterEntitiesList?.let {
                             marvelDao.insertCharacters(it)
                         }
+                    } else {
+                        Log.d("TAG", "getAllCharacters: ${responseWrapper.message()}")
                     }
                 }
                 characterEntities.map { characterEntity ->
                     characterMapper.map(characterEntity)
                 }
             }
-    }
-
-    override fun getCharacterByTitle(titleStartsWith: String?): Response<BaseResponse<List<CharacterDto>>> {
-        return marvelServiceImpl.getCharactersByTitle(titleStartsWith)
     }
 
     override fun refreshCharacters() =

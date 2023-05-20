@@ -43,7 +43,7 @@ class CharactersViewModel @Inject constructor(private val repository: MarvelRepo
     private fun getAllCharacters(titleStartsWith: String = "") {
         repository.getAllCharacters(titleStartsWith)
             .subscribe(
-                { _characters.postValue(it) },
+                { if (it.isNotEmpty()) _characters.postValue(it) },
                 {}
             )
             .addTo(compositeDisposable)
