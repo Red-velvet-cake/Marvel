@@ -8,6 +8,7 @@ import androidx.navigation.fragment.findNavController
 import com.red_velvet.marvel.R
 import com.red_velvet.marvel.databinding.FragmentEventsBinding
 import com.red_velvet.marvel.ui.base.BaseFragment
+import com.red_velvet.marvel.ui.series.SearchQueryAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -22,6 +23,9 @@ class EventsFragment : BaseFragment<FragmentEventsBinding, EventsViewModel>() {
         val adapter = EventsAdapter(emptyList(), viewModel)
         binding.recyclerViewEvents.adapter = adapter
         initNavigateToEventDetails()
+
+        val searchQueryAdapter = SearchQueryAdapter(emptyList(), viewModel)
+        binding.recyclerSearchQueries.adapter = searchQueryAdapter
     }
 
     private fun initNavigateToEventDetails() {

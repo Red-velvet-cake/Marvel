@@ -3,8 +3,10 @@ package com.red_velvet.marvel.ui.events
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.red_velvet.marvel.domain.models.Event
+import com.red_velvet.marvel.domain.models.SearchQuery
 import com.red_velvet.marvel.domain.repository.MarvelRepositoryImpl
 import com.red_velvet.marvel.ui.base.BaseViewModel
+import com.red_velvet.marvel.ui.series.SearchInteractionListener
 import com.red_velvet.marvel.ui.utils.SingleEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.core.Observable
@@ -14,7 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class EventsViewModel @Inject constructor(private val repository: MarvelRepositoryImpl) :
-    BaseViewModel(), EventsInteractionListener {
+    BaseViewModel(), EventsInteractionListener, SearchInteractionListener {
 
     private val _events = MutableLiveData<List<Event>>()
     val events: LiveData<List<Event>> = _events
@@ -24,9 +26,13 @@ class EventsViewModel @Inject constructor(private val repository: MarvelReposito
 
     val searchQuery = MutableLiveData<String>()
 
+    private val _searchQueries: MutableLiveData<List<SearchQuery>> = MutableLiveData()
+    val searchQueries: LiveData<List<SearchQuery>> = _searchQueries
+
     init {
         getAllEvents()
         initSearchObservable()
+        getSearchedQueries()
     }
 
     private fun getAllEvents(query: String = "") {
@@ -46,6 +52,7 @@ class EventsViewModel @Inject constructor(private val repository: MarvelReposito
         }.debounce(500, TimeUnit.MILLISECONDS)
             .distinctUntilChanged()
             .subscribe { query ->
+                repository.insertSearchQuery(query).subscribe()
                 getAllEvents(query)
             }.addTo(compositeDisposable)
     }
@@ -54,4 +61,17 @@ class EventsViewModel @Inject constructor(private val repository: MarvelReposito
         _navigationToEventDetails.postValue(SingleEvent(eventId))
     }
 
+    private fun getSearchedQueries() {
+        repository.getSearchQueries().subscribe { queries ->
+            _searchQueries.postValue(queries)
+        }.addTo(compositeDisposable)
+    }
+
+    override fun doOnSearchQueryClicked(query: String) {
+        searchQuery.postValue(query)
+    }
+
+    override fun doOnSearchQueryDeleteClicked(id: Int) {
+        repository.deleteSearchQuery(id).subscribe()
+    }
 }
