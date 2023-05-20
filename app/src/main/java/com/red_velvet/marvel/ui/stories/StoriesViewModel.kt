@@ -3,16 +3,17 @@ package com.red_velvet.marvel.ui.stories
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.red_velvet.marvel.data.model.Story
-import com.red_velvet.marvel.data.remote.RetrofitClient
-import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
+import com.red_velvet.marvel.domain.repository.MarvelRepositoryImpl
 import com.red_velvet.marvel.ui.base.BaseViewModel
 import com.red_velvet.marvel.ui.utils.SingleEvent
 import com.red_velvet.marvel.ui.utils.State
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
+@HiltViewModel
+class StoriesViewModel @Inject constructor(private val repository: MarvelRepositoryImpl) :
+    BaseViewModel(), StoriesInteractionListener {
 
-class StoriesViewModel : BaseViewModel(), StoriesInteractionListener {
-
-    private val repository by lazy { MarvelRepositoryImpl(RetrofitClient.apiService) }
 
     private val _navigationToStoryDetails: MutableLiveData<SingleEvent<Int>> = MutableLiveData()
     val navigationToStoryDetails: LiveData<SingleEvent<Int>> = _navigationToStoryDetails

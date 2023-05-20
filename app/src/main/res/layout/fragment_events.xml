@@ -36,6 +36,18 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_search_queries"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/spacing_medium"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@id/recyclerView_events"
+            app:layout_constraintTop_toBottomOf="@id/edit_text_search"
+            app:setItems="@{viewModel.searchQueries}"
+            app:showWhenData="@{viewModel.searchQueries.empty}"
+            tools:listitem="@layout/item_search_query" />
+
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView_events"
             android:layout_width="match_parent"
             android:layout_height="@dimen/zero"
@@ -45,89 +57,10 @@
             app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/edit_text_search"
-            app:setItems="@{viewModel.events.toData()}"
-            app:showWhenSuccess="@{viewModel.events}"
+            app:layout_constraintTop_toBottomOf="@id/recycler_search_queries"
+            app:setItems="@{viewModel.events}"
             app:spanCount="2"
             tools:listitem="@layout/item_event" />
-
-        <ProgressBar
-            android:id="@+id/progress_bar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:indeterminate="true"
-            android:indeterminateTint="@color/primary"
-            android:indeterminateTintMode="src_atop"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:showWhenLoading="@{viewModel.events}" />
-
-        <ImageView
-            android:id="@+id/main_iv_error"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_error"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:showWhenError="@{viewModel.events}" />
-
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/animation_view_search_empty"
-            android:layout_width="wrap_content"
-            android:layout_height="200dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            app:lottie_rawRes="@raw/search_empty"
-            app:showWhenEmpty="@{viewModel.events}" />
-
-        <TextView
-            android:id="@+id/text_view_search_empty"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="@dimen/padding_normal"
-            android:text="@string/empty_search"
-            android:textColor="@color/tertiary_87"
-            android:textSize="@dimen/font_size_body"
-            app:layout_constraintEnd_toEndOf="@id/animation_view_search_empty"
-            app:layout_constraintStart_toStartOf="@id/animation_view_search_empty"
-            app:layout_constraintTop_toBottomOf="@id/animation_view_search_empty"
-            app:showWhenEmpty="@{viewModel.events}" />
-
-        <ImageView
-            android:id="@+id/image_view_error"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/baseline_error_24"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:showWhenError="@{viewModel.events}" />
-
-        <TextView
-            android:id="@+id/text_view_error"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:focusable="true"
-            android:padding="@dimen/spacing_medium"
-            android:text="@string/try_again"
-            android:textColor="@color/primary"
-            android:textSize="@dimen/font_size_title"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@id/image_view_error"
-            app:layout_constraintStart_toStartOf="@id/image_view_error"
-            app:layout_constraintTop_toBottomOf="@id/image_view_error"
-            app:showWhenError="@{viewModel.events}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

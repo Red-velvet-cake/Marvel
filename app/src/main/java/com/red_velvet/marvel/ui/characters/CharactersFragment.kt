@@ -6,8 +6,11 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.red_velvet.marvel.R
 import com.red_velvet.marvel.databinding.FragmentCharactersBinding
+import com.red_velvet.marvel.ui.SearchQueryAdapter
 import com.red_velvet.marvel.ui.base.BaseFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CharactersFragment : BaseFragment<FragmentCharactersBinding, CharactersViewModel>() {
 
     override val layoutIdFragment = R.layout.fragment_characters
@@ -16,8 +19,10 @@ class CharactersFragment : BaseFragment<FragmentCharactersBinding, CharactersVie
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.recyclerViewChars.adapter = CharactersAdapter(emptyList(), viewModel)
-        binding.textViewError.setOnClickListener { viewModel.getAllCharacters() }
         initNavigateToCharacterDetails()
+
+        val searchQueryAdapter = SearchQueryAdapter(emptyList(), viewModel)
+        binding.recyclerSearchQueries.adapter = searchQueryAdapter
     }
 
     private fun initNavigateToCharacterDetails() {

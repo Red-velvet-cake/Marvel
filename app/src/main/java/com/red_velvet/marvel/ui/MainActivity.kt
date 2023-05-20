@@ -10,7 +10,9 @@ import com.red_velvet.marvel.databinding.ActivityMainBinding
 import com.red_velvet.marvel.ui.base.BaseActivity
 import com.red_velvet.marvel.ui.utils.hideView
 import com.red_velvet.marvel.ui.utils.showView
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     override val LOG_TAG: String = "MainActivity"
@@ -34,7 +36,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     private fun initNavigationDestinationListener() {
         navController.addOnDestinationChangedListener { _, destination, arguments ->
             when (destination.id) {
-                R.id.comicsFragment,
+                R.id.homeFragment,
                 R.id.charactersFragment,
                 R.id.seriesFragment,
                 R.id.eventsFragment,

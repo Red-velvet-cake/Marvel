@@ -6,8 +6,11 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.red_velvet.marvel.R
 import com.red_velvet.marvel.databinding.FragmentSeriesBinding
+import com.red_velvet.marvel.ui.SearchQueryAdapter
 import com.red_velvet.marvel.ui.base.BaseFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SeriesFragment : BaseFragment<FragmentSeriesBinding, SeriesViewModel>() {
 
     override val layoutIdFragment = R.layout.fragment_series
@@ -17,7 +20,11 @@ class SeriesFragment : BaseFragment<FragmentSeriesBinding, SeriesViewModel>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val adapter = SeriesAdapter(emptyList(), viewModel)
-        binding.recyclerViewSeries.adapter = adapter
+        val searchQueryAdapter = SearchQueryAdapter(emptyList(), viewModel)
+        binding.apply {
+            recyclerViewSeries.adapter = adapter
+            recyclerSearchQueries.adapter = searchQueryAdapter
+        }
 
         setUpChipsListener()
         viewModel.searchQuery.observe(viewLifecycleOwner) {
@@ -37,7 +44,7 @@ class SeriesFragment : BaseFragment<FragmentSeriesBinding, SeriesViewModel>() {
         }
     }
 
-    private fun setUpChipsListener(searchQuery: String? = null) {
+    private fun setUpChipsListener(searchQuery: String = "") {
         binding.chips.chipAllSeries.setOnClickListener {
             viewModel.getAllSeries()
         }

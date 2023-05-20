@@ -36,6 +36,5 @@ abstract class BaseViewModel : ViewModel() {
             onError(e)
         }
     }
-
 }
 

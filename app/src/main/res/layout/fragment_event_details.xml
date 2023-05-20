@@ -27,12 +27,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/zero"
                 android:scaleType="fitXY"
-                app:imageUrl="@{viewModel.event.toData().get(0).thumbnail}"
+                app:imageUrl="@{viewModel.eventDto.toData().get(0).thumbnail}"
                 app:layout_constraintDimensionRatio="16:9"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:showWhenSuccess="@{viewModel.event}"
+                app:showWhenSuccess="@{viewModel.eventDto}"
                 tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
             <TextView
@@ -41,13 +41,13 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/spacing_medium"
                 android:fontFamily="@font/roboto_medium"
-                android:text="@{viewModel.event.toData().get(0).title}"
+                android:text="@{viewModel.eventDto.toData().get(0).title}"
                 android:textColor="@color/tertiary_87"
                 android:textSize="@dimen/font_size_title_medium"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/image_view_details"
-                app:showWhenSuccess="@{viewModel.event}"
+                app:showWhenSuccess="@{viewModel.eventDto}"
                 tools:text="End of the chance" />
 
             <TextView
@@ -56,13 +56,13 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/spacing_medium"
                 android:fontFamily="@font/roboto"
-                android:text="@{viewModel.event.toData().get(0).description}"
+                android:text="@{viewModel.eventDto.toData().get(0).description}"
                 android:textColor="@color/tertiary_87"
                 android:textSize="@dimen/font_size_title"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/text_view_event_title"
-                app:showWhenSuccess="@{viewModel.event}"
+                app:showWhenSuccess="@{viewModel.eventDto}"
                 tools:text="happy day of gradation" />
 
             <TextView
@@ -135,7 +135,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:showWhenLoading="@{viewModel.event}" />
+                app:showWhenLoading="@{viewModel.eventDto}" />
 
             <ImageView
                 android:id="@+id/image_view_error"
@@ -146,7 +146,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:showWhenError="@{viewModel.event}" />
+                app:showWhenError="@{viewModel.eventDto}" />
 
             <TextView
                 android:id="@+id/text_view_error"
@@ -162,7 +162,7 @@
                 app:layout_constraintEnd_toEndOf="@id/image_view_error"
                 app:layout_constraintStart_toStartOf="@id/image_view_error"
                 app:layout_constraintTop_toBottomOf="@id/image_view_error"
-                app:showWhenError="@{viewModel.event}" />
+                app:showWhenError="@{viewModel.eventDto}" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

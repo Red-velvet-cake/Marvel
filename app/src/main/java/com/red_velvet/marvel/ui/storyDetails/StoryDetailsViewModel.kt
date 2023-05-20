@@ -2,29 +2,27 @@ package com.red_velvet.marvel.ui.storyDetails
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.red_velvet.marvel.data.model.Comic
 import com.red_velvet.marvel.data.model.Creator
 import com.red_velvet.marvel.data.model.Story
-import com.red_velvet.marvel.data.remote.RetrofitClient
-import com.red_velvet.marvel.data.repository.MarvelRepository
-import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
+import com.red_velvet.marvel.data.remote.dtos.ComicDto
+import com.red_velvet.marvel.domain.repository.MarvelRepositoryImpl
 import com.red_velvet.marvel.ui.base.BaseViewModel
 import com.red_velvet.marvel.ui.utils.State
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class StoryDetailsViewModel : BaseViewModel(), StoryCreatorInteractionListener {
+@HiltViewModel
+class StoryDetailsViewModel @Inject constructor(private val repository: MarvelRepositoryImpl) :
+    BaseViewModel(), StoryCreatorInteractionListener {
 
     private val _story: MutableLiveData<State<List<Story>>> = MutableLiveData()
     val story: LiveData<State<List<Story>>> = _story
 
-    private val _comics: MutableLiveData<State<List<Comic>>> = MutableLiveData()
-    val comics: LiveData<State<List<Comic>>> = _comics
+    private val _comics: MutableLiveData<State<List<ComicDto>>> = MutableLiveData()
+    val comics: LiveData<State<List<ComicDto>>> = _comics
 
     private val _creators: MutableLiveData<State<List<Creator>>> = MutableLiveData()
     val creators: LiveData<State<List<Creator>>> = _creators
-
-    private val repository: MarvelRepository by lazy {
-        MarvelRepositoryImpl(RetrofitClient.apiService)
-    }
 
     fun loadStoryDetails(storyId: Int) {
         getStoryById(storyId)
@@ -68,7 +66,7 @@ class StoryDetailsViewModel : BaseViewModel(), StoryCreatorInteractionListener {
         _comics.postValue(State.Failed(error.message.toString()))
     }
 
-    private fun onGetComicsState(state: State<List<Comic>>) {
+    private fun onGetComicsState(state: State<List<ComicDto>>) {
         _comics.postValue(state)
     }
 

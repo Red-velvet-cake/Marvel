@@ -37,6 +37,15 @@
                 android:text="@={viewModel.searchQuery}" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_search_queries"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/spacing_medium"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:setItems="@{viewModel.searchQueries}"
+            app:showWhenData="@{viewModel.searchQueries.empty}"
+            tools:listitem="@layout/item_search_query" />
 
         <include
             android:id="@+id/chips"
@@ -50,59 +59,9 @@
             android:clipToPadding="false"
             android:paddingTop="@dimen/spacing_medium"
             app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
-            app:setItems="@{viewModel.series.toData()}"
-            app:showWhenSuccess="@{viewModel.series}"
+            app:setItems="@{viewModel.seriesLiveData}"
             app:spanCount="2"
             tools:listitem="@layout/item_series" />
-
-        <ProgressBar
-            android:id="@+id/lading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:indeterminate="true"
-            android:indeterminateTint="@color/primary"
-            android:indeterminateTintMode="src_atop"
-            app:showWhenLoading="@{viewModel.series}" />
-
-        <ImageView
-            android:id="@+id/main_iv_error"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@drawable/ic_error"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:showWhenError="@{viewModel.series}" />
-
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/animation_view_search_empty"
-            android:layout_width="wrap_content"
-            android:layout_height="200dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            app:lottie_rawRes="@raw/search_empty"
-            app:showWhenEmpty="@{viewModel.series}" />
-
-        <TextView
-            android:id="@+id/text_view_search_empty"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="@dimen/padding_normal"
-            android:text="@string/empty_search"
-            android:textColor="@color/tertiary_87"
-            android:textSize="@dimen/font_size_body"
-            app:layout_constraintEnd_toEndOf="@id/animation_view_search_empty"
-            app:layout_constraintStart_toStartOf="@id/animation_view_search_empty"
-            app:layout_constraintTop_toBottomOf="@id/animation_view_search_empty"
-            app:showWhenEmpty="@{viewModel.series}" />
 
     </LinearLayout>
 

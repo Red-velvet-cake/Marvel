@@ -6,7 +6,7 @@
     <data>
         <variable
             name="item"
-            type="com.red_velvet.marvel.data.model.Character" />
+            type="com.red_velvet.marvel.domain.models.Character" />
         <variable
             name="listener"
             type="com.red_velvet.marvel.ui.characters.CharacterDetailsInteractionListener" />
@@ -31,11 +31,11 @@
                 android:layout_height="match_parent"
                 android:foreground="@drawable/bg_bottom_linear_transparent"
                 android:scaleType="centerCrop"
-                app:imageUrl="@{item.thumbnail}"
+                app:setImage="@{item.imageUrl}"
                 tools:src="@tools:sample/backgrounds/scenic" />
 
             <TextView
-                android:id="@+id/text_view_title"
+                android:id="@+id/text_view_comics_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"

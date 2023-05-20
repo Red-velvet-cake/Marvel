@@ -22,12 +22,12 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/zero"
             android:scaleType="fitXY"
-            app:imageUrl="@{viewModel.series.toData().get(0).thumbnail}"
+            app:imageUrl="@{viewModel.seriesDto.toData().get(0).thumbnail}"
             app:layout_constraintDimensionRatio="16:9"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:showWhenSuccess="@{viewModel.series}"
+            app:showWhenSuccess="@{viewModel.seriesDto}"
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
         <TextView
@@ -36,13 +36,13 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/spacing_medium"
             android:fontFamily="@font/roboto_medium"
-            android:text="@{viewModel.series.toData().get(0).title}"
+            android:text="@{viewModel.seriesDto.toData().get(0).title}"
             android:textColor="@color/tertiary_87"
             android:textSize="@dimen/font_size_title_medium"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/image_view_details"
-            app:showWhenSuccess="@{viewModel.series}"
+            app:showWhenSuccess="@{viewModel.seriesDto}"
             tools:text="Iron man" />
 
         <TextView
@@ -51,13 +51,13 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/spacing_medium"
             android:fontFamily="@font/roboto"
-            android:text="@{viewModel.series.toData().get(0).description}"
+            android:text="@{viewModel.seriesDto.toData().get(0).description}"
             android:textColor="@color/tertiary_87"
             android:textSize="@dimen/font_size_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_view_serie_title"
-            app:showWhenSuccess="@{viewModel.series}"
+            app:showWhenSuccess="@{viewModel.seriesDto}"
             tools:text="sakafklsanfskafnsakfnasksakfnksasfsafsaffssafsaasfsasafssasfsafsafsfsasfasfsaffsafffasassafsafssfasffs" />
 
         <TextView
@@ -101,7 +101,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:showWhenLoading="@{viewModel.series}" />
+            app:showWhenLoading="@{viewModel.seriesDto}" />
 
         <ImageView
             android:id="@+id/image_view_error"
@@ -112,7 +112,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:showWhenError="@{viewModel.series}" />
+            app:showWhenError="@{viewModel.seriesDto}" />
 
         <TextView
             android:id="@+id/text_view_error"
@@ -128,7 +128,7 @@
             app:layout_constraintEnd_toEndOf="@id/image_view_error"
             app:layout_constraintStart_toStartOf="@id/image_view_error"
             app:layout_constraintTop_toBottomOf="@id/image_view_error"
-            app:showWhenError="@{viewModel.series}" />
+            app:showWhenError="@{viewModel.seriesDto}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

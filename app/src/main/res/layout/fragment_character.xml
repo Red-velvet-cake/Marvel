@@ -26,7 +26,7 @@
                 android:layout_marginHorizontal="@dimen/spacing_medium"
                 android:layout_marginTop="@dimen/spacing_medium"
                 android:scaleType="centerCrop"
-                app:imageUrl="@{viewModel.characterDetails.toData().get(0).thumbnail}"
+                app:imageUrl="@{viewModel.characterDtoDetails.toData().get(0).thumbnail}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -40,7 +40,7 @@
                 android:layout_marginStart="@dimen/spacing_medium"
                 android:layout_marginTop="@dimen/spacing_medium"
                 android:fontFamily="@font/roboto_medium"
-                android:text="@{viewModel.characterDetails.toData().get(0).name}"
+                android:text="@{viewModel.characterDtoDetails.toData().get(0).name}"
                 android:textSize="@dimen/font_size_title"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/character_image_view" />
@@ -54,7 +54,7 @@
                 android:layout_marginEnd="@dimen/spacing_medium"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:text="@{viewModel.characterDetails.toData().get(0).description}"
+                android:text="@{viewModel.characterDtoDetails.toData().get(0).description}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/character_title_text_view" />
@@ -98,7 +98,7 @@
                 android:textSize="@dimen/font_size_title"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/comics_recycler_view"
-                app:showWhenData="@{viewModel.series.toData().empty || viewModel.series.toData() == null}" />
+                app:showWhenData="@{viewModel.seriesDto.toData().empty || viewModel.seriesDto.toData() == null}" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/series_recycler_view"
@@ -111,8 +111,8 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/series_text_view"
-                app:setItems="@{viewModel.series.toData()}"
-                app:showWhenSuccess="@{viewModel.series}"
+                app:setItems="@{viewModel.seriesDto.toData()}"
+                app:showWhenSuccess="@{viewModel.seriesDto}"
                 tools:listitem="@layout/item_character_series" />
 
             <ProgressBar
@@ -126,7 +126,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:showWhenLoading="@{viewModel.characterDetails}" />
+                app:showWhenLoading="@{viewModel.characterDtoDetails}" />
 
             <ImageView
                 android:id="@+id/image_view_error"

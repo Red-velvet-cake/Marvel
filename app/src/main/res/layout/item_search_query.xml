@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.red_velvet.marvel.domain.models.SearchQuery" />
+
+        <variable
+            name="listener"
+            type="com.red_velvet.marvel.ui.SearchInteractionListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> listener.doOnSearchQueryClicked(item.query)}"
+        android:paddingVertical="@dimen/spacing_small">
+
+        <TextView
+            android:id="@+id/text_view_query"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{item.query}"
+            android:textSize="@dimen/font_size_body"
+            app:layout_constraintEnd_toStartOf="@id/image_view_clear"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@tools:sample/full_names" />
+
+        <ImageView
+            android:id="@+id/image_view_clear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> listener.doOnSearchQueryDeleteClicked(item.id)}"
+            android:src="@drawable/baseline_clear_24"
+            app:layout_constraintBottom_toBottomOf="@id/text_view_query"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/text_view_query" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/comicsFragment">
+    app:startDestination="@id/homeFragment">
 
     <fragment
         android:id="@+id/storyFragment"
@@ -13,14 +13,20 @@
             app:argType="integer" />
     </fragment>
     <fragment
-        android:id="@+id/comicsFragment"
-        android:name="com.red_velvet.marvel.ui.comics.ComicsFragment"
+        android:id="@+id/homeFragment"
+        android:name="com.red_velvet.marvel.ui.home.HomeFragment"
         android:label="Comics">
         <action
-            android:id="@+id/action_comicsFragment_to_comicDetailsFragment"
+            android:id="@+id/action_homeFragment_to_comicDetailsFragment"
             app:destination="@id/comicDetailsFragment"
             app:launchSingleTop="false"
-            app:popUpTo="@id/comicsFragment" />
+            app:popUpTo="@id/homeFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_characterFragment"
+            app:destination="@id/characterFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_eventDetailsFragment"
+            app:destination="@id/eventDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/characterFragment"

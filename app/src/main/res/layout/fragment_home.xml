@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.red_velvet.marvel.ui.home.HomeViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_xlarge"
+            android:clipToPadding="false"
+            android:paddingVertical="@dimen/spacing_medium"
+            tools:context=".ui.home.HomeFragment">
+
+            <TextView
+                android:id="@+id/text_view_comics_title"
+                android:layout_width="@dimen/zero"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_medium"
+                android:paddingBottom="@dimen/spacing_normal"
+                android:text="@string/comics"
+                android:textColor="@color/tertiary_87"
+                android:textSize="@dimen/font_size_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_comics"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/padding_normal"
+                android:paddingBottom="@dimen/spacing_medium"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/text_view_comics_title"
+                app:setItems="@{viewModel.comicsLiveData}"
+                tools:listitem="@layout/item_home_comic" />
+
+            <TextView
+                android:id="@+id/text_view_events_title"
+                android:layout_width="@dimen/zero"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_medium"
+                android:paddingBottom="@dimen/spacing_normal"
+                android:text="@string/events"
+                android:textColor="@color/tertiary_87"
+                android:textSize="@dimen/font_size_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/recycler_comics" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_events"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/padding_normal"
+                android:paddingBottom="@dimen/spacing_medium"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/text_view_events_title"
+                app:setItems="@{viewModel.eventsLiveData}"
+                tools:listitem="@layout/item_home_event" />
+
+            <TextView
+                android:id="@+id/text_view_chars_title"
+                android:layout_width="@dimen/zero"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_medium"
+                android:paddingBottom="@dimen/spacing_normal"
+                android:text="@string/characters"
+                android:textColor="@color/tertiary_87"
+                android:textSize="@dimen/font_size_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/recycler_events" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_chars"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/padding_normal"
+                android:paddingBottom="@dimen/spacing_medium"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/text_view_chars_title"
+                app:setItems="@{viewModel.charactersLiveData}"
+                tools:listitem="@layout/item_home_character" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

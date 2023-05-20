@@ -2,33 +2,36 @@ package com.red_velvet.marvel.ui.characters
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.red_velvet.marvel.data.model.Character
-import com.red_velvet.marvel.data.remote.RetrofitClient
-import com.red_velvet.marvel.data.repository.MarvelRepository
-import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
+import com.red_velvet.marvel.domain.models.Character
+import com.red_velvet.marvel.domain.models.SearchQuery
+import com.red_velvet.marvel.domain.repository.MarvelRepositoryImpl
+import com.red_velvet.marvel.ui.SearchInteractionListener
 import com.red_velvet.marvel.ui.base.BaseViewModel
 import com.red_velvet.marvel.ui.utils.SingleEvent
-import com.red_velvet.marvel.ui.utils.State
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.kotlin.addTo
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
-class CharactersViewModel : BaseViewModel(), CharacterDetailsInteractionListener {
-    private val _characters: MutableLiveData<State<List<Character>>> = MutableLiveData()
-    val characters: LiveData<State<List<Character>>> = _characters
+@HiltViewModel
+class CharactersViewModel @Inject constructor(private val repository: MarvelRepositoryImpl) :
+    BaseViewModel(), CharacterDetailsInteractionListener, SearchInteractionListener {
+    private val _characters: MutableLiveData<List<Character>> = MutableLiveData()
+    val characters: LiveData<List<Character>> = _characters
 
     val searchQuery = MutableLiveData<String>()
-
-    private val repository: MarvelRepository by lazy {
-        MarvelRepositoryImpl(RetrofitClient.apiService)
-    }
 
     private val _navigationToCharacterDetails: MutableLiveData<SingleEvent<Int>> = MutableLiveData()
     val navigationToCharacterDetails: LiveData<SingleEvent<Int>> = _navigationToCharacterDetails
 
+    private val _searchQueries: MutableLiveData<List<SearchQuery>> = MutableLiveData()
+    val searchQueries: LiveData<List<SearchQuery>> = _searchQueries
+
     init {
         getAllCharacters()
         initSearchObservable()
+        getSearchedQueries()
     }
 
     private fun initSearchObservable() {
@@ -39,31 +42,36 @@ class CharactersViewModel : BaseViewModel(), CharacterDetailsInteractionListener
         }.debounce(500, TimeUnit.MILLISECONDS)
             .distinctUntilChanged()
             .subscribe { query ->
-                if (query.isEmpty()) {
-                    getAllCharacters()
-                } else {
-                    getAllCharacters(query)
-                }
+                repository.insertSearchQuery(query).subscribe()
+                getAllCharacters(query)
             }.addTo(compositeDisposable)
     }
 
-    fun getAllCharacters(nameStartsWith: String? = null) {
-        bindStateUpdates(
-            repository.getAllCharacters(nameStartsWith),
-            onNext = ::onGetCharactersState,
-            onError = ::onGetCharactersError
-        )
-    }
-
-    private fun onGetCharactersState(state: State<List<Character>>) {
-        _characters.postValue(state)
-    }
-
-    private fun onGetCharactersError(error: Throwable) {
-        _characters.postValue(State.Failed(error.message.toString()))
+    private fun getAllCharacters(titleStartsWith: String = "") {
+        repository.getAllCharacters(titleStartsWith)
+            .subscribe(
+                { if (it.isNotEmpty()) _characters.postValue(it) },
+                {}
+            )
+            .addTo(compositeDisposable)
     }
 
     override fun doOnCharacterClicked(characterId: Int) {
         _navigationToCharacterDetails.postValue(SingleEvent(characterId))
     }
+
+    private fun getSearchedQueries() {
+        repository.getSearchQueries().subscribe { queries ->
+            _searchQueries.postValue(queries)
+        }.addTo(compositeDisposable)
+    }
+
+    override fun doOnSearchQueryClicked(query: String) {
+        searchQuery.postValue(query)
+    }
+
+    override fun doOnSearchQueryDeleteClicked(id: Int) {
+        repository.deleteSearchQuery(id).subscribe()
+    }
+
 }

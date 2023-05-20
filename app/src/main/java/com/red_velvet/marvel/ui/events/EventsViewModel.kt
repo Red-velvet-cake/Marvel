@@ -2,47 +2,46 @@ package com.red_velvet.marvel.ui.events
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.red_velvet.marvel.data.model.Event
-import com.red_velvet.marvel.data.remote.RetrofitClient
-import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
+import com.red_velvet.marvel.domain.models.Event
+import com.red_velvet.marvel.domain.models.SearchQuery
+import com.red_velvet.marvel.domain.repository.MarvelRepositoryImpl
+import com.red_velvet.marvel.ui.SearchInteractionListener
 import com.red_velvet.marvel.ui.base.BaseViewModel
 import com.red_velvet.marvel.ui.utils.SingleEvent
-import com.red_velvet.marvel.ui.utils.State
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.kotlin.addTo
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
-class EventsViewModel : BaseViewModel(), EventsInteractionListener {
+@HiltViewModel
+class EventsViewModel @Inject constructor(private val repository: MarvelRepositoryImpl) :
+    BaseViewModel(), EventsInteractionListener, SearchInteractionListener {
 
-    private val repository by lazy { MarvelRepositoryImpl(RetrofitClient.apiService) }
-
-    private val _events = MutableLiveData<State<List<Event>>>()
-    val events: LiveData<State<List<Event>>> = _events
+    private val _events = MutableLiveData<List<Event>>()
+    val events: LiveData<List<Event>> = _events
 
     private val _navigationToEventDetails = MutableLiveData<SingleEvent<Int>>()
     val navigationToEventDetails: LiveData<SingleEvent<Int>> = _navigationToEventDetails
 
     val searchQuery = MutableLiveData<String>()
 
+    private val _searchQueries: MutableLiveData<List<SearchQuery>> = MutableLiveData()
+    val searchQueries: LiveData<List<SearchQuery>> = _searchQueries
+
     init {
         getAllEvents()
         initSearchObservable()
+        getSearchedQueries()
     }
 
-    fun getAllEvents(query: String? = null) {
-        bindStateUpdates(
-            repository.getAllEvents(query),
-            onError = ::onGetAllEventsFailure,
-            onNext = ::onGetAllEventsState
-        )
-    }
-
-    private fun onGetAllEventsState(state: State<List<Event>>) {
-        _events.postValue(state)
-    }
-
-    private fun onGetAllEventsFailure(e: Throwable) {
-        _events.postValue(State.Failed(e.message.toString()))
+    private fun getAllEvents(query: String = "") {
+        repository.getAllEvents(query)
+            .subscribe(
+                { if (it.isNotEmpty()) _events.postValue(it) },
+                {}
+            )
+            .addTo(compositeDisposable)
     }
 
     private fun initSearchObservable() {
@@ -50,14 +49,11 @@ class EventsViewModel : BaseViewModel(), EventsInteractionListener {
             searchQuery.observeForever { query ->
                 emitter.onNext(query)
             }
-        }.debounce(300, TimeUnit.MILLISECONDS)
+        }.debounce(500, TimeUnit.MILLISECONDS)
             .distinctUntilChanged()
             .subscribe { query ->
-                if (query.isEmpty()) {
-                    getAllEvents()
-                } else {
-                    getAllEvents(query)
-                }
+                repository.insertSearchQuery(query).subscribe()
+                getAllEvents(query)
             }.addTo(compositeDisposable)
     }
 
@@ -65,4 +61,17 @@ class EventsViewModel : BaseViewModel(), EventsInteractionListener {
         _navigationToEventDetails.postValue(SingleEvent(eventId))
     }
 
+    private fun getSearchedQueries() {
+        repository.getSearchQueries().subscribe { queries ->
+            _searchQueries.postValue(queries)
+        }.addTo(compositeDisposable)
+    }
+
+    override fun doOnSearchQueryClicked(query: String) {
+        searchQuery.postValue(query)
+    }
+
+    override fun doOnSearchQueryDeleteClicked(id: Int) {
+        repository.deleteSearchQuery(id).subscribe()
+    }
 }
