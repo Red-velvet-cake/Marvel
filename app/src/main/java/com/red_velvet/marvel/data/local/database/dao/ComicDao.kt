@@ -13,15 +13,15 @@ import io.reactivex.rxjava3.core.Observable
 interface ComicDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertComic(comic: ComicEntity): Completable
+    fun insert(comic: ComicEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAllComics(comics: List<ComicEntity>): Completable
+    fun insertAll(comics: List<ComicEntity>)
 
     @Query("SELECT * FROM COMIC_TABLE")
-    fun getAllComics(): Observable<List<ComicEntity>>
+    fun getAll(): Observable<List<ComicEntity>>
 
     @Delete
-    fun deleteComic(comic: ComicEntity): Completable
+    fun delete(comic: ComicEntity): Completable
 
 }
