@@ -2,22 +2,24 @@ package com.red_velvet.marvel.ui.events
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.red_velvet.marvel.data.model.Event
-import com.red_velvet.marvel.data.remote.RetrofitClient
-import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
+import com.red_velvet.marvel.data.remote.dto.EventDto
+import com.red_velvet.marvel.data.repository.MarvelRepository
 import com.red_velvet.marvel.ui.base.BaseViewModel
 import com.red_velvet.marvel.ui.utils.SingleEvent
 import com.red_velvet.marvel.ui.utils.State
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.kotlin.addTo
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
-class EventsViewModel : BaseViewModel(), EventsInteractionListener {
+@HiltViewModel
+class EventsViewModel @Inject constructor(
+    private val repository: MarvelRepository
+) : BaseViewModel(), EventsInteractionListener {
 
-    private val repository by lazy { MarvelRepositoryImpl(RetrofitClient.apiService) }
-
-    private val _events = MutableLiveData<State<List<Event>>>()
-    val events: LiveData<State<List<Event>>> = _events
+    private val _events = MutableLiveData<State<List<EventDto>>>()
+    val events: LiveData<State<List<EventDto>>> = _events
 
     private val _navigationToEventDetails = MutableLiveData<SingleEvent<Int>>()
     val navigationToEventDetails: LiveData<SingleEvent<Int>> = _navigationToEventDetails
@@ -37,7 +39,7 @@ class EventsViewModel : BaseViewModel(), EventsInteractionListener {
         )
     }
 
-    private fun onGetAllEventsState(state: State<List<Event>>) {
+    private fun onGetAllEventsState(state: State<List<EventDto>>) {
         _events.postValue(state)
     }
 

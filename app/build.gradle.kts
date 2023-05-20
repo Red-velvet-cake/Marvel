@@ -5,6 +5,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
     id("androidx.navigation.safeargs")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -30,7 +31,11 @@ android {
         }
 
         buildConfigField("String", "PUBLIC_KEY", localProperties.getProperty("publicKey") ?: "\"\"")
-        buildConfigField("String", "PRIVATE_KEY", localProperties.getProperty("privateKey") ?: "\"\"")
+        buildConfigField(
+            "String",
+            "PRIVATE_KEY",
+            localProperties.getProperty("privateKey") ?: "\"\""
+        )
     }
 
     buildTypes {
@@ -49,7 +54,7 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
-    dataBinding{
+    dataBinding {
         enable = true
     }
     viewBinding {
@@ -57,6 +62,9 @@ android {
     }
     buildFeatures {
         buildConfig = true
+    }
+    kapt {
+        correctErrorTypes = true
     }
 }
 
@@ -80,6 +88,7 @@ dependencies {
 
     // LiveData
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
+    implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycleVersion")
 
     // Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
@@ -105,10 +114,22 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:4.15.1")
 
     //navigation
-    val nav_version = "2.5.1"
-    implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
-    implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
+    val navVersion = "2.5.1"
+    implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
+    implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
 
     // Lottie Animation
     implementation("com.airbnb.android:lottie:6.0.0")
+
+    // Room Database
+    val roomVersion = "2.5.1"
+    implementation("androidx.room:room-runtime:$roomVersion")
+    kapt("androidx.room:room-compiler:$roomVersion")
+    implementation("androidx.room:room-ktx:$roomVersion")
+    implementation("androidx.room:room-rxjava3:$roomVersion")
+
+    // Dagger Hilt
+    val hiltVersion = "2.44"
+    implementation("com.google.dagger:hilt-android:$hiltVersion")
+    kapt("com.google.dagger:hilt-android-compiler:$hiltVersion")
 }

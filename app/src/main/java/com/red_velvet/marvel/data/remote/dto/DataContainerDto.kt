@@ -1,9 +1,9 @@
-package com.red_velvet.marvel.data.model
+package com.red_velvet.marvel.data.remote.dto
 
 
 import com.google.gson.annotations.SerializedName
 
-data class DataContainer<T>(
+data class DataContainerDto<T>(
     @SerializedName("count")
     val count: Int? = 0,
     @SerializedName("limit")

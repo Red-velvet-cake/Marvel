@@ -1,15 +1,15 @@
-package com.red_velvet.marvel.data.model
+package com.red_velvet.marvel.data.remote.dto
 
 import com.google.gson.annotations.SerializedName
-import com.red_velvet.marvel.data.model.*
+import com.red_velvet.marvel.data.remote.dto.*
 
-data class Character(
+data class CharacterDto(
     @SerializedName("comics")
-    val comics: ResourceCollection? = ResourceCollection(),
+    val comics: ResourceCollectionDto? = ResourceCollectionDto(),
     @SerializedName("description")
     val description: String?,
     @SerializedName("events")
-    val events: ResourceCollection? = ResourceCollection(),
+    val events: ResourceCollectionDto? = ResourceCollectionDto(),
     @SerializedName("id")
     val id: Int?,
     @SerializedName("modified")
@@ -19,11 +19,11 @@ data class Character(
     @SerializedName("resourceURI")
     val resourceURI: String?,
     @SerializedName("series")
-    val series: ResourceCollection? = ResourceCollection(),
+    val series: ResourceCollectionDto? = ResourceCollectionDto(),
     @SerializedName("stories")
-    val stories: ResourceCollection? = ResourceCollection(),
+    val stories: ResourceCollectionDto? = ResourceCollectionDto(),
     @SerializedName("thumbnail")
-    val thumbnail: Thumbnail?,
+    val thumbnail: ThumbnailDto?,
     @SerializedName("urls")
-    val urls: List<Url?>
+    val urls: List<UrlDto?>
 )

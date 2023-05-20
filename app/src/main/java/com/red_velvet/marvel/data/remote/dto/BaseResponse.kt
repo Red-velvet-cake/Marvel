@@ -1,4 +1,4 @@
-package com.red_velvet.marvel.data.model
+package com.red_velvet.marvel.data.remote.dto
 
 
 import com.google.gson.annotations.SerializedName
@@ -13,7 +13,7 @@ data class BaseResponse<T>(
     @SerializedName("copyright")
     val copyright: String? = "",
     @SerializedName("data")
-    val body: DataContainer<T>? = null,
+    val body: DataContainerDto<T>? = null,
     @SerializedName("etag")
     val etag: String? = "",
     @SerializedName("status")

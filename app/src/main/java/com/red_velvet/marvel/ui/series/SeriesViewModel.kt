@@ -3,27 +3,28 @@ package com.red_velvet.marvel.ui.series
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.red_velvet.marvel.data.model.Series
-import com.red_velvet.marvel.data.remote.RetrofitClient
+import com.red_velvet.marvel.data.remote.dto.SeriesDto
 import com.red_velvet.marvel.data.repository.MarvelRepository
-import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
 import com.red_velvet.marvel.ui.base.BaseViewModel
 import com.red_velvet.marvel.ui.utils.SingleEvent
 import com.red_velvet.marvel.ui.utils.State
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.kotlin.addTo
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
 
-class SeriesViewModel : BaseViewModel(), SeriesInteractionListener {
+@HiltViewModel
+class SeriesViewModel @Inject constructor(
+    private val repository: MarvelRepository
+) : BaseViewModel(), SeriesInteractionListener {
 
     private val _navigationToSeriesDetails: MutableLiveData<SingleEvent<Int>> = MutableLiveData()
     val navigationToSeriesDetails: LiveData<SingleEvent<Int>> = _navigationToSeriesDetails
 
-    private val _series: MutableLiveData<State<List<Series>>> = MutableLiveData()
-    val series: LiveData<State<List<Series>>> = _series
-
-    val repository: MarvelRepository by lazy { MarvelRepositoryImpl(RetrofitClient.apiService) }
+    private val _series: MutableLiveData<State<List<SeriesDto>>> = MutableLiveData()
+    val series: LiveData<State<List<SeriesDto>>> = _series
 
     val searchQuery = MutableLiveData<String>()
 
@@ -44,7 +45,7 @@ class SeriesViewModel : BaseViewModel(), SeriesInteractionListener {
         _series.postValue(State.Failed(error.message.toString()))
     }
 
-    private fun onGetSeriesState(state: State<List<Series>>) {
+    private fun onGetSeriesState(state: State<List<SeriesDto>>) {
         _series.postValue(state)
     }
 

@@ -1,9 +1,9 @@
-package com.red_velvet.marvel.data.model
+package com.red_velvet.marvel.data.remote.dto
 
 
 import com.google.gson.annotations.SerializedName
 
-data class Resource(
+data class ResourceDto(
     @SerializedName("name")
     val name: String? = null,
     @SerializedName("resourceURI")
