@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.red_velvet.marvel.data.model.Character" />
+            type="com.red_velvet.marvel.domain.models.Character" />
 
         <variable
             name="listener"
@@ -31,7 +31,7 @@
                 android:layout_height="match_parent"
                 android:foreground="@drawable/bg_bottom_linear_transparent"
                 android:scaleType="centerCrop"
-                app:imageUrl="@{item.thumbnail}"
+                app:setImage="@{item.imageUrl}"
                 tools:src="@tools:sample/backgrounds/scenic" />
 
             <TextView

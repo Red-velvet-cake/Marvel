@@ -8,7 +8,9 @@ import androidx.navigation.fragment.navArgs
 import com.red_velvet.marvel.R
 import com.red_velvet.marvel.databinding.FragmentCharacterBinding
 import com.red_velvet.marvel.ui.base.BaseFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CharacterDetailsFragment :
     BaseFragment<FragmentCharacterBinding, CharacterDetailsViewModel>() {
 

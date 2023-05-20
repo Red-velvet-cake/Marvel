@@ -7,7 +7,9 @@ import androidx.navigation.fragment.findNavController
 import com.red_velvet.marvel.R
 import com.red_velvet.marvel.databinding.FragmentCharactersBinding
 import com.red_velvet.marvel.ui.base.BaseFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CharactersFragment : BaseFragment<FragmentCharactersBinding, CharactersViewModel>() {
 
     override val layoutIdFragment = R.layout.fragment_characters

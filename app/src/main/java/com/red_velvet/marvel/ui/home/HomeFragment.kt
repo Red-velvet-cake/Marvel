@@ -7,10 +7,9 @@ import androidx.navigation.fragment.findNavController
 import com.red_velvet.marvel.R
 import com.red_velvet.marvel.databinding.FragmentHomeBinding
 import com.red_velvet.marvel.ui.base.BaseFragment
-import com.red_velvet.marvel.ui.home.adapter.CharactersAdapter
-import com.red_velvet.marvel.ui.home.adapter.ComicsAdapter
-import com.red_velvet.marvel.ui.home.adapter.EventsAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
     override val layoutIdFragment = R.layout.fragment_home
@@ -28,13 +27,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
             recyclerChars.adapter = charsAdapter
             recyclerEvents.adapter = eventsAdapter
         }
-        binding.textViewError.setOnClickListener {
-            viewModel.apply {
-                getCharacters()
-                getComics()
-                getEvents()
-            }
-        }
+//        binding.textViewError.setOnClickListener {
+//            viewModel.apply {
+//                getCharacters()
+//                getComics()
+//                getEvents()
+//            }
+//        }
         initNavigateToComicDetails()
     }
 

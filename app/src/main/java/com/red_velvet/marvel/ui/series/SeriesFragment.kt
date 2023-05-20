@@ -7,7 +7,9 @@ import androidx.navigation.fragment.findNavController
 import com.red_velvet.marvel.R
 import com.red_velvet.marvel.databinding.FragmentSeriesBinding
 import com.red_velvet.marvel.ui.base.BaseFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SeriesFragment : BaseFragment<FragmentSeriesBinding, SeriesViewModel>() {
 
     override val layoutIdFragment = R.layout.fragment_series
