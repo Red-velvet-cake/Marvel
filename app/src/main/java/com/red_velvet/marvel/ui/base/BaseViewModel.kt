@@ -37,5 +37,24 @@ abstract class BaseViewModel : ViewModel() {
         }
     }
 
+    fun <T : Any> bindObservable(
+        stateObservable: Observable<T>,
+        onError: (Throwable) -> Unit,
+        onNext: (T) -> Unit
+    ) {
+        try {
+            stateObservable
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeBy(
+                    onError = onError,
+                    onNext = onNext,
+                )
+                .addTo(compositeDisposable)
+        } catch (e: Exception) {
+            onError(e)
+        }
+    }
+
 }
 

@@ -35,6 +35,28 @@ class HomeViewModel @Inject constructor(
     private val _characters = MutableLiveData<State<List<Character>>>(State.Loading)
     val characterLiveData: LiveData<State<List<Character>>> = _characters
 
+    init {
+        repository.refreshComics()
+        getComics()
+    }
+
+    private fun getComics() {
+        bindObservable(
+            repository.getComics(),
+            ::onComicsError,
+            ::onComicsReceived,
+        )
+    }
+
+    private fun onComicsReceived(comics: List<Comic>) {
+        _comics.postValue(comics)
+    }
+
+    private fun onComicsError(throwable: Throwable) {
+        _comics.postValue(emptyList())
+    }
+
+
     override fun doOnComicClicked(comicId: Int) {
         _navigationToComicDetails.postValue(SingleEvent(comicId))
     }

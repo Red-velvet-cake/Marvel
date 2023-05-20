@@ -7,7 +7,9 @@ import com.red_velvet.marvel.data.remote.dto.CreatorDto
 import com.red_velvet.marvel.data.remote.dto.EventDto
 import com.red_velvet.marvel.data.remote.dto.SeriesDto
 import com.red_velvet.marvel.data.remote.dto.StoryDto
+import com.red_velvet.marvel.domain.model.Comic
 import com.red_velvet.marvel.ui.utils.State
+import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
 
 interface MarvelRepository {
@@ -55,5 +57,12 @@ interface MarvelRepository {
     fun getCreatorsBySeriesId(seriesId: Int): Observable<State<List<CreatorDto>>>
 
     fun getSeriesByCharacterId(characterId: Int): Observable<State<List<SeriesDto>>>
+
+    fun refreshComics(): Completable
+
+    fun getComics(
+        titleStartsWith: String? = null,
+        contains: String? = null
+    ): Observable<List<Comic>>
 }
 

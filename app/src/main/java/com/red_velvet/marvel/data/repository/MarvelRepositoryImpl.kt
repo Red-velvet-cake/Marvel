@@ -2,6 +2,7 @@ package com.red_velvet.marvel.data.repository
 
 
 import com.red_velvet.marvel.data.local.database.MarvelDatabase
+import com.red_velvet.marvel.data.local.mapper.ComicEntityMapper
 import com.red_velvet.marvel.data.remote.dto.BaseResponse
 import com.red_velvet.marvel.data.remote.dto.CharacterDto
 import com.red_velvet.marvel.data.remote.dto.ComicDto
@@ -10,15 +11,21 @@ import com.red_velvet.marvel.data.remote.dto.EventDto
 import com.red_velvet.marvel.data.remote.dto.SeriesDto
 import com.red_velvet.marvel.data.remote.dto.StoryDto
 import com.red_velvet.marvel.data.remote.service.MarvelService
+import com.red_velvet.marvel.domain.mapper.LocalComicMapper
+import com.red_velvet.marvel.domain.model.Comic
 import com.red_velvet.marvel.ui.utils.State
+import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.schedulers.Schedulers
 import retrofit2.Response
 import javax.inject.Inject
 
 class MarvelRepositoryImpl @Inject constructor(
     private val marvelServiceImpl: MarvelService,
     private val marvelDatabase: MarvelDatabase,
+    private val ComicEntityMapper: ComicEntityMapper,
+    private val localComicMapper: LocalComicMapper,
 ) : MarvelRepository {
 
     override fun getAllComics(
@@ -118,5 +125,26 @@ class MarvelRepositoryImpl @Inject constructor(
             }
             .onErrorReturn { State.Failed(it.message ?: "Unknown error") }
             .startWith(Observable.just(State.Loading))
+    }
+
+    override fun refreshComics(): Completable {
+        return marvelServiceImpl.getAllComics()
+            .flatMapCompletable { responseWrapper ->
+                val comics = responseWrapper.body()?.body?.results
+                val comicsEntities = comics?.map { ComicEntityMapper.map(it) }
+                comicsEntities?.let {
+                    Completable.fromAction { marvelDatabase.comicDao().insertAll(it) }
+                        .subscribeOn(Schedulers.io())
+                } ?: Completable.complete()
+            }
+            .onErrorResumeNext {
+                Completable.complete()
+            }
+    }
+
+    override fun getComics(titleStartsWith: String?, contains: String?): Observable<List<Comic>> {
+        return marvelDatabase.comicDao()
+            .getAll()
+            .map { comics -> comics.map { localComicMapper.map(it) } }
     }
 }
