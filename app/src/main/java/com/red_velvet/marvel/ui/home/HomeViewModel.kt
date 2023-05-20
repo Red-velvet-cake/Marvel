@@ -8,6 +8,9 @@ import com.red_velvet.marvel.data.entity.EventsEntity
 import com.red_velvet.marvel.data.remote.RetrofitClient
 import com.red_velvet.marvel.data.repository.MarvelRepository
 import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
+import com.red_velvet.marvel.domain.models.Chars
+import com.red_velvet.marvel.domain.models.Comic
+import com.red_velvet.marvel.domain.models.Event
 import com.red_velvet.marvel.ui.base.BaseViewModel
 import com.red_velvet.marvel.ui.utils.SingleEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -29,14 +32,14 @@ class HomeViewModel @Inject constructor (private val repository: MarvelRepositor
     val navigationToCharacterDetails: LiveData<SingleEvent<Int>> = _navigationToCharacterDetails
 
 
-    private val _events = MutableLiveData<List<EventsEntity>>()
-    val eventLiveData: LiveData<List<EventsEntity>> = _events
+    private val _events = MutableLiveData<List<Event>>()
+    val eventLiveData: LiveData<List<Event>> = _events
 
-    private val _characters = MutableLiveData<List<CharsEntity>>()
-    val characterLiveData: LiveData<List<CharsEntity>> = _characters
+    private val _characters = MutableLiveData<List<Chars>>()
+    val characterLiveData: LiveData<List<Chars>> = _characters
 
-    private val _comics = MutableLiveData<List<ComicsEntity>>()
-    val comics: LiveData<List<ComicsEntity>> get() = _comics
+    private val _comics = MutableLiveData<List<Comic>>()
+    val comics: LiveData<List<Comic>> get() = _comics
 
     init {
         getComics()
@@ -52,14 +55,18 @@ class HomeViewModel @Inject constructor (private val repository: MarvelRepositor
                     .mainThread()
                 )
             .subscribe(
-                ::onGetComicsState
+                ::onGetComicsSucccess,
+                ::onGetComicsFailed
             )
     }
 
 
 
-    private fun onGetComicsState(comics: List<ComicsEntity>) {
+    private fun onGetComicsSucccess(comics: List<Comic>) {
         _comics.postValue(comics)
+    }
+    private fun onGetComicsFailed(throwable: Throwable) {
+        _comics.postValue(emptyList())
     }
 
     fun getEvents() {
@@ -68,13 +75,17 @@ class HomeViewModel @Inject constructor (private val repository: MarvelRepositor
                 .mainThread()
         )
             .subscribe(
-                ::onGetEventsState
+                ::onGetEventsSuccess,
+            ::onGetEventsFailed
             )
+    }
+    private fun onGetEventsFailed(throwable: Throwable) {
+        _events.postValue(emptyList())
     }
 
 
 
-    private fun onGetEventsState(eventsEntity: List<EventsEntity>) {
+    private fun onGetEventsSuccess(eventsEntity: List<Event>) {
         _events.postValue(eventsEntity)
     }
 
@@ -84,13 +95,16 @@ class HomeViewModel @Inject constructor (private val repository: MarvelRepositor
                 .mainThread()
         )
             .subscribe(
-                ::onGetCharactersState
+                ::onGetCharactersState,
+                ::onGetCharsFailed
             )
     }
 
+    private fun onGetCharsFailed(throwable: Throwable) {
+        _events.postValue(emptyList())
+    }
 
-
-    private fun onGetCharactersState(charsEntity: List<CharsEntity>) {
+    private fun onGetCharactersState(charsEntity: List<Chars>) {
         _characters.postValue(charsEntity)
     }
 

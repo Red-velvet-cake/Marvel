@@ -10,24 +10,22 @@ import com.red_velvet.marvel.data.entity.EventsSearch
 import com.red_velvet.marvel.data.entity.SeriesSearch
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.core.Single
-import retrofit2.Response
 
 interface MovieDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertChars(charsEntity: CharsEntity): Completable
+    fun insertChars(charsEntity: List<CharsEntity>): Completable
 
     @Query("SELECT * FROM CHARS_TABLE")
     fun getAllChars() : Observable<List<CharsEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertComics(comicsEntity: ComicsEntity):Completable
+    fun insertComics(comicsEntity: List<ComicsEntity>):Completable
 
     @Query("SELECT * FROM COMICS_TABLE")
     fun getAllComics() : Observable<List<ComicsEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertEvents(eventsEntity: EventsEntity): Completable
+    fun insertEvents(eventsEntity: List<EventsEntity>): Completable
 
     @Query("SELECT * FROM EVENTS_TABLE")
     fun getAllEvents() : Observable<List<EventsEntity>>

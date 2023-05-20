@@ -5,7 +5,6 @@ import com.red_velvet.marvel.data.entity.CharsEntity
 import com.red_velvet.marvel.data.entity.ComicsEntity
 import com.red_velvet.marvel.data.entity.EventsEntity
 import com.red_velvet.marvel.data.entity.EventsSearch
-import com.red_velvet.marvel.data.entity.SeriesSearch
 import com.red_velvet.marvel.data.local.MovieDataBase
 import com.red_velvet.marvel.data.model.BaseResponse
 import com.red_velvet.marvel.data.model.CharacterDto
@@ -14,22 +13,32 @@ import com.red_velvet.marvel.data.model.Creator
 import com.red_velvet.marvel.data.model.EventDto
 import com.red_velvet.marvel.data.model.Series
 import com.red_velvet.marvel.data.model.Story
-import com.red_velvet.marvel.domain.mappers.ComicsMapper
 import com.red_velvet.marvel.data.remote.MarvelService
+import com.red_velvet.marvel.domain.mappers.CharsEntityMapper
 import com.red_velvet.marvel.domain.mappers.CharsMapper
+import com.red_velvet.marvel.domain.mappers.ComicsEntityMapper
+import com.red_velvet.marvel.domain.mappers.ComicsMapper
+import com.red_velvet.marvel.domain.mappers.EventEntityMapper
 import com.red_velvet.marvel.domain.mappers.EventMapper
+import com.red_velvet.marvel.domain.models.Chars
+import com.red_velvet.marvel.domain.models.Comic
+import com.red_velvet.marvel.domain.models.Event
 import com.red_velvet.marvel.ui.utils.State
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.schedulers.Schedulers
 import retrofit2.Response
 import javax.inject.Inject
 
 class MarvelRepositoryImpl @Inject constructor(
     private val marvelServiceImpl: MarvelService,
     private  val daoMovie : MovieDataBase,
-    private val  comicsMapper: ComicsMapper,
-    private val  eventMapper: EventMapper,
-    private val charsMapper: CharsMapper
+    private  val comicsMapper: ComicsMapper,
+    private  val eventMapper: EventMapper,
+    private  val  charsMapper: CharsMapper,
+    private  val  comicsEntityMapper: ComicsEntityMapper,
+    private  val  eventEntityMapper: EventEntityMapper,
+    private  val  charsEntityMapper: CharsEntityMapper
 
 ) : MarvelRepository {
 
@@ -40,8 +49,10 @@ class MarvelRepositoryImpl @Inject constructor(
         return wrapWithState { marvelServiceImpl.getAllComics(titleStartsWith, dateDescriptor) }
     }
 
-    override fun getAllComics(): Observable<List<ComicsEntity>> {
-        return daoMovie.movieDao().getAllComics()
+    override fun getAllComics(): Observable<List<Comic>> {
+        return daoMovie.movieDao().getAllComics().map {
+            it.map { comicsMapper.map(it) }
+        }
     }
 
     override fun getComicById(comicId: Int): Observable<State<List<ComicDto>>> {
@@ -71,8 +82,10 @@ class MarvelRepositoryImpl @Inject constructor(
         return wrapWithState { marvelServiceImpl.getAllEvents(query) }
     }
 
-    override fun getAllEvents(): Observable<List<EventsEntity>> {
-        return daoMovie.movieDao().getAllEvents()
+    override fun getAllEvents(): Observable<List<Event>> {
+        return daoMovie.movieDao().getAllEvents().map {
+            it.map { eventMapper.map(it) }
+        }
     }
 
     override fun getCreatorByComicId(comicId: Int): Observable<State<List<Creator>>> {
@@ -87,8 +100,10 @@ class MarvelRepositoryImpl @Inject constructor(
         return wrapWithState { marvelServiceImpl.getAllCharacters(nameStartsWith) }
     }
 
-    override fun getAllCharacters(): Observable<List<CharsEntity>> {
-       return  daoMovie.movieDao().getAllChars()
+    override fun getAllCharacters(): Observable<List<Chars>> {
+       return  daoMovie.movieDao().getAllChars().map {
+           it.map { charsMapper.map(it) }
+       }
     }
 
     override fun getCharacterById(characterId: Int): Observable<State<List<CharacterDto>>> {
@@ -122,35 +137,29 @@ class MarvelRepositoryImpl @Inject constructor(
     }
 
     override fun refreshComics() {
-        marvelServiceImpl.getAllComics().map { response ->
-            if (response.isSuccessful)
-                response.body()?.body?.results?.map { comic ->
-                    daoMovie.movieDao().insertComics(
-                        ComicsEntity(
-                            comic.id!!, comic.title.toString(),
-                            "${comic.thumbnail?.path}.${comic.thumbnail?.extension}"
-                        )
-                    )
-
+        marvelServiceImpl.getAllComics()
+            .observeOn(Schedulers.io())
+            .map { response ->
+            if (response.isSuccessful){
+              val comicEntities=  response.body()?.body?.results?.map {
+                  comicsEntityMapper.map(it)
                 }
-        }
+                daoMovie.movieDao().insertComics(comicEntities!!)
+        } }.subscribe()
     }
 
 
 
     override fun refreshEvents() {
-        marvelServiceImpl.getAllEvents().map { response ->
-            if (response.isSuccessful)
-                response.body()?.body?.results?.map { event ->
-                    daoMovie.movieDao().insertEvents(
-                        EventsEntity(
-                            event.id!!, event.title.toString(),
-                            "${event.thumbnail?.path}.${event.thumbnail?.extension}"
-                        )
-                    )
-
-                }
-        }
+        marvelServiceImpl.getAllEvents()
+            .observeOn(Schedulers.io())
+            .map { response ->
+                if (response.isSuccessful){
+                    val eventEntities=  response.body()?.body?.results?.map {
+                        eventEntityMapper.map(it)
+                    }
+                    daoMovie.movieDao().insertEvents(eventEntities!!)
+                } }.subscribe()
     }
 
     override fun refreshEventsSearch() {
@@ -168,24 +177,8 @@ class MarvelRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun refreshSeries() {
-        marvelServiceImpl.getAllSeries().map { response ->
-            if (response.isSuccessful)
-                response.body()?.body?.results?.map { series ->
-                    daoMovie.movieDao().insertSeries(
-                        SeriesSearch(
-                            series.id!!, series.title.toString(),
-                            "${series.thumbnail?.path}.${series.thumbnail?.extension}"
-                        )
-                    )
 
-                }
-        }
-    }
 
-    override fun getSeries(): Observable<List<SeriesSearch>> {
-      return  daoMovie.movieDao().getAllSeries()
-    }
 
     override fun getEventsSearch(): Observable<List<EventsSearch>> {
         return  daoMovie.movieDao().getAllEventsSearch()
@@ -194,18 +187,15 @@ class MarvelRepositoryImpl @Inject constructor(
 
 
     override fun refreshCharacters(){
-        marvelServiceImpl.getAllCharacters().map { response ->
-            if (response.isSuccessful)
-                response.body()?.body?.results?.map { character ->
-                    daoMovie.movieDao().insertChars(
-                        CharsEntity(
-                            character.id!!, character.name.toString(),
-                            "${character.thumbnail?.path}.${character.thumbnail?.extension}"
-                        )
-                    )
-
-                }
-        }
+        marvelServiceImpl.getAllCharacters()
+            .observeOn(Schedulers.io())
+            .map { response ->
+                if (response.isSuccessful){
+                    val charsEntities=  response.body()?.body?.results?.map {
+                        charsEntityMapper.map(it)
+                    }
+                    daoMovie.movieDao().insertChars(charsEntities!!)
+                } }.subscribe()
     }
 
 

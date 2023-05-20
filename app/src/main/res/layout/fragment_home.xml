@@ -35,7 +35,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:showWhenSuccess="@{viewModel.comicsLiveData}" />
+       />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_comics"
@@ -47,8 +47,8 @@
                 android:paddingBottom="@dimen/spacing_medium"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintTop_toBottomOf="@id/text_view_comics_title"
-                app:setItems="@{viewModel.comicsLiveData.toData()}"
-                app:showWhenSuccess="@{viewModel.comicsLiveData}"
+                app:setItems="@{viewModel.comics}"
+
                 tools:listitem="@layout/item_home_comic" />
 
             <TextView
@@ -63,7 +63,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/recycler_comics"
-                app:showWhenSuccess="@{viewModel.comicsLiveData}" />
+ />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_events"
@@ -75,8 +75,8 @@
                 android:paddingBottom="@dimen/spacing_medium"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintTop_toBottomOf="@id/text_view_events_title"
-                app:setItems="@{viewModel.eventLiveData.toData()}"
-                app:showWhenSuccess="@{viewModel.comicsLiveData}"
+                app:setItems="@{viewModel.eventLiveData}"
+
                 tools:listitem="@layout/item_home_event" />
 
             <TextView
@@ -102,33 +102,12 @@
                 android:paddingBottom="@dimen/spacing_medium"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintTop_toBottomOf="@id/text_view_chars_title"
-                app:setItems="@{viewModel.characterLiveData.toData()}"
-                app:showWhenSuccess="@{viewModel.comicsLiveData}"
+                app:setItems="@{viewModel.characterLiveData}"
+
                 tools:listitem="@layout/item_home_character" />
 
-            <ProgressBar
-                android:id="@+id/progress_bar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:indeterminate="true"
-                android:indeterminateTint="@color/primary"
-                android:indeterminateTintMode="src_atop"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:showWhenLoading="@{viewModel.comicsLiveData}" />
 
-            <ImageView
-                android:id="@+id/image_view_error"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/baseline_error_24"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:showWhenError="@{viewModel.comicsLiveData}" />
+
 
             <TextView
                 android:id="@+id/text_view_error"
@@ -141,10 +120,10 @@
                 android:textColor="@color/primary"
                 android:textSize="@dimen/font_size_title"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@id/image_view_error"
-                app:layout_constraintStart_toStartOf="@id/image_view_error"
-                app:layout_constraintTop_toBottomOf="@id/image_view_error"
-                app:showWhenError="@{viewModel.comicsLiveData}" />
+                app:layout_constraintEnd_toEndOf="@id/recycler_chars"
+                app:layout_constraintStart_toStartOf="@id/recycler_chars"
+                app:layout_constraintTop_toBottomOf="@id/recycler_chars"
+   " />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

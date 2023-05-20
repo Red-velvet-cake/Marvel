@@ -12,6 +12,9 @@ import com.red_velvet.marvel.data.model.Creator
 import com.red_velvet.marvel.data.model.EventDto
 import com.red_velvet.marvel.data.model.Series
 import com.red_velvet.marvel.data.model.Story
+import com.red_velvet.marvel.domain.models.Chars
+import com.red_velvet.marvel.domain.models.Comic
+import com.red_velvet.marvel.domain.models.Event
 import com.red_velvet.marvel.ui.utils.State
 import io.reactivex.rxjava3.core.Observable
 
@@ -66,13 +69,11 @@ interface MarvelRepository {
     fun refreshCharacters()
     fun refreshEvents()
     fun refreshEventsSearch()
-    fun refreshSeries()
 
-    fun getSeries(): Observable<List<SeriesSearch>>
     fun getEventsSearch(): Observable<List<EventsSearch>>
 
-    fun getAllComics(): Observable<List<ComicsEntity>>
-    fun getAllEvents(): Observable<List<EventsEntity>>
-    fun getAllCharacters(): Observable<List<CharsEntity>>
+    fun getAllComics(): Observable<List<Comic>>
+    fun getAllEvents(): Observable<List<Event>>
+    fun getAllCharacters(): Observable<List<Chars>>
 }
 

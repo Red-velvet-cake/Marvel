@@ -4,8 +4,11 @@ import com.red_velvet.marvel.data.local.MovieDataBase
 import com.red_velvet.marvel.data.remote.MarvelService
 import com.red_velvet.marvel.data.repository.MarvelRepository
 import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
+import com.red_velvet.marvel.domain.mappers.CharsEntityMapper
 import com.red_velvet.marvel.domain.mappers.CharsMapper
+import com.red_velvet.marvel.domain.mappers.ComicsEntityMapper
 import com.red_velvet.marvel.domain.mappers.ComicsMapper
+import com.red_velvet.marvel.domain.mappers.EventEntityMapper
 import com.red_velvet.marvel.domain.mappers.EventMapper
 import dagger.Module
 import dagger.Provides
@@ -20,15 +23,22 @@ class RepositoryModule {
         marvelServiceImpl: MarvelService,
         daoMovie: MovieDataBase,
         comicsMapper: ComicsMapper,
-        eventMapper: EventMapper,
-        charsMapper: CharsMapper
+        eventMapper:EventMapper,
+        charsMapper: CharsMapper,
+        comicsEntityMapper: ComicsEntityMapper,
+     eventEntityMapper: EventEntityMapper,
+     charsEntityMapper: CharsEntityMapper
     ): MarvelRepository {
         return MarvelRepositoryImpl(
             marvelServiceImpl,
             daoMovie,
             comicsMapper,
             eventMapper,
-            charsMapper
+            charsMapper,
+            comicsEntityMapper
+        ,eventEntityMapper,
+            charsEntityMapper
+
         )
     }
 }
