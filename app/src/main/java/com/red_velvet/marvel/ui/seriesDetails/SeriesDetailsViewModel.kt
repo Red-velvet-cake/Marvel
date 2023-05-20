@@ -9,10 +9,13 @@ import com.red_velvet.marvel.data.repository.MarvelRepository
 import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
 import com.red_velvet.marvel.ui.base.BaseViewModel
 import com.red_velvet.marvel.ui.utils.State
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class SeriesDetailsViewModel : BaseViewModel(), CreatorListenerInteraction {
+@HiltViewModel
+class SeriesDetailsViewModel @Inject constructor (private val repository: MarvelRepository)  : BaseViewModel(), CreatorListenerInteraction {
 
-    private val repository: MarvelRepository = MarvelRepositoryImpl(RetrofitClient.apiService)
+
 
     private val _series: MutableLiveData<State<List<Series>>> = MutableLiveData()
     val series: LiveData<State<List<Series>>> = _series

@@ -7,11 +7,11 @@
 
         <variable
             name="item"
-            type="com.red_velvet.marvel.data.model.Comic" />
+            type="com.red_velvet.marvel.data.model.ComicDto" />
 
         <variable
             name="listener"
-            type="com.red_velvet.marvel.ui.comics.ComicsInteractionListener" />
+            type="com.red_velvet.marvel.ui.home.HomeInteractionListener" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -35,7 +35,7 @@
                 tools:src="@tools:sample/backgrounds/scenic" />
 
             <TextView
-                android:id="@+id/text_view_title"
+                android:id="@+id/text_view_comics_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
