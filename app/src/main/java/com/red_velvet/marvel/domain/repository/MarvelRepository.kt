@@ -7,7 +7,7 @@ import com.red_velvet.marvel.data.model.Story
 import com.red_velvet.marvel.data.remote.dtos.CharacterDto
 import com.red_velvet.marvel.data.remote.dtos.ComicDto
 import com.red_velvet.marvel.data.remote.dtos.EventDto
-import com.red_velvet.marvel.domain.models.Charcter
+import com.red_velvet.marvel.domain.models.Character
 import com.red_velvet.marvel.domain.models.Comic
 import com.red_velvet.marvel.domain.models.Event
 import com.red_velvet.marvel.ui.utils.State
@@ -53,7 +53,7 @@ interface MarvelRepository {
 
     fun getEventById(eventId: Int): Observable<State<List<EventDto>>>
 
-    fun getAllCharacters(nameStartsWith: String? = null): Observable<List<Charcter>>
+    fun getAllCharacters(nameStartsWith: String? = null): Observable<List<Character>>
 
     fun refreshCharacters(): Single<Unit>
 

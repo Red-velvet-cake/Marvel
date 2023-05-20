@@ -46,6 +46,8 @@ class CharactersViewModel @Inject constructor(private val repository: MarvelRepo
     }
 
     fun getAllCharacters(nameStartsWith: String? = null) {
+        repository.getAllCharacters(nameStartsWith)
+            .subscribe()
 //        bindStateUpdates(
 //            repository.getAllCharacters(nameStartsWith),
 //            onNext = ::onGetCharactersState,

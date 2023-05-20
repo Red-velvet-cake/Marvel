@@ -16,7 +16,7 @@ import com.red_velvet.marvel.domain.mappers.ComicEntityMapper
 import com.red_velvet.marvel.domain.mappers.ComicMapper
 import com.red_velvet.marvel.domain.mappers.EventEntityMapper
 import com.red_velvet.marvel.domain.mappers.EventMapper
-import com.red_velvet.marvel.domain.models.Charcter
+import com.red_velvet.marvel.domain.models.Character
 import com.red_velvet.marvel.domain.models.Comic
 import com.red_velvet.marvel.domain.models.Event
 import com.red_velvet.marvel.ui.utils.State
@@ -110,7 +110,7 @@ class MarvelRepositoryImpl @Inject constructor(
         return wrapWithState { marvelServiceImpl.getCharactersByEventId(eventId) }
     }
 
-    override fun getAllCharacters(nameStartsWith: String?): Observable<List<Charcter>> {
+    override fun getAllCharacters(nameStartsWith: String?): Observable<List<Character>> {
         return marvelDao.getAllCharacters().map {
             it.map { characterEntity ->
                 characterMapper.map(characterEntity)

@@ -2,10 +2,10 @@ package com.red_velvet.marvel.ui.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.red_velvet.marvel.domain.repository.MarvelRepositoryImpl
-import com.red_velvet.marvel.domain.models.Charcter
+import com.red_velvet.marvel.domain.models.Character
 import com.red_velvet.marvel.domain.models.Comic
 import com.red_velvet.marvel.domain.models.Event
+import com.red_velvet.marvel.domain.repository.MarvelRepositoryImpl
 import com.red_velvet.marvel.ui.base.BaseViewModel
 import com.red_velvet.marvel.ui.utils.SingleEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -32,8 +32,8 @@ class HomeViewModel @Inject constructor(private val repository: MarvelRepository
     private val _events = MutableLiveData<List<Event>>()
     val eventsLiveData: LiveData<List<Event>> = _events
 
-    private val _characters = MutableLiveData<List<Charcter>>()
-    val charactersLiveData: LiveData<List<Charcter>> = _characters
+    private val _characters = MutableLiveData<List<Character>>()
+    val charactersLiveData: LiveData<List<Character>> = _characters
 
     init {
         repository.refreshComics().subscribe()
@@ -45,7 +45,8 @@ class HomeViewModel @Inject constructor(private val repository: MarvelRepository
     }
 
     private fun getComics() {
-        repository.getAllComics().subscribe(::onGetComicsState, ::onGetComicsFailure)
+        repository.getAllComics()
+            .subscribe(::onGetComicsState, ::onGetComicsFailure)
             .addTo(compositeDisposable)
     }
 
@@ -57,13 +58,9 @@ class HomeViewModel @Inject constructor(private val repository: MarvelRepository
     }
 
     private fun getEvents() {
-
-        repository.getAllEvents().subscribe(
-            ::onGetEventsState,
-            ::onGetEventsFailure
-        ).addTo(compositeDisposable)
-
-
+        repository.getAllEvents()
+            .subscribe(::onGetEventsState, ::onGetEventsFailure)
+            .addTo(compositeDisposable)
     }
 
     private fun onGetEventsFailure(throwable: Throwable) {
@@ -74,14 +71,15 @@ class HomeViewModel @Inject constructor(private val repository: MarvelRepository
     }
 
     private fun getCharacters() {
-        repository.getAllCharacters().subscribe(::onGetCharactersState, ::onGetCharactersFailure)
+        repository.getAllCharacters()
+            .subscribe(::onGetCharactersState, ::onGetCharactersFailure)
             .addTo(compositeDisposable)
     }
 
     private fun onGetCharactersFailure(throwable: Throwable) {
     }
 
-    private fun onGetCharactersState(state: List<Charcter>) {
+    private fun onGetCharactersState(state: List<Character>) {
         _characters.postValue(state)
     }
 
