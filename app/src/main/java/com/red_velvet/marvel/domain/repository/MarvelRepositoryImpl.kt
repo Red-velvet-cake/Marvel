@@ -2,6 +2,7 @@ package com.red_velvet.marvel.domain.repository
 
 
 import com.red_velvet.marvel.data.local.daos.MarvelDao
+import com.red_velvet.marvel.data.local.entity.SearchQueryEntity
 import com.red_velvet.marvel.data.model.BaseResponse
 import com.red_velvet.marvel.data.model.Creator
 import com.red_velvet.marvel.data.model.Series
@@ -16,15 +17,19 @@ import com.red_velvet.marvel.domain.mappers.ComicEntityMapper
 import com.red_velvet.marvel.domain.mappers.ComicMapper
 import com.red_velvet.marvel.domain.mappers.EventEntityMapper
 import com.red_velvet.marvel.domain.mappers.EventMapper
+import com.red_velvet.marvel.domain.mappers.SearchQueryMapper
 import com.red_velvet.marvel.domain.models.Character
 import com.red_velvet.marvel.domain.models.Comic
 import com.red_velvet.marvel.domain.models.Event
+import com.red_velvet.marvel.domain.models.SearchQuery
 import com.red_velvet.marvel.ui.utils.State
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import retrofit2.Response
+import java.util.Date
 import javax.inject.Inject
 
 class MarvelRepositoryImpl @Inject constructor(
@@ -35,7 +40,8 @@ class MarvelRepositoryImpl @Inject constructor(
     private val characterEntityMapper: CharacterEntityMapper,
     private val characterMapper: CharacterMapper,
     private val eventEntityMapper: EventEntityMapper,
-    private val eventMapper: EventMapper
+    private val eventMapper: EventMapper,
+    private val searchQueryMapper: SearchQueryMapper
 ) : MarvelRepository {
 
     override fun getAllComics(): Observable<List<Comic>> {
@@ -199,5 +205,26 @@ class MarvelRepositoryImpl @Inject constructor(
             }
         }.onErrorReturn { State.Failed(it.message ?: "Unknown error") }
             .startWith(Observable.just(State.Loading))
+    }
+
+    override fun getSearchQueries(): Observable<List<SearchQuery>> {
+        return marvelDao.getAllSearchQueries()
+            .map { it.map { searchQueryEntity -> searchQueryMapper.map(searchQueryEntity) } }
+    }
+
+    override fun insertSearchQuery(query: String): Completable {
+        return Completable.fromAction {
+            marvelDao.insertSearchQuery(SearchQueryEntity(query = query, timestamp = Date().time))
+        }.onErrorResumeNext { Completable.complete() }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    override fun deleteSearchQuery(id: Int): Completable {
+        return Completable.fromAction {
+            marvelDao.deleteSearchQuery(id)
+        }.onErrorResumeNext { Completable.complete() }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
     }
 }

@@ -8,8 +8,12 @@ import com.red_velvet.marvel.data.local.daos.MarvelDao
 import com.red_velvet.marvel.data.local.entity.CharacterEntity
 import com.red_velvet.marvel.data.local.entity.ComicEntity
 import com.red_velvet.marvel.data.local.entity.EventEntity
+import com.red_velvet.marvel.data.local.entity.SearchQueryEntity
 
-@Database(entities = [ComicEntity::class, CharacterEntity::class, EventEntity::class], version = 1)
+@Database(
+    entities = [ComicEntity::class, CharacterEntity::class, EventEntity::class, SearchQueryEntity::class],
+    version = 1
+)
 abstract class MarvelDatabase : RoomDatabase() {
 
     abstract fun marvelDao(): MarvelDao
