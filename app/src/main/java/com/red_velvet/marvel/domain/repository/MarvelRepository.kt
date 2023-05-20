@@ -1,6 +1,7 @@
 package com.red_velvet.marvel.domain.repository
 
 
+import com.red_velvet.marvel.data.model.BaseResponse
 import com.red_velvet.marvel.data.model.Creator
 import com.red_velvet.marvel.data.model.Series
 import com.red_velvet.marvel.data.model.Story
@@ -13,6 +14,7 @@ import com.red_velvet.marvel.domain.models.Event
 import com.red_velvet.marvel.ui.utils.State
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
+import retrofit2.Response
 
 interface MarvelRepository {
 
@@ -53,7 +55,9 @@ interface MarvelRepository {
 
     fun getEventById(eventId: Int): Observable<State<List<EventDto>>>
 
-    fun getAllCharacters(nameStartsWith: String? = null): Observable<List<Character>>
+    fun getAllCharacters(titleStartsWith: String = ""): Observable<List<Character>>
+
+    fun getCharacterByTitle(titleStartsWith: String?): Response<BaseResponse<List<CharacterDto>>>
 
     fun refreshCharacters(): Single<Unit>
 

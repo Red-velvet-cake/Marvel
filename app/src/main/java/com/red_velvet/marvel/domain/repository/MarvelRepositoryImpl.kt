@@ -110,12 +110,30 @@ class MarvelRepositoryImpl @Inject constructor(
         return wrapWithState { marvelServiceImpl.getCharactersByEventId(eventId) }
     }
 
-    override fun getAllCharacters(nameStartsWith: String?): Observable<List<Character>> {
-        return marvelDao.getAllCharacters().map {
-            it.map { characterEntity ->
-                characterMapper.map(characterEntity)
+    override fun getAllCharacters(titleStartsWith: String): Observable<List<Character>> {
+        return marvelDao.getAllCharacters("%$titleStartsWith%")
+            .observeOn(Schedulers.io())
+            .map { characterEntities ->
+                if (characterEntities.isEmpty()) {
+                    val responseWrapper = getCharacterByTitle(titleStartsWith)
+                    if (responseWrapper.isSuccessful) {
+                        val characterEntitiesList =
+                            responseWrapper.body()?.body?.results?.map { characterDto ->
+                                characterEntityMapper.map(characterDto)
+                            }
+                        characterEntitiesList?.let {
+                            marvelDao.insertCharacters(it)
+                        }
+                    }
+                }
+                characterEntities.map { characterEntity ->
+                    characterMapper.map(characterEntity)
+                }
             }
-        }
+    }
+
+    override fun getCharacterByTitle(titleStartsWith: String?): Response<BaseResponse<List<CharacterDto>>> {
+        return marvelServiceImpl.getCharactersByTitle(titleStartsWith)
     }
 
     override fun refreshCharacters() =

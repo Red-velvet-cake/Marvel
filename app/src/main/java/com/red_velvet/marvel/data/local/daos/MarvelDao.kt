@@ -21,11 +21,11 @@ interface MarvelDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertCharacters(characterEntity: List<CharacterEntity>)
 
-    @Query("SELECT * FROM CHARACTERS")
-    fun getAllCharacters(): Observable<List<CharacterEntity>>
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertEvents(eventEntity: List<EventEntity>)
+
+    @Query("SELECT * FROM CHARACTERS WHERE title LIKE :searchTerm LIMIT 20")
+    fun getAllCharacters(searchTerm: String?): Observable<List<CharacterEntity>>
 
     @Query("SELECT * FROM EVENTS")
     fun getAllEvents(): Observable<List<EventEntity>>

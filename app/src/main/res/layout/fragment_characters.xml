@@ -50,78 +50,10 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_input_layout_search"
             app:layout_constraintVertical_bias="0.0"
-            app:setItems="@{viewModel.characters.toData()}"
-            app:showWhenSuccess="@{viewModel.characters}"
+            app:setItems="@{viewModel.characters}"
             app:spanCount="2"
             tools:listitem="@layout/item_event" />
 
-        <ProgressBar
-            android:id="@+id/loading_progress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:indeterminate="true"
-            android:indeterminateTint="@color/primary"
-            android:indeterminateTintMode="src_atop"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:showWhenLoading="@{viewModel.characters}" />
-
-
-        <ImageView
-            android:id="@+id/image_view_error"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/baseline_error_24"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:showWhenError="@{viewModel.characters}" />
-
-        <TextView
-            android:id="@+id/text_view_error"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:focusable="true"
-            android:padding="@dimen/spacing_medium"
-            android:text="@string/try_again"
-            android:textColor="@color/primary"
-            android:textSize="@dimen/font_size_title"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@id/image_view_error"
-            app:layout_constraintStart_toStartOf="@id/image_view_error"
-            app:layout_constraintTop_toBottomOf="@id/image_view_error"
-            app:showWhenError="@{viewModel.characters}" />
-
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/animation_view_search_empty"
-            android:layout_width="wrap_content"
-            android:layout_height="200dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            app:lottie_rawRes="@raw/search_empty"
-            app:showWhenEmpty="@{viewModel.characters}" />
-
-        <TextView
-            android:id="@+id/text_view_search_empty"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="@dimen/padding_normal"
-            android:text="@string/empty_search"
-            android:textColor="@color/tertiary_87"
-            android:textSize="@dimen/font_size_body"
-            app:layout_constraintEnd_toEndOf="@id/animation_view_search_empty"
-            app:layout_constraintStart_toStartOf="@id/animation_view_search_empty"
-            app:layout_constraintTop_toBottomOf="@id/animation_view_search_empty"
-            app:showWhenEmpty="@{viewModel.characters}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

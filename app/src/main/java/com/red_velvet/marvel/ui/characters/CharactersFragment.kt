@@ -18,7 +18,6 @@ class CharactersFragment : BaseFragment<FragmentCharactersBinding, CharactersVie
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.recyclerViewChars.adapter = CharactersAdapter(emptyList(), viewModel)
-        binding.textViewError.setOnClickListener { viewModel.getAllCharacters() }
         initNavigateToCharacterDetails()
     }
 
