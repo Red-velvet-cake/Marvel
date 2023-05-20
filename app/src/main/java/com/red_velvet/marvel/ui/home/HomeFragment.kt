@@ -7,9 +7,6 @@ import androidx.navigation.fragment.findNavController
 import com.red_velvet.marvel.R
 import com.red_velvet.marvel.databinding.FragmentHomeBinding
 import com.red_velvet.marvel.ui.base.BaseFragment
-import com.red_velvet.marvel.ui.home.adapter.CharactersAdapter
-import com.red_velvet.marvel.ui.home.adapter.ComicsAdapter
-import com.red_velvet.marvel.ui.home.adapter.EventsAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

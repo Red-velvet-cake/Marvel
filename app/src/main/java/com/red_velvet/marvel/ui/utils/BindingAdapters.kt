@@ -47,7 +47,9 @@ fun loadImage(view: ImageView, thumbnail: Thumbnail?) {
 
 @BindingAdapter(value = ["app:setImage"])
 fun setImage(view: ImageView, imageUrl: String?) {
-    Glide.with(view).load(imageUrl)
+    Glide.with(view)
+        .load(imageUrl)
+        .thumbnail(Glide.with(view).load(R.raw.loading))
         .fitCenter()
         .centerCrop()
         .into(view)
