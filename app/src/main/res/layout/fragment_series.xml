@@ -37,6 +37,15 @@
                 android:text="@={viewModel.searchQuery}" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_search_queries"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/spacing_medium"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:setItems="@{viewModel.searchQueries}"
+            app:showWhenData="@{viewModel.searchQueries.empty}"
+            tools:listitem="@layout/item_search_query" />
 
         <include
             android:id="@+id/chips"

@@ -19,7 +19,11 @@ class SeriesFragment : BaseFragment<FragmentSeriesBinding, SeriesViewModel>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val adapter = SeriesAdapter(emptyList(), viewModel)
-        binding.recyclerViewSeries.adapter = adapter
+        val searchQueryAdapter = SearchQueryAdapter(emptyList(), viewModel)
+        binding.apply {
+            recyclerViewSeries.adapter = adapter
+            recyclerSearchQueries.adapter = searchQueryAdapter
+        }
 
         setUpChipsListener()
         viewModel.searchQuery.observe(viewLifecycleOwner) {

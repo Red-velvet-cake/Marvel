@@ -1,9 +1,9 @@
 package com.red_velvet.marvel.ui.series
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.red_velvet.marvel.data.model.Series
+import com.red_velvet.marvel.domain.models.SearchQuery
 import com.red_velvet.marvel.domain.repository.MarvelRepositoryImpl
 import com.red_velvet.marvel.ui.base.BaseViewModel
 import com.red_velvet.marvel.ui.utils.SingleEvent
@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SeriesViewModel @Inject constructor(private val repository: MarvelRepositoryImpl) :
-    BaseViewModel(), SeriesInteractionListener {
+    BaseViewModel(), SeriesInteractionListener, SearchInteractionListener {
 
     private val _navigationToSeriesDetails: MutableLiveData<SingleEvent<Int>> = MutableLiveData()
     val navigationToSeriesDetails: LiveData<SingleEvent<Int>> = _navigationToSeriesDetails
@@ -27,9 +27,13 @@ class SeriesViewModel @Inject constructor(private val repository: MarvelReposito
 
     val searchQuery = MutableLiveData<String>()
 
+    private val _searchQueries: MutableLiveData<List<SearchQuery>> = MutableLiveData()
+    val searchQueries: LiveData<List<SearchQuery>> = _searchQueries
+
     init {
         initSearchObservable()
         getAllSeries()
+        getSearchedQueries()
     }
 
     fun getAllSeries(titleStartsWith: String? = null, contains: String? = null) {
@@ -59,14 +63,29 @@ class SeriesViewModel @Inject constructor(private val repository: MarvelReposito
                 if (query.isEmpty()) {
                     getAllSeries()
                 } else {
-                    Log.d("thio", query)
+                    repository.insertSearchQuery(query).subscribe()
                     getAllSeries(query)
                 }
             }.addTo(compositeDisposable)
     }
 
-    override fun doOnSeriesClicked(seriesId: Int) {
+    private fun getSearchedQueries() {
+        repository.getSearchQueries().subscribe { queries ->
+            _searchQueries.postValue(queries)
+        }.addTo(compositeDisposable)
+    }
+
+    override
+    fun doOnSeriesClicked(seriesId: Int) {
         _navigationToSeriesDetails.postValue(SingleEvent(seriesId))
+    }
+
+    override fun doOnSearchQueryClicked(query: String) {
+        searchQuery.postValue(query)
+    }
+
+    override fun doOnSearchQueryDeleteClicked(id: Int) {
+        repository.deleteSearchQuery(id).subscribe()
     }
 
 }
