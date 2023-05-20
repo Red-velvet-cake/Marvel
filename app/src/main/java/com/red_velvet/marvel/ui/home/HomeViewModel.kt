@@ -36,9 +36,6 @@ class HomeViewModel @Inject constructor(private val repository: MarvelRepository
     val charactersLiveData: LiveData<List<Character>> = _characters
 
     init {
-        repository.refreshComics().subscribe()
-        repository.refreshCharacters().subscribe()
-        repository.refreshEvents().subscribe()
         getComics()
         getEvents()
         getCharacters()

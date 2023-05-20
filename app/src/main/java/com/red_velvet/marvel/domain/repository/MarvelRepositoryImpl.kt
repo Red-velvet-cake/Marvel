@@ -88,11 +88,26 @@ class MarvelRepositoryImpl @Inject constructor(
         return wrapWithState { marvelServiceImpl.getSeriesById(seriesId) }
     }
 
-    override fun getAllEvents(query: String?): Observable<List<Event>> {
-        return marvelDao.getAllEvents()
+    override fun getAllEvents(query: String): Observable<List<Event>> {
+        return marvelDao.getAllEvents("%$query%")
             .observeOn(Schedulers.io())
-            .map {
-                it.map { eventEntity ->
+            .map { eventEntities ->
+                if (eventEntities.isEmpty()) {
+                    val responseWrapper = marvelServiceImpl.getEventsByTitle(query)
+                        .blockingGet()
+                    if (responseWrapper.isSuccessful) {
+                        val eventsEntitiesList =
+                            responseWrapper.body()?.body?.results?.map { eventDto ->
+                                eventEntityMapper.map(eventDto)
+                            }
+                        eventsEntitiesList?.let {
+                            marvelDao.insertEvents(it)
+                        }
+                    } else {
+                        Log.d("TAG", "getAllCharacters: ${responseWrapper.message()}")
+                    }
+                }
+                eventEntities.map { eventEntity ->
                     eventMapper.map(eventEntity)
                 }
             }

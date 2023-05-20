@@ -50,8 +50,11 @@ interface MarvelService {
     ): Single<Response<BaseResponse<List<Series>>>>
 
     @GET("events")
-    fun getAllEvents(
-        @Query("nameStartsWith") nameStartsWith: String? = null
+    fun getAllEvents(): Single<Response<BaseResponse<List<EventDto>>>>
+
+    @GET("events")
+    fun getEventsByTitle(
+        @Query("nameStartsWith") titleStartsWith: String? = null
     ): Single<Response<BaseResponse<List<EventDto>>>>
 
     @GET("comics/{comicId}/characters")

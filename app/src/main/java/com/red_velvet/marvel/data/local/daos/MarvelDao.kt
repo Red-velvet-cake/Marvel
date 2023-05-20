@@ -28,8 +28,8 @@ interface MarvelDao {
     @Query("SELECT * FROM CHARACTERS WHERE title LIKE :searchTerm LIMIT 20")
     fun getAllCharacters(searchTerm: String?): Observable<List<CharacterEntity>>
 
-    @Query("SELECT * FROM EVENTS")
-    fun getAllEvents(): Observable<List<EventEntity>>
+    @Query("SELECT * FROM EVENTS WHERE title LIKE :searchTerm LIMIT 20")
+    fun getAllEvents(searchTerm: String?): Observable<List<EventEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertSearchQuery(searchQuery: SearchQueryEntity)

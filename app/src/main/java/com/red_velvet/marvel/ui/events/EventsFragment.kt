@@ -21,7 +21,6 @@ class EventsFragment : BaseFragment<FragmentEventsBinding, EventsViewModel>() {
         super.onViewCreated(view, savedInstanceState)
         val adapter = EventsAdapter(emptyList(), viewModel)
         binding.recyclerViewEvents.adapter = adapter
-        binding.textViewError.setOnClickListener { viewModel.getAllEvents() }
         initNavigateToEventDetails()
     }
 
