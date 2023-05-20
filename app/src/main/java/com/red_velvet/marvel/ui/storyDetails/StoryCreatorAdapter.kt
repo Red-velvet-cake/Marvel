@@ -1,7 +1,7 @@
 package com.red_velvet.marvel.ui.storyDetails
 
 import com.red_velvet.marvel.R
-import com.red_velvet.marvel.data.model.Creator
+import com.red_velvet.marvel.data.remote.dtos.Creator
 import com.red_velvet.marvel.ui.base.BaseAdapter
 import com.red_velvet.marvel.ui.base.BaseInteractionListener
 

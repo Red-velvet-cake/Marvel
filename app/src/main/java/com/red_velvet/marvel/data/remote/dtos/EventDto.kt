@@ -1,9 +1,9 @@
-package com.red_velvet.marvel.data.model
+package com.red_velvet.marvel.data.remote.dtos
 
 
 import com.google.gson.annotations.SerializedName
 
-data class Event(
+data class EventDto(
     @SerializedName("id")
     val id: Int? = 0,
     @SerializedName("title")

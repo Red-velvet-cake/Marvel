@@ -2,12 +2,12 @@ package com.red_velvet.marvel.ui.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.red_velvet.marvel.data.model.Character
-import com.red_velvet.marvel.data.model.Comic
-import com.red_velvet.marvel.data.model.Event
+import com.red_velvet.marvel.data.remote.dtos.CharacterDto
+import com.red_velvet.marvel.data.remote.dtos.ComicDto
+import com.red_velvet.marvel.data.remote.dtos.EventDto
 import com.red_velvet.marvel.data.remote.RetrofitClient
-import com.red_velvet.marvel.data.repository.MarvelRepository
-import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
+import com.red_velvet.marvel.domain.repository.MarvelRepository
+import com.red_velvet.marvel.domain.repository.MarvelRepositoryImpl
 import com.red_velvet.marvel.ui.base.BaseViewModel
 import com.red_velvet.marvel.ui.utils.SingleEvent
 import com.red_velvet.marvel.ui.utils.State
@@ -27,14 +27,14 @@ class HomeViewModel : BaseViewModel(), HomeInteractionListener {
     private val _navigationToCharacterDetails: MutableLiveData<SingleEvent<Int>> = MutableLiveData()
     val navigationToCharacterDetails: LiveData<SingleEvent<Int>> = _navigationToCharacterDetails
 
-    private val _comics = MutableLiveData<State<List<Comic>>>(State.Loading)
-    val comicsLiveData: LiveData<State<List<Comic>>> = _comics
+    private val _comics = MutableLiveData<State<List<ComicDto>>>(State.Loading)
+    val comicsLiveData: LiveData<State<List<ComicDto>>> = _comics
 
-    private val _events = MutableLiveData<State<List<Event>>>(State.Loading)
-    val eventLiveData: LiveData<State<List<Event>>> = _events
+    private val _events = MutableLiveData<State<List<EventDto>>>(State.Loading)
+    val eventLiveData: LiveData<State<List<EventDto>>> = _events
 
-    private val _characters = MutableLiveData<State<List<Character>>>(State.Loading)
-    val characterLiveData: LiveData<State<List<Character>>> = _characters
+    private val _characters = MutableLiveData<State<List<CharacterDto>>>(State.Loading)
+    val characterLiveData: LiveData<State<List<CharacterDto>>> = _characters
 
 
     init {
@@ -55,7 +55,7 @@ class HomeViewModel : BaseViewModel(), HomeInteractionListener {
         _comics.postValue(State.Failed(throwable.message ?: UNKNOWN_ERROR))
     }
 
-    private fun onGetComicsState(state: State<List<Comic>>) {
+    private fun onGetComicsState(state: State<List<ComicDto>>) {
         _comics.postValue(state)
     }
 
@@ -71,7 +71,7 @@ class HomeViewModel : BaseViewModel(), HomeInteractionListener {
         _events.postValue(State.Failed(throwable.message ?: UNKNOWN_ERROR))
     }
 
-    private fun onGetEventsState(state: State<List<Event>>) {
+    private fun onGetEventsState(state: State<List<EventDto>>) {
         _events.postValue(state)
     }
 
@@ -87,7 +87,7 @@ class HomeViewModel : BaseViewModel(), HomeInteractionListener {
         _characters.postValue(State.Failed(throwable.message ?: UNKNOWN_ERROR))
     }
 
-    private fun onGetCharactersState(state: State<List<Character>>) {
+    private fun onGetCharactersState(state: State<List<CharacterDto>>) {
         _characters.postValue(state)
     }
 

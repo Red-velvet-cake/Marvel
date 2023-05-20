@@ -2,12 +2,12 @@ package com.red_velvet.marvel.ui.characterDetails
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.red_velvet.marvel.data.model.Character
-import com.red_velvet.marvel.data.model.Comic
-import com.red_velvet.marvel.data.model.Series
+import com.red_velvet.marvel.data.remote.dtos.CharacterDto
+import com.red_velvet.marvel.data.remote.dtos.ComicDto
+import com.red_velvet.marvel.data.remote.dtos.Series
 import com.red_velvet.marvel.data.remote.RetrofitClient
-import com.red_velvet.marvel.data.repository.MarvelRepository
-import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
+import com.red_velvet.marvel.domain.repository.MarvelRepository
+import com.red_velvet.marvel.domain.repository.MarvelRepositoryImpl
 import com.red_velvet.marvel.ui.base.BaseViewModel
 import com.red_velvet.marvel.ui.utils.SingleEvent
 import com.red_velvet.marvel.ui.utils.State
@@ -19,11 +19,11 @@ class CharacterDetailsViewModel : BaseViewModel(), SeriesInteractionListener,
         MarvelRepositoryImpl(RetrofitClient.apiService)
     }
 
-    private val _characterDetails: MutableLiveData<State<List<Character>>> = MutableLiveData()
-    val characterDetails: LiveData<State<List<Character>>> = _characterDetails
+    private val _characterDetails: MutableLiveData<State<List<CharacterDto>>> = MutableLiveData()
+    val characterDetails: LiveData<State<List<CharacterDto>>> = _characterDetails
 
-    private val _comics: MutableLiveData<State<List<Comic>>> = MutableLiveData()
-    val comics: LiveData<State<List<Comic>>> = _comics
+    private val _comics: MutableLiveData<State<List<ComicDto>>> = MutableLiveData()
+    val comics: LiveData<State<List<ComicDto>>> = _comics
 
     private val _series: MutableLiveData<State<List<Series>>> = MutableLiveData()
     val series: LiveData<State<List<Series>>> = _series
@@ -48,7 +48,7 @@ class CharacterDetailsViewModel : BaseViewModel(), SeriesInteractionListener,
         )
     }
 
-    private fun onGetCharacterState(state: State<List<Character>>) {
+    private fun onGetCharacterState(state: State<List<CharacterDto>>) {
         _characterDetails.postValue(state)
     }
 
@@ -64,7 +64,7 @@ class CharacterDetailsViewModel : BaseViewModel(), SeriesInteractionListener,
         )
     }
 
-    private fun onGetComicsByCharacterIdState(state: State<List<Comic>>) {
+    private fun onGetComicsByCharacterIdState(state: State<List<ComicDto>>) {
         _comics.postValue(state)
     }
 

@@ -2,11 +2,11 @@ package com.red_velvet.marvel.ui.eventDetails
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.red_velvet.marvel.data.model.Character
-import com.red_velvet.marvel.data.model.Creator
-import com.red_velvet.marvel.data.model.Event
+import com.red_velvet.marvel.data.remote.dtos.CharacterDto
+import com.red_velvet.marvel.data.remote.dtos.Creator
+import com.red_velvet.marvel.data.remote.dtos.EventDto
 import com.red_velvet.marvel.data.remote.RetrofitClient
-import com.red_velvet.marvel.data.repository.MarvelRepositoryImpl
+import com.red_velvet.marvel.domain.repository.MarvelRepositoryImpl
 import com.red_velvet.marvel.ui.base.BaseViewModel
 import com.red_velvet.marvel.ui.utils.SingleEvent
 import com.red_velvet.marvel.ui.utils.State
@@ -16,11 +16,11 @@ class EventDetailViewModel : BaseViewModel(), CharactersInteractionListener,
 
     private val repository by lazy { MarvelRepositoryImpl(RetrofitClient.apiService) }
 
-    private var _event: MutableLiveData<State<List<Event>>> = MutableLiveData()
-    val event: MutableLiveData<State<List<Event>>> = _event
+    private var _event: MutableLiveData<State<List<EventDto>>> = MutableLiveData()
+    val event: MutableLiveData<State<List<EventDto>>> = _event
 
-    private var _characters: MutableLiveData<State<List<Character>>> = MutableLiveData()
-    val characters: MutableLiveData<State<List<Character>>> = _characters
+    private var _characters: MutableLiveData<State<List<CharacterDto>>> = MutableLiveData()
+    val characters: MutableLiveData<State<List<CharacterDto>>> = _characters
 
     private var _creators: MutableLiveData<State<List<Creator>>> = MutableLiveData()
     val creators: MutableLiveData<State<List<Creator>>> = _creators
@@ -58,7 +58,7 @@ class EventDetailViewModel : BaseViewModel(), CharactersInteractionListener,
         )
     }
 
-    private fun onGetEventState(state: State<List<Event>>) {
+    private fun onGetEventState(state: State<List<EventDto>>) {
         _event.postValue(state)
     }
 
@@ -74,7 +74,7 @@ class EventDetailViewModel : BaseViewModel(), CharactersInteractionListener,
         _creators.postValue(State.Failed(e.message.toString()))
     }
 
-    private fun onGetEventCharactersState(state: State<List<Character>>) {
+    private fun onGetEventCharactersState(state: State<List<CharacterDto>>) {
         _characters.postValue(state)
     }
 
