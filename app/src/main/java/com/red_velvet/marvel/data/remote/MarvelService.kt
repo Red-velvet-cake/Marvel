@@ -2,11 +2,11 @@ package com.red_velvet.marvel.data.remote
 
 import com.red_velvet.marvel.data.model.BaseResponse
 import com.red_velvet.marvel.data.model.Creator
-import com.red_velvet.marvel.data.model.Series
 import com.red_velvet.marvel.data.model.Story
 import com.red_velvet.marvel.data.remote.dtos.CharacterDto
 import com.red_velvet.marvel.data.remote.dtos.ComicDto
 import com.red_velvet.marvel.data.remote.dtos.EventDto
+import com.red_velvet.marvel.data.remote.dtos.SeriesDto
 import io.reactivex.rxjava3.core.Single
 import retrofit2.Response
 import retrofit2.http.GET
@@ -38,16 +38,16 @@ interface MarvelService {
         @Path("comicId") comicId: Int? = null,
     ): Single<Response<BaseResponse<List<Creator>>>>
 
-    @GET("series")
-    fun getAllSeries(
-        @Query("titleStartsWith") titleStartsWith: String? = null,
+    @GET("events")
+    fun getSeriesByTitle(
+        @Query("nameStartsWith") titleStartsWith: String? = null,
         @Query("contains") contains: String? = null
-    ): Single<Response<BaseResponse<List<Series>>>>
+    ): Single<Response<BaseResponse<List<SeriesDto>>>>
 
     @GET("series/{seriesId}")
     fun getSeriesById(
         @Path("seriesId") seriesId: Int
-    ): Single<Response<BaseResponse<List<Series>>>>
+    ): Single<Response<BaseResponse<List<SeriesDto>>>>
 
     @GET("events")
     fun getAllEvents(): Single<Response<BaseResponse<List<EventDto>>>>
@@ -106,7 +106,7 @@ interface MarvelService {
     @GET("characters/{characterId}/series")
     fun getSeriesByCharacterId(
         @Path("characterId") characterId: Int
-    ): Single<Response<BaseResponse<List<Series>>>>
+    ): Single<Response<BaseResponse<List<SeriesDto>>>>
 
     @GET("series/{seriesId}/creators")
     fun getCreatorsBySeriesId(

@@ -2,16 +2,16 @@ package com.red_velvet.marvel.domain.repository
 
 
 import android.util.Log
-import com.red_velvet.marvel.data.local.daos.MarvelDao
+import com.red_velvet.marvel.data.local.MarvelDao
 import com.red_velvet.marvel.data.local.entity.SearchQueryEntity
 import com.red_velvet.marvel.data.model.BaseResponse
 import com.red_velvet.marvel.data.model.Creator
-import com.red_velvet.marvel.data.model.Series
 import com.red_velvet.marvel.data.model.Story
 import com.red_velvet.marvel.data.remote.MarvelService
 import com.red_velvet.marvel.data.remote.dtos.CharacterDto
 import com.red_velvet.marvel.data.remote.dtos.ComicDto
 import com.red_velvet.marvel.data.remote.dtos.EventDto
+import com.red_velvet.marvel.data.remote.dtos.SeriesDto
 import com.red_velvet.marvel.domain.mappers.CharacterEntityMapper
 import com.red_velvet.marvel.domain.mappers.CharacterMapper
 import com.red_velvet.marvel.domain.mappers.ComicEntityMapper
@@ -19,10 +19,13 @@ import com.red_velvet.marvel.domain.mappers.ComicMapper
 import com.red_velvet.marvel.domain.mappers.EventEntityMapper
 import com.red_velvet.marvel.domain.mappers.EventMapper
 import com.red_velvet.marvel.domain.mappers.SearchQueryMapper
+import com.red_velvet.marvel.domain.mappers.SeriesEntityMapper
+import com.red_velvet.marvel.domain.mappers.SeriesMapper
 import com.red_velvet.marvel.domain.models.Character
 import com.red_velvet.marvel.domain.models.Comic
 import com.red_velvet.marvel.domain.models.Event
 import com.red_velvet.marvel.domain.models.SearchQuery
+import com.red_velvet.marvel.domain.models.Series
 import com.red_velvet.marvel.ui.utils.State
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Completable
@@ -42,6 +45,8 @@ class MarvelRepositoryImpl @Inject constructor(
     private val characterMapper: CharacterMapper,
     private val eventEntityMapper: EventEntityMapper,
     private val eventMapper: EventMapper,
+    private val seriesEntityMapper: SeriesEntityMapper,
+    private val seriesMapper: SeriesMapper,
     private val searchQueryMapper: SearchQueryMapper
 ) : MarvelRepository {
 
@@ -75,16 +80,37 @@ class MarvelRepositoryImpl @Inject constructor(
     }
 
     override fun getAllSeries(
-        titleStartsWith: String?, contains: String?
-    ): Observable<State<List<Series>>> {
-        return wrapWithState { marvelServiceImpl.getAllSeries(titleStartsWith, contains) }
+        titleStartsWith: String, contains: String
+    ): Observable<List<Series>> {
+        return marvelDao.getAllSeries("%$titleStartsWith%")
+            .observeOn(Schedulers.io())
+            .map { seriesEntities ->
+                if (seriesEntities.isEmpty()) {
+                    val responseWrapper = marvelServiceImpl.getSeriesByTitle(titleStartsWith)
+                        .blockingGet()
+                    if (responseWrapper.isSuccessful) {
+                        val seriesEntitiesList =
+                            responseWrapper.body()?.body?.results?.map { eventDto ->
+                                seriesEntityMapper.map(eventDto)
+                            }
+                        seriesEntitiesList?.let {
+                            marvelDao.insertSeries(it)
+                        }
+                    } else {
+                        Log.d("TAG", "getAllSeries: ${responseWrapper.message()}")
+                    }
+                }
+                seriesEntities.map { eventEntity ->
+                    seriesMapper.map(eventEntity)
+                }
+            }
     }
 
     override fun getCharactersByComicId(comicId: Int): Observable<State<List<CharacterDto>>> {
         return wrapWithState { marvelServiceImpl.getCharactersByComicId(comicId) }
     }
 
-    override fun getSeriesById(seriesId: Int): Observable<State<List<Series>>> {
+    override fun getSeriesById(seriesId: Int): Observable<State<List<SeriesDto>>> {
         return wrapWithState { marvelServiceImpl.getSeriesById(seriesId) }
     }
 
@@ -199,7 +225,7 @@ class MarvelRepositoryImpl @Inject constructor(
 
     override fun getSeriesByCharacterId(
         characterId: Int
-    ): Observable<State<List<Series>>> {
+    ): Observable<State<List<SeriesDto>>> {
         return wrapWithState { marvelServiceImpl.getSeriesByCharacterId(characterId) }
     }
 

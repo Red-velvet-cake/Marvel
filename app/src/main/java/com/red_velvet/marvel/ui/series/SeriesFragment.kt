@@ -6,6 +6,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.red_velvet.marvel.R
 import com.red_velvet.marvel.databinding.FragmentSeriesBinding
+import com.red_velvet.marvel.ui.SearchQueryAdapter
 import com.red_velvet.marvel.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -43,7 +44,7 @@ class SeriesFragment : BaseFragment<FragmentSeriesBinding, SeriesViewModel>() {
         }
     }
 
-    private fun setUpChipsListener(searchQuery: String? = null) {
+    private fun setUpChipsListener(searchQuery: String = "") {
         binding.chips.chipAllSeries.setOnClickListener {
             viewModel.getAllSeries()
         }

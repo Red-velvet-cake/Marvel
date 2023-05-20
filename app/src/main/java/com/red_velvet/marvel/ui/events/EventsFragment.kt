@@ -7,8 +7,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.red_velvet.marvel.R
 import com.red_velvet.marvel.databinding.FragmentEventsBinding
+import com.red_velvet.marvel.ui.SearchQueryAdapter
 import com.red_velvet.marvel.ui.base.BaseFragment
-import com.red_velvet.marvel.ui.series.SearchQueryAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

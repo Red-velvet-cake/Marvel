@@ -11,7 +11,7 @@
 
         <variable
             name="listener"
-            type="com.red_velvet.marvel.ui.series.SearchInteractionListener" />
+            type="com.red_velvet.marvel.ui.SearchInteractionListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

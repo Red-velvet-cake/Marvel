@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import com.red_velvet.marvel.domain.models.Event
 import com.red_velvet.marvel.domain.models.SearchQuery
 import com.red_velvet.marvel.domain.repository.MarvelRepositoryImpl
+import com.red_velvet.marvel.ui.SearchInteractionListener
 import com.red_velvet.marvel.ui.base.BaseViewModel
-import com.red_velvet.marvel.ui.series.SearchInteractionListener
 import com.red_velvet.marvel.ui.utils.SingleEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.core.Observable

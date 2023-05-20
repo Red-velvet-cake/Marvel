@@ -98,7 +98,7 @@
                 android:textSize="@dimen/font_size_title"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/comics_recycler_view"
-                app:showWhenData="@{viewModel.series.toData().empty || viewModel.series.toData() == null}" />
+                app:showWhenData="@{viewModel.seriesDto.toData().empty || viewModel.seriesDto.toData() == null}" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/series_recycler_view"
@@ -111,8 +111,8 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/series_text_view"
-                app:setItems="@{viewModel.series.toData()}"
-                app:showWhenSuccess="@{viewModel.series}"
+                app:setItems="@{viewModel.seriesDto.toData()}"
+                app:showWhenSuccess="@{viewModel.seriesDto}"
                 tools:listitem="@layout/item_character_series" />
 
             <ProgressBar

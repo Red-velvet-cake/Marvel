@@ -2,9 +2,9 @@ package com.red_velvet.marvel.ui.characterDetails
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.red_velvet.marvel.data.model.Series
 import com.red_velvet.marvel.data.remote.dtos.CharacterDto
 import com.red_velvet.marvel.data.remote.dtos.ComicDto
+import com.red_velvet.marvel.data.remote.dtos.SeriesDto
 import com.red_velvet.marvel.domain.repository.MarvelRepositoryImpl
 import com.red_velvet.marvel.ui.base.BaseViewModel
 import com.red_velvet.marvel.ui.utils.SingleEvent
@@ -24,8 +24,8 @@ class CharacterDetailsViewModel @Inject constructor(private val repository: Marv
     private val _comics: MutableLiveData<State<List<ComicDto>>> = MutableLiveData()
     val comics: LiveData<State<List<ComicDto>>> = _comics
 
-    private val _series: MutableLiveData<State<List<Series>>> = MutableLiveData()
-    val series: LiveData<State<List<Series>>> = _series
+    private val _seriesDto: MutableLiveData<State<List<SeriesDto>>> = MutableLiveData()
+    val seriesDto: LiveData<State<List<SeriesDto>>> = _seriesDto
 
     private val _navigationToComicDetails: MutableLiveData<SingleEvent<Int>> = MutableLiveData()
     val navigationToComicDetails: LiveData<SingleEvent<Int>> = _navigationToComicDetails
@@ -79,12 +79,12 @@ class CharacterDetailsViewModel @Inject constructor(private val repository: Marv
         )
     }
 
-    private fun onGetSeriesByCharacterIdState(state: State<List<Series>>) {
-        _series.postValue(state)
+    private fun onGetSeriesByCharacterIdState(state: State<List<SeriesDto>>) {
+        _seriesDto.postValue(state)
     }
 
     private fun onGetSeriesByCharacterIdError(error: Throwable) {
-        _series.postValue(State.Failed(error.message.toString()))
+        _seriesDto.postValue(State.Failed(error.message.toString()))
     }
 
     override fun doOnComicClicked(comicId: Int) {

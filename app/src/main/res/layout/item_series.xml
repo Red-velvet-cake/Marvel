@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.red_velvet.marvel.data.model.Series" />
+            type="com.red_velvet.marvel.domain.models.Series" />
 
         <variable
             name="listener"
@@ -31,7 +31,7 @@
                 android:layout_height="match_parent"
                 android:foreground="@drawable/bg_bottom_linear_transparent"
                 android:scaleType="centerCrop"
-                app:imageUrl="@{item.thumbnail}"
+                app:setImage="@{item.imageUrl}"
                 tools:src="@tools:sample/backgrounds/scenic" />
 
             <TextView
@@ -41,7 +41,7 @@
                 android:ellipsize="end"
                 android:maxLines="2"
                 android:padding="@dimen/spacing_normal"
-                android:text="@{item.title}"
+                android:text="@{item.name}"
                 android:textColor="@color/secondary"
                 app:layout_constraintBottom_toBottomOf="parent"
                 tools:text="@string/lorem_ipsum" />

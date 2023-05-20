@@ -1,4 +1,4 @@
-package com.red_velvet.marvel.ui.series
+package com.red_velvet.marvel.ui
 
 import com.red_velvet.marvel.ui.base.BaseAdapter
 import com.red_velvet.marvel.ui.base.BaseInteractionListener
