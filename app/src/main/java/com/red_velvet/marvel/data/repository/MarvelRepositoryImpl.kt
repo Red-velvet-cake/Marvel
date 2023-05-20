@@ -1,8 +1,11 @@
 package com.red_velvet.marvel.data.repository
 
 
+import android.util.Log
 import com.red_velvet.marvel.data.local.database.MarvelDatabase
+import com.red_velvet.marvel.data.local.mapper.CharacterEntityMapper
 import com.red_velvet.marvel.data.local.mapper.ComicEntityMapper
+import com.red_velvet.marvel.data.local.mapper.EventEntityMapper
 import com.red_velvet.marvel.data.remote.dto.BaseResponse
 import com.red_velvet.marvel.data.remote.dto.CharacterDto
 import com.red_velvet.marvel.data.remote.dto.ComicDto
@@ -11,8 +14,12 @@ import com.red_velvet.marvel.data.remote.dto.EventDto
 import com.red_velvet.marvel.data.remote.dto.SeriesDto
 import com.red_velvet.marvel.data.remote.dto.StoryDto
 import com.red_velvet.marvel.data.remote.service.MarvelService
+import com.red_velvet.marvel.domain.mapper.LocalCharacterMapper
 import com.red_velvet.marvel.domain.mapper.LocalComicMapper
+import com.red_velvet.marvel.domain.mapper.LocalEventMapper
+import com.red_velvet.marvel.domain.model.Character
 import com.red_velvet.marvel.domain.model.Comic
+import com.red_velvet.marvel.domain.model.Event
 import com.red_velvet.marvel.ui.utils.State
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
@@ -26,6 +33,10 @@ class MarvelRepositoryImpl @Inject constructor(
     private val marvelDatabase: MarvelDatabase,
     private val ComicEntityMapper: ComicEntityMapper,
     private val localComicMapper: LocalComicMapper,
+    private val eventEntityMapper: EventEntityMapper,
+    private val localEventMapper: LocalEventMapper,
+    private val characterEntityMapper: CharacterEntityMapper,
+    private val localCharacterMapper: LocalCharacterMapper,
 ) : MarvelRepository {
 
     override fun getAllComics(
@@ -132,6 +143,7 @@ class MarvelRepositoryImpl @Inject constructor(
             .flatMapCompletable { responseWrapper ->
                 val comics = responseWrapper.body()?.body?.results
                 val comicsEntities = comics?.map { ComicEntityMapper.map(it) }
+                Log.d("SADEQMHANA", "refreshComics: $comicsEntities")
                 comicsEntities?.let {
                     Completable.fromAction { marvelDatabase.comicDao().insertAll(it) }
                         .subscribeOn(Schedulers.io())
@@ -142,9 +154,54 @@ class MarvelRepositoryImpl @Inject constructor(
             }
     }
 
-    override fun getComics(titleStartsWith: String?, contains: String?): Observable<List<Comic>> {
-        return marvelDatabase.comicDao()
-            .getAll()
+    override fun refreshEvents(): Completable {
+        return marvelServiceImpl.getAllEvents()
+            .flatMapCompletable { responseWrapper ->
+                val events = responseWrapper.body()?.body?.results
+                val eventsEntities = events?.map { eventEntityMapper.map(it) }
+                Log.d("SADEQMHANA", "refreshEvents: $eventsEntities")
+                eventsEntities?.let {
+                    Completable.fromAction { marvelDatabase.eventDao().insertAll(it) }
+                        .subscribeOn(Schedulers.io())
+                } ?: Completable.complete()
+            }
+            .onErrorResumeNext {
+                Completable.complete()
+            }
+    }
+
+    override fun refreshCharacters(): Completable {
+        return marvelServiceImpl.getAllCharacters()
+            .flatMapCompletable { responseWrapper ->
+                val characters = responseWrapper.body()?.body?.results
+                val charactersEntities = characters?.map { characterEntityMapper.map(it) }
+                Log.d("SADEQMHANA", "refreshCharacters: $charactersEntities")
+                charactersEntities?.let {
+                    Completable.fromAction { marvelDatabase.characterDao().insertAll(it) }
+                        .subscribeOn(Schedulers.io())
+                } ?: Completable.complete()
+            }
+            .onErrorResumeNext {
+                Completable.complete()
+            }
+    }
+
+    override fun getLocalComics(
+        titleStartsWith: String?,
+        contains: String?
+    ): Observable<List<Comic>> {
+        return marvelDatabase.comicDao().getAll()
             .map { comics -> comics.map { localComicMapper.map(it) } }
     }
+
+    override fun getLocalEvents(query: String?): Observable<List<Event>> {
+        return marvelDatabase.eventDao().getAll()
+            .map { events -> events.map { localEventMapper.map(it) } }
+    }
+
+    override fun getLocalCharacters(nameStartsWith: String?): Observable<List<Character>> {
+        return marvelDatabase.characterDao().getAll()
+            .map { characters -> characters.map { localCharacterMapper.map(it) } }
+    }
+
 }

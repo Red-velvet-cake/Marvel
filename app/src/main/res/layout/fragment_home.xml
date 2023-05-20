@@ -63,7 +63,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/recycler_comics"
-                app:showWhenData="@{viewModel.comicsLiveData.empty}" />
+                app:showWhenData="@{viewModel.eventLiveData.empty}" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_events"
@@ -75,8 +75,8 @@
                 android:paddingBottom="@dimen/spacing_medium"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintTop_toBottomOf="@id/text_view_events_title"
-                app:setItems="@{viewModel.eventLiveData.toData()}"
-                app:showWhenData="@{viewModel.comicsLiveData.empty}"
+                app:setItems="@{viewModel.eventLiveData}"
+                app:showWhenData="@{viewModel.eventLiveData.empty}"
                 tools:listitem="@layout/item_home_event" />
 
             <TextView
@@ -90,7 +90,8 @@
                 android:textSize="@dimen/font_size_title"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/recycler_events" />
+                app:layout_constraintTop_toBottomOf="@id/recycler_events"
+                app:showWhenData="@{viewModel.characterLiveData.empty}" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_chars"
@@ -102,8 +103,8 @@
                 android:paddingBottom="@dimen/spacing_medium"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintTop_toBottomOf="@id/text_view_chars_title"
-                app:setItems="@{viewModel.characterLiveData.toData()}"
-                app:showWhenData="@{viewModel.comicsLiveData.empty}"
+                app:setItems="@{viewModel.characterLiveData}"
+                app:showWhenData="@{viewModel.characterLiveData.empty}"
                 tools:listitem="@layout/item_home_character" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
