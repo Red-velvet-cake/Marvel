@@ -1,9 +1,9 @@
-package com.red_velvet.marvel.data.model
+package com.red_velvet.marvel.data.remote.dtos
 
 import com.google.gson.annotations.SerializedName
-import com.red_velvet.marvel.data.model.*
+import com.red_velvet.marvel.data.remote.dtos.*
 
-data class Character(
+data class CharacterDto(
     @SerializedName("comics")
     val comics: ResourceCollection? = ResourceCollection(),
     @SerializedName("description")

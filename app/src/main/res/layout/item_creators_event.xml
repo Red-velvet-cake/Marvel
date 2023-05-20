@@ -6,7 +6,7 @@
     <data>
         <variable
             name="item"
-            type="com.red_velvet.marvel.data.model.Creator" />
+            type="com.red_velvet.marvel.data.remote.dtos.Creator" />
 
     </data>
 
