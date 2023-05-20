@@ -1,6 +1,5 @@
 package com.red_velvet.marvel.ui.home
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.red_velvet.marvel.data.repository.MarvelRepository
@@ -52,14 +51,9 @@ class HomeViewModel @Inject constructor(
         )
     }
 
-    private fun onComicsReceived(comics: List<Comic>) {
-        _comics.postValue(comics)
-        Log.d("HomeViewModel", "onComicsReceived: $comics")
-    }
+    private fun onComicsReceived(comics: List<Comic>) = _comics.postValue(comics)
 
-    private fun onComicsError(throwable: Throwable) {
-        _comics.postValue(emptyList())
-    }
+    private fun onComicsError(throwable: Throwable) = _comics.postValue(emptyList())
 
     private fun getEvents() {
         bindObservable(
@@ -69,14 +63,10 @@ class HomeViewModel @Inject constructor(
         )
     }
 
-    private fun onEventsReceived(events: List<Event>) {
-        _events.postValue(events)
-        Log.d("HomeViewModel", "onEventsReceived: $events")
-    }
+    private fun onEventsReceived(events: List<Event>) = _events.postValue(events)
 
-    private fun onEventsError(throwable: Throwable) {
-        _events.postValue(emptyList())
-    }
+    private fun onEventsError(throwable: Throwable) = _events.postValue(emptyList())
+
 
     private fun getCharacters() {
         bindObservable(
@@ -86,14 +76,12 @@ class HomeViewModel @Inject constructor(
         )
     }
 
-    private fun onCharactersReceived(characters: List<Character>) {
+    private fun onCharactersReceived(characters: List<Character>) =
         _characters.postValue(characters)
-        Log.d("HomeViewModel", "onCharactersReceived: $characters")
-    }
 
-    private fun onCharactersError(throwable: Throwable) {
-        _characters.postValue(emptyList())
-    }
+
+    private fun onCharactersError(throwable: Throwable) = _characters.postValue(emptyList())
+
 
     override fun doOnComicClicked(comicId: Int) {
         _navigationToComicDetails.postValue(SingleEvent(comicId))

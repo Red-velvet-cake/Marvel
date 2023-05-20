@@ -1,7 +1,6 @@
 package com.red_velvet.marvel.data.repository
 
 
-import android.util.Log
 import com.red_velvet.marvel.data.local.database.MarvelDatabase
 import com.red_velvet.marvel.data.local.mapper.CharacterEntityMapper
 import com.red_velvet.marvel.data.local.mapper.ComicEntityMapper
@@ -138,54 +137,6 @@ class MarvelRepositoryImpl @Inject constructor(
             .startWith(Observable.just(State.Loading))
     }
 
-    override fun refreshComics(): Completable {
-        return marvelServiceImpl.getAllComics()
-            .flatMapCompletable { responseWrapper ->
-                val comics = responseWrapper.body()?.body?.results
-                val comicsEntities = comics?.map { ComicEntityMapper.map(it) }
-                Log.d("SADEQMHANA", "refreshComics: $comicsEntities")
-                comicsEntities?.let {
-                    Completable.fromAction { marvelDatabase.comicDao().insertAll(it) }
-                        .subscribeOn(Schedulers.io())
-                } ?: Completable.complete()
-            }
-            .onErrorResumeNext {
-                Completable.complete()
-            }
-    }
-
-    override fun refreshEvents(): Completable {
-        return marvelServiceImpl.getAllEvents()
-            .flatMapCompletable { responseWrapper ->
-                val events = responseWrapper.body()?.body?.results
-                val eventsEntities = events?.map { eventEntityMapper.map(it) }
-                Log.d("SADEQMHANA", "refreshEvents: $eventsEntities")
-                eventsEntities?.let {
-                    Completable.fromAction { marvelDatabase.eventDao().insertAll(it) }
-                        .subscribeOn(Schedulers.io())
-                } ?: Completable.complete()
-            }
-            .onErrorResumeNext {
-                Completable.complete()
-            }
-    }
-
-    override fun refreshCharacters(): Completable {
-        return marvelServiceImpl.getAllCharacters()
-            .flatMapCompletable { responseWrapper ->
-                val characters = responseWrapper.body()?.body?.results
-                val charactersEntities = characters?.map { characterEntityMapper.map(it) }
-                Log.d("SADEQMHANA", "refreshCharacters: $charactersEntities")
-                charactersEntities?.let {
-                    Completable.fromAction { marvelDatabase.characterDao().insertAll(it) }
-                        .subscribeOn(Schedulers.io())
-                } ?: Completable.complete()
-            }
-            .onErrorResumeNext {
-                Completable.complete()
-            }
-    }
-
     override fun getLocalComics(
         titleStartsWith: String?,
         contains: String?
@@ -204,4 +155,48 @@ class MarvelRepositoryImpl @Inject constructor(
             .map { characters -> characters.map { localCharacterMapper.map(it) } }
     }
 
+    override fun refreshComics(): Completable {
+        return marvelServiceImpl.getAllComics()
+            .flatMapCompletable { responseWrapper ->
+                val comics = responseWrapper.body()?.body?.results
+                val comicsEntities = comics?.map { ComicEntityMapper.map(it) }
+                comicsEntities?.let {
+                    Completable.fromAction { marvelDatabase.comicDao().insertAll(it) }
+                        .subscribeOn(Schedulers.io())
+                } ?: Completable.complete()
+            }
+            .onErrorResumeNext {
+                Completable.complete()
+            }
+    }
+
+    override fun refreshEvents(): Completable {
+        return marvelServiceImpl.getAllEvents()
+            .flatMapCompletable { responseWrapper ->
+                val events = responseWrapper.body()?.body?.results
+                val eventsEntities = events?.map { eventEntityMapper.map(it) }
+                eventsEntities?.let {
+                    Completable.fromAction { marvelDatabase.eventDao().insertAll(it) }
+                        .subscribeOn(Schedulers.io())
+                } ?: Completable.complete()
+            }
+            .onErrorResumeNext {
+                Completable.complete()
+            }
+    }
+
+    override fun refreshCharacters(): Completable {
+        return marvelServiceImpl.getAllCharacters()
+            .flatMapCompletable { responseWrapper ->
+                val characters = responseWrapper.body()?.body?.results
+                val charactersEntities = characters?.map { characterEntityMapper.map(it) }
+                charactersEntities?.let {
+                    Completable.fromAction { marvelDatabase.characterDao().insertAll(it) }
+                        .subscribeOn(Schedulers.io())
+                } ?: Completable.complete()
+            }
+            .onErrorResumeNext {
+                Completable.complete()
+            }
+    }
 }
